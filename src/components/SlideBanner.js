@@ -9,7 +9,6 @@ const SlidBanner = ({show=3,page=3}) => {
     slidesToShow: show,
     slidesToScroll: page,
   };
-  console.log(settings);
   return (
     <div>
       <Slider {...settings}>
