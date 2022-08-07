@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { CurrentLocation } from "./utils/CurrentLocation";
 import SlidBanner from "./components/SlideBanner";
+import Popover from "./components/Popover";
 
 function App() {
   const [nowPosition, setNowPosition] = useState({});
@@ -13,7 +14,7 @@ function App() {
 
   return (
     <div>
-      <SlidBanner show={1} page={1}/>
+      
     </div>
   );
 }
