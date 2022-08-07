@@ -1,20 +1,10 @@
-import { useEffect, useState } from "react";
-import { CurrentLocation } from "./utils/CurrentLocation";
-import SlidBanner from "./components/SlideBanner";
-import Popover from "./components/Popover";
+import styled from "styled-components";
+import NavBar from "./components/NavBar";
 
 function App() {
-  const [nowPosition, setNowPosition] = useState({});
-
-  useEffect(() => {
-    CurrentLocation(setNowPosition);
-  }, []);
-
-  console.log(nowPosition);
-
   return (
     <div>
-      
+      <NavBar />
     </div>
   );
 }
