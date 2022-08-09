@@ -14,7 +14,7 @@ const NavBar = () => {
   };
   return (
     <div>
-      <Opener onClick={onOpenerClick}>Opener</Opener>
+      <Opener onClick={onOpenerClick}>profile</Opener>
       {isPopperShown && (
         <Popover onClose={onClose}>
           <Popper>Popper</Popper>
@@ -27,12 +27,12 @@ const NavBar = () => {
 const Opener = styled.button`
   position: absolute;
   top: 0;
-  right: 0;
-  width: 150px;
+  right: 10px;
+  width: 80px;
   height: 50px;
-  background-color: #fbd14b;
   font-size: 20px;
   border-radius: 5px;
+  border: none;
 `;
 
 const Popper = styled.div`
