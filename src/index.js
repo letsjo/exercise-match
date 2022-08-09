@@ -6,12 +6,19 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import { ReactChannelIO } from "react-channel-plugin";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <ReactChannelIO
+        pluginKey="aaf7a64b-5864-4a4b-9a75-1ad7b86c3e8c"
+        language="en"
+        autoBoot
+      >
+        <App />
+      </ReactChannelIO>
     </BrowserRouter>
   </Provider>
 );
