@@ -10,6 +10,8 @@ import SlidBanner from "./components/SlideBanner";
 import BoardHistory from "./components/BoardHistory";
 import SlideComponents from "./components/SlideComponents";
 import PopularBoard from "./components/PopularBoard";
+import OtherPostCardBig from "./components/OtherPostCardBig";
+import SelectCategoryBox from "./components/SelectCategoryBox";
 
 function App() {
   const { showMessenger } = useChannelIOApi();
@@ -23,7 +25,8 @@ function App() {
       <NavBar />
       <Sweetalert />
       {/* <Login /> */}
-      {/* <OtherPostCard/> */}
+      {/* <OtherPostCardBig/> */}
+      {/* <SelectCategoryBox/> */}
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/kakaologin" element={<KakaoLogin />} />

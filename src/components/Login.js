@@ -1,3 +1,4 @@
+import win from "global";
 import React from "react";
 import styled from "styled-components";
 
@@ -9,6 +10,15 @@ const Login = () => {
   const kakaoLogin = () => {
     window.location.href = kakaoURL;
   };
+
+  const CLIENT_ID = "r1zmtgVUyyZ2koRdASic";
+  const CALLBACK_URL ="http://localhost:3000/naverLogin";
+  const STATE_STRING = "state"
+  const naverURL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${CLIENT_ID}&state=${STATE_STRING}&redirect_uri=${CALLBACK_URL}`
+
+  const naverLogin = ()=>{
+    window.location.href =naverURL;
+  }
 
   return (
     <Wrap>
@@ -32,7 +42,7 @@ const Login = () => {
         </LineWrap>
         <IconBox>
           <KakaoIcon onClick={kakaoLogin}><img src="/images/kakao_logo.png" alt=""/></KakaoIcon>
-          <Icon><img src="/images/btnG_아이콘원형.png" alt=""/></Icon>
+          <NaverIcon onClick={naverLogin}><img src="/images/btnG_아이콘원형.png" alt=""/></NaverIcon>
         </IconBox>
       </LoginWrap>
     </Wrap>
@@ -186,7 +196,7 @@ const KakaoIcon =styled.div`
   }
 `;
 
-const Icon =styled.div`
+const NaverIcon =styled.div`
   img{
     width:50px;
     height: 50px;

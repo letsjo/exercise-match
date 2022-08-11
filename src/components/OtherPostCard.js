@@ -20,10 +20,10 @@ const CardWrap = styled.div`
   align-items: center;
   flex-direction: column;
     width: 250px;
-    height: 276px;
+    height: 279px;
     padding: 10px;
-    border: 1px solid lightgray;
-    margin: auto;
+    margin: 0;
+    box-sizing: border-box;
 `;
 
 const Image = styled.div`

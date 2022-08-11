@@ -33,11 +33,11 @@ const Popover = ({ onClose }) => {
 
 const Wrapper = styled.div`
   position: absolute;
+  background-color: white;
   width: 150px;
   border: 1px solid lightgray;
   right: 0;
   top: 58px;
-  margin: 20px 40px 20px 0;
   border-radius: 3px;
 `;
 
