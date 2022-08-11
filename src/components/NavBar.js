@@ -27,7 +27,7 @@ const NavBar = () => {
             <SearchIcon>
               <img src="/images/pngwing.com (2).png" alt="" />
             </SearchIcon>
-            <SearchInput placeholder="어떤 서비스가 필요하세요?"/>
+            <SearchInput placeholder="어떤 서비스가 필요하세요?" />
           </SearchWrap>
         </SearchBox>
 
@@ -36,8 +36,10 @@ const NavBar = () => {
         <SignupBtn>회원가입</SignupBtn>
       </BeforeLoginBox> */}
 
-        <AfterLoginBox onClick={onOpenerClick}>
-          <img src="/images/pngwing.com (1).png" alt="" />
+        <AfterLoginBox>
+          <ProfileImg onClick={onOpenerClick}>
+            <img src="https://item.kakaocdn.net/do/479d4f178d8d03980ffc52eeb66465c3f43ad912ad8dd55b04db6a64cddaf76d" />
+          </ProfileImg>
           {isPopperShown && (
             <Popover onClose={onClose}>
               <Popper>Popper</Popper>
@@ -79,12 +81,10 @@ const SearchBox = styled.div`
   height: 44px;
   background-color: #f0f0f0;
   border-radius: 10px;
-  :focus-within{
-    box-shadow: 0px 0px 3px 3px #CCCCCC;
+  :focus-within {
+    box-shadow: 0px 0px 3px 3px #cccccc;
   }
 `;
-
-
 
 const SearchWrap = styled.div`
   margin: 9.5px 236px 9.5px 10px;
@@ -139,15 +139,22 @@ const SignupBtn = styled.div`
 `;
 
 const AfterLoginBox = styled.div`
-  position: absolute;
-  top: 25px;
-  right: 80px;
+  position: relative;
   margin-left: auto;
+`;
+
+const ProfileImg = styled.div`
   width: 50px;
   height: 50px;
+  border-radius: 25px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: transparent;
+  box-shadow: 1px 1px black;
   img {
-    width: 50px;
-    height: 50px;
+    width: 100%;
   }
 `;
 
