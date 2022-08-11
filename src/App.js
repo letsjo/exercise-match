@@ -5,6 +5,10 @@ import Login from "./components/Login";
 import KakaoLogin from "./components/KakaoLogin";
 import { useChannelIOApi, useChannelIOEvent } from "react-channel-plugin";
 import { Route, Routes } from "react-router-dom";
+import SlidBanner from "./components/SlideBanner";
+import BoardHistory from "./components/BoardHistory";
+import SlideComponents from "./components/SlideComponents";
+import PopularBoard from "./components/PopularBoard";
 
 function App() {
   const { showMessenger } = useChannelIOApi();
@@ -15,9 +19,6 @@ function App() {
 
   return (
     <div>
-      <NavBar />
-      <Sweetalert />
-      <Login />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/kakaologin" element={<KakaoLogin />} />
