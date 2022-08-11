@@ -5,7 +5,7 @@ const kakaoLogin = (code) => {
   return function (dispatch, getState, { history }) {
     userAPI({
       method: "GET",
-      url: `/oauth/callback/kakao?code=${code}`,
+      url: `/kakaoLogin?code=${code}`,
     })
       .then((res) => {
         console.log(res); // 토큰이 넘어올 것임
