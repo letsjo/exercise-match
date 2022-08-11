@@ -1,4 +1,3 @@
-import win from "global";
 import React from "react";
 import styled from "styled-components";
 

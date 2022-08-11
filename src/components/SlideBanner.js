@@ -2,9 +2,9 @@ import React, { useRef } from "react";
 import Slider from "react-slick";
 import styled from "styled-components";
 
-const SlidBanner = ({ show = 3, page = 3, imgsPath = [] }) => {
+const SlidBanner = ({ show = 1, page = 1, imgsPath = [] }) => {
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     autoplay: true,
     speed: 500,
@@ -17,9 +17,9 @@ const SlidBanner = ({ show = 3, page = 3, imgsPath = [] }) => {
     <SliderWrap>
       <Slider {...settings}>
         {imgsPath.map((imgPath) => (
-          <div>
+          <SliderImageWrap>
             <img src={imgPath} />
-          </div>
+          </SliderImageWrap>
         ))}
       </Slider>
     </SliderWrap>
@@ -27,6 +27,9 @@ const SlidBanner = ({ show = 3, page = 3, imgsPath = [] }) => {
 };
 
 const SliderWrap = styled.div`
+  width: 100%;
+  height: auto;
+  margin-bottom: 50px;
   .slick-arrow:before {
     content: "\f105";
     color: black;
@@ -35,20 +38,25 @@ const SliderWrap = styled.div`
     margin-right: 10px;
   }
   .slick-slide {
-    
+    width: 100%;
   }
-  .slick-next{
-    
+  .slick-next {
   }
-  .slick-prev{
-
+  .slick-prev {
   }
   .slick-arrow {
     z-index: 1;
   }
+`;
 
-  width: 80%;
-  height: auto;
+const SliderImageWrap = styled.div`
+  width: 100%;
+  text-align: center;
+  img {
+    width: 100%;
+    /* width: 1440px;
+    height: 360px; */
+  }
 `;
 
 const CustomNextArrow = styled.div`

@@ -39,6 +39,8 @@ const Wrapper = styled.div`
   right: 0;
   top: 58px;
   border-radius: 3px;
+  z-index: 1;
+  background-color: white;
 `;
 
 const ProfileBox = styled.div`

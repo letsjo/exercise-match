@@ -1,7 +1,8 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-const BoardHistoryCard = ({
+const BoardCardHistory = ({
+  labelImg = "https://cdn-icons-png.flaticon.com/512/748/748646.png",
   label = "내가 작성한 글",
   title = "내가 작성한 글의 제목",
   entrycount = "참여 완료",
@@ -12,7 +13,9 @@ const BoardHistoryCard = ({
         <CardTop>
           <HistoryLabelFrame>
             <HistoryLabelContent>
-              <Icon>아이콘</Icon>
+              <Icon>
+                <img src={labelImg} />
+              </Icon>
               <HistoryLabel>{label}</HistoryLabel>
             </HistoryLabelContent>
           </HistoryLabelFrame>
@@ -31,15 +34,18 @@ const BoardHistoryCard = ({
 };
 
 const HistoryCardFrame = styled.div`
+  max-width: 217px;
+  min-width: 217px;
   height: 221px;
   border: 1px solid #c4c4c4;
   border-radius: 5px;
   display: flex;
+  overflow: hidden;
 `;
 
 const HistoryCardWrapper = styled.div`
   padding: 20px 41px;
-  
+  width: 100%;
 `;
 
 const CardTop = styled.div`
@@ -91,10 +97,13 @@ const Icon = styled.div`
   font-size: 5px;
   line-height: 150%;
 
-  color: #a8a8a8;
+  /* background: #dedede; */
+  /* border-radius: 185px; */
 
-  background: #dedede;
-  border-radius: 185px;
+  overflow: hidden;
+  img {
+    width: 100%;
+  }
 `;
 
 const CardBottom = styled.div`
@@ -103,9 +112,12 @@ const CardBottom = styled.div`
   justify-content: space-between;
   text-align: center;
   padding: 0px;
+  height: 136px;
 `;
 
 const HistoryTitle = styled.div`
+  max-width: 135px;
+  overflow: hidden;
   font-weight: 700;
   font-size: 15px;
   line-height: 150%;
@@ -118,10 +130,9 @@ const HistoryButton = styled.div`
   border: 2px solid #dedede;
   border-radius: 20px;
   display: inline-block;
-  margin-top: 70px;
   div {
     padding: 10px 20px;
   }
 `;
 
-export default BoardHistoryCard;
+export default BoardCardHistory;
