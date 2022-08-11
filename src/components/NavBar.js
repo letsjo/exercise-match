@@ -22,7 +22,14 @@ const NavBar = () => {
         </Popover>
       )} */}
         <Logo>LOGO</Logo>
-        <SearchBox></SearchBox>
+        <SearchBox>
+          <SearchWrap>
+            <SearchIcon>
+              <img src="/images/pngwing.com (2).png" alt="" />
+            </SearchIcon>
+            <SearchInput placeholder="어떤 서비스가 필요하세요?"/>
+          </SearchWrap>
+        </SearchBox>
 
         {/* <BeforeLoginBox>
         <LoginBtn>로그인</LoginBtn>
@@ -48,7 +55,7 @@ const NavBarWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: aliceblue;
+  /* background-color: aliceblue; */
   box-sizing: border-box;
 `;
 
@@ -72,6 +79,38 @@ const SearchBox = styled.div`
   height: 44px;
   background-color: #f0f0f0;
   border-radius: 10px;
+  :focus-within{
+    box-shadow: 0px 0px 3px 3px #CCCCCC;
+  }
+`;
+
+
+
+const SearchWrap = styled.div`
+  margin: 9.5px 236px 9.5px 10px;
+  width: 450px;
+  height: 25px;
+  box-sizing: border-box;
+  display: flex;
+`;
+
+const SearchIcon = styled.div`
+  /* background-color: beige; */
+  width: 25px;
+  height: 25px;
+  img {
+    width: 25px;
+    height: 25px;
+  }
+`;
+
+const SearchInput = styled.input`
+  width: 100%;
+  height: 23px;
+  border: none;
+  background-color: transparent;
+  box-sizing: border-box;
+  outline: none;
 `;
 
 const BeforeLoginBox = styled.div`
@@ -100,6 +139,9 @@ const SignupBtn = styled.div`
 `;
 
 const AfterLoginBox = styled.div`
+  position: absolute;
+  top: 25px;
+  right: 80px;
   margin-left: auto;
   width: 50px;
   height: 50px;
@@ -128,7 +170,5 @@ const Popper = styled.div`
   color: black;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 `;
-
-
 
 export default NavBar;
