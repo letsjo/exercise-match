@@ -14,6 +14,7 @@ import OtherPostCardBig from "./components/OtherPostCardBig";
 import SelectCategoryBox from "./components/SelectCategoryBox";
 import OtherBoard from "./components/OtherBoard";
 
+
 function App() {
   const { showMessenger } = useChannelIOApi();
 
