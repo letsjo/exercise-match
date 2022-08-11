@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import KakaoLogin from "./components/KakaoLogin";
 import { useChannelIOApi, useChannelIOEvent } from "react-channel-plugin";
 import { Route, Routes } from "react-router-dom";
+import OtherPostCard from "./components/OtherPostCard";
 
 function App() {
   const { showMessenger } = useChannelIOApi();
@@ -17,7 +18,8 @@ function App() {
     <div>
       <NavBar />
       <Sweetalert />
-      <Login />
+      {/* <Login /> */}
+      {/* <OtherPostCard/> */}
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/kakaologin" element={<KakaoLogin />} />
