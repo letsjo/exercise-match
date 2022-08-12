@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import InputAnimation from "../components/InputAnimation";
 
 const Signup = () => {
   return (
@@ -11,7 +12,7 @@ const Signup = () => {
 
       <SignupOutline>
         <SignupBox>
-          <EmailEx />
+          <InputAnimation width="700px" inputName="이메일"/>
           <EmailInfo>
             회원 가입시 ID는 반드시 본인 소유의 연락 가능한 이메일 주소를
             사용하여야 합니다.
@@ -26,7 +27,7 @@ const Signup = () => {
           <AuthNumberTitle>인증번호 ?자리</AuthNumberTitle>
           <InputBox>
             <Input>
-              <AuthInput></AuthInput>
+              <AuthInput maxLength={7}/>
               <Timeleft>??분??초</Timeleft>
             </Input>
             <Line />
@@ -177,10 +178,10 @@ const Timeleft = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 12.5px;
 `;
 
 const Line = styled.div`
-  margin-top: 12.5px;
   width: 100%;
   border: 0.5px solid #000000;
 `;

@@ -11,6 +11,7 @@ import Main from "./pages/Main";
 import Login from "./pages/Login";
 import KakaoLogin from "./pages/KakaoLogin";
 import Signup from "./pages/Signup";
+import InputAnimation from "./components/InputAnimation";
 
 
 function App() {

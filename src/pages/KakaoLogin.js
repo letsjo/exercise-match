@@ -1,14 +1,18 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { userAction } from "../redux/actions/userAction";
 
 const KakaoLogin = (props) => {
-
+  const dispatch = useDispatch();
   let params = new URL(document.location).searchParams;
   let code = params.get("code");
   console.log(code);
 
-  return (
-    <div>KakaoLogin</div>
-  )
-}
+  useEffect(() => {
+    dispatch(userAction.kakaoLogin(code));
+  }, []);
 
-export default KakaoLogin
+  return <div>KakaoLogin</div>;
+};
+
+export default KakaoLogin;

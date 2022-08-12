@@ -4,6 +4,7 @@ import modalReducer from "./reducers/modalReducer";
 
 const store = configureStore({reducer:{
     userReducer,
-    modalReducer}})
+    modalReducer,
+}})
 
 export default store;
