@@ -10,6 +10,7 @@ import NavBar from "./components/NavBar";
 import Main from "./pages/Main";
 import Login from "./pages/Login";
 import KakaoLogin from "./pages/KakaoLogin";
+import InputAnimation from "./components/InputAnimation";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
 
   return (
     <div>
+      <InputAnimation/>
       <Routes>
         <Route path="/" element={<Main/>} />
         <Route path="/login" element={<Login />} />
