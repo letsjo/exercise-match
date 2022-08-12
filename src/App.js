@@ -10,6 +10,7 @@ import NavBar from "./components/NavBar";
 import Main from "./pages/Main";
 import Login from "./pages/Login";
 import KakaoLogin from "./pages/KakaoLogin";
+import Signup from "./pages/Signup";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main/>} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup/>}/>
         <Route path="/kakaologin" element={<KakaoLogin />} />
       </Routes>
       <span onClick={showMessenger}></span>
