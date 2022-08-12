@@ -2,7 +2,7 @@ import axios from "axios";
 
 const userAPI = axios.create({
   baseURL: "http://13.125.210.74",
-  headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  headers: { "Content-Type": "application/json" },
 });
 
 // Add a request interceptor

@@ -122,6 +122,7 @@ const Container = styled.div`
 
 const DelBtn = styled.div`
   display: block;
+  cursor: pointer;
 `;
 
 export default InputAnimation;
