@@ -11,8 +11,8 @@ const Login = () => {
   };
 
   const CLIENT_ID = "r1zmtgVUyyZ2koRdASic";
-  const CALLBACK_URL = "http://localhost:3000/naverLogin";
-  const STATE_STRING = "state";
+  const CALLBACK_URL = "http://localhost:3000/api/naverLogin";
+  const STATE_STRING = "state_test";
   const naverURL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${CLIENT_ID}&state=${STATE_STRING}&redirect_uri=${CALLBACK_URL}`;
 
   const naverLogin = () => {
