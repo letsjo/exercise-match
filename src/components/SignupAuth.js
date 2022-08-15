@@ -39,7 +39,7 @@ const SignupAuth = () => {
 };
 
 const Container = styled.div`
-
+  margin-bottom: 196px;
 `;
 
 const EmailEx = styled.div`
