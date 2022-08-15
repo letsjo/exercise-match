@@ -14,8 +14,8 @@ const Signup = () => {
 
       <SignupOutline>
         <SignupBox>
-          {<SignupAuth />}
-          <Wrap>
+          <SignupAuth />
+          {/* <Wrap>
           <Title>이름</Title>
           <Box placeholder="이름을 입력해주세요."></Box>
           </Wrap> 
@@ -26,7 +26,7 @@ const Signup = () => {
           <Wrap>
           <Title>연락처</Title>
           <Box placeholder="연락처를 입력해주세요.."></Box>
-          </Wrap>
+          </Wrap> */}
           <NextButton>다음</NextButton>
         </SignupBox>
       </SignupOutline>
@@ -42,7 +42,7 @@ const SignupOutline = styled.div`
   border: 1px solid lightgray;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   margin: 18px auto 0;
 `;
 
