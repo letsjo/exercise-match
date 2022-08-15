@@ -4,7 +4,6 @@ import { Route, Routes } from "react-router-dom";
 import { useChannelIOApi, useChannelIOEvent } from "react-channel-plugin";
 
 // components
-import NavBar from "./components/NavBar";
 
 //pages
 import Main from "./pages/Main";
@@ -14,10 +13,8 @@ import Signup from "./pages/Signup";
 import InputAnimation from "./components/InputAnimation";
 import NaverLogin from "./pages/NaverLogin";
 
-
 function App() {
   const { showMessenger } = useChannelIOApi();
-
   useChannelIOEvent("onShowMessenger", () => {
     console.log("Messenger opened!");
   });
