@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Login = () => {
   const REST_API_KEY = "77c5975ead488c768a11d49f9320425c";
-  const REDIRECT_URI = "http://localhost:3000/kakaoLogin";
+  const REDIRECT_URI = "http://localhost:3000/api/kakaoLogin";
   const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
   const kakaoLogin = () => {

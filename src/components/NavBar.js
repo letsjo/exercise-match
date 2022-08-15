@@ -12,6 +12,7 @@ const NavBar = () => {
   const onClose = () => {
     setIsPopperShown(false);
   };
+  
   return (
     <NavBarWrap>
       <Wrap>

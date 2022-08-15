@@ -3,7 +3,7 @@ import userAPI from "../../apis/userAPI";
 
 const kakaoLogin = (code) => {
   return async (dispatch) => {
-    await userAPI.get(`/kakaoLogin?code=${code}`)
+    await userAPI.get(`/api/kakaoLogin?code=${code}`)
       .then((res) => {
         console.log(res); // 토큰이 넘어올 것임
 
