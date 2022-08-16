@@ -1,32 +1,29 @@
 // packages
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 // components
 import SignupAuth from "../components/SignupAuth";
 import SignupNavbar from "../components/SignupNavbar";
+import SignupAuthSecond from "../components/SignupAuthSecond";
 
 const Signup = () => {
-  const [page,setPage] = useState(1);
+  const [page, setPage] = useState(1);
   return (
     <Container>
-      <SignupNavbar pageState={{page,setPage}} title={"회원가입("+page+"/2)"} leftArrow={true} rightArrow={false} />
+      <SignupNavbar
+        pageState={{ page, setPage }}
+        title={"회원가입(" + page + "/2)"}
+        leftArrow={true}
+        rightArrow={false}
+      />
 
       <SignupOutline>
         <SignupBox>
-          <SignupAuth />
-          {/* <Wrap>
-          <Title>이름</Title>
-          <Box placeholder="이름을 입력해주세요."></Box>
-          </Wrap> 
-          <Wrap>
-          <Title>닉네임</Title>
-          <Box placeholder="닉네임을 입력해주세요."></Box>
-          </Wrap> 
-          <Wrap>
-          <Title>연락처</Title>
-          <Box placeholder="연락처를 입력해주세요.."></Box>
-          </Wrap> */}
+          <ContentZone>
+            {/* {<SignupAuth />} */}
+            <SignupAuthSecond />
+          </ContentZone>
           <NextButton>다음</NextButton>
         </SignupBox>
       </SignupOutline>
@@ -47,16 +44,19 @@ const SignupOutline = styled.div`
 `;
 
 const SignupBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 100%;
-
+  height: 650px;
   margin: 75px 50px;
 `;
+
+const ContentZone = styled.div``;
 
 const NextButton = styled.div`
   width: 100%;
   height: 69px;
-  position: relative;
-  bottom: 0;
   background-color: #dedede;
   border-radius: 5px;
   color: white;
@@ -66,33 +66,6 @@ const NextButton = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  margin-top: 196px;
-`;
-
-const Wrap = styled.div`
-  height: 84px;
-  margin-bottom: 30px;
-`;
-
-const Title = styled.div`
-  height:29px;
-  margin-bottom: 5px;
-  box-sizing: border-box;
-  color: #494949;
-  font-size: 20px;
-  font-weight: bold;
-`;
-
-const Box = styled.input`
-margin: 0%;
-  height: 50px;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 10px;
-  font-size: 20px;
-  &::placeholder {
-    color: #DEDEDE;
-  }
 `;
 
 export default Signup;
