@@ -3,27 +3,26 @@ import styled, { css } from "styled-components";
 import { RiCloseCircleFill } from "react-icons/ri";
 import { BsCheckSquareFill } from "react-icons/bs";
 
-const InputAnimation = ({ width = "700px", inputName = "이메일" }) => {
+const InputAnimation = ({ width = "700px", inputName, validation, inputAvailable }) => {
   const [input, setInput] = useState("");
   const emailRef = useRef("");
-  const [validationState, setValidationState] = useState(false);
-
-  const validation = (e) => {
+  
+  const ValidationCheck = (e) => {
     e.preventDefault();
     const email = emailRef.current.value.trim();
     const regEmail =
       /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
 
     if (!regEmail.test(email)) {
-      setValidationState(false);
+      validation.setValidationState(false);
     } else {
-      setValidationState(true);
+      validation.setValidationState(true);
     }
   };
 
   const onChange = (e) => {
     setInput(e.target.value);
-    validation(e);
+    ValidationCheck(e);
   };
 
   const onReset = () => {
@@ -39,14 +38,15 @@ const InputAnimation = ({ width = "700px", inputName = "이메일" }) => {
         onChange={onChange}
         required
         autocomplete="off"
+        disabled={inputAvailable}
       />
       <label className="label-wrapper">
-        <span className="label-text">이메일</span>
+        <span className="label-text">{inputName}</span>
       </label>
       {input && (
         <InputBtn>
-          {validationState ? (
-            <BsCheckSquareFill size={18} color="#494949"/>
+          {validation.validationState ? (
+            <BsCheckSquareFill size={18} color="#494949" />
           ) : (
             <RiCloseCircleFill className="delIcon" onClick={onReset} size={24} color="#a8a8a8" />
           )}
@@ -117,6 +117,12 @@ const Container = styled.div`
         left: 0px;
         transition: all 0.2s ease;
         line-height: 150%;
+      }
+
+      input:disabled + .label-wrapper .label-text {
+        color: #a8a8a8;
+        font-size: 15px;
+        transform: translateY(-35px);
       }
 
       input:focus + .label-wrapper .label-text,

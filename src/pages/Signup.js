@@ -6,14 +6,17 @@ import styled from "styled-components";
 import SignupAuth from "../components/SignupAuth";
 import SignupNavbar from "../components/SignupNavbar";
 import SignupAuthSecond from "../components/SignupAuthSecond";
+import ButtonBigMain from "../components/ButtonBigMain";
 
 const Signup = () => {
   const [page, setPage] = useState(1);
+  const [nextAvailable,setNextAvailable] = useState(false);
+
   return (
     <Container>
       <SignupNavbar
         pageState={{ page, setPage }}
-        title={"회원가입(" + page + "/2)"}
+        title={"회원가입(" + page + "/3)"}
         leftArrow={true}
         rightArrow={false}
       />
@@ -21,10 +24,10 @@ const Signup = () => {
       <SignupOutline>
         <SignupBox>
           <ContentZone>
-            {/* {<SignupAuth />} */}
-            <SignupAuthSecond />
+            {<SignupAuth setNextAvailable={setNextAvailable}/>}
+            {/* <SignupAuthSecond /> */}
           </ContentZone>
-          <NextButton>다음</NextButton>
+          <ButtonBigMain name="다음" nextAvailable={nextAvailable}/>
         </SignupBox>
       </SignupOutline>
     </Container>
