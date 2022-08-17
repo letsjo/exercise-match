@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import BoardListHistory from "./BoardListHistory";
-import BoardInfo from "./BoardInfo";
+import BoardInfo from "./BoardNameInfo";
 
 const HistoryBoard = () => {
   return (

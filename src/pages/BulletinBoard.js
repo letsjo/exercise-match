@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import NavBar from '../components/NavBar'
-import BulletinCategoryBox from '../components/BulletinCategoryBox'
-import BulletinListFrame from '../components/BulletinListFrame'
+import NavBar from '../components/public/NavBar'
+import BulletinCategoryBox from '../components/Board/BulletinCategoryBox'
+import BulletinListFrame from '../components/Board/BulletinListFrame'
 
 const BulletinBoard = () => {
   return (

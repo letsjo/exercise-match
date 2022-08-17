@@ -15,8 +15,8 @@ const SlidBanner = ({ show = 1, page = 1, imgsPath = [] }) => {
     <SliderFrame>
       <SliderWrap>
         <Slider {...settings}>
-          {imgsPath.map((imgPath) => (
-            <SliderImageWrap>
+          {imgsPath.map((imgPath,index) => (
+            <SliderImageWrap key={index}>
               <img src={imgPath} />
             </SliderImageWrap>
           ))}

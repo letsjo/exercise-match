@@ -10,9 +10,9 @@ import Main from "./pages/Main";
 import Login from "./pages/Login";
 import KakaoLogin from "./pages/KakaoLogin";
 import Signup from "./pages/Signup";
-import InputAnimation from "./components/InputAnimation";
 import NaverLogin from "./pages/NaverLogin";
 import BulletinBoard from "./pages/BulletinBoard";
+import MyPage from "./pages/MyPage";
 import Review from "./pages/Review";
 
 function App() {
@@ -29,8 +29,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/bulletinBoard" element={<BulletinBoard/>}/>
+        <Route path="/mypage" element={<MyPage/>}/>
         <Route path="/review" element={<Review/>}/>
-        <Route path="/api/kakaologin" element={<KakaoLogin />} />
+        <Route path="/api/kakaologin" element={<KakaoLogin/>} />
         <Route path="/api/naverLogin" element={<NaverLogin/>}/>
       </Routes>
       <span onClick={showMessenger}></span>

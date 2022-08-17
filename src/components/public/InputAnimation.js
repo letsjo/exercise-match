@@ -3,52 +3,39 @@ import styled, { css } from "styled-components";
 import { RiCloseCircleFill } from "react-icons/ri";
 import { BsCheckSquareFill } from "react-icons/bs";
 
-const InputAnimation = ({ width = "700px", inputName, validation, inputAvailable }) => {
-  const [input, setInput] = useState("");
-  const emailRef = useRef("");
+const InputAnimation = ({ type="text", width = "700px", Ref=null, inputName="", inputValue, setInputValue, ValidationCheck=()=>{}, validation={}, inputDisAvailable=false}) => {
   
-  const ValidationCheck = (e) => {
-    e.preventDefault();
-    const email = emailRef.current.value.trim();
-    const regEmail =
-      /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-
-    if (!regEmail.test(email)) {
-      validation.setValidationState(false);
-    } else {
-      validation.setValidationState(true);
-    }
-  };
-
   const onChange = (e) => {
-    setInput(e.target.value);
-    ValidationCheck(e);
+    e.preventDefault();
+    if (setInputValue) setInputValue(e.target.value);
+    if (ValidationCheck) ValidationCheck(e);
   };
 
-  const onReset = () => {
-    setInput("");
+  const onReset = (e) => {
+    e.preventDefault();
+    if (setInputValue) setInputValue("");
+    if (Ref) Ref.current.value = "";
   };
 
   return (
     <Container width={width}>
       <input
-        type="text"
-        ref={emailRef}
-        value={input}
+        type={type}
+        ref={Ref}
+        value={inputValue}
         onChange={onChange}
         required
-        autocomplete="off"
-        disabled={inputAvailable}
+        disabled={inputDisAvailable}
       />
       <label className="label-wrapper">
         <span className="label-text">{inputName}</span>
       </label>
-      {input && (
+      {!inputDisAvailable && inputValue && (
         <InputBtn>
           {validation.validationState ? (
             <BsCheckSquareFill size={18} color="#494949" />
           ) : (
-            <RiCloseCircleFill className="delIcon" onClick={onReset} size={24} color="#a8a8a8" />
+            <RiCloseCircleFill className="delIcon" onClick={(e)=>onReset(e)} size={24} color="#a8a8a8" />
           )}
         </InputBtn>
       )}
