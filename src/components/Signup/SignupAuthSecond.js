@@ -184,4 +184,8 @@ const ContactAddress = styled.div`
   background-color: aliceblue;
 `;
 
+const InputBox = styled.div`
+
+`
+
 export default SignupAuthSecond;

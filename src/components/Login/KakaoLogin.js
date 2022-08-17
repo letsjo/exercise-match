@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
-import { userAction } from '../redux/actions/userAction';
+import { userAction } from '../../redux/actions/userAction';
 
 
 const KakaoLogin = (props) => {

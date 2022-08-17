@@ -12,7 +12,7 @@ import KakaoLogin from "./pages/KakaoLogin";
 import Signup from "./pages/Signup";
 import NaverLogin from "./pages/NaverLogin";
 import BulletinBoard from "./pages/BulletinBoard";
-import MyPage from "./pages/MyPage";
+import Mypage from "./pages/Mypage";
 import Review from "./pages/Review";
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/bulletinBoard" element={<BulletinBoard/>}/>
-        <Route path="/mypage" element={<MyPage/>}/>
+        <Route path="/mypage" element={<Mypage/>}/>
         <Route path="/review" element={<Review/>}/>
         <Route path="/api/kakaologin" element={<KakaoLogin/>} />
         <Route path="/api/naverLogin" element={<NaverLogin/>}/>

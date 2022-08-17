@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { LocalAction } from "../redux/actions/LocalAction";
+import { LocalAction } from "../../redux/actions/LocalAction";
 
 const LocalSelect = () => {
   const dispatch = useDispatch();

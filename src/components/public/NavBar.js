@@ -33,12 +33,10 @@ const NavBar = () => {
             <SearchInput placeholder="어떤 서비스가 필요하세요?" />
           </SearchWrap>
         </SearchBox>
-
         {/* <BeforeLoginBox>
         <LoginBtn>로그인</LoginBtn>
         <SignupBtn>회원가입</SignupBtn>
       </BeforeLoginBox> */}
-
         <AfterLoginBox>
           <ProfileImg onClick={onOpenerClick}>
             <img src="https://item.kakaocdn.net/do/479d4f178d8d03980ffc52eeb66465c3f43ad912ad8dd55b04db6a64cddaf76d" />
