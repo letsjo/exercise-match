@@ -16,6 +16,7 @@ const BulletinBoard = () => {
             <ContextFrame>
                 <BulletinCategoryBox/>
                 <BulletinListFrame/>
+                
             </ContextFrame>
         </MainFrame>
     </Container>
@@ -29,6 +30,8 @@ const Container =styled.div`
 
 const MainFrame = styled.div`
     display: flex;
+    justify-content: center;
+    
 `;
 
 const CategoryFrame =styled.div`
