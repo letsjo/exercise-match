@@ -4,11 +4,11 @@ import styled from "styled-components";
 import Swal from "sweetalert2";
 
 // components
-import SignupAuth from "../components/SignupAuth";
-import SignupNavbar from "../components/SignupNavbar";
-import SignupAuthSecond from "../components/SignupAuthSecond";
-import ButtonBigMain from "../components/ButtonBigMain";
-import SignupAuthPW from "../components/SignupAuthPW";
+import SignupAuth from "../components/Signup/SignupAuth";
+import SignupNavbar from "../components/public/SubNavbar";
+import SignupAuthSecond from "../components/Signup/SignupAuthSecond";
+import ButtonBigMain from "../components/public/ButtonBigMain";
+import SignupAuthPW from "../components/Signup/SignupAuthPW";
 
 const Signup = () => {
   const [page, setPage] = useState(1);

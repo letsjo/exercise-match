@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import SignupNavbar from "../components/SignupNavbar";
+import SubNavbar from "../components/public/SubNavbar";
 
 const MyPage = () => {
   const [page, setPage] = useState(1);
@@ -8,7 +8,7 @@ const MyPage = () => {
   const [rightArrow, setRightArrow] = useState(false);
   return (
     <Container>
-      <SignupNavbar
+      <SubNavbar
         title="마이페이지"
         pageState={{ page, setPage }}
         leftState={{leftArrow, setLeftArrow}}

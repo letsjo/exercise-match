@@ -65,7 +65,7 @@ const WriteSubTitle =styled.div`
     height: 23px;
 `;
 
-const WriteBox =styled.input`
+const WriteBox =styled.textarea`
 margin: auto;
 border-radius:10px ;
 border: 1px solid #a8a8a8;

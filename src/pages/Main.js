@@ -3,12 +3,12 @@ import React from "react";
 import styled from "styled-components";
 
 // components
-import NavBar from "../components/NavBar";
-import SlidBanner from "../components/SlideBanner";
-import PopularBoard from "../components/PopularBoard";
-import HistoryBoard from "../components/HistoryBoard";
-import SelectCategoryBox from "../components/SelectCategoryBox";
-import OtherBoard from "../components/OtherBoard";
+import NavBar from "../components/public/NavBar";
+import SlidBanner from "../components/Main/SlideBanner";
+import PopularBoard from "../components/Main/PopularBoard";
+import HistoryBoard from "../components/Main/HistoryBoard";
+import SelectCategoryBox from "../components/Main/SelectCategoryBox";
+import OtherBoard from "../components/Main/OtherBoard";
 
 const Main = () => {
   return (

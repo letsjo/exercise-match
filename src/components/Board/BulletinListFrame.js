@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
-import BulletinCard from '../components/BulletinCard'
-import Pagination from './Pagination';
+import BulletinCard from '../Board/BulletinCard'
+import Pagination from '../Board/Pagination';
 import { useState } from 'react';
 
 const BulletinListFrame = () => {

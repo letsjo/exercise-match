@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
-import InputAnimation from "./InputAnimation";
+import InputAnimation from "../public/InputAnimation";
 
 const SignupAuthPW = ({ setNextAvailable, signUpInfo, setSignUpInfo, leftState, rightState }) => {
 

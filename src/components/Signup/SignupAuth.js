@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import styled, { css } from "styled-components";
 import Swal from "sweetalert2";
 
-import InputAnimation from "../components/InputAnimation";
+import InputAnimation from "../public/InputAnimation";
 import AlertBox from "./AlertBox";
 
 const SignupAuth = ({

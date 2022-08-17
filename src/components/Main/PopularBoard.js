@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import BoardInfo from "./BoardInfo";
+import BoardInfo from "./BoardNameInfo";
 import BoardListBig from "./BoardListBig";
 import BoardListSmall from "./BoardListSmall";
 
