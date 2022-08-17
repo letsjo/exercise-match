@@ -3,8 +3,9 @@ import styled from 'styled-components'
 import NavBar from '../components/public/NavBar'
 import BulletinCategoryBox from '../components/Board/BoardPublic/BulletinCategoryBox'
 import BulletinListFrame from '../components/Board/BulletinBoard/BulletinListFrame'
+import MatchingListFrame from '../components/Board/MatchingBoard/MatchingListFrame'
 
-const BulletinBoard = () => {
+const MatchingBoard = () => {
   return (
     <Container>
         <NavBar/>
@@ -15,7 +16,7 @@ const BulletinBoard = () => {
             </CategoryFrame>
             <ContextFrame>
                 <BulletinCategoryBox/>
-                <BulletinListFrame/>
+                <MatchingListFrame/>
                 
             </ContextFrame>
         </MainFrame>
@@ -70,4 +71,4 @@ const InfoTitle =styled.div`
 
 
 
-export default BulletinBoard
+export default MatchingBoard

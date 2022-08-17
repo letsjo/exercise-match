@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components';
-import BulletinCard from '../Board/BulletinCard'
-import Pagination from '../Board/Pagination';
+import Pagination from '../BoardPublic/Pagination';
 import { useState } from 'react';
+import MatchingBoardCard from './MatchingBoardCard';
 
-const BulletinListFrame = () => {
+const MatchingListFrame = () => {
 
     const [page, setPage] =useState(1);
 
@@ -13,10 +13,7 @@ const BulletinListFrame = () => {
         <ButtonBox>
             <WriteButton>작성하기</WriteButton>
         </ButtonBox>
-        <BulletinCard/>
-        <BulletinCard/>
-        <BulletinCard/>
-        <BulletinCard/>
+        <MatchingBoardCard/>
         <PageFrame>
             <Frame>
             <Pagination
@@ -76,4 +73,4 @@ const BoardListFrame = styled.div`
 
 `;
 
-export default BulletinListFrame
+export default MatchingListFrame
