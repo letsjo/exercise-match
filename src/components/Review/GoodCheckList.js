@@ -1,15 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useState } from 'react';
 import { ImCheckboxUnchecked, ImCheckboxChecked } from "react-icons/im";
 
 const GoodCheckList = () => {
+
 
   return (
         <ReviewCheck>
         <CheckList>
           <CheckBox>
-            <input type="checkbox"/>
+            <input type="checkbox" />
             {/* <ImCheckboxChecked size={18} /> */}
           </CheckBox>
           <ListContent>1 친절하고 매너가 좋아요.</ListContent>
@@ -17,7 +17,7 @@ const GoodCheckList = () => {
 
         <CheckList>
           <CheckBox>
-          <input type="checkbox"/>
+          <input type="checkbox" />
           </CheckBox>
           <ListContent>2 친절하고 매너가 좋아요.</ListContent>
         </CheckList>
@@ -31,18 +31,19 @@ const GoodCheckList = () => {
 
         <CheckList>
           <CheckBox>
-          <input type="checkbox"/>
+          <input type="checkbox" />
           </CheckBox>
           <ListContent>4 친절하고 매너가 좋아요.</ListContent>
         </CheckList>
 
         <CheckList>
           <CheckBox>
-          <input type="checkbox"/>
+          <input type="checkbox" />
           </CheckBox>
           <ListContent>5 친절하고 매너가 좋아요.</ListContent>
-        </CheckList>
+        </CheckList>  
       </ReviewCheck>
+
 
   )
 }
