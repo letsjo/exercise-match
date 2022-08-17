@@ -1,15 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
+import {AiOutlineHeart} from "react-icons/ai"
+import {MdChatBubble} from "react-icons/md"
 
 const BulletinLikeCard = () => {
   return (
     <Container>
     <LikeCommentBox>
         <IconBox>
-            <Icon/> <Text>x명</Text>
+            <AiOutlineHeart size={24} color= "#a8a8a8"/> <Text>x명</Text>
         </IconBox>
         <IconBox>
-        <Icon/> <Text>x명</Text>
+        <MdChatBubble size={24} color= "#a8a8a8"/> <Text>x명</Text>
         </IconBox>
     </LikeCommentBox>
     <Daysago>1일 전</Daysago>
@@ -37,12 +39,6 @@ const IconBox = styled.div`
     height: 24px;
     display: flex;
     justify-content: space-between;
-`;
-
-const Icon =styled.div`
-    width: 24px;
-    height: 24px;
-    background-color: aliceblue
 `;
 
 const Text =styled.div`

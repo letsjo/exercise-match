@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 function Pagination({ total, limit, page, setPage }) {
   const numPages = Math.ceil(total / limit);
@@ -31,17 +31,19 @@ const Nav = styled.nav`
   justify-content: center;
   align-items: center;
   gap: 4px;
-  margin: 16px;
 `;
 
 const Button = styled.button`
-  border: none;
-  border-radius: 8px;
+  border: 1px solid #f0f0f0;
+  border-radius: 100px;
+  width: 50px;
+  height: 50px;
   padding: 8px;
   margin: 0;
   background: transparent;
-  color: rgba(79, 79, 79, 0.5);
-  font-size: 1rem;
+  color: rgba(79, 79, 79, 1);
+  font-weight: bold;
+  font-size: 15px;
 
   &:hover {
     color: rgba(79, 79, 79, 1);
@@ -63,6 +65,7 @@ const Button = styled.button`
   }
 
   &[aria-current] {
+    background-color:#dedede;
     color: rgba(79, 79, 79, 1);
     font-weight: bold;
     cursor: revert;

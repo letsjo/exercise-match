@@ -3,13 +3,13 @@ import styled, { css } from "styled-components";
 
 const SignupNavbar = ({ pageState, title, leftArrow, rightArrow }) => {
   const goToBack = () => {
-    if (pageState.page>1) pageState.setPage(pageState.page-1);
-    // window.history.back();
+    if (pageState && pageState.page>1) pageState.setPage(pageState.page-1);
+    else window.history.back();
   };
 
   const goToFront = () => {
-    if (pageState.page<3) pageState.setPage(pageState.page+1);
-    // window.history.forward();
+    if (pageState && pageState.page<3) pageState.setPage(pageState.page+1);
+    else window.history.forward();
   };
 
   return (
