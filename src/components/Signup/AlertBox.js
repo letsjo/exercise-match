@@ -16,7 +16,7 @@ const AlertBox = ({ setAlertSent, alertcomment }) => {
 const Container = styled.div`
   opacity: 0;
   position: absolute;
-  top: 290px;
+  top: 345px;
   left: 50%;
   width: 700px;
   height: 49px;

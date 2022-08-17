@@ -8,7 +8,6 @@ const Sweetalert = ({ comment = "Hello" }) => {
     Swal.fire(...comment);
   };
 
-
   // const Alert = (e)=>{
   //     e.preventDefault();
   //     Swal.fire(

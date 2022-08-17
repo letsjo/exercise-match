@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { GrFormClose } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
-import { modalSliceAction } from "../redux/reducers/modalReducer";
+import { modalSliceAction } from "../../redux/reducers/modalReducer";
 import { useNavigate } from "react-router-dom";
 
 const ModalComponents = () => {
