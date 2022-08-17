@@ -1,38 +1,70 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 
-const SignupAuthSecond = () => {
+const SignupAuthSecond = ({
+  setNextAvailable,
+  signUpInfo,
+  setSignUpInfo,
+  leftState,
+  rightState,
+}) => {
+  useEffect(() => {
+    setNextAvailable(false);
+    rightState.setRightArrow(false);
+  }, []);
+
+  console.log(signUpInfo);
+
+  const RefNickName = useRef("");
+  const RefGender = useRef("");
+
+  const ValidationCheck = () => {
+    console.log(RefGender);
+    console.log(RefGender.current.elements.women.checked);
+  };
+
   return (
     <Container>
-      <Wrap>
+      {/* <Wrap>
         <Title>이름</Title>
         <Box placeholder="이름을 입력해주세요."></Box>
-      </Wrap>
+      </Wrap> */}
       <Wrap>
         <Title>닉네임</Title>
-        <Box placeholder="닉네임을 입력해주세요."></Box>
+        <Box
+          onChange={ValidationCheck}
+          ref={RefNickName}
+          placeholder="닉네임을 입력해주세요."
+        ></Box>
       </Wrap>
-      <Wrap>
+      {/* <Wrap>
         <Title>연락처</Title>
         <Box placeholder="연락처를 입력해주세요.."></Box>
-      </Wrap>
+      </Wrap> */}
       <Wrap>
         <Title>성별</Title>
-        <Gender action="#">
+        <Gender ref={RefGender}>
           <RadioSection>
-            <input type="radio" id="men" name="radio-group" checked />
-            <label for="men">남성</label>
+            <input type="radio" id="men" name="radio-group" />
+            <label htmlFor="men">남성</label>
           </RadioSection>
           <RadioSection>
             <input type="radio" id="women" name="radio-group" />
-            <label for="women">여성</label>
+            <label htmlFor="women">여성</label>
           </RadioSection>
         </Gender>
       </Wrap>
       <WrapAge>
         <Title>생년월일</Title>
         <ContactAddress>
-          
+          <input placeholder="년(4자)" />
+          <select name="birthMonths">
+            <option value="none">월</option>
+            {Array.from({ length: 12 }, (item, index) => (
+              <option value={index+1}>{index+1}</option>
+            ))}
+          </select>
+          <input placeholder="일" />
         </ContactAddress>
       </WrapAge>
     </Container>
@@ -100,7 +132,7 @@ const Gender = styled.form`
 
   input:checked + label:before,
   input:not(:checked) + label:before {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     top: 0;
@@ -108,12 +140,12 @@ const Gender = styled.form`
     height: 30px;
     border: 1px solid #ddd;
     border-radius: 100%;
-    background: #A8A8A8;
+    background: #a8a8a8;
   }
 
   input:checked + label:after,
   input:not(:checked) + label:after {
-    content: '';
+    content: "";
     width: 14px;
     height: 14px;
     background: #ddd;
@@ -144,7 +176,7 @@ const RadioSection = styled.div`
   align-items: center;
   height: 100%;
   width: 100%;
-`
+`;
 
 const ContactAddress = styled.div`
   width: 100%;

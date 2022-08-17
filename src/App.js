@@ -13,6 +13,7 @@ import Signup from "./pages/Signup";
 import InputAnimation from "./components/InputAnimation";
 import NaverLogin from "./pages/NaverLogin";
 import BulletinBoard from "./pages/BulletinBoard";
+import MyPage from "./pages/MyPage";
 
 function App() {
   const { showMessenger } = useChannelIOApi();
@@ -27,7 +28,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/bulletinBoard" element={<BulletinBoard/>}/>
-        <Route path="/api/kakaologin" element={<KakaoLogin />} />
+        <Route path="/mypage" element={<MyPage/>}/>
+        <Route path="/api/kakaologin" element={<KakaoLogin/>} />
         <Route path="/api/naverLogin" element={<NaverLogin/>}/>
       </Routes>
       <span onClick={showMessenger}></span>
