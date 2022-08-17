@@ -14,6 +14,7 @@ import InputAnimation from "./components/InputAnimation";
 import NaverLogin from "./pages/NaverLogin";
 import BulletinBoard from "./pages/BulletinBoard";
 import MyPage from "./pages/MyPage";
+import Review from "./pages/Review";
 
 function App() {
   const { showMessenger } = useChannelIOApi();
@@ -22,6 +23,7 @@ function App() {
   });
 
   return (
+    
     <div>
       <Routes>
         <Route path="/" element={<Main/>} />
@@ -29,6 +31,7 @@ function App() {
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/bulletinBoard" element={<BulletinBoard/>}/>
         <Route path="/mypage" element={<MyPage/>}/>
+        <Route path="/review" element={<Review/>}/>
         <Route path="/api/kakaologin" element={<KakaoLogin/>} />
         <Route path="/api/naverLogin" element={<NaverLogin/>}/>
       </Routes>
