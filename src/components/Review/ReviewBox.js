@@ -55,7 +55,7 @@ const ReviewBox = () => {
                   setRate(idx + 1);
                   setShow(true);
                 }}
-              >
+              >  
                 <BsStarFill size={42} />
               </Star>
             );
