@@ -15,6 +15,7 @@ import BulletinBoard from "./pages/BulletinBoard";
 import Mypage from "./pages/Mypage";
 import Review from "./pages/Review";
 import MatchingBoard from "./pages/MatchingBoard";
+import UserInfo from "./pages/UserInfo";
 
 function App() {
   const { showMessenger } = useChannelIOApi();
@@ -33,6 +34,7 @@ function App() {
         <Route path="/bulletinBoard" element={<BulletinBoard/>}/>
         <Route path="/matchingBoard" element={<MatchingBoard/>}/>
         <Route path="/mypage" element={<Mypage/>}/>
+        <Route path="/userinfo" element={<UserInfo/>}/>
         <Route path="/review" element={<Review/>}/>
         <Route path="/api/kakaologin" element={<KakaoLogin/>} />
         <Route path="/api/naverLogin" element={<NaverLogin/>}/>

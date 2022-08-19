@@ -73,7 +73,7 @@ const Signup = () => {
                 leftState={{ leftArrow, setLeftArrow }}
                 rightState={{ rightArrow, setRightArrow }}
               />
-            ) : page == 3 ? (
+            ) : page == 4 ? (
               <SignupAuthSecond
                 setNextAvailable={setNextAvailable}
                 signUpInfo={signUpInfo}
@@ -86,7 +86,7 @@ const Signup = () => {
             )}
           </ContentZone>
           <ButtonBigMain
-            name={page == 3?("회원가입 완료"):("다음")}
+            name={page == 2?("회원가입 완료"):("다음")}
             nextAvailable={nextAvailable}
             NextPageAllow={NextPageAllow}
           />

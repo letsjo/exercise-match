@@ -1,26 +1,25 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import LeaveSection from "../components/Mypage/LeaveSection";
-import MyPersonalData from "../components/Mypage/MyPersonalData";
 import MyProfileShow from "../components/Mypage/MyProfileShow";
+import UserDataFrame from "../components/Mypage/UserDataFrame";
 import SubNavbar from "../components/public/SubNavbar";
 
-const Mypage = () => {
+const UserInfo = () => {
   const [page, setPage] = useState(1);
   const [leftArrow, setLeftArrow] = useState(true);
   const [rightArrow, setRightArrow] = useState(false);
   return (
     <Container>
       <SubNavbar
-        title="마이페이지"
+        title="회원정보"
         pageState={{ page, setPage }}
         leftState={{ leftArrow, setLeftArrow }}
         rightState={{ rightArrow, setRightArrow }}
       />
       <PageFrame>
-        <MyProfileShow/>
-        <MyPersonalData/>
-        <LeaveSection/>
+        <MyProfileShow mypage={false}/>
+        <UserDataFrame title="매칭 간단 평가"/>
+        <UserDataFrame title="매칭 후기"/>
       </PageFrame>
     </Container>
   );
@@ -31,7 +30,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
 `;
 
 const PageFrame = styled.div`
@@ -40,7 +39,7 @@ const PageFrame = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  margin-bottom: 68px;
 `;
 
-
-export default Mypage;
+export default UserInfo;

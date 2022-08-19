@@ -18,7 +18,7 @@ const SignupAuthPW = ({ setNextAvailable, signUpInfo, setSignUpInfo, leftState, 
   const ValidationCheck = () =>{
     if(RefFirstPassword.current.value && RefFirstPassword.current.value==RefSecondPassword.current.value){
       setNextAvailable(true);
-      rightState.setRightArrow(true);
+      rightState.setRightArrow(false);
       setSignUpInfo({...signUpInfo,password:RefFirstPassword.current.value});
     } else {
       setNextAvailable(false);
