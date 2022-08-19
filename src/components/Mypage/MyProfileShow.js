@@ -3,25 +3,46 @@ import styled from "styled-components";
 import InputEditButton from "../public/InputEditButton";
 import ShowStarScore from "../public/ShowStarScore";
 
-const MyProfileShow = () => {
+const MyProfileShow = ({ mypage = true }) => {
   return (
     <Container>
       <LeftFrame>
         <LeftZone>
           <PhotoFrame>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfUdO7mjLq0t2Z84miXEHCrcg9B6P3_WBOJZJMtjLfmfPPhhbgQquqw_MibaCMhlX1aBw&usqp=CAU" />
+            <img src="https://blog.kakaocdn.net/dn/WEMjR/btqyKIAbWD0/AMiEpF2AWAZN1cSIOFA8MK/img.jpg" />
           </PhotoFrame>
           <InfoFrame>
-            <div>홍길동</div>
-            <ShowStarScore point={4} />
+            <NameZone>홍길동</NameZone>
+            <ShowStarScore point={4} width={128} height={25}/>
           </InfoFrame>
         </LeftZone>
       </LeftFrame>
       <RightFrame>
         <RightZone>
-          <InputEditButton initialState="홍길동" />
-          <InputEditButton title="관심사" initialState="테스트" />
-          <InputEditButton title="참여횟수" initialState="헬스 n회 | 테니스 n회 | 기타 n회" editBt={false} />
+          <InputEditButton
+            initialState="홍길동"
+            editBt={mypage ? true : false}
+          />
+          <InputEditButton
+            title="관심사"
+            initialState="#관심사1 #관심사2 #관심사3"
+            fontSize="15px"
+            editBt={mypage ? true : false}
+            border={true}
+          />
+          <InputEditButton
+            title="참여횟수"
+            initialState="헬스 n회 | 테니스 n회 | 기타 n회"
+            editBt={false}
+            fontSize="15px"
+          />
+          {mypage ? (
+            <ButtonZone>
+              <button>회원정보 보기</button>
+            </ButtonZone>
+          ) : (
+            <></>
+          )}
         </RightZone>
       </RightFrame>
     </Container>
@@ -30,10 +51,14 @@ const MyProfileShow = () => {
 
 const Container = styled.div`
   width: 100%;
+  min-height: 300px;
   display: flex;
   flex-direction: row;
   border-radius: 10px;
   border: 1px solid #dedede;
+  overflow: hidden;
+  
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
 `;
 
 const LeftFrame = styled.div`
@@ -76,14 +101,16 @@ const InfoFrame = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  div{
-    font-size: 25px;
-    font-weight: 400;
-  }
+`;
+
+const NameZone = styled.div`
+  font-size: 22px;
+  font-weight: 400;
 `;
 
 const RightFrame = styled.div`
   width: 470px;
+  background-color: white;
 `;
 
 const RightZone = styled.div`
@@ -92,6 +119,21 @@ const RightZone = styled.div`
   align-items: center;
   justify-content: center;
   margin: 28px 35px;
+`;
+
+const ButtonZone = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  button {
+    margin-right: 10px;
+    width: 103px;
+    height: 31px;
+    background: #494949;
+    border: 1px solid #494949;
+    border-radius: 5px;
+    color: white;
+  }
 `;
 
 export default MyProfileShow;

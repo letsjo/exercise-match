@@ -26,12 +26,12 @@ const SignupNavbar = ({ title, pageState, leftState, rightState }) => {
 const Container = styled.div`
   height: 94px;
   width: 100%;
-  border: 2px solid plum;
   padding: 25px 10px;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: white;
 `;
 
 const TitleFrame = styled.div`

@@ -2,7 +2,13 @@ import React, { useState, useRef, useEffect } from "react";
 import styled, { css } from "styled-components";
 import { FaPen } from "react-icons/fa";
 
-const InputEditButton = ({ title = "", initialState, editBt=true, fontSize = "25px" }) => {
+const InputEditButton = ({
+  title = "",
+  initialState,
+  editBt = true,
+  fontSize = "25px",
+  border = false,
+}) => {
   const [inputValue, setInputValue] = useState(initialState);
   const [modifyable, setModifyable] = useState(true);
   const inputRef = useRef(null);
@@ -38,7 +44,7 @@ const InputEditButton = ({ title = "", initialState, editBt=true, fontSize = "25
   };
 
   return (
-    <Container>
+    <Container border={border}>
       <TitleFrame title={title}>{title}</TitleFrame>
       <InputFrame>
         <InputLine
@@ -46,6 +52,7 @@ const InputEditButton = ({ title = "", initialState, editBt=true, fontSize = "25
           ref={inputRef}
           value={inputValue}
           disabled={modifyable}
+          fontSize={fontSize}
         />
         <IconFrame onClick={(e) => EditButton(e)} editBt={editBt}>
           <FaPen size={24} />
@@ -56,11 +63,17 @@ const InputEditButton = ({ title = "", initialState, editBt=true, fontSize = "25
 };
 
 const Container = styled.div`
-  width: 100%;
-  height: 77px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  ${({ border }) => {
+    return css`
+      width: 100%;
+      height: 70px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-top: ${border?("1px solid #a8a8a8"):("")};
+      border-bottom: ${border?("1px solid #a8a8a8"):("")};
+    `;
+  }}
 `;
 
 const TitleFrame = styled.div`
@@ -80,22 +93,26 @@ const InputFrame = styled.div`
 `;
 
 const InputLine = styled.input`
-  font-size: 25px;
-  height: 36px;
-  flex: 1;
-  border: transparent;
-  &:disabled {
-    color: black;
-    background-color: transparent;
-  }
+  ${({ fontSize }) => {
+    return css`
+      font-size: ${fontSize};
+      height: 36px;
+      flex: 1;
+      border: transparent;
+      &:disabled {
+        color: black;
+        background-color: transparent;
+      }
+    `;
+  }}
 `;
 
 const IconFrame = styled.div`
-  ${({ editBt }) => {
+  ${({ editBt, fontSize }) => {
     return css`
       width: 36px;
       height: 36px;
-      display: ${editBt?"flex":"none"};
+      display: ${editBt ? "flex" : "none"};
       justify-content: center;
       align-items: center;
       cursor: pointer;
