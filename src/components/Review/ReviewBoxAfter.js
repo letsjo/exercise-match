@@ -1,20 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import BadCheckList from "./BadCheckList";
-import GoodCheckList from "./GoodCheckList";
+import CheckListBox from "./CheckListBox";
 
-const ReviewBoxAfter = (props) => {
+const ReviewBoxAfter =({rate}) => {
   return (
     <Container>
-      {props.rate > 3 ? (
+      {rate > 3 ? (
         <>
           <ReviewOpinion>어떤 점이 좋았나요?</ReviewOpinion>
-          <GoodCheckList />
+          <CheckListBox rate={rate}/>
         </>
       ) : (
         <>
           <ReviewOpinion>어떤 점이 아쉬웠나요?</ReviewOpinion>
-          <BadCheckList />
+          <CheckListBox rate={rate} />
         </>
       )}
 
