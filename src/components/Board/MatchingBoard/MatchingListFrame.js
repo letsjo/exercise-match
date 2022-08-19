@@ -2,7 +2,8 @@ import React from 'react'
 import styled from 'styled-components';
 import Pagination from '../BoardPublic/Pagination';
 import { useState } from 'react';
-import MatchingBoardCard from './MatchingBoardCard';
+import MatchingCard from './MatchingCard';
+
 
 const MatchingListFrame = () => {
 
@@ -13,7 +14,12 @@ const MatchingListFrame = () => {
         <ButtonBox>
             <WriteButton>작성하기</WriteButton>
         </ButtonBox>
-        <MatchingBoardCard/>
+        <MatchingCard completed={true}/>
+        <MatchingCard/>
+        <MatchingCard completed={true}/>
+        <MatchingCard/>
+        <MatchingCard/>
+        <MatchingCard/>
         <PageFrame>
             <Frame>
             <Pagination
@@ -30,7 +36,7 @@ const MatchingListFrame = () => {
 
 const ButtonBox = styled.div`
     height:69px;
-    width: 958px;
+    width: 1000px;
     padding: 10px;
     box-sizing: border-box;
     display: flex;
@@ -48,11 +54,10 @@ const WriteButton = styled.div`
     font-size: 20px;     
     padding :9px;
     box-sizing: border-box;
-    
 `;
 
-const PageFrame =styled.div`    
-    width:958px;
+const PageFrame =styled.div`   
+    width:1000px;
     height: 110px;
     box-sizing: border-box;
     display: flex;
@@ -62,13 +67,12 @@ const Frame =styled.div`
     margin: auto;
 `;
 
-
 const BoardListFrame = styled.div`
     height: 100%;
     width: 1258px;  
     border-top: 2px solid #f0f0f0;
     border-left: 4px solid #f0f0f0;
-    padding: 10px 50px 10px 70px;
+    padding: 10px 50px 10px 50px;
     box-sizing: border-box;
 
 `;
