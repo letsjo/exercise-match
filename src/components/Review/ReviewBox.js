@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import { BsStarFill, BsStar } from "react-icons/bs";
 import { useState, useRef } from "react";
 import ReviewBoxAfter from "./ReviewBoxAfter";
@@ -35,8 +35,8 @@ const ReviewBox = () => {
         홍길동님 ,<br />
         ___님과 매칭은 어떠셨나요?
       </ReviewTitle>
-      <form ref={checkboxRefForm} onSubmit={(e) => save(e)}>
-        <StarBox>
+      <StarForm show={show} ref={checkboxRefForm} onSubmit={(e) => save(e)}>
+        <StarBox show={show}>
           {Array.from({ length: 5 }, (item, idx) => {
             return rate < idx + 1 ? (
               <Star
@@ -62,7 +62,7 @@ const ReviewBox = () => {
           })}
         </StarBox>
         {show && <ReviewBoxAfter rate={rate} />}
-      </form>
+      </StarForm>
     </Container>
   );
 };
@@ -87,6 +87,15 @@ const ReviewTitle = styled.div`
   margin: auto;
 `;
 
+const StarForm=styled.form`
+  transition: all 0.2s ease;
+  ${({show})=>{
+    return css`
+      transform: ${show?"translateY(-40px)":""};
+    `
+  }}
+`;
+
 const StarBox = styled.div`
   width: 320px;
   height: 60px;
@@ -94,6 +103,12 @@ const StarBox = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 5px;
+  transition: transform 0.2s ease;
+  ${({show})=>{
+    return css`
+    transform: ${show? "scale(60%)":""} ;
+    `
+  }}
 `;
 
 const Star = styled.div`
