@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Pagination from "../Board/BoardPublic/Pagination";
+import MypageReviewCard from "./MypageReviewCard";
 
 const UserReviewList = () => {
   const [page, setPage] = useState(1);
   return (
     <Container>
-      UserMatchingRate
+      <MypageReviewCard/>
+      <MypageReviewCard/>
+      <MypageReviewCard/>
+      <MypageReviewCard/>
       <Pagination total={10} limit={2} page={page} setPage={setPage} />
     </Container>
   );
