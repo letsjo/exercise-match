@@ -1,8 +1,8 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-const ShowStarScore = ({ point, width, height }) => {
-  const starView = point * (width / 5);
+const ShowStarScore = ({ score, width, height }) => {
+  const starView = score * (width / 5);
   return (
     <CommentStarFrame>
       <FillingStar starView={starView} width={width} height={height}>

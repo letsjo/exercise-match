@@ -13,7 +13,7 @@ const MyProfileShow = ({ mypage = true }) => {
           </PhotoFrame>
           <InfoFrame>
             <NameZone>홍길동</NameZone>
-            <ShowStarScore point={4} width={128} height={25}/>
+            <ShowStarScore score={4} width={128} height={25}/>
           </InfoFrame>
         </LeftZone>
       </LeftFrame>

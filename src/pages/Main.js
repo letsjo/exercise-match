@@ -1,5 +1,5 @@
 // package
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 // components
@@ -9,6 +9,9 @@ import PopularBoard from "../components/Main/PopularBoard";
 import HistoryBoard from "../components/Main/HistoryBoard";
 import SelectCategoryBox from "../components/Main/SelectCategoryBox";
 import OtherBoard from "../components/Main/OtherBoard";
+import CurrentLocationCard from "../components/Main/CurrentLocationCard";
+import { useDispatch } from "react-redux";
+import { modalSliceAction } from "../redux/reducers/modalReducer";
 
 const Main = () => {
   return (
@@ -21,6 +24,7 @@ const Main = () => {
           "https://placehold.jp/1440x360.png",
         ]}
       />
+      <CurrentLocationCard/>
       <SelectCategoryBox />
       <HistoryBoard />
       <PopularBoard
