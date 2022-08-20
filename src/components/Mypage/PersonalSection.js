@@ -10,7 +10,7 @@ const PersonalSection = ({ type, title, data }) => {
           <Gender>
             <RadioSection>
               {data == "남성" ? (
-                <input type="radio" id="men" name="radio-group" checked />
+                <input type="radio" id="men" name="radio-group" defaultChecked />
               ) : (
                 <input type="radio" id="men" name="radio-group" />
               )}
@@ -18,7 +18,7 @@ const PersonalSection = ({ type, title, data }) => {
             </RadioSection>
             <RadioSection>
               {data == "여성" ? (
-                <input type="radio" id="women" name="radio-group" checked />
+                <input type="radio" id="women" name="radio-group" defaultChecked />
               ) : (
                 <input type="radio" id="women" name="radio-group" />
               )}

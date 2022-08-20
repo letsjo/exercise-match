@@ -10,20 +10,12 @@ const NavBar = () => {
     setIsPopperShown(!isPopperShown);
   };
 
-  console.log(isPopperShown);
-
   const onClose = () => {
     setIsPopperShown(false);
   };
   return (
     <NavBarWrap>
       <Wrap>
-        {/* <Opener onClick={onOpenerClick}>profile</Opener>
-      {isPopperShown && (
-        <Popover onClose={onClose}>
-          <Popper>Popper</Popper>
-        </Popover>
-      )} */}
         <Logo>LOGO</Logo>
         <SearchBox>
           <SearchWrap>

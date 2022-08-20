@@ -4,6 +4,7 @@ import { GrFormClose } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
 import { modalSliceAction } from "../../redux/reducers/modalReducer";
 import { useNavigate } from "react-router-dom";
+import SelectLocation from "../Main/SelectLocation";
 
 const ModalComponents = () => {
   const dispatch = useDispatch();
@@ -24,15 +25,17 @@ const ModalComponents = () => {
     return () => window.removeEventListener("keydown", escKeyModalClose);
   }, []);
 
+  console.log(ModalOpen,ModalRequiredName);
+
   return (
     <>
       {ModalOpen && (
         <Modal>
           <Overlay></Overlay>
           <ModalBody>
-            {ModalRequiredName == "login" ? (
+            {ModalRequiredName == "selectLocation" ? (
               <ModalContent>
-                {/* <Login sessionStorageLogin={sessionStorageLogin} /> */}
+                <SelectLocation/>
                 <CloseModal>
                   <GrFormClose
                     size={35}
@@ -125,9 +128,8 @@ const Overlay = styled.div`
 
 const CloseModal = styled.div`
   position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 5px 7px;
+  top: 32px;
+  right: 24px;
   &:hover {
     color: "red";
   }
@@ -135,21 +137,14 @@ const CloseModal = styled.div`
 ////// ModalContent 여기가 흰 부분 입니다.
 const ModalContent = styled.div`
   position: absolute;
-  top: 35%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: white;
-  padding: 34px 24px 24px;
-  border-radius: 5px;
-  min-width: 320px;
-  min-height: 350px;
-  width: 10%;
-
-  @media screen and (max-width: 768px) {
-    align-items: center;
-    height: 100%;
-    width: 100%;
-  }
+  border-radius: 20px;
+  min-width: 550px;
+  height: 85%;
+  max-height: 890px;
 `;
 
 const ModalComment = styled.div`

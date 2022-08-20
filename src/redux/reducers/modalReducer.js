@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 let initialState = {
     ModalOpen: false,
     ModalRequiredName: "",
-    productId:"",
 };
 
 const modalSlice = createSlice({
@@ -14,22 +13,9 @@ const modalSlice = createSlice({
             state.ModalOpen = false;
             state.ModalRequiredName ="";
         },
-        modalLoginOpen(state){
+        modalLocalSelectOpen(state){
             state.ModalOpen = true;
-            state.ModalRequiredName ="login";
-        },
-        modalSignupOpen(state){
-            state.ModalOpen = true;
-            state.ModalRequiredName ="signup";
-        },
-        modalCommentOpen(state,action){
-            state.ModalOpen = true;
-            state.ModalRequiredName ="comment";
-            state.productId = action.payload;
-        },
-        modalCartAlertOpen(state){
-            state.ModalOpen = true;
-            state.ModalRequiredName ="alertcart";
+            state.ModalRequiredName ="selectLocation";
         },
     }
 });

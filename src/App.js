@@ -16,6 +16,7 @@ import Mypage from "./pages/Mypage";
 import Review from "./pages/Review";
 import MatchingBoard from "./pages/MatchingBoard";
 import UserInfo from "./pages/UserInfo";
+import ModalComponents from "./components/public/ModalComponents";
 
 function App() {
   const { showMessenger } = useChannelIOApi();
@@ -39,6 +40,7 @@ function App() {
         <Route path="/api/kakaologin" element={<KakaoLogin/>} />
         <Route path="/api/naverLogin" element={<NaverLogin/>}/>
       </Routes>
+      <ModalComponents/>
       <span onClick={showMessenger}></span>
     </div>
   );

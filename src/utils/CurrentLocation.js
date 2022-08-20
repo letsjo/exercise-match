@@ -39,3 +39,5 @@ export function CurrentLocation(setNowPosition) {
     options
   );
 }
+
+export default CurrentLocation;

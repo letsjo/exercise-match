@@ -1,6 +1,6 @@
 import mapAPI from "../apis/mapAPI";
 
-export function GetAddressName (position) {
+export function GetAddressName (position,setAddressName) {
     const lat = position.lat;
     const lon = position.lng;
 
@@ -13,6 +13,7 @@ export function GetAddressName (position) {
       )
       .then((res) => {
         console.log(res.data.documents);
+        setAddressName(res.data.documents);
         // dispatch(
         //   changeRegion(res.data.documents[0].address.region_1depth_name)
         // );
