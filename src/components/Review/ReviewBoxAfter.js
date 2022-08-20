@@ -1,6 +1,5 @@
 import React from "react";
-import styled from "styled-components";
-import BadCheckList from "./BadCheckList";
+import styled,{css} from "styled-components";
 import CheckListBox from "./CheckListBox";
 
 const ReviewBoxAfter =({rate}) => {
@@ -28,12 +27,13 @@ const ReviewBoxAfter =({rate}) => {
         <WriteBox placeholder="(선택사항입니다)" />
       </WriteWrap>
 
-      <button>Submit</button>
+      <SubmitBtn>작성하기</SubmitBtn>
     </Container>
   );
 };
 
-const Container = styled.div``;
+const Container = styled.div`
+`;
 
 const ReviewOpinion = styled.div`
   width: 400px;
@@ -82,6 +82,19 @@ const WriteBox = styled.textarea`
   &::placeholder {
     color: #a8a8a8;
   }
+`;
+
+const SubmitBtn =styled.button`
+  width:400px;
+  height:69px;
+  border:none;
+  background-color: #494949;
+  padding: 20px 0px;
+  box-sizing: border-box;
+  color:white;
+  margin-top: 50px;
+  font-size: 20px;
+  font-weight: bold;
 `;
 
 export default ReviewBoxAfter;
