@@ -2,13 +2,24 @@ import React from "react";
 import styled from "styled-components";
 import ShowStarScore from "../public/ShowStarScore";
 
-const MypageReviewCard = () => {
+const MypageReviewCard = ({
+  nickname,
+  date,
+  content,
+  score,
+  image,
+  category,
+}) => {
   return (
     <Container>
       <ProfileImage>
         <Image>
           <img
-            src="https://image.fmkorea.com/files/attach/new2/20220312/14339012/3726389874/4424593526/b0074c5ac8c5a4fad7809f2004a41665.jpeg"
+            src={
+              image
+                ? image
+                : "https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg"
+            }
             alt=""
           />
         </Image>
@@ -16,26 +27,19 @@ const MypageReviewCard = () => {
       <ContextWrap>
         <PersonalWrap>
           <SmallWrap>
-            <Nickname>닉네임</Nickname>
-            <Date>2022.xx.xx</Date>
+            <Nickname>{nickname}</Nickname>
+            <Date>{date}</Date>
           </SmallWrap>
           <StarRate>
             <Star>
-              <ShowStarScore score={4} width={80} height={16} />
+              <ShowStarScore score={score} width={80} height={16} />
             </Star>
           </StarRate>
         </PersonalWrap>
-        <Context>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae
-          vestibulum sed at nullam odio. Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit. Vitae vestibulum sed at nullam odio.Lorem ipsum dolor
-          sit amet, consectetur adipiscing elit. Vitae vestibulum sed at nullam
-          odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae
-          vestibulum sed at nullam odio.
-        </Context>
+        <Context>{content}</Context>
         <ButtonWrap>
           <Matching>매칭글</Matching>
-          <Join>테니스 같이 칠 사람?</Join>
+          <Join>{category}</Join>
         </ButtonWrap>
       </ContextWrap>
     </Container>

@@ -16,6 +16,8 @@ import Mypage from "./pages/Mypage";
 import Review from "./pages/Review";
 import UserInfo from "./pages/UserInfo";
 import ModalComponents from "./components/public/ModalComponents";
+import PostWrite from "./pages/PostWrite";
+import Detailpage from "./pages/Detailpage";
 
 
 function App() {
@@ -33,9 +35,11 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/board" element={<Board/>}/>
+        <Route path="/postWrite" element={<PostWrite/>}/>
         <Route path="/mypage" element={<Mypage/>}/>
         <Route path="/userinfo" element={<UserInfo/>}/>
         <Route path="/review" element={<Review/>}/>
+        <Route path="/detailpage" element={<Detailpage/>}/>
         <Route path="/api/kakaologin" element={<KakaoLogin/>} />
         <Route path="/api/naverLogin" element={<NaverLogin/>}/>
       </Routes>
