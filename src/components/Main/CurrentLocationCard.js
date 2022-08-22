@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { locaionAction } from "../../redux/actions/locationAction";
+import { locationSliceAction } from "../../redux/reducers/locationReducer";
 import { modalSliceAction } from "../../redux/reducers/modalReducer";
 import CurrentLocation from "../../utils/CurrentLocation";
 
 const CurrentLocationCard = () => {
-  const [nowPosition, setNowPosition] = useState({});
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    CurrentLocation(setNowPosition);
-  }, []);
-  console.log(nowPosition);
+  const { selectedCity, selectedGu } = useSelector(
+    (state) => state.locationReducer
+  );
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    dispatch(locaionAction.getLocation());
+  }, []);
 
   const OpenLocationModal = () => {
     dispatch(modalSliceAction.modalLocalSelectOpen());
@@ -21,12 +23,7 @@ const CurrentLocationCard = () => {
 
   return (
     <Container onClick={OpenLocationModal}>
-      <LocationFrame>
-        {nowPosition[0]?.address.region_1depth_name +
-          " " +
-          nowPosition[0]?.address.region_2depth_name}
-      </LocationFrame>
-      {/* <LocationFrame>{nowPosition[0]?.address.region_1depth_name }</LocationFrame> */}
+      <LocationFrame>{selectedCity + " " + selectedGu}</LocationFrame>
     </Container>
   );
 };

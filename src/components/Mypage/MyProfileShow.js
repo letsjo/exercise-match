@@ -3,13 +3,13 @@ import styled from "styled-components";
 import InputEditButton from "../public/InputEditButton";
 import ShowStarScore from "../public/ShowStarScore";
 
-const MyProfileShow = ({ mypage = true }) => {
+const MyProfileShow = ({ mypage = true, profileImg }) => {
   return (
     <Container>
       <LeftFrame>
         <LeftZone>
           <PhotoFrame>
-            <img src="https://blog.kakaocdn.net/dn/WEMjR/btqyKIAbWD0/AMiEpF2AWAZN1cSIOFA8MK/img.jpg" />
+            <img src={profileImg?profileImg:"https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg"} />
           </PhotoFrame>
           <InfoFrame>
             <NameZone>홍길동</NameZone>
