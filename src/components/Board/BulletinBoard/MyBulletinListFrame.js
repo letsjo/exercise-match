@@ -2,6 +2,7 @@ import React from 'react'
 import styled,{css} from 'styled-components'
 import { useState } from 'react';
 import Pagination from '../BoardPublic/Pagination';
+import CommentCard from '../BoardPublic/CommentCard';
 
 const MyBulletinListFrame = () => {
 
@@ -36,6 +37,10 @@ const MyBulletinListFrame = () => {
                 <Comment boardType={boardType} onClick={CommentOnClick}>작성 댓글</Comment>
             </ButtonBox>
     </SelectBox>
+    <CommentCard/>
+    <CommentCard/>
+    <CommentCard/>
+    <CommentCard/>    
         <PageFrame>
             <Frame>
             <Pagination
@@ -77,6 +82,7 @@ const ButtonBox=styled.div`
 `;
 
 const Write=styled.div`
+cursor: pointer;
     height: 57px;
     padding:14px;
     box-sizing: border-box;
@@ -91,6 +97,7 @@ const Write=styled.div`
     `;
 
 const Apply=styled.div`
+cursor: pointer;
 height: 57px;
 padding:14px;
 box-sizing: border-box;
@@ -105,6 +112,7 @@ ${({boardType})=>{
 `;
 
 const Comment=styled.div`
+cursor: pointer;
     height: 57px;
     padding:14px;
     box-sizing: border-box;
@@ -119,7 +127,7 @@ const Comment=styled.div`
     `;
 
 const PageFrame =styled.div`    
-    width:958px;
+    width:1000px;
     height: 110px;
     box-sizing: border-box;
     display: flex;

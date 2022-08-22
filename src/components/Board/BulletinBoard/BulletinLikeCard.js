@@ -8,10 +8,10 @@ const BulletinLikeCard = () => {
     <Container>
     <LikeCommentBox>
         <IconBox>
-            <AiOutlineHeart size={24} color= "#a8a8a8"/> <Text>x명</Text>
+            <AiOutlineHeart size={24} color= "#a8a8a8"/> <Text>x개</Text>
         </IconBox>
         <IconBox>
-        <MdChatBubble size={24} color= "#a8a8a8"/> <Text>x명</Text>
+        <MdChatBubble size={24} color= "#a8a8a8"/> <Text>x개</Text>
         </IconBox>
     </LikeCommentBox>
     <Daysago>1일 전</Daysago>

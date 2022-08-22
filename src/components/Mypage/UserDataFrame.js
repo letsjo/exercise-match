@@ -46,7 +46,6 @@ const TitleZone = styled.div`
 
 const ContentsZone = styled.div`
   width: 100%;
-  margin-bottom: ;
 `;
 
 export default UserDataFrame;
