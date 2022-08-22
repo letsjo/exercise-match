@@ -6,29 +6,39 @@ import Swal from "sweetalert2";
 // components
 import SignupAuth from "../components/Signup/SignupAuth";
 import SignupNavbar from "../components/public/SubNavbar";
-import SignupAuthSecond from "../components/Signup/SignupAuthSecond";
 import ButtonBigMain from "../components/public/ButtonBigMain";
 import SignupAuthPW from "../components/Signup/SignupAuthPW";
+import { useDispatch, useSelector } from "react-redux";
+import { signupSliceAction } from "../redux/reducers/signupReducer";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { email, password } = useSelector((state)=> state.signupReducer.info);
   const [page, setPage] = useState(1);
   const [nextAvailable, setNextAvailable] = useState(false);
   const [leftArrow, setLeftArrow] = useState(true);
   const [rightArrow, setRightArrow] = useState(false);
-
-  const [signUpInfo, setSignUpInfo] = useState({
-    email: "",
-    password: "",
-    username: "",
-    nickname: "",
-    gender: "",
-    birth: "",
-  });
+  
+  const [inputEmail, setInputEmail] = useState(email);
+  const [inputPassword, setInputPassword] = useState(password);
 
   const NextPageAllow = (e) => {
     e.preventDefault();
-    if (nextAvailable) {
+    if (nextAvailable && page < 2) {
+      dispatch(signupSliceAction.getInfo({inputEmail,inputPassword}));
       setPage(page + 1);
+    } else if (nextAvailable && page >= 2) {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: '회원가입이 완료되었습니다.',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      navigate('/');
     } else {
       WarningAlert(e);
     }
@@ -37,6 +47,8 @@ const Signup = () => {
   const WarningAlert = (e) => {
     e.preventDefault();
     Swal.fire({
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: '확인',
       icon: "warning",
       title: "미작성된 항목이 있습니다.",
       text: "필수 항목을 모두 작성해주세요.",
@@ -49,7 +61,7 @@ const Signup = () => {
     <Container>
       <SignupNavbar
         pageState={{ page: page, setPage: setPage }}
-        title={"회원가입(" + page + "/3)"}
+        title={"회원가입(" + page + "/2)"}
         leftState={{ leftArrow, setLeftArrow }}
         rightState={{ rightArrow, setRightArrow }}
       />
@@ -60,24 +72,16 @@ const Signup = () => {
             {page == 1 ? (
               <SignupAuth
                 setNextAvailable={setNextAvailable}
-                signUpInfo={signUpInfo}
-                setSignUpInfo={setSignUpInfo}
+                inputEmail={inputEmail}
+                setInputEmail={setInputEmail}
                 leftState={{ leftArrow, setLeftArrow }}
                 rightState={{ rightArrow, setRightArrow }}
               />
             ) : page == 2 ? (
               <SignupAuthPW
                 setNextAvailable={setNextAvailable}
-                signUpInfo={signUpInfo}
-                setSignUpInfo={setSignUpInfo}
-                leftState={{ leftArrow, setLeftArrow }}
-                rightState={{ rightArrow, setRightArrow }}
-              />
-            ) : page == 4 ? (
-              <SignupAuthSecond
-                setNextAvailable={setNextAvailable}
-                signUpInfo={signUpInfo}
-                setSignUpInfo={setSignUpInfo}
+                inputPassword={inputPassword}
+                setInputPassword={setInputPassword}
                 leftState={{ leftArrow, setLeftArrow }}
                 rightState={{ rightArrow, setRightArrow }}
               />

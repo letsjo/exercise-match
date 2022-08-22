@@ -1,8 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import InputAnimation from "../public/InputAnimation";
 
-const SignupAuthPW = ({ setNextAvailable, signUpInfo, setSignUpInfo, leftState, rightState }) => {
+const SignupAuthPW = ({ setNextAvailable, inputPassword, setInputPassword, leftState, rightState }) => {
+
+  const { email, password, repassword } = useSelector((state)=> state.signupReducer.info);
 
   useEffect(() => {
     setNextAvailable(false);
@@ -19,7 +22,7 @@ const SignupAuthPW = ({ setNextAvailable, signUpInfo, setSignUpInfo, leftState, 
     if(RefFirstPassword.current.value && RefFirstPassword.current.value==RefSecondPassword.current.value){
       setNextAvailable(true);
       rightState.setRightArrow(false);
-      setSignUpInfo({...signUpInfo,password:RefFirstPassword.current.value});
+      setInputPassword(RefFirstPassword.current.value);
     } else {
       setNextAvailable(false);
       rightState.setRightArrow(false);
@@ -33,7 +36,7 @@ const SignupAuthPW = ({ setNextAvailable, signUpInfo, setSignUpInfo, leftState, 
         inputName="이메일"
         inputDisAvailable={true}
         ValidationCheck={ValidationCheck}
-        inputValue={signUpInfo.email}
+        inputValue={email}
       />
       <InputAnimation
         width="100%"
@@ -41,7 +44,7 @@ const SignupAuthPW = ({ setNextAvailable, signUpInfo, setSignUpInfo, leftState, 
         type="password"
         ValidationCheck={ValidationCheck}
         Ref = {RefFirstPassword}
-        // setInputValue={setFirstPassword}
+        x// setInputValue={setFirstPassword}
         inputDisAvailable={false}
       />
       <InputAnimation

@@ -1,24 +1,27 @@
 import React, { useState, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 import Swal from "sweetalert2";
+import { signupSliceAction } from "../../redux/reducers/signupReducer";
 
 import InputAnimation from "../public/InputAnimation";
 import AlertBox from "./AlertBox";
 
 const SignupAuth = ({
   setNextAvailable,
-  signUpInfo,
-  setSignUpInfo,
+  inputEmail,
+  setInputEmail,
   leftState,
   rightState,
 }) => {
   var time = 60000;
 
+  const { email } = useSelector((state)=> state.signupReducer.info)
+
   // auth
   const AuthKeywordRef = useRef("");
   const [validationState, setValidationState] = useState(false);
   const [inputAvailable, setInputAvailable] = useState(false);
-  const [inputEmail, setInputEmail] = useState(signUpInfo.email);
     
   // timer
   const [alertSent, setAlertSent] = useState(false);
@@ -47,14 +50,14 @@ const SignupAuth = ({
   const ReWriteAlert = (e) => {
     e.preventDefault();
     Swal.fire({
-      title: "이메일 인증을 취소하시겠습니까?",
-      text: "인증을 취소하시면 [이메일 변경]이 가능합니다.",
+      title: "인증번호 재발송",
+      text: "인증번호를 다시 발송하시겠습니까?",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "네, 취소하겠습니다",
-      cancelButtonText: "아니요",
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "인증번호 다시 받기",
+      cancelButtonText: "취소",
     }).then((result) => {
       if (result.isConfirmed) {
         ChangeEmail();
@@ -67,10 +70,8 @@ const SignupAuth = ({
     if (validationState) {
       if (!sentAuth) {
         if (sentAuthCount > 0) {
-          console.log(inputEmail);
-
           setSentAuthCount(sentAuthCount - 1);
-          setSignUpInfo({ ...signUpInfo, email: inputEmail });
+          setInputEmail(inputEmail);
           setAlertcomment("인증번호가 전송되었습니다.");
           TIMER();
           timerAuth = setTimeout(() => SentAuthOverTime(), time); //3분이 되면 타이머를 삭제한다.
@@ -164,7 +165,7 @@ const SignupAuth = ({
         inputAvailable={inputAvailable}
         inputValue={inputEmail}
         setInputValue={setInputEmail}
-        value={signUpInfo.email}
+        value={email}
       />
       {alertSent ? (
         <AlertBox alertcomment={alertcomment} setAlertSent={setAlertSent} />
@@ -181,7 +182,7 @@ const SignupAuth = ({
             onClick={(e) => SentAuthCode(e)}
             validationState={validationState}
           >
-            이메일 수정하기 (남은 횟수 {sentAuthCount}회)
+            인증번호 다시 전송 (남은 횟수 {sentAuthCount}회)
           </AuthButton>
           <AuthInfo>
             인증번호에 대한 안내 문구

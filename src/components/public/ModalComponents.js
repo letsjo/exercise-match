@@ -25,8 +25,6 @@ const ModalComponents = () => {
     return () => window.removeEventListener("keydown", escKeyModalClose);
   }, []);
 
-  console.log(ModalOpen,ModalRequiredName);
-
   return (
     <>
       {ModalOpen && (

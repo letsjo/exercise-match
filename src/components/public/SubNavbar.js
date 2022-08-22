@@ -1,7 +1,8 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-const SignupNavbar = ({ title, pageState, leftState, rightState }) => {
+const SubNavbar = ({ title, pageState, leftState, rightState }) => {
+  
   const goToBack = () => {
     if (pageState && pageState.page > 1) pageState.setPage(pageState.page - 1);
     else window.history.back();
@@ -93,4 +94,4 @@ const SignupTitle = styled.div`
   margin: auto;
 `;
 
-export default SignupNavbar;
+export default SubNavbar;
