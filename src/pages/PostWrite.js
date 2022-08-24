@@ -112,25 +112,15 @@ const PostWrite = () => {
               <option value="default" disabled>
                 인원
               </option>
-              <option value="1">1 </option>
-              <option value="2">2</option>
+              {Array.from({length:20}, (item, idx)=>{
+                return <option key={idx} value={idx+1}>{idx+1}</option>
+              })}
             </PersonDrop>
             <GatherText>모집 날짜</GatherText>
-            <DateDrop
-              defaultValue="default"
-              id="date"
-              name="date"
-              ref={date_ref}
-            >
-              <option value="default" disabled>
-                날짜
-              </option>
-              <option value="1">1 </option>
-              <option value="2">2 </option>
-            </DateDrop>
+              <input type="date" ref={date_ref} name="date"/>
           </GatherWrap>
           <Text>장소 위치</Text>
-          <LocationImage className="img_box" name="locationImage" />
+          <LocationMap />
 
           <ImageButton onClick={handleClick}>
             <input
@@ -141,9 +131,9 @@ const PostWrite = () => {
               style={{ display: "none" }}
               ref={photoInput_ref}
             />
-            이미지 등록
+            이미지 등록(0/1)
           </ImageButton>
-
+          <LocationImage className="img_box" name="locationImage" />
           <WriteButton type="submit">작성하기</WriteButton>
         </Container>
       </form>
@@ -221,17 +211,20 @@ const PersonDrop = styled.select`
   margin-right: 70px;
 `;
 
-const DateDrop = styled.select`
-  width: 180px;
-  height: 50px;
+const LocationMap = styled.div`
+  width: 700px;
+  height:281px;
+  margin-bottom: 70px;
+  box-sizing: border-box;
+  border:1px solid #d9d9d9;
 `;
 
 const LocationImage = styled.div`
   width: 700px;
-  height: 281px;
-  margin-bottom: 40px;
+  height:317px;
+  margin-bottom: 70px;           // 매칭, 정보공유에 따라 수정 필요
   box-sizing: border-box;
-  background-color: mistyrose;
+  background-color: #d9d9d9;
   /* background-size: contain;
   background-repeat: no-repeat; */
   background-size: cover;
@@ -241,10 +234,10 @@ const ImageButton = styled.button`
   width: 700px;
   height: 50px;
   box-sizing: border-box;
-  background-color: #a8a8a8;
+  background-color: #dedede;
   font-size: 20px;
   border: none;
-  margin-bottom: 70px;
+  margin-bottom: 20px;
 `;
 
 const WriteButton = styled.button`
@@ -256,6 +249,7 @@ const WriteButton = styled.button`
   font-size: 20px;
   font-weight: bold;
   border: none;
+  margin-top: 70px;
 `;
 
 export default PostWrite;

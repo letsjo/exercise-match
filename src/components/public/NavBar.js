@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Popover from "./Popover";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 const NavBar = () => {
   const [isPopperShown, setIsPopperShown] = useState(false);
@@ -11,6 +12,9 @@ const NavBar = () => {
     setIsPopperShown(!isPopperShown);
   };
 
+  const onClose = () => {
+    setIsPopperShown(false);
+  };
   return (
     <NavBarWrap>
       <Wrap>
@@ -27,15 +31,22 @@ const NavBar = () => {
         <LoginBtn>로그인</LoginBtn>
         <SignupBtn>회원가입</SignupBtn>
       </BeforeLoginBox> */}
-        <AfterLoginBox >
-          <ProfileImg onClick={(e) => onOpenerClick(e)}>
-            <img src="https://item.kakaocdn.net/do/479d4f178d8d03980ffc52eeb66465c3f43ad912ad8dd55b04db6a64cddaf76d" />
+        <AfterLoginBox>
+          <ProfileImg onClick={onOpenerClick}>
+            {/* <img src="https://item.kakaocdn.net/do/479d4f178d8d03980ffc52eeb66465c3f43ad912ad8dd55b04db6a64cddaf76d" /> */}
+            <img
+              src="https://cdn.clien.net/web/api/file/F01/11059505/25fb954e3ed280.jpg"
+              alt=""
+            />
           </ProfileImg>
-          <Arrow onClick={(e) => onOpenerClick(e)}>o</Arrow>
-
-          {isPopperShown && (
-            <Popover onOpenerClick={onOpenerClick}></Popover>
-          )}
+          <Arrow
+          // onClick={onOpenerClick}
+          >
+            <div onClick={onOpenerClick}>
+              {isPopperShown ? <IoIosArrowDown /> : <IoIosArrowUp />}
+            </div>
+          </Arrow>
+          {isPopperShown && <Popover onOpenerClick={onOpenerClick} />}
         </AfterLoginBox>
       </Wrap>
     </NavBarWrap>
@@ -145,15 +156,18 @@ const ProfileImg = styled.div`
   justify-content: center;
   align-items: center;
   border: transparent;
-  box-shadow: 1px 1px black;
   img {
     width: 100%;
+    height: 100%;
   }
   margin-right: 10px;
 `;
 
 const Arrow = styled.div`
   width: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Opener = styled.button`

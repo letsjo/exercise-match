@@ -5,11 +5,11 @@ const Popover = ({ onOpenerClick }) => {
   const settingsWindowRef = useRef(null);
 
   useEffect(() => {
-      const pageClickEvent = (e) => {
-        if (!settingsWindowRef.current.contains(e.target)) {
-          onOpenerClick(e);
-        }
-      };
+    const pageClickEvent = (e) => {
+      if (!settingsWindowRef.current.contains(e.target)) {
+        onOpenerClick(e);
+      }
+    };
 
       window.addEventListener("click", pageClickEvent, true);
 
@@ -24,18 +24,18 @@ const Popover = ({ onOpenerClick }) => {
         <Nickname>닉네임</Nickname>
         <Nim>님</Nim>
         <Hello>안녕하세요!</Hello>
-      </ProfileBox>
-      <Boxes>마이페이지</Boxes>
-      <Boxes>내가 작성/신청한 글 보기</Boxes>
-      <Logout>로그아웃</Logout>
+        </ProfileBox>
+        <Boxes>마이페이지</Boxes>
+        <Boxes>나의 게시글</Boxes>
+    <Logout>로그아웃</Logout>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   position: absolute;
-  background-color: white;
-  width: 300px;
+  background-color:white;
+  width:300px;
   height: 274px;
   right: 0;
   top: 58px;

@@ -1,7 +1,27 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
+import {FiX} from "react-icons/fi";
+import Swal from "sweetalert2";
 
 const Comment = () => {
+
+    const Alert =(e)=>{
+        e.preventDefault();
+        Swal.fire({
+            // title: '',
+            text: "게시물을 삭제하시겠습니까?",
+            // icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#494949',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '삭제',
+            cancelButtonText:'취소',
+            width:439,
+            // heightAuto:false,
+            // height:'359px'
+          })
+    }
+
   return (
     <Container>
         <CommentInput placeholder='댓글을 남겨주세요'/>
@@ -13,9 +33,12 @@ const Comment = () => {
                 <Nickname>
                     홍길동
                 </Nickname>
+                <Delete >
+                    <FiX size={20} onClick={Alert} />
+                </Delete>
             </ProfileWrap>
             <Content>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra elit donec nunc posuere pulvinar libero fermentum mi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra elit donec nunc posuere pulvinar libero fermentum mi. 
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
             </Content>
             <Date><div>22.xx.xx</div></Date>
         </CommentWrap>
@@ -45,7 +68,7 @@ const Comment = () => {
                 </Nickname>
             </ProfileWrap>
             <Content>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra elit donec nunc posuere pulvinar libero fermentum mi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra elit donec nunc posuere pulvinar libero fermentum mi. 
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra elit donec nunc posuere pulvinar libero fermentum mi.
             </Content>
             <Date><div>22.xx.xx</div></Date>
         </CommentWrap>
@@ -99,6 +122,15 @@ const Nickname=styled.div`
     width:75px;
     height: 29px;
     margin: auto auto auto 0px;
+`;
+
+const Delete=styled.div`
+    width: 26px;
+    height: 26px;
+    margin: auto 12px ; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 const Content=styled.div`
