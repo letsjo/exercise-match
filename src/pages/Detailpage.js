@@ -1,28 +1,39 @@
-import React from "react";
+import React,{useState} from "react";
 import styled from "styled-components";
 import Comment from "../components/public/Comment";
 import NavBar from "../components/public/NavBar";
 import { BiDotsVerticalRounded} from "react-icons/bi";
-import Swal from "sweetalert2";
+import {BsHeart, BsHeartFill} from "react-icons/bs"
+import DetailpagePopover from "../components/Detailpage/DetailpagePopover";
+import TitleWrap from "../components/Detailpage/TitleWrap";
+import DatePersonnelWrap from "../components/Detailpage/DatePersonnelWrap";
 
 const Detailpage = () => {
+    const [isPopperShown, setIsPopperShown] = useState(false);
+  const onOpenerClick = (e) => {
+    e.stopPropagation();
+    
+    setIsPopperShown(!isPopperShown);
+  };
 
-    const Alert =(e)=>{
-        e.preventDefault();
-        Swal.fire({
-            // title: '',
-            text: "게시물을 삭제하시겠습니까?",
-            // icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#494949',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '삭제',
-            cancelButtonText:'취소',
-            width:439,
-            // heightAuto:false,
-            // height:'359px'
-          })
-    }
+  // const onClose = () => {
+  //   setIsPopperShown(false);
+  // };
+
+  const [like, setLike] = useState(false);
+
+  const likeOnClick= ()=>{
+    // if(like){
+    //   setLike(false);
+    // }else{
+    //   setLike(true);
+    // }
+    setLike(!like);
+  }
+
+  console.log(like);
+
+    
   return (
     <>
       <NavBar />
@@ -37,15 +48,18 @@ const Detailpage = () => {
           </Profile>
           <Nickname>홍길동</Nickname>
           </>
-          <Dot>
-            <BiDotsVerticalRounded size={30} onClick={Alert}/>
+          <Dot >
+            <BiDotsVerticalRounded size={30} onClick={onOpenerClick}/>
+
+{isPopperShown &&(
+            <DetailpagePopover onOpenerClick={onOpenerClick}></DetailpagePopover>
+          )}
           </Dot>
+         
         </ProfileWrap>
-        <TitleWrap>
-          <Category>헬스</Category>
-          <Title>헬스장 같이 등록할 사람?</Title>
-          <Date>20xx.xx.xx</Date>
-        </TitleWrap>
+        <TitleWrap/>
+
+        <DatePersonnelWrap/>
 
         <ContentWrap>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra elit
@@ -58,14 +72,17 @@ const Detailpage = () => {
           <LocationTitle>장소 위치</LocationTitle>
           <LocationImg></LocationImg>
         </LocationWrap>
+        <JoinButton>참여하기 X/X</JoinButton>
         <InfoWrap>
-          <Icon />
+          <Icon  onClick={likeOnClick}>
+            {like?< BsHeartFill color="red" size={24}/>:<BsHeart size={24}/>}
+            
+          </Icon>
           <Text>좋아요 0개</Text>
           <CommentIcon />
           <Text>댓글 0개</Text>
         </InfoWrap>
-
-        <Comment />
+        <Comment />     
       </Container>
     </>
   );
@@ -110,49 +127,14 @@ const Dot =styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-`;
-
-const TitleWrap = styled.div`
-  height: 157px;
-  border-bottom: 1px solid #dedede;
-  margin-bottom: 50px;
-  padding: 20px 0px;
-  box-sizing: border-box;
-`;
-
-const Category = styled.div`
-  width: 59px;
-  height: 39px;
-  border: 1px solid #f0f0f0;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 29px;
-  padding: 5px 10px;
-  box-sizing: border-box;
-`;
-
-const Title = styled.div`
-  height: 50px;
-  font-size: 25px;
-  font-weight: bold;
-  /* padding : 10px auto 4px 10px; */
-  padding: 10px 10px 4px;
-  box-sizing: border-box;
-`;
-
-const Date = styled.div`
-  width: 113px;
-  height: 29px;
-  font-size: 20px;
-  padding: 0px 10px;
-  box-sizing: border-box;
+    position: relative;
 `;
 
 const ContentWrap = styled.div`
   margin-bottom: 50px;
   padding: 10px;
   box-sizing: border-box;
+  font-size: 20px;
 `;
 
 const ContentImage = styled.div`
@@ -163,6 +145,7 @@ const ContentImage = styled.div`
 
 const LocationWrap = styled.div`
   height: 315px;
+  margin-bottom: 50px;
 `;
 
 const LocationTitle = styled.div`
@@ -175,6 +158,18 @@ const LocationTitle = styled.div`
 const LocationImg = styled.div`
   height: 281px;
   border: 1px solid lightgray;
+  border-radius: 20px;
+`;
+
+const JoinButton=styled.div`
+  height: 89px;
+  background-color: #494949;
+  font-size: 20px;
+  font-weight: bold;
+  color:white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const InfoWrap = styled.div`
@@ -190,13 +185,12 @@ const Icon = styled.div`
   height: 24px;
   width: 24px;
   margin: 2.5px 10px 2.5px 0px;
-  background-color: aliceblue;
 `;
 
 const CommentIcon = styled.div`
   height: 24px;
   width: 24px;
-  margin: 2.5px 10px 2.5px 39px;
+  margin: 2.5px 10px 2.5px 0px;
   background-color: aliceblue;
 `;
 
@@ -205,6 +199,8 @@ const Text = styled.div`
   font-weight: bold;
   color: #494949;
   font-size: 20px;
+  margin-right: 39px;
 `;
+
 
 export default Detailpage;

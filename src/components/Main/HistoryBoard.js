@@ -6,7 +6,7 @@ import BoardInfo from "./BoardNameInfo";
 const HistoryBoard = () => {
   return (
     <BoardWrapper>
-      <BoardInfo iconImg="https://cdn-icons-png.flaticon.com/512/5053/5053917.png" title="내가 작성한 글/내가 신청한 글"/>
+      <BoardInfo iconImg="https://cdn-icons-png.flaticon.com/512/5053/5053917.png" title="나의 게시글"/>
       <BoardListHistory />
     </BoardWrapper>
   );
