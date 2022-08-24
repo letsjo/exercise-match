@@ -1,13 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 
-const Popover = ({ onClose }) => {
+const Popover = ({ onOpenerClick }) => {
   const settingsWindowRef = useRef(null);
 
   useEffect(() => {
     const pageClickEvent = (e) => {
       if (!settingsWindowRef.current.contains(e.target)) {
-        onClose();
+        onOpenerClick(e);
       }
     };
 
@@ -25,14 +25,14 @@ const Popover = ({ onClose }) => {
         <Hello>안녕하세요!</Hello>
         </ProfileBox>
         <Boxes>마이페이지</Boxes>
-        <Boxes>내가 작성/신청한 글 보기</Boxes>
+        <Boxes>나의 게시글</Boxes>
     <Logout>로그아웃</Logout>
     </Wrapper>
 };
 
 const Wrapper = styled.div`
   position: absolute;
-  background-color: white;
+  background-color:white;
   width:300px;
   height: 274px;
   right: 0;

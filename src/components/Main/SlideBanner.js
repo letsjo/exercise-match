@@ -35,7 +35,7 @@ const SliderWrap = styled.div`
   width: 1440px;
   height: 360px;
   overflow: hidden;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   &:hover .slick-arrow::before{
     display: block;
   }
