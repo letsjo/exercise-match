@@ -4,15 +4,13 @@ import Popover from "./Popover";
 
 const NavBar = () => {
   const [isPopperShown, setIsPopperShown] = useState(false);
+  
   const onOpenerClick = (e) => {
     e.stopPropagation();
-    
+    e.preventDefault();
     setIsPopperShown(!isPopperShown);
   };
 
-  const onClose = () => {
-    setIsPopperShown(false);
-  };
   return (
     <NavBarWrap>
       <Wrap>
@@ -29,17 +27,14 @@ const NavBar = () => {
         <LoginBtn>로그인</LoginBtn>
         <SignupBtn>회원가입</SignupBtn>
       </BeforeLoginBox> */}
-        <AfterLoginBox>
-          <ProfileImg onClick={onOpenerClick}>
+        <AfterLoginBox >
+          <ProfileImg onClick={(e) => onOpenerClick(e)}>
             <img src="https://item.kakaocdn.net/do/479d4f178d8d03980ffc52eeb66465c3f43ad912ad8dd55b04db6a64cddaf76d" />
           </ProfileImg>
-          <Arrow onClick={onOpenerClick}>o</Arrow>
+          <Arrow onClick={(e) => onOpenerClick(e)}>o</Arrow>
 
           {isPopperShown && (
-            
-            <Popover onClose={onClose}>
-
-            </Popover>
+            <Popover onOpenerClick={onOpenerClick}></Popover>
           )}
         </AfterLoginBox>
       </Wrap>
@@ -135,7 +130,7 @@ const SignupBtn = styled.div`
 `;
 
 const AfterLoginBox = styled.div`
-display: flex;
+  display: flex;
   position: relative;
   margin-left: auto;
   width: 84px;
@@ -158,7 +153,7 @@ const ProfileImg = styled.div`
 `;
 
 const Arrow = styled.div`
-  width:24px;
+  width: 24px;
 `;
 
 const Opener = styled.button`

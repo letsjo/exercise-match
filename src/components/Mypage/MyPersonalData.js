@@ -1,23 +1,24 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+import PersonalBirth from "./PersonalBirth";
+import PersonalRadio from "./PersonalRadio";
 import PersonalSection from "./PersonalSection";
 
 const MyPersonalData = () => {
+
+  const {userName,userGender,userBirthYear,userBirthMonth,userBirthDay} = useSelector((state) => state.userReducer);
+
   return (
     <Container>
       <DataFrame>
         <TitleZone>개인정보</TitleZone>
         <DataZone>
-          <PersonalSection title="아이디(이메일)" data="nanu@naver.com" />
-          <PersonalSection title="이름" data="조현오" />
-          <PersonalSection title="연락처" data="01020770000" />
-          <PersonalSection type="gender" title="성별" data="남성" />
-          <PersonalSection title="생년월일" data="1991년 01월 04일" />
-          <PersonalSection title="비밀번호" data="●●●●●●●●" />
+          <PersonalSection title="아이디(이메일)" data={userName} editBt={false} />
+          <PersonalRadio type="gender" title="성별" data={userGender} />
+          <PersonalBirth title="생년월일" data={{Year:userBirthYear,Month:userBirthMonth,Day:userBirthDay}}/>
+          <PersonalSection title="비밀번호" data="●●●●●●●●●●●●●" />
         </DataZone>
-        <ButtonZone>
-          <button>수정하기</button>
-        </ButtonZone>
       </DataFrame>
     </Container>
   );

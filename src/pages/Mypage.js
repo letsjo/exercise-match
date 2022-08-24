@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import LeaveSection from "../components/Mypage/LeaveSection";
-import MyPersonalData from "../components/Mypage/MyPersonalData";
 import MyProfileShow from "../components/Mypage/MyProfileShow";
+import MyPersonalData from "../components/Mypage/MyPersonalData";
+import LeaveSection from "../components/Mypage/LeaveSection";
 import SubNavbar from "../components/public/SubNavbar";
 
 import { useLocation } from "react-router-dom";
@@ -52,6 +52,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #f0f0f0;
+  user-select: none;
 `;
 
 const PageFrame = styled.div`

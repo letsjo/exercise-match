@@ -1,9 +1,17 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import InputEditButton from "../public/InputEditButton";
+import InputEditToggle from "../public/InputEditToggle";
+import InputJoinList from "../public/InputJoinList";
 import ShowStarScore from "../public/ShowStarScore";
 
 const MyProfileShow = ({ mypage = true, profileImg }) => {
+  const navigate = useNavigate();
+
+  const { userNickName, userJoinList, userInterest } = useSelector((state) => state.userReducer);
+
   return (
     <Container>
       <LeftFrame>
@@ -12,7 +20,7 @@ const MyProfileShow = ({ mypage = true, profileImg }) => {
             <img src={profileImg?profileImg:"https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg"} />
           </PhotoFrame>
           <InfoFrame>
-            <NameZone>홍길동</NameZone>
+            <NameZone>{userNickName}</NameZone>
             <ShowStarScore score={4} width={128} height={25}/>
           </InfoFrame>
         </LeftZone>
@@ -20,24 +28,24 @@ const MyProfileShow = ({ mypage = true, profileImg }) => {
       <RightFrame>
         <RightZone>
           <InputEditButton
-            initialState="홍길동"
+            initialState={userNickName}
             editBt={mypage ? true : false}
           />
-          <InputEditButton
+          <InputEditToggle
             title="관심사"
-            initialState="#관심사1 #관심사2 #관심사3"
+            initialState={userInterest}
             fontSize="15px"
             editBt={mypage ? true : false}
             border={true}
           />
-          <InputEditButton
+          <InputJoinList
             title="참여횟수"
-            initialState="헬스 n회 | 테니스 n회 | 기타 n회"
+            initialState={`헬스 ${userJoinList["헬스"]}회 | 런닝&조깅 ${userJoinList["런닝&조깅"]}회 | 배드민턴 ${userJoinList["배드민턴"]}회 | 테니스 ${userJoinList["테니스"]}회 | 라이딩 ${userJoinList["라이딩"]}회 | 골프 ${userJoinList["골프"]}회 | 기타 ${userJoinList["기타"]}회`}
             editBt={false}
             fontSize="15px"
           />
           {mypage ? (
-            <ButtonZone>
+            <ButtonZone onClick={(e)=>navigate("/userinfo")}>
               <button>회원정보 보기</button>
             </ButtonZone>
           ) : (

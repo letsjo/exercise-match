@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { modalSliceAction } from "../../redux/reducers/modalReducer";
 import { useNavigate } from "react-router-dom";
 import SelectLocation from "../Main/SelectLocation";
+import InterestFrame from "../Mypage/InterestFrame";
 
 const ModalComponents = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const ModalComponents = () => {
           <Overlay></Overlay>
           <ModalBody>
             {ModalRequiredName == "selectLocation" ? (
-              <ModalContent>
+              <ModalLocalSelect>
                 <SelectLocation/>
                 <CloseModal>
                   <GrFormClose
@@ -42,19 +43,19 @@ const ModalComponents = () => {
                     }}
                   />
                 </CloseModal>
-              </ModalContent>
-            ) : ModalRequiredName == "signup" ? (
-              <ModalContent>
-                {/* <Signup /> */}
-                <CloseModal>
+              </ModalLocalSelect>
+            ) : ModalRequiredName == "interestEdit" ? (
+              <ModalInterestSelect>
+                <InterestFrame />
+                <CloseInterestModal>
                   <GrFormClose
                     size={35}
                     onClick={() => {
                       dispatch(modalSliceAction.modalClose());
                     }}
                   />
-                </CloseModal>
-              </ModalContent>
+                </CloseInterestModal>
+              </ModalInterestSelect>
             ) : ModalRequiredName == "comment" ? (
               <ModalComment>
                 {/* <CommentPost /> */}
@@ -132,6 +133,48 @@ const CloseModal = styled.div`
     color: "red";
   }
 `;
+
+const CloseInterestModal = styled.div`
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 30px;
+  right: 60px;
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+  &:hover {
+    color: "red";
+  }
+`;
+
+////// ModalContent 여기가 흰 부분 입니다.
+const ModalLocalSelect = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 20px;
+  min-width: 550px;
+  height: 85%;
+  max-height: 890px;
+`;
+
+////// ModalContent 여기가 흰 부분 입니다.
+const ModalInterestSelect = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 20px;
+  min-width: 640px;
+  height: 85%;
+  max-height: 543px;
+`;
+
 ////// ModalContent 여기가 흰 부분 입니다.
 const ModalContent = styled.div`
   position: absolute;

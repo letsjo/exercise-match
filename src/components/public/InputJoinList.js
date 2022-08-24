@@ -4,7 +4,7 @@ import { FaPen } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { userSliceAction } from "../../redux/reducers/userReducer";
 
-const InputEditButton = ({
+const InputJoinList = ({
   title = "",
   initialState,
   editBt = true,
@@ -34,12 +34,6 @@ const InputEditButton = ({
     }
   });
 
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      onClose();
-    }
-  };
-
   const onChange = (e) => {
     e.preventDefault();
     if (setInputValue) setInputValue(e.target.value);
@@ -65,7 +59,6 @@ const InputEditButton = ({
           value={inputValue}
           disabled={modifyable}
           fontSize={fontSize}
-          onKeyPress={handleKeyPress}
         />
         <IconFrame onClick={(e) => EditButton(e)} editBt={editBt}>
           <FaPen size={24} />
@@ -133,4 +126,4 @@ const IconFrame = styled.div`
   }}
 `;
 
-export default InputEditButton;
+export default InputJoinList;

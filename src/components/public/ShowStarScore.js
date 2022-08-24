@@ -24,13 +24,13 @@ const FillingStar = styled.div`
   ${({ starView, width, height }) => {
     return css`
       position: absolute;
-      z-index: 1000;
+      z-index: 1;
       width: ${starView + "px"};
       height: ${height + "px"};
       overflow: hidden;
       img {
         position: absolute;
-        z-index: 10;
+        z-index: 1;
         height: ${height + "px"};
         width: ${width + "px"};
       }
