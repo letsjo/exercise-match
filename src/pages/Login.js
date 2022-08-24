@@ -1,7 +1,14 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState, useRef } from "react";
+import styled, { css } from "styled-components";
 
 const Login = () => {
+  const [errorMessage, setErrorMessage] = useState(false);
+
+
+  const validationState = useRef(false);
+  const idRef = useRef();
+  const pwRef = useRef();
+
   const REST_API_KEY = "77c5975ead488c768a11d49f9320425c";
   const REDIRECT_URI = "http://localhost:3000/api/kakaoLogin";
   const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
@@ -19,21 +26,25 @@ const Login = () => {
     window.location.href = naverURL;
   };
 
+  const validation = (e) => {
+    
+  }
+
   return (
     <LoginContainer>
       <Wrap>
         <LoginWrap>
           <LoginText>로그인</LoginText>
-          <IdName>아이디</IdName>
-          <Input type="text" placeholder="아이디를 입력해주세요." />
+          <IdName>이메일</IdName>
+          <Input ref={idRef} type="text" placeholder="예) nanu@naver.com" />
           <PwName>비밀번호</PwName>
-          <Input type="text" placeholder="비밀번호를 입력해주세요." />
+          <Input pwRef={pwRef} type="text" placeholder="비밀번호를 입력해주세요." />
           <FindBoxWrap>
             <FindBox>
-              <div>아이디 찾기</div> <Line /> <div>비밀번호 찾기</div>
+              <div>비밀번호 찾기</div>
             </FindBox>
           </FindBoxWrap>
-          <ErrorMessage>
+          <ErrorMessage errorMessage={errorMessage}>
             아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다.
             <br />
             입력하신 내용을 다시 확인해주세요.
@@ -136,13 +147,17 @@ const FindBoxWrap = styled.div`
 
 const FindBox = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   width: 196px;
   height: 17px;
   /* background-color: azure; */
   font-size: 15px;
   margin-top: 10px;
   margin-bottom: 30px;
+  
+  div{
+    cursor: pointer;
+  }
 `;
 
 const Line = styled.div`
@@ -152,10 +167,14 @@ const Line = styled.div`
 `;
 
 const ErrorMessage = styled.div`
-  height: 35px;
-  color: #ff0000;
-  font-size: 15px;
-  /* display: none; */
+  ${({ errorMessage }) => {
+    return css`
+      height: 35px;
+      color: #ff0000;
+      font-size: 15px;
+      display: ${errorMessage ? "block" : "none"};
+    `;
+  }}
 `;
 
 const LoginBtn = styled.div`

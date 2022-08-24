@@ -3,9 +3,16 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import InputAnimation from "../public/InputAnimation";
 
-const SignupAuthPW = ({ setNextAvailable, inputPassword, setInputPassword, leftState, rightState }) => {
-
-  const { email, password, repassword } = useSelector((state)=> state.signupReducer.info);
+const SignupAuthPW = ({
+  setNextAvailable,
+  inputPassword,
+  setInputPassword,
+  leftState,
+  rightState,
+}) => {
+  const { email, password, repassword } = useSelector(
+    (state) => state.signupReducer.info
+  );
 
   useEffect(() => {
     setNextAvailable(false);
@@ -17,9 +24,13 @@ const SignupAuthPW = ({ setNextAvailable, inputPassword, setInputPassword, leftS
 
   const RefFirstPassword = useRef("");
   const RefSecondPassword = useRef("");
+  const [validationComment, setValidationComment] = useState("");
 
-  const ValidationCheck = () =>{
-    if(RefFirstPassword.current.value && RefFirstPassword.current.value==RefSecondPassword.current.value){
+  const ValidationCheck = () => {
+    if (
+      RefFirstPassword.current.value &&
+      RefFirstPassword.current.value == RefSecondPassword.current.value
+    ) {
       setNextAvailable(true);
       rightState.setRightArrow(false);
       setInputPassword(RefFirstPassword.current.value);
@@ -27,7 +38,7 @@ const SignupAuthPW = ({ setNextAvailable, inputPassword, setInputPassword, leftS
       setNextAvailable(false);
       rightState.setRightArrow(false);
     }
-  }
+  };
 
   return (
     <Container>
@@ -35,7 +46,6 @@ const SignupAuthPW = ({ setNextAvailable, inputPassword, setInputPassword, leftS
         width="100%"
         inputName="이메일"
         inputDisAvailable={true}
-        ValidationCheck={ValidationCheck}
         inputValue={email}
       />
       <InputAnimation
@@ -43,8 +53,8 @@ const SignupAuthPW = ({ setNextAvailable, inputPassword, setInputPassword, leftS
         inputName="비밀번호"
         type="password"
         ValidationCheck={ValidationCheck}
-        Ref = {RefFirstPassword}
-        x// setInputValue={setFirstPassword}
+        Ref={RefFirstPassword}
+        x // setInputValue={setFirstPassword}
         inputDisAvailable={false}
       />
       <InputAnimation
@@ -52,7 +62,7 @@ const SignupAuthPW = ({ setNextAvailable, inputPassword, setInputPassword, leftS
         inputName="비밀번호 확인"
         type="password"
         ValidationCheck={ValidationCheck}
-        Ref = {RefSecondPassword}
+        Ref={RefSecondPassword}
         // setInputValue={setSecondPassword}
         inputDisAvailable={false}
       />

@@ -5,27 +5,16 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 const NavBar = () => {
   const [isPopperShown, setIsPopperShown] = useState(false);
+  
   const onOpenerClick = (e) => {
     e.stopPropagation();
-
+    e.preventDefault();
     setIsPopperShown(!isPopperShown);
   };
 
-  // const onClose = () => {
-  //   setIsPopperShown(false);
-  // };
-
-  // const [profile, setProfile] = useState(false);
-  // const profileOnClick=()=>{
-  //   if(profile){
-  //     setProfile(false);
-  //   }else{
-  //     setProfile(true);
-  //   }
-  // }
-
-  // console.log(profile);
-
+  const onClose = () => {
+    setIsPopperShown(false);
+  };
   return (
     <NavBarWrap>
       <Wrap>

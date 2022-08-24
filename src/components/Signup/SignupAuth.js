@@ -21,6 +21,7 @@ const SignupAuth = ({
   // auth
   const AuthKeywordRef = useRef("");
   const [validationState, setValidationState] = useState(false);
+  const [validationComment, setValidationComment] = useState("");
   const [inputAvailable, setInputAvailable] = useState(false);
     
   // timer
@@ -161,6 +162,7 @@ const SignupAuth = ({
         width="100%"
         inputName="이메일"
         ValidationCheck={ValidationCheck}
+        validationComment={validationComment}
         validation={{ validationState, setValidationState }}
         inputAvailable={inputAvailable}
         inputValue={inputEmail}

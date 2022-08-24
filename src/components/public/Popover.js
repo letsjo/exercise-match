@@ -11,23 +11,25 @@ const Popover = ({ onOpenerClick }) => {
       }
     };
 
-    window.addEventListener("click", pageClickEvent, true);
+      window.addEventListener("click", pageClickEvent, true);
 
-    return () => {
-      window.removeEventListener("click", pageClickEvent, true);
-    };
+      return () => {
+        window.removeEventListener("click", pageClickEvent, true);
+      };
   });
 
-  return <Wrapper ref={settingsWindowRef}>
-    <ProfileBox>
-        <Nickname>닉네임</Nickname> 
-        <Nim>님</Nim>   
+  return (
+    <Wrapper ref={settingsWindowRef}>
+      <ProfileBox>
+        <Nickname>닉네임</Nickname>
+        <Nim>님</Nim>
         <Hello>안녕하세요!</Hello>
         </ProfileBox>
         <Boxes>마이페이지</Boxes>
         <Boxes>나의 게시글</Boxes>
     <Logout>로그아웃</Logout>
     </Wrapper>
+  );
 };
 
 const Wrapper = styled.div`
@@ -43,37 +45,36 @@ const Wrapper = styled.div`
 `;
 
 const ProfileBox = styled.div`
-  height:63px;
+  height: 63px;
   border-bottom: 0.5px solid #f0f0f0;
   padding: 20px;
   box-sizing: border-box;
   display: flex;
 `;
 
-
 const Nickname = styled.div`
-width:42px;
+  width: 42px;
   font-weight: bold;
   font-size: 15px;
-  margin-right:5px;
+  margin-right: 5px;
 `;
 
 const Nim = styled.div`
-width:14px;
+  width: 14px;
   font-weight: bold;
   font-size: 15px;
-  margin-right:10px;
+  margin-right: 10px;
 `;
 
-const Hello =styled.div`
-  width:75px;
+const Hello = styled.div`
+  width: 75px;
   font-weight: bold;
   font-size: 15px;
   color: #494949;
 `;
 
 const Boxes = styled.div`
-  height:43px;
+  height: 43px;
   border-bottom: 0.5px solid #f0f0f0;
   padding: 10px 20px;
   box-sizing: border-box;
@@ -83,20 +84,19 @@ const Boxes = styled.div`
   color: #494949;
 `;
 
-
 const Logout = styled.div`
-height: 45px;
-padding :10px;
-cursor: pointer;
-display:flex;
-justify-content: center;
-align-items: center;
-box-sizing: border-box;
-color:#000000;
-font-weight: bold;
-font-size: 15px;
-border : #f0f0f0 solid 2px;
-margin-top: 80px;
+  height: 45px;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  color: #000000;
+  font-weight: bold;
+  font-size: 15px;
+  border: #f0f0f0 solid 2px;
+  margin-top: 80px;
 `;
 
 export default Popover;

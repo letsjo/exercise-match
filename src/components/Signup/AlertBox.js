@@ -1,25 +1,35 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-const AlertBox = ({ setAlertSent, alertcomment }) => {
+const AlertBox = ({
+  setAlertSent,
+  alertcomment,
+  position = "345px",
+  width = "700px",
+  height = "49px",
+}) => {
   useEffect(() => {
     setTimeout(() => setAlertSent(false), 2000);
   });
 
   return (
-    <Container>
+    <Container position={position} width={width} height={height}>
       <TextField>{alertcomment}</TextField>
     </Container>
   );
 };
 
 const Container = styled.div`
+  ${({ position, width, height }) => {
+    return css`
+      top: ${position};
+      width: ${width};
+      height: ${height};
+    `;
+  }}
   opacity: 0;
   position: absolute;
-  top: 345px;
   left: 50%;
-  width: 700px;
-  height: 49px;
   background-color: black;
   transform: translate(-50%, -50%);
   z-index: 1;

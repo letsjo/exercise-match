@@ -11,9 +11,9 @@ const Sweetalert = ({ comment = "Hello" }) => {
   // const Alert = (e)=>{
   //     e.preventDefault();
   //     Swal.fire(
-        // 'Deleted!',
-        // 'Your file has been deleted.',
-        // 'success'
+  //       'Deleted!',
+  //       'Your file has been deleted.',
+  //       'success'
   //     )
   // }
 

@@ -2,8 +2,6 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 const ButtonBigMain = ({ name, nextAvailable, NextPageAllow }) => {
-
-
   return (
     <Container type="submit" onClick={(e) => NextPageAllow(e)} nextAvailable={nextAvailable}>
       {name}

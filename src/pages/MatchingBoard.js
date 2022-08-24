@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import NavBar from '../components/public/NavBar'
 import BulletinCategoryBox from '../components/Board/BoardPublic/BulletinCategoryBox'
-import BulletinListFrame from '../components/Board/BulletinBoard/BulletinListFrame'
 import MatchingListFrame from '../components/Board/MatchingBoard/MatchingListFrame'
 
 const MatchingBoard = () => {
