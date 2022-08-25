@@ -40,7 +40,7 @@ const MyProfileShow = ({ mypage = true, profileImg }) => {
           />
           <InputJoinList
             title="참여횟수"
-            initialState={`헬스 ${userJoinList["헬스"]}회 | 런닝&조깅 ${userJoinList["런닝&조깅"]}회 | 배드민턴 ${userJoinList["배드민턴"]}회 | 테니스 ${userJoinList["테니스"]}회 | 라이딩 ${userJoinList["라이딩"]}회 | 골프 ${userJoinList["골프"]}회 | 기타 ${userJoinList["기타"]}회`}
+            initialState={`헬스 ${userJoinList["gym"]}회 | 런닝&조깅 ${userJoinList["running"]}회 | 배드민턴 ${userJoinList["badminton"]}회 | 테니스 ${userJoinList["tennis"]}회 | 라이딩 ${userJoinList["ridding"]}회 | 골프 ${userJoinList["golf"]}회 | 기타 ${userJoinList["ect"]}회`}
             editBt={false}
             fontSize="15px"
           />
@@ -141,6 +141,7 @@ const ButtonZone = styled.div`
     border: 1px solid #494949;
     border-radius: 5px;
     color: white;
+    cursor: pointer;
   }
 `;
 

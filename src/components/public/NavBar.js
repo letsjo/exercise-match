@@ -2,23 +2,23 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Popover from "./Popover";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
+  const navigete = useNavigate();
+
   const [isPopperShown, setIsPopperShown] = useState(false);
-  
+
   const onOpenerClick = (e) => {
     e.stopPropagation();
     e.preventDefault();
     setIsPopperShown(!isPopperShown);
   };
 
-  const onClose = () => {
-    setIsPopperShown(false);
-  };
   return (
     <NavBarWrap>
       <Wrap>
-        <Logo>LOGO</Logo>
+        <Logo href="/">LOGO</Logo>
         <SearchBox>
           <SearchWrap>
             <SearchIcon>
@@ -69,13 +69,16 @@ const Wrap = styled.div`
   width: 1280px;
 `;
 
-const Logo = styled.div`
+const Logo = styled.a`
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 92px;
   height: 44px;
   margin-right: 40px;
+  text-decoration: none;
+  color: black;
 `;
 
 const SearchBox = styled.div`

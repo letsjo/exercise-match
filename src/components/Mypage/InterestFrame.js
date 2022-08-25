@@ -9,20 +9,51 @@ const InterestFrame = () => {
   const modalRef = useRef(null);
   const dispatch = useDispatch();
 
+  const interestLists = [
+    [
+      ["running", "조깅&러닝"],
+      ["riding", "라이딩"],
+      ["gym", "헬스"],
+      ["hiking", "등산"],
+      ["ballet", "발레"],
+    ],
+    [
+      ["climbing", "클라이밍"],
+      ["pilates", "필라테스"],
+      ["swimming", "수영"],
+      ["boxing", "복싱"],
+      ["bowling", "볼링"],
+    ],
+    [
+      ["badminton", "배드민턴"],
+      ["crossfit", "크로스핏"],
+      ["gymnastics", "체조"],
+      ["skateboard", "보드"],
+      ["golf", "골프"],
+    ],
+    [
+      ["skate", "스케이트"],
+      ["pocketball", "당구"],
+      ["ski", "스키"],
+      ["futsal", "풋살"],
+      ["tennis", "테니스"],
+    ],
+    [
+      ["pingpong", "탁구"],
+      ["basketball", "농구"],
+      ["soccer", "축구"],
+      ["volleyball", "배구"],
+      ["baseball", "야구"],
+    ],
+  ];
+
+
   const { userInterest } = useSelector((state) => state.userReducer);
   const [editInterest, setEditInterest] = useState(userInterest);
   const [alertcomment, setAlertcomment] = useState(
     "관심사는 최대 3개까지 선택이 가능합니다."
   );
   const [alertSent, setAlertSent] = useState(false);
-
-  const interestLists = [
-    ["조깅&러닝", "라이딩", "헬스", "등산", "발레"],
-    ["클라이밍", "필라테스", "수영", "복싱", "볼링"],
-    ["배드민턴", "크로스핏", "체조", "보드", "골프"],
-    ["스케이트", "당구", "스키", "풋살", "테니스"],
-    ["탁구", "농구", "축구", "배구", "야구"],
-  ];
 
   useEffect(() => {
     const pageClickEvent = (e) => {
@@ -46,9 +77,9 @@ const InterestFrame = () => {
 
   const onClick = (e, interest) => {
     e.preventDefault();
-    const findIndex = editInterest.indexOf(interest);
+    const findIndex = editInterest.indexOf(interest[0]);
     if (editInterest.length < 3 && findIndex === -1) {
-      setEditInterest([...editInterest, interest]);
+      setEditInterest([...editInterest, interest[0]]);
       //   dispatch(userSliceAction.setInterest(userInterest));
     } else if (editInterest.length <= 3 && findIndex >= 0) {
       setEditInterest([
@@ -84,10 +115,10 @@ const InterestFrame = () => {
             {interestList.map((interest, index) => (
               <InterestBox
                 onClick={(e) => onClick(e, interest)}
-                selected={editInterest.indexOf(interest) >= 0 ? true : false}
+                selected={editInterest.indexOf(interest[0]) >= 0 ? true : false}
                 key={index}
               >
-                {interest}
+                {interest[1]}
               </InterestBox>
             ))}
           </LineFrame>
