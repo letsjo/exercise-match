@@ -36,14 +36,13 @@ const MypageReviewCard = ({
             </Star>
           </StarRate>
         </PersonalWrap>
-        <Context>{content}</Context>
         <ButtonWrap>
-          <Matching>매칭글</Matching>
           <Join>{category}</Join>
         </ButtonWrap>
+        <Context>{content}</Context>
       </ContextWrap>
     </Container>
-  );
+  );       
 };
 
 const Container = styled.div`
@@ -79,11 +78,9 @@ const Image = styled.div`
 
 const ContextWrap = styled.div`
   width: 692px;
-  height: 112px;
 `;
 
 const PersonalWrap = styled.div`
-  height: 39px;
   margin-bottom: 10px;
 `;
 
@@ -93,6 +90,7 @@ const SmallWrap = styled.div`
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
+  margin-bottom:6px ;
 `;
 
 const Nickname = styled.div`
@@ -123,7 +121,6 @@ const Star = styled.div`
 `;
 
 const Context = styled.div`
-  margin-bottom: 10px;
   font-size: 10px;
   height: 30px;
   padding: 0px 10px;
@@ -138,24 +135,16 @@ const Context = styled.div`
 
 const ButtonWrap = styled.div`
   display: flex;
-`;
-
-const Matching = styled.div`
-  border: 1px solid #a8a8a8;
-  border-right: none;
-  border-radius: 2px 0px 0px 2px;
-  padding: 4px 6px;
-  margin-left: 10px;
-  box-sizing: border-box;
-  font-size: 10px;
+  margin-bottom: 6px;
 `;
 
 const Join = styled.div`
   border: 1px solid #a8a8a8;
-  border-radius: 0px 2px 2px 0px;
+  border-radius: 2px ;
   padding: 4px;
   box-sizing: border-box;
   font-size: 10px;
+  margin-left: 10px
 `;
 
 export default MypageReviewCard;
