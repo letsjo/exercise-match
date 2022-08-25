@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef,} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 import Swal from "sweetalert2";
@@ -155,6 +155,29 @@ const SignupAuth = ({
       rightState.setRightArrow(false);
     }
   };
+
+  //new
+  // const [newemail, setNewEmail] = useState('')
+  // const [emailMessage, setEmailMessage] = useState('')
+  // const [isEmail, setIsEmail] = useState(false)
+
+
+  // const onChangeEmail = useCallback((e) => {
+  //   const emailRegex =
+  //     /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/
+  //   const emailCurrent = e.target.value
+  //   setNewEmail(emailCurrent)
+
+  //   if (!emailRegex.test(emailCurrent)) {
+  //     setEmailMessage('이메일 형식이 틀렸어요! 다시 확인해주세요 ㅜ ㅜ')
+  //     setIsEmail(false)
+  //   } else {
+  //     setEmailMessage('올바른 이메일 형식이에요 : )')
+  //     setIsEmail(true)
+  //   }
+  // }, [])
+
+  // console.log(newemail);
 
   return (
     <Container>
