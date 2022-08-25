@@ -38,6 +38,12 @@ const Board = () => {
   const InfoOnClick = () => {
     setBoardType("info");
   };
+  const MyMatchingOnClick=()=>{
+    setBoardType("myMatch");  
+  }
+  const MyInfoOnClick=()=>{
+    setBoardType("myInfo");
+  }
 
   return (
     <Container>
@@ -47,18 +53,36 @@ const Board = () => {
           <MatchingTitle boardType={boardType} onClick={MatchingOnClick}>
             매칭(구합니다)
           </MatchingTitle>
+          {boardType ==="match"?(
+            <>
+            <SelectMatching boardType={boardType} onClick={MatchingOnClick}>
+              매칭 게시판 
+              </SelectMatching>
+            <SelectMyBoard boardType={boardType} onClick={MyMatchingOnClick}>
+              나의 게시글</SelectMyBoard> 
+            </>
+          ):(<></>)}
+            
           <InfoTitle boardType={boardType} onClick={InfoOnClick}>
             정보 공유 게시판
           </InfoTitle>
+          {boardType ==="info"?(
+            <>
+            <SelectInfo boardType={boardType} onClick={InfoOnClick}>정보 공유 </SelectInfo>
+            <SelectMyBoard boardType={boardType} onClick={MyInfoOnClick}>나의 게시글</SelectMyBoard> 
+            </>
+          ):(<></>)}
         </CategoryFrame>
         <ContextFrame>
           {boardType === "match" ? (
             <MatchingListFrame />
           ) : boardType === "info" ? (
             <BulletinListFrame />
-          ) : (
-            <></>
-          )}
+          ) : boardType ==="myMatch" ?(
+            <MyBulletinListFrame/>
+          ) : boardType ==="myInfo"?(
+            <MyBulletinListFrame/>
+          ):(<></>)}
           {/* <BulletinListFrame/> */}
           {/* <MatchingListFrame/> */}
           {/* <MyMatchingListFrame/> */}
@@ -92,12 +116,65 @@ const MatchingTitle = styled.div`
   font-weight: bold;
   font-size: 15px;
   box-sizing: border-box;
+  border-top: 2px solid #f0f0f0;
   ${({ boardType }) => {
     return css`
-      border-bottom: ${boardType === "match"
+      border-bottom: 2px solid #F0F0F0;
+       /* ${boardType === "match"
         ? "2px solid #DEDEDE"
-        : "2px solid #F0F0F0"};
-      background-color: ${boardType === "match" ? "#dedede" : ""};
+        : "2px solid #F0F0F0"}; */
+      background-color: ${boardType === "match" ? "#F0F0F0" : ""};
+    `;
+  }}
+`;
+
+const SelectMatching=styled.div`
+  width: 180px;
+  height: 39px;
+  padding: 8px 40px;
+  box-sizing: border-box;
+  font-size: 15px;
+  font-weight: bold;
+  color:#494949;
+  border-bottom: 2px solid #F0F0F0;
+  cursor: pointer;
+  ${({boardType})=>{
+    return css`
+      background-color: ${boardType ==="myMatch"? "":""};
+    `;
+  }}
+`;
+
+const SelectInfo=styled.div`
+  width: 180px;
+  height: 39px;
+  padding: 8px 40px;
+  box-sizing: border-box;
+  font-size: 15px;
+  font-weight: bold;
+  color:#494949;
+  border-bottom: 2px solid #F0F0F0;
+  cursor: pointer;
+  ${({boardType})=>{
+    return css`
+      background-color: ${boardType ==="myInfo"? "":""};
+    `;
+  }}
+`;
+
+const SelectMyBoard=styled.div`
+  width: 180px;
+  height: 39px;
+  padding: 8px 40px;
+  box-sizing: border-box;
+  font-size: 15px;
+  font-weight: bold;
+  color:#494949;
+  border-bottom: 2px solid #F0F0F0;
+  cursor: pointer;
+  ${({boardType})=>{
+    return css`
+      background-color: ${boardType ==="myInfo"? "":""};
     `;
   }}
 `;
@@ -113,10 +190,11 @@ const InfoTitle = styled.div`
   box-sizing: border-box;
   ${({ boardType }) => {
     return css`
-      border-bottom: ${boardType === "info"
+      border-bottom: 2px solid #f0f0f0;
+      /* ${boardType === "info"
         ? "2px solid #DEDEDE"
-        : "2px solid #F0F0F0"};
-      background-color: ${boardType === "info" ? "#dedede" : ""};
+        : "2px solid #F0F0F0"}; */
+      background-color: ${boardType === "info" ? "#f0f0f0" : ""};
     `;
   }}
 `;

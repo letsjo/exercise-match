@@ -17,11 +17,11 @@ const MatchingListFrame = () => {
         <ButtonBox>
             <WriteButton>작성하기</WriteButton>
         </ButtonBox>
-        <MatchingCard completed={true}/>
+        <MatchingCard />
         <MatchingCard/>
         <MatchingCard completed={true}/>
         <MatchingCard/>
-        <MatchingCard/>
+        <MatchingCard completed={true}/>
         <MatchingCard/>
         <PageFrame>
             <Frame>
@@ -40,7 +40,7 @@ const MatchingListFrame = () => {
 
 const ButtonBox = styled.div`
     height:69px;
-    width: 1000px;
+    width: 958px;
     padding: 10px;
     box-sizing: border-box;
     display: flex;
@@ -76,7 +76,7 @@ const BoardListFrame = styled.div`
     width: 1258px;  
     border-top: 2px solid #f0f0f0;
     border-left: 4px solid #f0f0f0;
-    padding: 10px 50px 10px 50px;
+    padding: 10px 50px 10px 70px;
     box-sizing: border-box;
 
 `;

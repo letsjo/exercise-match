@@ -1,5 +1,6 @@
-import { userSliceAction } from "../reducers/userReducer";
+import userReducer, { userSliceAction } from "../reducers/userReducer";
 import userAPI from "../../apis/userAPI";
+
 
 const kakaoLogin = (code) => {
   return async (dispatch) => {
@@ -37,7 +38,45 @@ const naverLogin = (code) => {
   };
 };
 
+const Login =(LoginData)=>{
+  return async(dispatch)=>{
+    try{
+      const res = await userAPI.post("login",LoginData)
+      dispatch(userSliceAction.setLogin({username:res.data.username, nickname: res.data.nickname, profile: res.data.profile }))
+    }catch(e){
+      console.log(e);
+    }
+  }
+}
+
+// const MypageProfile=()=>{
+//   return async(dispatch)=>{
+//     try{
+//       const mypageActionAPI = userAPI.get(
+//         "api/mypage/action"
+//       );
+//       const mypageInfoAPI=userAPI.get(
+//         "api/mypage/info"
+//       );
+
+//       let [?]=await Promise.all([
+//         mypageActionAPI,
+//         mypageInfoAPI,
+//       ]);
+
+//       dispatch({
+//         //?
+//       })
+
+//     }catch(e){
+//       console.log(e);
+//     }
+//   }
+// }
+
+
 export const userAction = {
   kakaoLogin,
   naverLogin,
+  Login
 };

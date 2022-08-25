@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 import { boardAction } from "../../../redux/actions/boardAction";
+import SearchOption from "./SearchOption";
 
 const CategoryBoxFrame = ({}) => {
   const dispatch = useDispatch();
