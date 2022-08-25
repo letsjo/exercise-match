@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
 import styled, { css } from "styled-components";
+import { useDispatch } from "react-redux";
+import { userAction } from "../redux/actions/userAction";
 
 
 const Login = () => {
@@ -7,6 +9,7 @@ const Login = () => {
 
   const idRef = useRef();
   const pwRef = useRef();
+  const dispatch= useDispatch();
 
   const REST_API_KEY = "77c5975ead488c768a11d49f9320425c";
   const REDIRECT_URI = "http://localhost:3000/api/kakaoLogin";
@@ -38,12 +41,14 @@ const Login = () => {
       return;
     } else {
       setErrorMessage(false);
-      const res = {
+      const LoginData = {
         username: idRef.current.value,
         password: pwRef.current.value,
       };
-      console.log(res);
+      console.log(LoginData);
+      dispatch(userAction.Login(LoginData))
     }
+    
   };
 
 
