@@ -6,6 +6,10 @@ import SelectCityCard from "./SelectCityCard";
 const SelectLocation = () => {
   const tmpLocalName = [
     {
+      city: "전국",
+      gu: [],
+    },
+    {
       city: "서울",
       gu: [
         "종로구",

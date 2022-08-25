@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 let initialState = {
     currentLat:37.566353,
     currentLon:126.977953,
-    selectedCity: "",
+    selectedCity: "전국",
     selectedGu: "",
 };
 

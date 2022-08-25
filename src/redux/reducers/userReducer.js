@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 let initialState = {
+  isLogin: false,
   username: "hyunoh.jo@gmail.com",
   userNickName: "조현오",
   userProfile: "",
@@ -9,13 +10,13 @@ let initialState = {
   userBirthMonth: "1",
   userBirthDay: "4",
   userJoinList: {
-    "gym": 1,
-    "running": 0,
-    "badminton": 0,
-    "tennis": 2,
-    "ridding": 3,
-    "golf": 0,
-    "ect": 0,
+    gym: 1,
+    running: 0,
+    badminton: 0,
+    badminton: 2,
+    ridding: 3,
+    golf: 0,
+    ect: 0,
   },
   userInterest: ["hiking", "swimming"],
 };

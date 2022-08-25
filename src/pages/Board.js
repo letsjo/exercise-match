@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import styled, { css } from "styled-components";
 import NavBar from "../components/public/NavBar";
@@ -7,36 +7,38 @@ import MatchingListFrame from "../components/Board/MatchingBoard/MatchingListFra
 import MyBulletinListFrame from "../components/Board/BulletinBoard/MyBulletinListFrame";
 import MyMatchingListFrame from "../components/Board/MatchingBoard/MyMatchingListFrame";
 
-import { useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { boardAction } from "../redux/actions/boardAction";
 
 const Board = () => {
-  //board?type=matching&categories=all
-  //const location = useLocation();
-  //console.log(location);
-  //http://localhost:3000/mypage?a=123&bb=%EA%B0%80%EB%82%98%EB%8B%A4#51515
-  //{
-  //     "pathname": "/mypage",
-  //     "search": "?type=123&cate=%EA%B0%80%EB%82%98%EB%8B%A4",
-  //     "hash": "#51515",
-  //     "state": null,
-  //     "key": "default"
-  //}
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { category } = useSelector((state) => state.boardReducer);
+  const { selectedCity, selectedGu } = useSelector((state) => state.locationReducer);
 
   const query = useLocation().search;
   const type = new URLSearchParams(query).get("type");
   const cate = new URLSearchParams(query).get("cate");
 
-  const [boardType, setBoardType] = useState("match");
-  const [categories, setCategories] = useState("all");
+  useEffect(() => {
+    if (!type || !cate) {
+      dispatch(boardAction.setBoardType(type ? type : "match", cate ? cate : "all"));
+      navigate(
+        `/board?type=${type ? type : "match"}&cate=${cate ? cate : "all"}`
+      );
+    }
+  }, []);
 
   const MatchingOnClick = () => {
-    setBoardType("match");
+    dispatch(boardAction.setBoardType("match", category));
+    navigate(`/board?type=match&cate=${category}&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
   };
+
   const InfoOnClick = () => {
-    setBoardType("info");
+    dispatch(boardAction.setBoardType("info", category));
+    navigate(`/board?type=info&cate=${category}&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
   };
 
   return (
@@ -44,17 +46,17 @@ const Board = () => {
       <NavBar />
       <MainFrame>
         <CategoryFrame>
-          <MatchingTitle boardType={boardType} onClick={MatchingOnClick}>
+          <MatchingTitle boardType={type} onClick={MatchingOnClick}>
             매칭(구합니다)
           </MatchingTitle>
-          <InfoTitle boardType={boardType} onClick={InfoOnClick}>
+          <InfoTitle boardType={type} onClick={InfoOnClick}>
             정보 공유 게시판
           </InfoTitle>
         </CategoryFrame>
         <ContextFrame>
-          {boardType === "match" ? (
+          {type === "match" ? (
             <MatchingListFrame />
-          ) : boardType === "info" ? (
+          ) : type === "info" ? (
             <BulletinListFrame />
           ) : (
             <></>

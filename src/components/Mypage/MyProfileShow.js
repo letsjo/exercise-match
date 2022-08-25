@@ -40,7 +40,7 @@ const MyProfileShow = ({ mypage = true, profileImg }) => {
           />
           <InputJoinList
             title="참여횟수"
-            initialState={`헬스 ${userJoinList["gym"]}회 | 런닝&조깅 ${userJoinList["running"]}회 | 배드민턴 ${userJoinList["badminton"]}회 | 테니스 ${userJoinList["tennis"]}회 | 라이딩 ${userJoinList["ridding"]}회 | 골프 ${userJoinList["golf"]}회 | 기타 ${userJoinList["ect"]}회`}
+            initialState={`헬스 ${userJoinList["gym"]}회 | 런닝&조깅 ${userJoinList["running"]}회 | 배드민턴 ${userJoinList["badminton"]}회 | 테니스 ${userJoinList["tennis"]}회 | 라이딩 ${userJoinList["ridding"]}회 | 골프 ${userJoinList["golf"]}회 | 기타 ${userJoinList["etc"]}회`}
             editBt={false}
             fontSize="15px"
           />

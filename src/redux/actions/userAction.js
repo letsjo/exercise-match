@@ -1,4 +1,5 @@
 import { userSliceAction } from "../reducers/userReducer";
+import { encrypt, decrypt } from "../../utils/CryptoJS";
 import userAPI from "../../apis/userAPI";
 
 const kakaoLogin = (code) => {
@@ -36,6 +37,34 @@ const naverLogin = (code) => {
       });
   };
 };
+
+
+// const userSignup = createAsyncThunk(
+//   "user/Signup",
+//   async (userData, { rejectWithValue }) => {
+//     try {
+//       const response = await userAPI.post("/user/signup", userData);
+//       return response;
+//     } catch (err) {
+//       console.log(err);
+//       return rejectWithValue(err.response);
+//     }
+//   }
+// );
+
+// const userLogin = createAsyncThunk(
+//   "user/Login",
+//   async (userData, { rejectWithValue }) => {
+//     try {
+//       const response = await userAPI.post("/login", userData);
+//       return response;
+//     } catch (err) {
+//       console.log(err);
+//       return rejectWithValue(err.response.data);
+//     }
+//   }
+// );
+
 
 export const userAction = {
   kakaoLogin,

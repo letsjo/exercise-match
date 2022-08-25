@@ -1,10 +1,16 @@
 import { boardSliceAction } from "../reducers/boardReducer";
 import userAPI from "../../apis/userAPI";
 
-function setCategory(cate) {
+function setBoardType(type,cate) {
     return async (dispatch) => {
       try {
-        dispatch(boardSliceAction.setCategory(cate));
+        // await userAPI.get("").then((response)=>{
+
+        // }).catch((error) => {
+
+        // });
+        
+        dispatch(boardSliceAction.setBoardType({type,cate}));
       } catch (errer) {
 
       }
@@ -12,5 +18,5 @@ function setCategory(cate) {
 }
 
 export const boardAction = {
-    setCategory,
+    setBoardType,
 };
