@@ -33,17 +33,14 @@ const NavBar = () => {
       </BeforeLoginBox> */}
         <AfterLoginBox>
           <ProfileImg onClick={onOpenerClick}>
-            {/* <img src="https://item.kakaocdn.net/do/479d4f178d8d03980ffc52eeb66465c3f43ad912ad8dd55b04db6a64cddaf76d" /> */}
             <img
               src="https://cdn.clien.net/web/api/file/F01/11059505/25fb954e3ed280.jpg"
               alt=""
             />
           </ProfileImg>
-          <Arrow
-          // onClick={onOpenerClick}
-          >
+          <Arrow>
             <div onClick={onOpenerClick}>
-              {isPopperShown ? <IoIosArrowDown /> : <IoIosArrowUp />}
+              {isPopperShown ? <IoIosArrowUp /> : <IoIosArrowDown />}
             </div>
           </Arrow>
           {isPopperShown && <Popover onOpenerClick={onOpenerClick} />}
@@ -86,9 +83,9 @@ const SearchBox = styled.div`
   height: 44px;
   background-color: #f0f0f0;
   border-radius: 10px;
-  :focus-within {
+  /* :focus-within {
     box-shadow: 0px 0px 3px 3px #cccccc;
-  }
+  } */
 `;
 
 const SearchWrap = styled.div`

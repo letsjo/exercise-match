@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom"; 
 
 const Popover = ({ onOpenerClick }) => {
   const settingsWindowRef = useRef(null);
@@ -18,6 +19,8 @@ const Popover = ({ onOpenerClick }) => {
       };
   });
 
+  const navigate=useNavigate();
+
   return (
     <Wrapper ref={settingsWindowRef}>
       <ProfileBox>
@@ -25,9 +28,9 @@ const Popover = ({ onOpenerClick }) => {
         <Nim>님</Nim>
         <Hello>안녕하세요!</Hello>
         </ProfileBox>
-        <Boxes>마이페이지</Boxes>
-        <Boxes>나의 게시글</Boxes>
-    <Logout>로그아웃</Logout>
+        <Boxes onClick={()=>navigate("/mypage")}>마이페이지</Boxes>
+        <Boxes onClick={()=>navigate("/board")}>나의 게시글</Boxes>
+    <Logout onClick={()=>navigate("/")}>로그아웃</Logout>
     </Wrapper>
   );
 };
@@ -82,6 +85,7 @@ const Boxes = styled.div`
   font-weight: bold;
   display: flex;
   color: #494949;
+  cursor: pointer;
 `;
 
 const Logout = styled.div`

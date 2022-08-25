@@ -1,11 +1,10 @@
 import React, { useState, useRef } from "react";
 import styled, { css } from "styled-components";
 
+
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState(false);
 
-
-  const validationState = useRef(false);
   const idRef = useRef();
   const pwRef = useRef();
 
@@ -26,9 +25,27 @@ const Login = () => {
     window.location.href = naverURL;
   };
 
-  const validation = (e) => {
-    
-  }
+  const clickLogin = () => {
+
+    const idInputVal = idRef.current.value;
+    const pwInputVal = pwRef.current.value;
+
+      const regex = new RegExp("^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$");
+    const validId = regex.exec(idInputVal);
+
+    if (idRef.current.value === "" || pwRef.current.value === "" || !validId || pwInputVal.length < 5) {
+      setErrorMessage(true);
+      return;
+    } else {
+      setErrorMessage(false);
+      const res = {
+        username: idRef.current.value,
+        password: pwRef.current.value,
+      };
+      console.log(res);
+    }
+  };
+
 
   return (
     <LoginContainer>
@@ -38,7 +55,11 @@ const Login = () => {
           <IdName>이메일</IdName>
           <Input ref={idRef} type="text" placeholder="예) nanu@naver.com" />
           <PwName>비밀번호</PwName>
-          <Input pwRef={pwRef} type="text" placeholder="비밀번호를 입력해주세요." />
+          <Input
+            ref={pwRef}
+            type="text"
+            placeholder="비밀번호를 입력해주세요."
+          />
           <FindBoxWrap>
             <FindBox>
               <div>비밀번호 찾기</div>
@@ -49,7 +70,7 @@ const Login = () => {
             <br />
             입력하신 내용을 다시 확인해주세요.
           </ErrorMessage>
-          <LoginBtn>로그인하기</LoginBtn>
+          <LoginBtn onClick={clickLogin}>로그인하기</LoginBtn>
           <SignupBtn>아직 회원이 아니신가요?</SignupBtn>
           <LineWrap>
             <OrLine /> 또는 <OrLine />
@@ -154,8 +175,8 @@ const FindBox = styled.div`
   font-size: 15px;
   margin-top: 10px;
   margin-bottom: 30px;
-  
-  div{
+
+  div {
     cursor: pointer;
   }
 `;
