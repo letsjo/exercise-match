@@ -7,8 +7,30 @@ import MatchingListFrame from "../components/Board/MatchingBoard/MatchingListFra
 import MyBulletinListFrame from "../components/Board/BulletinBoard/MyBulletinListFrame";
 import MyMatchingListFrame from "../components/Board/MatchingBoard/MyMatchingListFrame";
 
+import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 const Board = () => {
+  //board?type=matching&categories=all
+  //const location = useLocation();
+  //console.log(location);
+  //http://localhost:3000/mypage?a=123&bb=%EA%B0%80%EB%82%98%EB%8B%A4#51515
+  //{
+  //     "pathname": "/mypage",
+  //     "search": "?type=123&cate=%EA%B0%80%EB%82%98%EB%8B%A4",
+  //     "hash": "#51515",
+  //     "state": null,
+  //     "key": "default"
+  //}
+
+  const { category } = useSelector((state) => state.boardReducer);
+
+  const query = useLocation().search;
+  const type = new URLSearchParams(query).get("type");
+  const cate = new URLSearchParams(query).get("cate");
+
   const [boardType, setBoardType] = useState("match");
+  const [categories, setCategories] = useState("all");
 
   const MatchingOnClick = () => {
     setBoardType("match");
@@ -30,17 +52,17 @@ const Board = () => {
           </InfoTitle>
         </CategoryFrame>
         <ContextFrame>
-          {/* {boardType === "match" ? (
+          {boardType === "match" ? (
             <MatchingListFrame />
           ) : boardType === "info" ? (
             <BulletinListFrame />
           ) : (
             <></>
-          )} */}
+          )}
           {/* <BulletinListFrame/> */}
           {/* <MatchingListFrame/> */}
           {/* <MyMatchingListFrame/> */}
-          <MyBulletinListFrame/>
+          {/* <MyBulletinListFrame/> */}
         </ContextFrame>
       </MainFrame>
     </Container>

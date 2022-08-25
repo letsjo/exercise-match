@@ -43,10 +43,10 @@ const PersonalRadio = ({ title, data, editBt = true }) => {
         <Gender available={available}>
           <RadioSection
             onClick={(e) => {
-              if (!available) setGender("남성");
+              if (!available) setGender("male");
             }}
           >
-            {gender == "남성" ? (
+            {gender == "male" ? (
               <input
                 type="radio"
                 id="men"
@@ -66,10 +66,10 @@ const PersonalRadio = ({ title, data, editBt = true }) => {
           </RadioSection>
           <RadioSection
             onClick={(e) => {
-              if (!available) setGender("여성");
+              if (!available) setGender("female");
             }}
           >
-            {gender == "여성" ? (
+            {gender == "female" ? (
               <input
                 type="radio"
                 id="women"

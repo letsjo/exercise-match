@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Pagination from '../BoardPublic/Pagination';
 import { useState } from 'react';
 import MatchingCard from './MatchingCard';
-import BulletinCategoryBox from '../BoardPublic/BulletinCategoryBox';
+import CategoryBoxFrame from '../BoardPublic/CategoryBoxFrame';
 
 
 const MatchingListFrame = () => {
@@ -12,7 +12,7 @@ const MatchingListFrame = () => {
 
   return (
     <>
-    <BulletinCategoryBox/>
+    <CategoryBoxFrame/>
     <BoardListFrame>
         <ButtonBox>
             <WriteButton>작성하기</WriteButton>

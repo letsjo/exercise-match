@@ -28,10 +28,10 @@ const Login = () => {
   const clickLogin = () => {
 
     const idInputVal = idRef.current.value;
-      const pwInputVal = pwRef.current.value;
+    const pwInputVal = pwRef.current.value;
 
       const regex = new RegExp("^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$");
-      const validId = regex.exec(idInputVal);
+    const validId = regex.exec(idInputVal);
 
     if (idRef.current.value === "" || pwRef.current.value === "" || !validId || pwInputVal.length < 5) {
       setErrorMessage(true);

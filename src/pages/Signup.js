@@ -55,8 +55,6 @@ const Signup = () => {
     });
   };
 
-  console.log(page);
-
   return (
     <Container>
       <SignupNavbar

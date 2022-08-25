@@ -1,25 +1,39 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 let initialState = {
-  userName: "hyunoh.jo@gmail.com",
+  username: "hyunoh.jo@gmail.com",
   userNickName: "조현오",
-  userGender: "남성",
+  userProfile: "",
+  userGender: "male",
   userBirthYear: "1991",
   userBirthMonth: "1",
   userBirthDay: "4",
-  userJoinList: {"헬스":1,"런닝&조깅":0,"배드민턴":0,"테니스":2,"라이딩":3,"골프":0,"기타":0},
-  userInterest: ["등산"],
+  userJoinList: {
+    "gym": 1,
+    "running": 0,
+    "badminton": 0,
+    "tennis": 2,
+    "ridding": 3,
+    "golf": 0,
+    "ect": 0,
+  },
+  userInterest: ["hiking", "swimming"],
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUserInterest(state, action) {
-      state.userInterest = action.payload;
+    setLogin(state, action) {
+      state.username = action.payload.username;
+      state.userProfile = action.payload.profile;
+      state.userNickName = action.payload.nickname;
     },
     setUserNickName(state, action) {
       state.userNickName = action.payload;
+    },
+    setUserProfile(state, action) {
+      state.userProfile = action.payload;
     },
     setUserGender(state, action) {
       state.userGender = action.payload;
@@ -35,6 +49,9 @@ const userSlice = createSlice({
     },
     setUserJoinList(state, action) {
       state.userJoinList = action.payload;
+    },
+    setUserInterest(state, action) {
+      state.userInterest = action.payload;
     },
   },
 });

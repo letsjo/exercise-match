@@ -3,12 +3,39 @@ import styled, { css } from "styled-components";
 import { RiCloseCircleFill } from "react-icons/ri";
 import { BsCheckSquareFill } from "react-icons/bs";
 
-const InputAnimation = ({ type="text", width = "700px", Ref=null, inputName="", inputValue, setInputValue, ValidationCheck=()=>{}, validation={}, inputDisAvailable=false}) => {
-  
+const InputAnimation = ({
+  type = "text",
+  width = "700px",
+  Ref = null,
+  inputName = "",
+  inputValue,
+  setInputValue,
+  ValidationCheck = () => {},
+  validation = {},
+  inputDisAvailable = false,
+  validationState,
+  setValidationState,
+}) => {
+
+  const [validationLine, setValidationLine] = useState(false);
+
   const onChange = (e) => {
     e.preventDefault();
     if (setInputValue) setInputValue(e.target.value);
-    if (ValidationCheck) ValidationCheck(e);
+    if (ValidationCheck(e)) {
+      setValidationState(true);
+    } else {
+      setValidationState(false);
+    }
+  };
+  
+  const onBlur = (e) => {
+    if (ValidationCheck(e)){
+      setValidationLine(false);
+    } else {
+      setValidationLine(true);
+    }
+      
   };
 
   const onReset = (e) => {
@@ -18,12 +45,13 @@ const InputAnimation = ({ type="text", width = "700px", Ref=null, inputName="", 
   };
 
   return (
-    <Container width={width}>
+    <Container width={width} validationLine={validationLine}>
       <input
         type={type}
         ref={Ref}
         value={inputValue}
         onChange={onChange}
+        onBlur={onBlur}
         required
         disabled={inputDisAvailable}
       />
@@ -35,7 +63,12 @@ const InputAnimation = ({ type="text", width = "700px", Ref=null, inputName="", 
           {validation.validationState ? (
             <BsCheckSquareFill size={18} color="#494949" />
           ) : (
-            <RiCloseCircleFill className="delIcon" onClick={(e)=>onReset(e)} size={24} color="#a8a8a8" />
+            <RiCloseCircleFill
+              className="delIcon"
+              onClick={(e) => onReset(e)}
+              size={24}
+              color="#a8a8a8"
+            />
           )}
         </InputBtn>
       )}
@@ -44,7 +77,7 @@ const InputAnimation = ({ type="text", width = "700px", Ref=null, inputName="", 
 };
 
 const Container = styled.div`
-  ${({ width }) => {
+  ${({ width, validationState, validationLine }) => {
     return css`
       position: relative;
       height: 69px;
@@ -80,7 +113,7 @@ const Container = styled.div`
         bottom: 0;
         left: 0;
         pointer-events: none;
-        border-bottom: 1px solid #a8a8a8;
+        border-bottom: ${validationLine||validationState?"1px solid #CA2323":"1px solid #a8a8a8"};;
       }
 
       .label-wrapper::after {
@@ -88,7 +121,7 @@ const Container = styled.div`
         position: absolute;
         height: 100%;
         width: 100%;
-        border-bottom: 2px solid #494949;
+        border-bottom: 2px solid ${validationLine||validationState?"#CA2323":"#494949"};
         left: 0;
         bottom: -1px;
         transform: translateX(-100%);
@@ -147,7 +180,7 @@ const InputBtn = styled.div`
   height: 24px;
   right: 0;
   bottom: 11px;
-  .delIcon{
+  .delIcon {
     cursor: pointer;
   }
 `;

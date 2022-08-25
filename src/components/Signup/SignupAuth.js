@@ -139,9 +139,9 @@ const SignupAuth = ({
       /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
 
     if (!regEmail.test(email)) {
-      setValidationState(false);
+      return false;
     } else {
-      setValidationState(true);
+      return true;
     }
   };
 
@@ -186,6 +186,7 @@ const SignupAuth = ({
         inputName="이메일"
         ValidationCheck={ValidationCheck}
         validationComment={validationComment}
+        setValidationState={setValidationState}
         validation={{ validationState, setValidationState }}
         inputAvailable={inputAvailable}
         inputValue={inputEmail}
