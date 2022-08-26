@@ -26,9 +26,9 @@ const userSlice = createSlice({
   reducers: {
     setLogin(state, action) {
       state.isLogin= true;
-      state.username = action.payload.username;
-      state.userProfile = action.payload.profile;
-      state.userNickName = action.payload.nickname;
+      state.username = action.payload?.username;
+      state.userProfile = action.payload?.profile;
+      state.userNickName = action.payload?.nickname;
     },
     setUserNickName(state, action) {
       state.userNickName = action.payload;

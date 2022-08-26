@@ -1,9 +1,11 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import { FaPen } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { userAction } from "../../redux/actions/userAction";
 
 const PersonalRadio = ({ title, data, editBt = true }) => {
+  const dispatch = useDispatch();
   const [available, setAvailable] = useState(true);
   const [gender, setGender] = useState(data);
   const radioRef = useRef(null);
@@ -32,10 +34,10 @@ const PersonalRadio = ({ title, data, editBt = true }) => {
   const onClose = (e) => {
     e.preventDefault();
     setAvailable(true);
+    console.log(gender);
+    dispatch(userAction.editGender(gender));
   };
-
-  console.log(gender);
-
+  
   return (
     <Container ref={radioRef}>
       <TitleZone>{title}</TitleZone>

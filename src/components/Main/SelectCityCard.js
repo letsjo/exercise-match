@@ -9,7 +9,7 @@ const SelectCityCard = ({ localData }) => {
   const selectedLocationRef = useRef(null);
   const dispatch = useDispatch();
 
-  const { selectedCity, selectedGu } = useSelector(
+  const { selectedCity, selectedGu, currentLat, currentLon } = useSelector(
     (state) => state.locationReducer
   );
 
@@ -33,7 +33,7 @@ const SelectCityCard = ({ localData }) => {
 
   useEffect(() => {
     selectedLocationRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [selectedCity, selectedGu]);
+  }, [selectedCity, selectedGu, currentLat, currentLon]);
 
   // console.log(selectedCity, selectedGu);
 

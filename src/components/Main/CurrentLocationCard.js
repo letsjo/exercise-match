@@ -13,10 +13,6 @@ const CurrentLocationCard = () => {
     (state) => state.locationReducer
   );
 
-  useEffect(() => {
-    dispatch(locaionAction.getLocation());
-  }, []);
-
   const OpenLocationModal = () => {
     dispatch(modalSliceAction.modalLocalSelectOpen());
   };
