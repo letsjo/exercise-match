@@ -50,6 +50,7 @@ const InterestFrame = () => {
 
   const { userInterest } = useSelector((state) => state.userReducer);
   const [editInterest, setEditInterest] = useState(userInterest);
+  const [editInterestKo, setEditInterestKo] = useState([]);
   const [alertcomment, setAlertcomment] = useState(
     "관심사는 최대 3개까지 선택이 가능합니다."
   );
@@ -80,11 +81,16 @@ const InterestFrame = () => {
     const findIndex = editInterest.indexOf(interest[0]);
     if (editInterest.length < 3 && findIndex === -1) {
       setEditInterest([...editInterest, interest[0]]);
+      setEditInterestKo([...editInterestKo, interest[1]]);
       //   dispatch(userSliceAction.setInterest(userInterest));
     } else if (editInterest.length <= 3 && findIndex >= 0) {
       setEditInterest([
         ...editInterest.slice(0, findIndex),
         ...editInterest.slice(findIndex + 1),
+      ]);
+      setEditInterestKo([
+        ...editInterestKo.slice(0, findIndex),
+        ...editInterestKo.slice(findIndex + 1),
       ]);
     } else {
       setAlertSent(true);

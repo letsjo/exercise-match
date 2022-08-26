@@ -22,8 +22,8 @@ const CurrentLocationCard = () => {
   };
 
   return (
-    <Container onClick={OpenLocationModal}>
-      <LocationFrame>{selectedCity + " " + selectedGu}</LocationFrame>
+    <Container>
+      <LocationFrame onClick={OpenLocationModal}>{selectedCity + " " + selectedGu}</LocationFrame>
     </Container>
   );
 };
@@ -33,10 +33,10 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   margin-bottom: 70px;
-  cursor: pointer;
 `;
 
 const LocationFrame = styled.div`
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;

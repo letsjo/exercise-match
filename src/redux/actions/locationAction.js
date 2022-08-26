@@ -1,6 +1,8 @@
 import mapAPI from "../../apis/mapAPI";
 import CurrentLocation from "../../utils/CurrentLocation";
 import { locationSliceAction } from "../reducers/locationReducer";
+import { modalSliceAction } from "../reducers/modalReducer";
+import Swal from "sweetalert2";
 
 function loadLocalList() {}
 
@@ -8,7 +10,12 @@ const getLocation = () => {
   return async (dispatch) => {
     try {
       const { lat, lon } = await CurrentLocation();
-      dispatch(locationSliceAction.currentLocation({currentLat:lat,currentLon:lon}));
+      dispatch(
+        locationSliceAction.currentLocation({
+          currentLat: lat,
+          currentLon: lon,
+        })
+      );
       await mapAPI
         .get(
           `https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${lon}&y=${lat}&input_coord=WGS84`
@@ -24,6 +31,12 @@ const getLocation = () => {
         .catch((e) => console.log(e));
     } catch (e) {
       console.log(e);
+      Swal.fire({
+        icon: "warning",
+        title: "위치정보를 허용해 주세요!",
+        text: "서비스 이용에 제한이 있을 수 있습니다.",
+      });
+      dispatch(modalSliceAction.modalLocalSelectOpen());
     }
   };
 };

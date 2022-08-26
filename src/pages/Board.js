@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import styled, { css } from "styled-components";
 import NavBar from "../components/public/NavBar";
@@ -7,42 +7,50 @@ import MatchingListFrame from "../components/Board/MatchingBoard/MatchingListFra
 import MyBulletinListFrame from "../components/Board/BulletinBoard/MyBulletinListFrame";
 import MyMatchingListFrame from "../components/Board/MatchingBoard/MyMatchingListFrame";
 
-import { useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { boardAction } from "../redux/actions/boardAction";
 
 const Board = () => {
-  //board?type=matching&categories=all
-  //const location = useLocation();
-  //console.log(location);
-  //http://localhost:3000/mypage?a=123&bb=%EA%B0%80%EB%82%98%EB%8B%A4#51515
-  //{
-  //     "pathname": "/mypage",
-  //     "search": "?type=123&cate=%EA%B0%80%EB%82%98%EB%8B%A4",
-  //     "hash": "#51515",
-  //     "state": null,
-  //     "key": "default"
-  //}
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { category } = useSelector((state) => state.boardReducer);
+  const { selectedCity, selectedGu } = useSelector((state) => state.locationReducer);
 
   const query = useLocation().search;
   const type = new URLSearchParams(query).get("type");
   const cate = new URLSearchParams(query).get("cate");
 
-  const [boardType, setBoardType] = useState("match");
-  const [categories, setCategories] = useState("all");
+  const [boardType, setBoardType] = useState();
+
+  useEffect(() => {
+    if (!type || !cate) {
+      dispatch(boardAction.setBoardType(type ? type : "match", cate ? cate : "all"));
+      navigate(
+        `/board?type=${type ? type : "match"}&cate=${cate ? cate : "all"}`
+      );
+    }
+  }, []);
 
   const MatchingOnClick = () => {
-    setBoardType("match");
+    dispatch(boardAction.setBoardType("match", category));
+    navigate(`/board?type=match&cate=${category}&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
   };
+
   const InfoOnClick = () => {
-    setBoardType("info");
+    dispatch(boardAction.setBoardType("info", category));
+    navigate(`/board?type=info&cate=${category}&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
   };
+
   const MyMatchingOnClick=()=>{
-    setBoardType("myMatch");  
+    dispatch(boardAction.setBoardType("mymatch", category));
+    navigate(`/board?type=mymatch&cate=${category}&page=1&amount=12`);
   }
+
   const MyInfoOnClick=()=>{
-    setBoardType("myInfo");
+    dispatch(boardAction.setBoardType("myinfo", category));
+    navigate(`/board?type=myinfo&cate=${category}&page=1&amount=12`);
   }
 
   return (
@@ -50,37 +58,37 @@ const Board = () => {
       <NavBar />
       <MainFrame>
         <CategoryFrame>
-          <MatchingTitle boardType={boardType} onClick={MatchingOnClick}>
+          <MatchingTitle type={type} onClick={MatchingOnClick}>
             매칭(구합니다)
           </MatchingTitle>
-          {boardType ==="match"?(
+          {(type ==="match"||type === "mymatch") && (
             <>
-            <SelectMatching boardType={boardType} onClick={MatchingOnClick}>
+            <SelectMatching type={type} onClick={MatchingOnClick}>
               매칭 게시판 
               </SelectMatching>
-            <SelectMyBoard boardType={boardType} onClick={MyMatchingOnClick}>
+            <SelectMyBoard type={type} onClick={MyMatchingOnClick}>
               나의 게시글</SelectMyBoard> 
             </>
-          ):(<></>)}
+          )}
             
-          <InfoTitle boardType={boardType} onClick={InfoOnClick}>
+          <InfoTitle type={type} onClick={InfoOnClick}>
             정보 공유 게시판
           </InfoTitle>
-          {boardType ==="info"?(
+          {(type === "info"||type === "myinfo") && (
             <>
-            <SelectInfo boardType={boardType} onClick={InfoOnClick}>정보 공유 </SelectInfo>
-            <SelectMyBoard boardType={boardType} onClick={MyInfoOnClick}>나의 게시글</SelectMyBoard> 
+            <SelectInfo type={type} onClick={InfoOnClick}>정보 공유 </SelectInfo>
+            <SelectMyBoard type={type} onClick={MyInfoOnClick}>나의 게시글</SelectMyBoard> 
             </>
-          ):(<></>)}
+          )}
         </CategoryFrame>
         <ContextFrame>
-          {boardType === "match" ? (
+          {type === "match" ? (
             <MatchingListFrame />
-          ) : boardType === "info" ? (
+          ) : type === "info" ? (
             <BulletinListFrame />
-          ) : boardType ==="myMatch" ?(
+          ) : type ==="mymatch" ?(
             <MyBulletinListFrame/>
-          ) : boardType ==="myInfo"?(
+          ) : type ==="myinfo"?(
             <MyBulletinListFrame/>
           ):(<></>)}
           {/* <BulletinListFrame/> */}
@@ -117,13 +125,11 @@ const MatchingTitle = styled.div`
   font-size: 15px;
   box-sizing: border-box;
   border-top: 2px solid #f0f0f0;
-  ${({ boardType }) => {
+  ${({ type }) => {
     return css`
       border-bottom: 2px solid #F0F0F0;
-       /* ${boardType === "match"
-        ? "2px solid #DEDEDE"
-        : "2px solid #F0F0F0"}; */
-      background-color: ${boardType === "match" ? "#F0F0F0" : ""};
+
+      background-color: ${(type ==="match"||type ==="mymatch") ? "#F0F0F0" : ""};
     `;
   }}
 `;
@@ -138,9 +144,9 @@ const SelectMatching=styled.div`
   color:#494949;
   border-bottom: 2px solid #F0F0F0;
   cursor: pointer;
-  ${({boardType})=>{
+  ${({type})=>{
     return css`
-      background-color: ${boardType ==="myMatch"? "":""};
+      background-color: ${(type ==="match")? "#DEDEDE":""};
     `;
   }}
 `;
@@ -155,9 +161,9 @@ const SelectInfo=styled.div`
   color:#494949;
   border-bottom: 2px solid #F0F0F0;
   cursor: pointer;
-  ${({boardType})=>{
+  ${({type})=>{
     return css`
-      background-color: ${boardType ==="myInfo"? "":""};
+      background-color: ${(type ==="info")? "#DEDEDE":""};
     `;
   }}
 `;
@@ -172,9 +178,9 @@ const SelectMyBoard=styled.div`
   color:#494949;
   border-bottom: 2px solid #F0F0F0;
   cursor: pointer;
-  ${({boardType})=>{
+  ${({type})=>{
     return css`
-      background-color: ${boardType ==="myInfo"? "":""};
+      background-color: ${(type ==="mymatch"||type ==="myinfo")? "#DEDEDE":""};
     `;
   }}
 `;
@@ -188,13 +194,11 @@ const InfoTitle = styled.div`
   font-weight: bold;
   font-size: 15px;
   box-sizing: border-box;
-  ${({ boardType }) => {
+  ${({ type }) => {
     return css`
       border-bottom: 2px solid #f0f0f0;
-      /* ${boardType === "info"
-        ? "2px solid #DEDEDE"
-        : "2px solid #F0F0F0"}; */
-      background-color: ${boardType === "info" ? "#f0f0f0" : ""};
+
+      background-color: ${(type ==="info"||type ==="myinfo") ? "#f0f0f0" : ""};
     `;
   }}
 `;

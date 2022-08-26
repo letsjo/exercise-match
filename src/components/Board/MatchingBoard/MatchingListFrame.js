@@ -1,27 +1,25 @@
-import React from 'react'
-import styled from 'styled-components';
-import Pagination from '../BoardPublic/Pagination';
-import { useState } from 'react';
-import MatchingCard from './MatchingCard';
-import CategoryBoxFrame from '../BoardPublic/CategoryBoxFrame';
-
+import React from "react";
+import styled from "styled-components";
+import Pagination from "../BoardPublic/Pagination";
+import { useState } from "react";
+import MatchingCard from "./MatchingCard";
+import CategoryBoxFrame from "../BoardPublic/CategoryBoxFrame";
 
 const MatchingListFrame = () => {
-
-    const [page, setPage] =useState(1);
+  const [page, setPage] = useState(1);
 
   return (
     <>
-    <CategoryBoxFrame/>
-    <BoardListFrame>
+      <CategoryBoxFrame />
+      <BoardListFrame>
         <ButtonBox>
-            <WriteButton>작성하기</WriteButton>
+          <WriteButton>작성하기</WriteButton>
         </ButtonBox>
-        <MatchingCard />
-        <MatchingCard/>
         <MatchingCard completed={true}/>
         <MatchingCard/>
         <MatchingCard completed={true}/>
+        <MatchingCard/>
+        <MatchingCard/>
         <MatchingCard/>
         <PageFrame>
             <Frame>
@@ -33,10 +31,10 @@ const MatchingListFrame = () => {
             />
             </Frame>
         </PageFrame>
-    </BoardListFrame>
+      </BoardListFrame>
     </>
-  )
-}
+  );
+};
 
 const ButtonBox = styled.div`
     height:69px;
@@ -49,26 +47,26 @@ const ButtonBox = styled.div`
 `;
 
 const WriteButton = styled.div`
-    font-family: 'Noto Sans KR';
-    font-style: normal;
-    width:94px;
-    height:49px;
-    border: 1px solid #F0F0F0;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-    font-size: 20px;     
-    padding :9px;
-    box-sizing: border-box;
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  width: 94px;
+  height: 49px;
+  border: 1px solid #f0f0f0;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  font-size: 20px;
+  padding: 9px;
+  box-sizing: border-box;
 `;
 
-const PageFrame =styled.div`   
-    width:1000px;
-    height: 110px;
-    box-sizing: border-box;
-    display: flex;
-    `;
+const PageFrame = styled.div`
+  width: 1000px;
+  height: 110px;
+  box-sizing: border-box;
+  display: flex;
+`;
 
-const Frame =styled.div`
-    margin: auto;
+const Frame = styled.div`
+  margin: auto;
 `;
 
 const BoardListFrame = styled.div`

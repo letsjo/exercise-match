@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 let initialState = {
-    boardtype:"match",
+    boardType:"match",
     category:"all",
 };
 
@@ -9,9 +9,10 @@ const boardSlice = createSlice({
     name: 'board',
     initialState,
     reducers:{
-        setCategory(state,action){
-            state.category = action.payload;
-        }
+        setBoardType(state,action){
+            state.boardType = action.payload.type;
+            state.category = action.payload.cate;
+        },
     }
 });
 

@@ -1,4 +1,5 @@
-import userReducer, { userSliceAction } from "../reducers/userReducer";
+import { userSliceAction } from "../reducers/userReducer";
+import { encrypt, decrypt } from "../../utils/CryptoJS";
 import userAPI from "../../apis/userAPI";
 
 
