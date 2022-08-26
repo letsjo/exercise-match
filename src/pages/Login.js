@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import styled, { css } from "styled-components";
 import { useDispatch } from "react-redux";
 import { userAction } from "../redux/actions/userAction";
+import { useNavigate } from "react-router-dom";
 import { userSliceAction } from "../redux/reducers/userReducer";
 
 const Login = () => {
@@ -10,6 +11,7 @@ const Login = () => {
   const idRef = useRef();
   const pwRef = useRef();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const REST_API_KEY = "77c5975ead488c768a11d49f9320425c";
   const REDIRECT_URI = "http://localhost:3000/api/kakaoLogin";
@@ -83,7 +85,7 @@ const Login = () => {
             placeholder="비밀번호를 입력해주세요."
           />
           <FindBoxWrap>
-            <FindBox>
+            <FindBox onClick={()=>{navigate("/passwordFind")}}>
               <div>비밀번호 찾기</div>
             </FindBox>
           </FindBoxWrap>
@@ -93,7 +95,7 @@ const Login = () => {
             입력하신 내용을 다시 확인해주세요.
           </ErrorMessage>
           <LoginBtn onClick={clickLogin}>로그인하기</LoginBtn>
-          <SignupBtn>아직 회원이 아니신가요?</SignupBtn>
+          <SignupBtn onClick={()=>{navigate("/signup")}}>아직 회원이 아니신가요?</SignupBtn>
           <LineWrap>
             <OrLine /> 또는 <OrLine />
           </LineWrap>

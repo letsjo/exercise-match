@@ -123,7 +123,7 @@ const checkAuthkey = (authNum) => {
     } catch (e) {
       console.log(e);
     }
-  };
+  }
 };
 
 const checkPassword = (password, passwordCheck) => {

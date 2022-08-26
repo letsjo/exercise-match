@@ -3,11 +3,16 @@ import styled from "styled-components";
 import Popover from "./Popover";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const NavBar = () => {
-  const navigete = useNavigate();
+  const navigate = useNavigate();
 
   const [isPopperShown, setIsPopperShown] = useState(false);
+
+  const { isLogin } = useSelector((state) => state.userReducer);
+
+  console.log(isLogin);
 
   const onOpenerClick = (e) => {
     e.stopPropagation();
@@ -27,24 +32,39 @@ const NavBar = () => {
             <SearchInput placeholder="어떤 서비스가 필요하세요?" />
           </SearchWrap>
         </SearchBox>
-        {/* <BeforeLoginBox>
-        <LoginBtn>로그인</LoginBtn>
-        <SignupBtn>회원가입</SignupBtn>
-      </BeforeLoginBox> */}
-        <AfterLoginBox>
-          <ProfileImg onClick={onOpenerClick}>
-            <img
-              src="https://cdn.clien.net/web/api/file/F01/11059505/25fb954e3ed280.jpg"
-              alt=""
-            />
-          </ProfileImg>
-          <Arrow>
-            <div onClick={onOpenerClick}>
-              {isPopperShown ? <IoIosArrowUp /> : <IoIosArrowDown />}
-            </div>
-          </Arrow>
-          {isPopperShown && <Popover onOpenerClick={onOpenerClick} />}
-        </AfterLoginBox>
+        {isLogin ? (
+          <AfterLoginBox>
+            <ProfileImg onClick={onOpenerClick}>
+              <img
+                src="https://cdn.clien.net/web/api/file/F01/11059505/25fb954e3ed280.jpg"
+                alt=""
+              />
+            </ProfileImg>
+            <Arrow>
+              <div onClick={onOpenerClick}>
+                {isPopperShown ? <IoIosArrowUp /> : <IoIosArrowDown />}
+              </div>
+            </Arrow>
+            {isPopperShown && <Popover onOpenerClick={onOpenerClick} />}
+          </AfterLoginBox>
+        ) : (
+          <BeforeLoginBox>
+            <LoginBtn
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              로그인
+            </LoginBtn>
+            <SignupBtn
+              onClick={() => {
+                navigate("/signup");
+              }}
+            >
+              회원가입
+            </SignupBtn>
+          </BeforeLoginBox>
+        )}
       </Wrap>
     </NavBarWrap>
   );
@@ -53,6 +73,7 @@ const NavBar = () => {
 const NavBarWrap = styled.div`
   width: 100%;
   height: 100px;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -129,6 +150,7 @@ const LoginBtn = styled.div`
   align-items: center;
   font-size: 15px;
   color: #000000;
+  cursor: pointer;
 `;
 
 const SignupBtn = styled.div`
@@ -138,6 +160,7 @@ const SignupBtn = styled.div`
   align-items: center;
   font-size: 15px;
   color: #000000;
+  cursor: pointer;
 `;
 
 const AfterLoginBox = styled.div`

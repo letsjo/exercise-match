@@ -22,7 +22,10 @@ import Detailpage from "./pages/Detailpage";
 import { useDispatch } from "react-redux";
 import { locaionAction } from "./redux/actions/locationAction";
 import { userSliceAction } from "./redux/reducers/userReducer";
+import PasswordChange from "./pages/PasswordChange";
+import PasswordFind from "./pages/PasswordFind";
 import userAPI from "./apis/userAPI";
+
 
 export let sessionStorageLogin = sessionStorage;
 export const is_authorization = sessionStorage.getItem("accesstoken")
@@ -50,6 +53,7 @@ function App() {
         sessionStorage.getItem("refreshtoken");
         console.log(sessionStorage.getItem("accesstoken"));
         console.log(sessionStorage.getItem("refreshtoken"));
+        dispatch(userSliceAction.setLogin({username:sessionStorage.getItem("username")}))
     }
   }, []);
 
@@ -58,15 +62,17 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/board" element={<Board />} />
-        <Route path="/postWrite" element={<PostWrite />} />
-        <Route path="/mypage" element={<Mypage />} />
-        <Route path="/userinfo" element={<UserInfo />} />
-        <Route path="/review" element={<Review />} />
-        <Route path="/detailpage" element={<Detailpage />} />
-        <Route path="/api/kakaologin" element={<KakaoLogin />} />
-        <Route path="/api/naverLogin" element={<NaverLogin />} />
+        <Route path="/signup" element={<Signup/>}/>
+        <Route path="/board" element={<Board/>}/>
+        <Route path="/postWrite" element={<PostWrite/>}/>
+        <Route path="/mypage" element={<Mypage/>}/>
+        <Route path="/userinfo" element={<UserInfo/>}/>
+        <Route path="/review" element={<Review/>}/>
+        <Route path="/detailpage" element={<Detailpage/>}/>
+        <Route path="/passwordFind" element={<PasswordFind/>}/>
+        <Route path="/passwordChange" element={<PasswordChange/>}/>
+        <Route path="/api/kakaologin" element={<KakaoLogin/>} />
+        <Route path="/api/naverLogin" element={<NaverLogin/>}/>
       </Routes>
       <ModalComponents />
       <span onClick={showMessenger}></span>

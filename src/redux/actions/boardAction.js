@@ -16,6 +16,20 @@ function setBoardType(type, cate) {
   };
 }
 
+const boardPost = (tmpPostData) => {
+  return async (dispatch) => {
+    await userAPI
+      .post("/api/board/create",tmpPostData)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
 export const boardAction = {
   setBoardType,
+  boardPost,
 };

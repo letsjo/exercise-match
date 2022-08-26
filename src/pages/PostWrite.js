@@ -1,10 +1,13 @@
 import React from "react";
 import { useEffect } from "react";
 import { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import NavBar from "../components/public/NavBar";
+import { boardAction } from "../redux/actions/boardAction";
 
 const PostWrite = () => {
+  const dispatch = useDispatch();
   const category_ref = useRef(null);
   const person_ref = useRef(null);
   const date_ref = useRef(null);
@@ -50,6 +53,16 @@ const PostWrite = () => {
   const onHandleSubmit = async (e) => {
     e.preventDefault();
 
+    const tmpPostData = {
+      // boardType: "information",
+      boardType: "matching",
+      category : "gym",
+      title : titleInput_ref.current.value,
+      person: person_ref.current.value,
+      centent : contentInput_ref.current.value,
+      // endDateAt : date_ref.current.value,
+    }
+
     const object = new FormData();
     object.append("locationImage", files[0]);
     object.append("category", category_ref.current.value);
@@ -64,6 +77,7 @@ const PostWrite = () => {
     }
 
     try {
+      dispatch(boardAction.boardPost(tmpPostData));
       console.log(object);
     } catch (e) {
       console.log(e);
@@ -119,6 +133,7 @@ const PostWrite = () => {
             <GatherText>모집 날짜</GatherText>
               <input type="date" ref={date_ref} name="date"/>
           </GatherWrap>
+          
           <Text>장소 위치</Text>
           <LocationMap />
 
@@ -133,7 +148,8 @@ const PostWrite = () => {
             />
             이미지 등록(0/1)
           </ImageButton>
-          <LocationImage className="img_box" name="locationImage" />
+          <LocationImage className="img_box" name="locationImage" /> 
+          
           <WriteButton type="submit">작성하기</WriteButton>
         </Container>
       </form>
@@ -143,8 +159,9 @@ const PostWrite = () => {
 
 const Container = styled.div`
   width: 700px;
-  height: 1349px;
-  margin: 15px auto;
+  /* height: 1349px; */
+  margin: 15px auto 50px;
+
 `;
 
 const Text = styled.div`

@@ -50,10 +50,11 @@ const Text =styled.div`
 `;
 
 const Daysago = styled.div`
-    width:40px;
+    width:45px;
     font-size:15px;
     color: #a8a8a8;
-
+    margin-right:20px;
+    box-sizing: border-box;
 `;
 
 

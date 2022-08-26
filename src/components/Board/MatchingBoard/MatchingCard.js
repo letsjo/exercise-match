@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import BulletinLikeCard from "../BulletinBoard/BulletinLikeCard";
 
 const BeforeMatchingCard = ({ completed=false }) => {
 
@@ -38,8 +39,11 @@ const BeforeMatchingCard = ({ completed=false }) => {
           <Dot>·</Dot>
           <Write>위치(강릉시)</Write>
         </InfoWrap>
-        <Daysago>1일 전</Daysago>
       </WriterWrap>
+      {/* <LikeWrap>
+          <Daysago>1일 전</Daysago>
+      </LikeWrap> */}
+      <BulletinLikeCard/>
     </Container>
   );
 };
@@ -129,7 +133,7 @@ const Personnel = styled.div`
 
 const Context = styled.div`
   width: 930px;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
   font-size: 15px;
   color: #494949;
   text-overflow: ellipsis;
@@ -141,7 +145,15 @@ const Context = styled.div`
 `;
 
 const WriterWrap = styled.div`
-  height: 23px;
+  height: 20px;
+  margin-bottom: 14px;
+  box-sizing: border-box;
+`;
+
+const LikeWrap=styled.div`
+margin-top: 14px;
+box-sizing: border-box;
+  height: 24px;
   display: flex;
   justify-content: space-between;
 `;
