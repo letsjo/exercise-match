@@ -68,7 +68,7 @@ function App() {
         <Route path="/mypage" element={<Mypage/>}/>
         <Route path="/userinfo" element={<UserInfo/>}/>
         <Route path="/review" element={<Review/>}/>
-        <Route path="/detailpage" element={<Detailpage/>}/>
+        <Route path="/detailpage/:id" element={<Detailpage/>}/>
         <Route path="/passwordFind" element={<PasswordFind/>}/>
         <Route path="/passwordChange" element={<PasswordChange/>}/>
         <Route path="/api/kakaologin" element={<KakaoLogin/>} />

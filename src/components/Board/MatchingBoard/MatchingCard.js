@@ -1,12 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 import BulletinLikeCard from "../BulletinBoard/BulletinLikeCard";
 
 const BeforeMatchingCard = ({ completed=false }) => {
 
+  const navigate = useNavigate();
 
   return (
-    <Container completed={completed}>
+    <Container onClick={()=>{navigate("/detailpage/5")}} completed={completed}>
       <MatchingOrNot completed={completed}>{completed ? "매칭완료" : "매칭중"}</MatchingOrNot>
       <TitleWrap>
         <CategoryTag>배드민턴</CategoryTag>
@@ -57,6 +59,7 @@ const Container = styled.div`
       box-sizing: border-box;
       padding: 30px 10px;
       background-color: ${completed?"#F0F0F0":"white"};
+      cursor: pointer;
     `;
   }}
 `;

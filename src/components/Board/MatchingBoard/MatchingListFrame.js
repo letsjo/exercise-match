@@ -1,37 +1,49 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Pagination from "../BoardPublic/Pagination";
 import { useState } from "react";
 import MatchingCard from "./MatchingCard";
 import CategoryBoxFrame from "../BoardPublic/CategoryBoxFrame";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { boardAction } from "../../../redux/actions/boardAction";
 
 const MatchingListFrame = () => {
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(boardAction.loadBoard("matching", "gym"));
+  }, []);
+
+  const { boardData } = useSelector((state)=>state.boardReducer);
+
+  console.log(boardData);
 
   return (
     <>
       <CategoryBoxFrame />
       <BoardListFrame>
         <ButtonBox>
-          <WriteButton onClick={()=>{navigate("/postwrite")}}>작성하기</WriteButton>
+          <WriteButton
+            onClick={() => {
+              navigate("/postwrite");
+            }}
+          >
+            작성하기
+          </WriteButton>
         </ButtonBox>
-        <MatchingCard completed={true}/>
-        <MatchingCard/>
-        <MatchingCard completed={true}/>
-        <MatchingCard/>
-        <MatchingCard/>
-        <MatchingCard/>
+        <MatchingCard completed={true} />
+        <MatchingCard />
+        <MatchingCard completed={true} />
+        <MatchingCard />
+        <MatchingCard />
+        <MatchingCard />
         <PageFrame>
-            <Frame>
-            <Pagination
-            total={5}
-            limit={2}
-            page={page}
-            setPage={setPage}
-            />
-            </Frame>
+          <Frame>
+            <Pagination total={5} limit={2} page={page} setPage={setPage} />
+          </Frame>
         </PageFrame>
       </BoardListFrame>
     </>
@@ -39,13 +51,12 @@ const MatchingListFrame = () => {
 };
 
 const ButtonBox = styled.div`
-    height:69px;
-    width: 958px;
-    padding: 10px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: flex-end;
-    
+  height: 69px;
+  width: 958px;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-end;
 `;
 
 const WriteButton = styled.div`
@@ -73,13 +84,12 @@ const Frame = styled.div`
 `;
 
 const BoardListFrame = styled.div`
-    height: 100%;
-    width: 1258px;  
-    border-top: 2px solid #f0f0f0;
-    border-left: 2px solid #f0f0f0;
-    padding: 10px 50px 10px 70px;
-    box-sizing: border-box;
-
+  height: 100%;
+  width: 1258px;
+  border-top: 2px solid #f0f0f0;
+  border-left: 2px solid #f0f0f0;
+  padding: 10px 50px 10px 70px;
+  box-sizing: border-box;
 `;
 
-export default MatchingListFrame
+export default MatchingListFrame;

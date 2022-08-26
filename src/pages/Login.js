@@ -65,6 +65,7 @@ const Login = () => {
           })
         );
         console.log(response);
+        navigate("/");
       } catch (err) {
         window.alert(err);
       }

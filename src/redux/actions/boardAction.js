@@ -19,8 +19,35 @@ function setBoardType(type, cate) {
 const boardPost = (tmpPostData) => {
   return async (dispatch) => {
     await userAPI
-      .post("/api/board/create",tmpPostData)
+      .post("/api/board/create", tmpPostData)
       .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+const likePost = (boardId) => {
+  return async (dispatch) => {
+    await userAPI
+      .post(`/board/${boardId}/likes`)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+const loadBoard = (type, cate) => {
+  return async (dispatch) => {
+    await userAPI
+      .get(`/api/boards/${type}/${cate}`)
+      .then((response) => {
+        dispatch(boardSliceAction.loadBoardData(response.data));
         console.log(response);
       })
       .catch((err) => {
@@ -32,4 +59,6 @@ const boardPost = (tmpPostData) => {
 export const boardAction = {
   setBoardType,
   boardPost,
+  likePost,
+  loadBoard,
 };
