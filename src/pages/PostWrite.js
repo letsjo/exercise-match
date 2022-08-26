@@ -119,6 +119,7 @@ const PostWrite = () => {
             <GatherText>모집 날짜</GatherText>
               <input type="date" ref={date_ref} name="date"/>
           </GatherWrap>
+          
           <Text>장소 위치</Text>
           <LocationMap />
 
@@ -133,7 +134,8 @@ const PostWrite = () => {
             />
             이미지 등록(0/1)
           </ImageButton>
-          <LocationImage className="img_box" name="locationImage" />
+          <LocationImage className="img_box" name="locationImage" /> 
+          
           <WriteButton type="submit">작성하기</WriteButton>
         </Container>
       </form>
@@ -143,8 +145,9 @@ const PostWrite = () => {
 
 const Container = styled.div`
   width: 700px;
-  height: 1349px;
-  margin: 15px auto;
+  /* height: 1349px; */
+  margin: 15px auto 50px;
+
 `;
 
 const Text = styled.div`

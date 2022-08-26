@@ -4,16 +4,18 @@ import Pagination from "../BoardPublic/Pagination";
 import { useState } from "react";
 import MatchingCard from "./MatchingCard";
 import CategoryBoxFrame from "../BoardPublic/CategoryBoxFrame";
+import { useNavigate } from "react-router-dom";
 
 const MatchingListFrame = () => {
   const [page, setPage] = useState(1);
+  const navigate = useNavigate();
 
   return (
     <>
       <CategoryBoxFrame />
       <BoardListFrame>
         <ButtonBox>
-          <WriteButton>작성하기</WriteButton>
+          <WriteButton onClick={()=>{navigate("/postwrite")}}>작성하기</WriteButton>
         </ButtonBox>
         <MatchingCard completed={true}/>
         <MatchingCard/>
@@ -56,6 +58,7 @@ const WriteButton = styled.div`
   font-size: 20px;
   padding: 9px;
   box-sizing: border-box;
+  cursor: pointer;
 `;
 
 const PageFrame = styled.div`
@@ -73,7 +76,7 @@ const BoardListFrame = styled.div`
     height: 100%;
     width: 1258px;  
     border-top: 2px solid #f0f0f0;
-    border-left: 4px solid #f0f0f0;
+    border-left: 2px solid #f0f0f0;
     padding: 10px 50px 10px 70px;
     box-sizing: border-box;
 

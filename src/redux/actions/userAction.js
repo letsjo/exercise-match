@@ -42,7 +42,7 @@ const naverLogin = (code) => {
 const Login =(LoginData)=>{
   return async(dispatch)=>{
     try{
-      const res = await userAPI.post("login",LoginData)
+      const res = await userAPI.post("/user/login",LoginData)
       dispatch(userSliceAction.setLogin({username:res.data.username, nickname: res.data.nickname, profile: res.data.profile }))
     }catch(e){
       console.log(e);

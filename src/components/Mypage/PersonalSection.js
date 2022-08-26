@@ -1,11 +1,14 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { FaPen } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const PersonalSection = ({ title, data, editBt = true }) => {
 
+  const navigate=useNavigate();
   const EditButton = (e) => {
     e.preventDefault();
+    navigate("/passwordChange")
     console.log("비밀번호 변경 페이지 연결")
   };
 
