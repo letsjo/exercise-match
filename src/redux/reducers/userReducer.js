@@ -31,6 +31,12 @@ const userSlice = createSlice({
       state.userProfile = action.payload?.profile;
       state.userNickName = action.payload?.nickname;
     },
+      setLoginOut(state){
+        state.isLogin = false;
+        state.username = "";
+        state.userProfile = "";
+        state.userNickName="";
+      },
     setUserNickName(state, action) {
       state.userNickName = action.payload;
     },
