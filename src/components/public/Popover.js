@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom"; 
+import { useDispatch } from "react-redux";
+import { userSliceAction } from "../../redux/reducers/userReducer";
 
 const Popover = ({ onOpenerClick }) => {
   const settingsWindowRef = useRef(null);
@@ -20,6 +22,7 @@ const Popover = ({ onOpenerClick }) => {
   });
 
   const navigate=useNavigate();
+  const dispatch = useDispatch();
 
   return (
     <Wrapper ref={settingsWindowRef}>
@@ -30,7 +33,11 @@ const Popover = ({ onOpenerClick }) => {
         </ProfileBox>
         <Boxes onClick={()=>navigate("/mypage")}>마이페이지</Boxes>
         <Boxes onClick={()=>navigate("/board?type=mymatch&cate=all&page=1&amount=12")}>나의 게시글</Boxes>
-    <Logout onClick={()=>navigate("/")}>로그아웃</Logout>
+    <Logout onClick={()=>{sessionStorage.removeItem("accesstoken") 
+    sessionStorage.removeItem("refreshtoken")
+    sessionStorage.removeItem("username") 
+    dispatch(userSliceAction.setLoginOut());
+    }}>로그아웃</Logout>
     </Wrapper>
   );
 };
