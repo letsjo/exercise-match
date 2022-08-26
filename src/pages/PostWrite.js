@@ -98,10 +98,15 @@ const PostWrite = () => {
             ref={category_ref}
           >
             <option value="default" disabled>
-              category
+              카테고리 선택
             </option>
-            <option value="헬스">헬스 </option>
-            <option value="골프">골프 </option>
+            <option value="gym">헬스 </option>
+            <option value="running">러닝&조깅 </option>
+            <option value="riding">라이딩 </option>
+            <option value="badminton">배드민턴 </option>
+            <option value="tennis">테니스 </option>
+            <option value="golf">골프 </option>
+            <option value="hiking">등산 </option>
           </CategoryDrop>
           <Text>제목</Text>
           <TitleInput
