@@ -15,16 +15,21 @@ const MatchingListFrame = () => {
         <ButtonBox>
           <WriteButton>작성하기</WriteButton>
         </ButtonBox>
-        <MatchingCard completed={true} />
-        <MatchingCard />
-        <MatchingCard completed={true} />
-        <MatchingCard />
-        <MatchingCard />
-        <MatchingCard />
+        <MatchingCard completed={true}/>
+        <MatchingCard/>
+        <MatchingCard completed={true}/>
+        <MatchingCard/>
+        <MatchingCard/>
+        <MatchingCard/>
         <PageFrame>
-          <Frame>
-            <Pagination total={5} limit={2} page={page} setPage={setPage} />
-          </Frame>
+            <Frame>
+            <Pagination
+            total={5}
+            limit={2}
+            page={page}
+            setPage={setPage}
+            />
+            </Frame>
         </PageFrame>
       </BoardListFrame>
     </>
@@ -32,12 +37,13 @@ const MatchingListFrame = () => {
 };
 
 const ButtonBox = styled.div`
-  height: 69px;
-  width: 1000px;
-  padding: 10px;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: flex-end;
+    height:69px;
+    width: 958px;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-end;
+    
 `;
 
 const WriteButton = styled.div`
@@ -64,12 +70,13 @@ const Frame = styled.div`
 `;
 
 const BoardListFrame = styled.div`
-  height: 100%;
-  width: 1258px;
-  border-top: 2px solid #f0f0f0;
-  border-left: 4px solid #f0f0f0;
-  padding: 10px 50px 10px 50px;
-  box-sizing: border-box;
+    height: 100%;
+    width: 1258px;  
+    border-top: 2px solid #f0f0f0;
+    border-left: 4px solid #f0f0f0;
+    padding: 10px 50px 10px 70px;
+    box-sizing: border-box;
+
 `;
 
-export default MatchingListFrame;
+export default MatchingListFrame

@@ -2,6 +2,7 @@ import { userSliceAction } from "../reducers/userReducer";
 import { encrypt, decrypt } from "../../utils/CryptoJS";
 import userAPI from "../../apis/userAPI";
 
+
 const kakaoLogin = (code) => {
   return async (dispatch) => {
     await userAPI.get(`/api/kakaoLogin?code=${code}`)
@@ -38,35 +39,45 @@ const naverLogin = (code) => {
   };
 };
 
+const Login =(LoginData)=>{
+  return async(dispatch)=>{
+    try{
+      const res = await userAPI.post("login",LoginData)
+      dispatch(userSliceAction.setLogin({username:res.data.username, nickname: res.data.nickname, profile: res.data.profile }))
+    }catch(e){
+      console.log(e);
+    }
+  }
+}
 
-// const userSignup = createAsyncThunk(
-//   "user/Signup",
-//   async (userData, { rejectWithValue }) => {
-//     try {
-//       const response = await userAPI.post("/user/signup", userData);
-//       return response;
-//     } catch (err) {
-//       console.log(err);
-//       return rejectWithValue(err.response);
+// const MypageProfile=()=>{
+//   return async(dispatch)=>{
+//     try{
+//       const mypageActionAPI = userAPI.get(
+//         "api/mypage/action"
+//       );
+//       const mypageInfoAPI=userAPI.get(
+//         "api/mypage/info"
+//       );
+
+//       let [?]=await Promise.all([
+//         mypageActionAPI,
+//         mypageInfoAPI,
+//       ]);
+
+//       dispatch({
+//         //?
+//       })
+
+//     }catch(e){
+//       console.log(e);
 //     }
 //   }
-// );
-
-// const userLogin = createAsyncThunk(
-//   "user/Login",
-//   async (userData, { rejectWithValue }) => {
-//     try {
-//       const response = await userAPI.post("/login", userData);
-//       return response;
-//     } catch (err) {
-//       console.log(err);
-//       return rejectWithValue(err.response.data);
-//     }
-//   }
-// );
+// }
 
 
 export const userAction = {
   kakaoLogin,
   naverLogin,
+  Login
 };

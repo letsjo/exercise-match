@@ -6,7 +6,7 @@ const BeforeMatchingCard = ({ completed=false }) => {
 
   return (
     <Container completed={completed}>
-      <MatchingOrNot>{completed ? "매칭완료" : "매칭중"}</MatchingOrNot>
+      <MatchingOrNot completed={completed}>{completed ? "매칭완료" : "매칭중"}</MatchingOrNot>
       <TitleWrap>
         <CategoryTag>배드민턴</CategoryTag>
         <Title>글 제목 (테니스 같이칠 사람?</Title>
@@ -48,20 +48,25 @@ const Container = styled.div`
   ${({ completed }) => {
     return css`
       border-top: 1px solid #f0f0f0;
-      height: 318px;
-      width: 1000px;
+      height: 332px;
+      width: 950px;
       box-sizing: border-box;
-      padding: 40px 10px;
+      padding: 30px 10px;
       background-color: ${completed?"#F0F0F0":"white"};
     `;
   }}
 `;
 
 const MatchingOrNot = styled.div`
-  height: 29px;
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 10px;
+  ${({completed})=>{
+    return css`
+    height: 29px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: ${completed?"#a8a8a8":"#000000"};
+    `;
+  }}
 `;
 
 const TitleWrap = styled.div`
@@ -123,7 +128,7 @@ const Personnel = styled.div`
 `;
 
 const Context = styled.div`
-  width: 980px;
+  width: 930px;
   margin-bottom: 10px;
   font-size: 15px;
   color: #494949;
@@ -171,6 +176,8 @@ const Daysago = styled.div`
   width: 40px;
   font-size: 15px;
   color: #494949;
+  margin-right: 30px;
+  box-sizing: border-box;
 `;
 
 export default BeforeMatchingCard;

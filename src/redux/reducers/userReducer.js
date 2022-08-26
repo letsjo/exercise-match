@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 let initialState = {
-  isLogin: false,
   username: "hyunoh.jo@gmail.com",
   userNickName: "조현오",
   userProfile: "",
@@ -26,6 +25,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setLogin(state, action) {
+      state.isLogin= true;
       state.username = action.payload.username;
       state.userProfile = action.payload.profile;
       state.userNickName = action.payload.nickname;

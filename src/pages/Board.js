@@ -22,6 +22,8 @@ const Board = () => {
   const type = new URLSearchParams(query).get("type");
   const cate = new URLSearchParams(query).get("cate");
 
+  const [boardType, setBoardType] = useState();
+
   useEffect(() => {
     if (!type || !cate) {
       dispatch(boardAction.setBoardType(type ? type : "match", cate ? cate : "all"));
@@ -41,26 +43,54 @@ const Board = () => {
     navigate(`/board?type=info&cate=${category}&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
   };
 
+  const MyMatchingOnClick=()=>{
+    dispatch(boardAction.setBoardType("mymatch", category));
+    navigate(`/board?type=mymatch&cate=${category}&page=1&amount=12`);
+  }
+
+  const MyInfoOnClick=()=>{
+    dispatch(boardAction.setBoardType("myinfo", category));
+    navigate(`/board?type=myinfo&cate=${category}&page=1&amount=12`);
+  }
+
   return (
     <Container>
       <NavBar />
       <MainFrame>
         <CategoryFrame>
-          <MatchingTitle boardType={type} onClick={MatchingOnClick}>
+          <MatchingTitle type={type} onClick={MatchingOnClick}>
             매칭(구합니다)
           </MatchingTitle>
-          <InfoTitle boardType={type} onClick={InfoOnClick}>
+          {(type ==="match"||type === "mymatch") && (
+            <>
+            <SelectMatching type={type} onClick={MatchingOnClick}>
+              매칭 게시판 
+              </SelectMatching>
+            <SelectMyBoard type={type} onClick={MyMatchingOnClick}>
+              나의 게시글</SelectMyBoard> 
+            </>
+          )}
+            
+          <InfoTitle type={type} onClick={InfoOnClick}>
             정보 공유 게시판
           </InfoTitle>
+          {(type === "info"||type === "myinfo") && (
+            <>
+            <SelectInfo type={type} onClick={InfoOnClick}>정보 공유 </SelectInfo>
+            <SelectMyBoard type={type} onClick={MyInfoOnClick}>나의 게시글</SelectMyBoard> 
+            </>
+          )}
         </CategoryFrame>
         <ContextFrame>
           {type === "match" ? (
             <MatchingListFrame />
           ) : type === "info" ? (
             <BulletinListFrame />
-          ) : (
-            <></>
-          )}
+          ) : type ==="mymatch" ?(
+            <MyBulletinListFrame/>
+          ) : type ==="myinfo"?(
+            <MyBulletinListFrame/>
+          ):(<></>)}
           {/* <BulletinListFrame/> */}
           {/* <MatchingListFrame/> */}
           {/* <MyMatchingListFrame/> */}
@@ -94,12 +124,63 @@ const MatchingTitle = styled.div`
   font-weight: bold;
   font-size: 15px;
   box-sizing: border-box;
-  ${({ boardType }) => {
+  border-top: 2px solid #f0f0f0;
+  ${({ type }) => {
     return css`
-      border-bottom: ${boardType === "match"
-        ? "2px solid #DEDEDE"
-        : "2px solid #F0F0F0"};
-      background-color: ${boardType === "match" ? "#dedede" : ""};
+      border-bottom: 2px solid #F0F0F0;
+
+      background-color: ${(type ==="match"||type ==="mymatch") ? "#F0F0F0" : ""};
+    `;
+  }}
+`;
+
+const SelectMatching=styled.div`
+  width: 180px;
+  height: 39px;
+  padding: 8px 40px;
+  box-sizing: border-box;
+  font-size: 15px;
+  font-weight: bold;
+  color:#494949;
+  border-bottom: 2px solid #F0F0F0;
+  cursor: pointer;
+  ${({type})=>{
+    return css`
+      background-color: ${(type ==="match")? "#DEDEDE":""};
+    `;
+  }}
+`;
+
+const SelectInfo=styled.div`
+  width: 180px;
+  height: 39px;
+  padding: 8px 40px;
+  box-sizing: border-box;
+  font-size: 15px;
+  font-weight: bold;
+  color:#494949;
+  border-bottom: 2px solid #F0F0F0;
+  cursor: pointer;
+  ${({type})=>{
+    return css`
+      background-color: ${(type ==="info")? "#DEDEDE":""};
+    `;
+  }}
+`;
+
+const SelectMyBoard=styled.div`
+  width: 180px;
+  height: 39px;
+  padding: 8px 40px;
+  box-sizing: border-box;
+  font-size: 15px;
+  font-weight: bold;
+  color:#494949;
+  border-bottom: 2px solid #F0F0F0;
+  cursor: pointer;
+  ${({type})=>{
+    return css`
+      background-color: ${(type ==="mymatch"||type ==="myinfo")? "#DEDEDE":""};
     `;
   }}
 `;
@@ -113,12 +194,11 @@ const InfoTitle = styled.div`
   font-weight: bold;
   font-size: 15px;
   box-sizing: border-box;
-  ${({ boardType }) => {
+  ${({ type }) => {
     return css`
-      border-bottom: ${boardType === "info"
-        ? "2px solid #DEDEDE"
-        : "2px solid #F0F0F0"};
-      background-color: ${boardType === "info" ? "#dedede" : ""};
+      border-bottom: 2px solid #f0f0f0;
+
+      background-color: ${(type ==="info"||type ==="myinfo") ? "#f0f0f0" : ""};
     `;
   }}
 `;

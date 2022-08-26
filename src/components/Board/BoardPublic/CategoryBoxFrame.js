@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { boardAction } from "../../../redux/actions/boardAction";
+import SearchOption from "./SearchOption";
 
 const CategoryBoxFrame = ({}) => {
   const navigate = useNavigate();
