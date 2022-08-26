@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 let initialState = {
     boardType:"match",
     category:"all",
+    boardData:[],
 };
 
 const boardSlice = createSlice({
@@ -13,6 +14,9 @@ const boardSlice = createSlice({
             state.boardType = action.payload.type;
             state.category = action.payload.cate;
         },
+        loadBoardData(state,action){
+            state.boardData = action.payload;
+        }
     }
 });
 

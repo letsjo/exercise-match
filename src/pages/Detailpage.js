@@ -1,18 +1,24 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Comment from "../components/public/Comment";
 import NavBar from "../components/public/NavBar";
-import { BiDotsVerticalRounded} from "react-icons/bi";
-import {BsHeart, BsHeartFill} from "react-icons/bs"
+import { BiDotsVerticalRounded } from "react-icons/bi";
+import { BsHeart, BsHeartFill } from "react-icons/bs";
 import DetailpagePopover from "../components/Detailpage/DetailpagePopover";
 import TitleWrap from "../components/Detailpage/TitleWrap";
 import DatePersonnelWrap from "../components/Detailpage/DatePersonnelWrap";
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { boardAction } from "../redux/actions/boardAction";
 
 const Detailpage = () => {
-    const [isPopperShown, setIsPopperShown] = useState(false);
+  const dispatch = useDispatch();
+  const params = useParams();
+
+  const [isPopperShown, setIsPopperShown] = useState(false);
   const onOpenerClick = (e) => {
     e.stopPropagation();
-    
+
     setIsPopperShown(!isPopperShown);
   };
 
@@ -22,44 +28,45 @@ const Detailpage = () => {
 
   const [like, setLike] = useState(false);
 
-  const likeOnClick= ()=>{
+  const likeOnClick = () => {
     // if(like){
     //   setLike(false);
     // }else{
     //   setLike(true);
     // }
     setLike(!like);
-  }
+    dispatch(boardAction.likePost(params.id));
+  };
 
-  console.log(like);
+  console.log(like,params.id);
 
-    
   return (
     <>
       <NavBar />
       <Container>
         <ProfileWrap>
-            <>
-          <Profile>
-            <img
-              src="http://file3.instiz.net/data/cached_img/upload/2018/09/15/0/28998558fac5abcead6e6e942d53194f.jpg"
-              alt=""
-            />
-          </Profile>
-          <Nickname>홍길동</Nickname>
+          <>
+            <Profile>
+              <img
+                src="http://file3.instiz.net/data/cached_img/upload/2018/09/15/0/28998558fac5abcead6e6e942d53194f.jpg"
+                alt=""
+              />
+            </Profile>
+            <Nickname>홍길동</Nickname>
           </>
-          <Dot >
-            <BiDotsVerticalRounded size={30} onClick={onOpenerClick}/>
+          <Dot>
+            <BiDotsVerticalRounded size={30} onClick={onOpenerClick} />
 
-{isPopperShown &&(
-            <DetailpagePopover onOpenerClick={onOpenerClick}></DetailpagePopover>
-          )}
+            {isPopperShown && (
+              <DetailpagePopover
+                onOpenerClick={onOpenerClick}
+              ></DetailpagePopover>
+            )}
           </Dot>
-         
         </ProfileWrap>
-        <TitleWrap/>
+        <TitleWrap />
 
-        <DatePersonnelWrap/>
+        <DatePersonnelWrap />
 
         <ContentWrap>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra elit
@@ -74,15 +81,18 @@ const Detailpage = () => {
         </LocationWrap>
         <JoinButton>참여하기 X/X</JoinButton>
         <InfoWrap>
-          <Icon  onClick={likeOnClick}>
-            {like?< BsHeartFill color="red" size={24}/>:<BsHeart size={24}/>}
-            
+          <Icon onClick={likeOnClick}>
+            {like ? (
+              <BsHeartFill color="red" size={24} />
+            ) : (
+              <BsHeart size={24} />
+            )}
           </Icon>
           <Text>좋아요 0개</Text>
           <CommentIcon />
           <Text>댓글 0개</Text>
         </InfoWrap>
-        <Comment />     
+        <Comment />
       </Container>
     </>
   );
@@ -120,14 +130,14 @@ const Nickname = styled.div`
   margin: auto auto auto 0px;
 `;
 
-const Dot =styled.div`
-    width:30px;
-    height: 30px;
-    margin: auto 0px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+const Dot = styled.div`
+  width: 30px;
+  height: 30px;
+  margin: auto 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 `;
 
 const ContentWrap = styled.div`
@@ -161,12 +171,12 @@ const LocationImg = styled.div`
   border-radius: 20px;
 `;
 
-const JoinButton=styled.div`
+const JoinButton = styled.div`
   height: 89px;
   background-color: #494949;
   font-size: 20px;
   font-weight: bold;
-  color:white;
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -201,6 +211,5 @@ const Text = styled.div`
   font-size: 20px;
   margin-right: 39px;
 `;
-
 
 export default Detailpage;
