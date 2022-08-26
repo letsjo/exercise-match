@@ -1,10 +1,11 @@
-import React, { useState, useRef,} from "react";
+import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 import Swal from "sweetalert2";
+import { userAction } from "../../redux/actions/userAction";
 import { signupSliceAction } from "../../redux/reducers/signupReducer";
 
-import InputAnimation from "../public/InputAnimation";
+import InputEmailAni from "../public/InputEmailAni";
 import AlertBox from "./AlertBox";
 
 const SignupAuth = ({
@@ -14,6 +15,7 @@ const SignupAuth = ({
   leftState,
   rightState,
 }) => {
+  const dispatch = useDispatch();
   var time = 60000;
 
   const { email } = useSelector((state)=> state.signupReducer.info)
@@ -21,7 +23,6 @@ const SignupAuth = ({
   // auth
   const AuthKeywordRef = useRef("");
   const [validationState, setValidationState] = useState(false);
-  const [validationComment, setValidationComment] = useState("");
   const [inputAvailable, setInputAvailable] = useState(false);
     
   // timer
@@ -73,6 +74,7 @@ const SignupAuth = ({
         if (sentAuthCount > 0) {
           setSentAuthCount(sentAuthCount - 1);
           setInputEmail(inputEmail);
+          dispatch(userAction.checkEmail({ username : inputEmail }));
           setAlertcomment("인증번호가 전송되었습니다.");
           TIMER();
           timerAuth = setTimeout(() => SentAuthOverTime(), time); //3분이 되면 타이머를 삭제한다.
@@ -132,19 +134,6 @@ const SignupAuth = ({
     playNumber.current = PlAYTIME;
   };
 
-  const ValidationCheck = (e) => {
-    e.preventDefault();
-    const email = inputEmail.trim();
-    const regEmail =
-      /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-
-    if (!regEmail.test(email)) {
-      return false;
-    } else {
-      return true;
-    }
-  };
-
   const AuthOnChange = (e) => {
     e.preventDefault();
     if (AuthKeywordRef.current.value.length >= 7) {
@@ -181,16 +170,13 @@ const SignupAuth = ({
 
   return (
     <Container>
-      <InputAnimation
+      <InputEmailAni
         width="100%"
         inputName="이메일"
-        ValidationCheck={ValidationCheck}
-        validationComment={validationComment}
-        setValidationState={setValidationState}
         validation={{ validationState, setValidationState }}
         inputAvailable={inputAvailable}
-        inputValue={inputEmail}
-        setInputValue={setInputEmail}
+        inputEmail={inputEmail}
+        setInputEmail={setInputEmail}
         value={email}
       />
       {alertSent ? (

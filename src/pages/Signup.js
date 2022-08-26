@@ -27,7 +27,7 @@ const Signup = () => {
 
   const NextPageAllow = (e) => {
     e.preventDefault();
-    if (nextAvailable && page < 2) {
+    if (nextAvailable && page == 1) {
       dispatch(signupSliceAction.getInfo({inputEmail,inputPassword}));
       setPage(page + 1);
     } else if (nextAvailable && page >= 2) {

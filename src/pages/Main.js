@@ -27,7 +27,7 @@ const Main = () => {
         imgsPath={[
           "https://www.sciencetimes.co.kr/wp-content/uploads/2021/04/GettyImages-1128647143-scaled.jpg",
           "https://mblogthumb-phinf.pstatic.net/20160723_117/rimiy_1469204735492fnEcr_JPEG/3.jpeg?type=w2",
-          "https://placehold.jp/1440x360.png",
+          "https://activeinternational.kr/wp-content/uploads/2021/08/%EA%B3%A8%ED%94%84%EC%9E%A5-Golf-Course.jpg",
         ]}
       />
       <CurrentLocationCard/>

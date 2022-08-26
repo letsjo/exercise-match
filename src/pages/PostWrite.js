@@ -1,10 +1,13 @@
 import React from "react";
 import { useEffect } from "react";
 import { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import NavBar from "../components/public/NavBar";
+import { boardAction } from "../redux/actions/boardAction";
 
 const PostWrite = () => {
+  const dispatch = useDispatch();
   const category_ref = useRef(null);
   const person_ref = useRef(null);
   const date_ref = useRef(null);
@@ -50,6 +53,16 @@ const PostWrite = () => {
   const onHandleSubmit = async (e) => {
     e.preventDefault();
 
+    const tmpPostData = {
+      // boardType: "information",
+      boardType: "matching",
+      category : "gym",
+      title : titleInput_ref.current.value,
+      person: person_ref.current.value,
+      centent : contentInput_ref.current.value,
+      // endDateAt : date_ref.current.value,
+    }
+
     const object = new FormData();
     object.append("locationImage", files[0]);
     object.append("category", category_ref.current.value);
@@ -64,6 +77,7 @@ const PostWrite = () => {
     }
 
     try {
+      dispatch(boardAction.boardPost(tmpPostData));
       console.log(object);
     } catch (e) {
       console.log(e);

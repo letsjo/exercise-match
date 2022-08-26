@@ -1,15 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import MyProfileShow from "../components/Mypage/MyProfileShow";
 import MyPersonalData from "../components/Mypage/MyPersonalData";
 import LeaveSection from "../components/Mypage/LeaveSection";
 import SubNavbar from "../components/public/SubNavbar";
+import { useDispatch } from "react-redux";
+import { userAction } from "../redux/actions/userAction";
 
 const Mypage = () => {
   const [page, setPage] = useState(1);
   const [leftArrow, setLeftArrow] = useState(true);
   const [rightArrow, setRightArrow] = useState(false);
 
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(userAction.loadMyPage());
+  },[])
+  
   return (
     <Container>
       <SubNavbar

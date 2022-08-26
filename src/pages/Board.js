@@ -5,7 +5,6 @@ import NavBar from "../components/public/NavBar";
 import BulletinListFrame from "../components/Board/BulletinBoard/BulletinListFrame";
 import MatchingListFrame from "../components/Board/MatchingBoard/MatchingListFrame";
 import MyBulletinListFrame from "../components/Board/BulletinBoard/MyBulletinListFrame";
-import MyMatchingListFrame from "../components/Board/MatchingBoard/MyMatchingListFrame";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,25 +21,23 @@ const Board = () => {
   const type = new URLSearchParams(query).get("type");
   const cate = new URLSearchParams(query).get("cate");
 
-  const [boardType, setBoardType] = useState();
-
   useEffect(() => {
     if (!type || !cate) {
       dispatch(boardAction.setBoardType(type ? type : "match", cate ? cate : "all"));
       navigate(
-        `/board?type=${type ? type : "match"}&cate=${cate ? cate : "all"}`
+        `/board?type=${type ? type : "match"}&cate=${cate ? cate : "all"}&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
       );
     }
-  }, []);
+  }, [selectedCity,selectedGu]);
 
   const MatchingOnClick = () => {
-    dispatch(boardAction.setBoardType("match", category));
-    navigate(`/board?type=match&cate=${category}&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
+    dispatch(boardAction.setBoardType("match", "all"));
+    navigate(`/board?type=match&cate=all&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
   };
 
   const InfoOnClick = () => {
-    dispatch(boardAction.setBoardType("info", category));
-    navigate(`/board?type=info&cate=${category}&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
+    dispatch(boardAction.setBoardType("info", "all"));
+    navigate(`/board?type=info&cate=all&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
   };
 
   const MyMatchingOnClick=()=>{
@@ -61,25 +58,25 @@ const Board = () => {
           <MatchingTitle type={type} onClick={MatchingOnClick}>
             매칭(구합니다)
           </MatchingTitle>
-          {(type ==="match"||type === "mymatch") && (
-            <>
+          {/* {(type ==="match"||type === "mymatch") && (
+            <> */}
             <SelectMatching type={type} onClick={MatchingOnClick}>
               매칭 게시판 
               </SelectMatching>
-            <SelectMyBoard type={type} onClick={MyMatchingOnClick}>
-              나의 게시글</SelectMyBoard> 
-            </>
-          )}
+            <SelectMyMatching type={type} onClick={MyMatchingOnClick}>
+              나의 게시글</SelectMyMatching> 
+            {/* </>
+          )} */}
             
           <InfoTitle type={type} onClick={InfoOnClick}>
             정보 공유 게시판
           </InfoTitle>
-          {(type === "info"||type === "myinfo") && (
-            <>
+          {/* {(type === "info"||type === "myinfo") && (
+            <> */}
             <SelectInfo type={type} onClick={InfoOnClick}>정보 공유 </SelectInfo>
             <SelectMyBoard type={type} onClick={MyInfoOnClick}>나의 게시글</SelectMyBoard> 
-            </>
-          )}
+            {/* </>
+          )} */}
         </CategoryFrame>
         <ContextFrame>
           {type === "match" ? (
@@ -91,10 +88,6 @@ const Board = () => {
           ) : type ==="myinfo"?(
             <MyBulletinListFrame type={type}/>
           ):(<></>)}
-          {/* <BulletinListFrame/> */}
-          {/* <MatchingListFrame/> */}
-          {/* <MyMatchingListFrame/> */}
-          {/* <MyBulletinListFrame/> */}
         </ContextFrame>
       </MainFrame>
     </Container>
@@ -168,6 +161,23 @@ const SelectInfo=styled.div`
   }}
 `;
 
+const SelectMyMatching=styled.div`
+  width: 180px;
+  height: 39px;
+  padding: 8px 40px;
+  box-sizing: border-box;
+  font-size: 15px;
+  font-weight: bold;
+  color:#494949;
+  border-bottom: 2px solid #F0F0F0;
+  cursor: pointer;
+  ${({type})=>{
+    return css`
+      background-color: ${(type ==="mymatch")? "#DEDEDE":""};
+    `;
+  }}
+`;
+
 const SelectMyBoard=styled.div`
   width: 180px;
   height: 39px;
@@ -180,7 +190,7 @@ const SelectMyBoard=styled.div`
   cursor: pointer;
   ${({type})=>{
     return css`
-      background-color: ${(type ==="mymatch"||type ==="myinfo")? "#DEDEDE":""};
+      background-color: ${(type ==="myinfo")? "#DEDEDE":""};
     `;
   }}
 `;

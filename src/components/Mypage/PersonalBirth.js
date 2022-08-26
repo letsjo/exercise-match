@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import { FaPen } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { userSliceAction } from "../../redux/reducers/userReducer";
+import { userAction } from "../../redux/actions/userAction";
 
 const PersonalBirth = ({ title, data, editBt = true }) => {
     const dispatch = useDispatch();
@@ -61,10 +62,8 @@ const PersonalBirth = ({ title, data, editBt = true }) => {
 
   const onClose = (e) => {
     e.preventDefault();
-    dispatch(userSliceAction.setUserBirthYear(birthYear));
-    dispatch(userSliceAction.setUserBirthMonth(birthMonth));
-    dispatch(userSliceAction.setUserBirthDay(birthDay));
     setAvailable(true);
+    dispatch(userAction.editBirth(birthYear,birthMonth,birthDay));
   };
 
   return (

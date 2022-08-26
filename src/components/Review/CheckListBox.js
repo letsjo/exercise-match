@@ -11,9 +11,9 @@ const CheckListBox = ({rate}) => {
   
   useEffect(()=>{
     if(rate>3){
-      setCommentList(["친절","매너","약속","운동","전문"])
+      setCommentList(["시간 약속을 잘지켜요.","친절하고 매너가 좋아요.","응답이 빨라요.","해당 운동에 대한 이해도가 높아요.","세세하게 잘 가르쳐 줘요."])
     }else{
-      setCommentList(["불만","불만","불만","불만","불만"])
+      setCommentList(["불친절해요.","시간 약속을 안 지켜요.","채팅을 보내도 답이 늦거나 없어요.","모임 직전에 취소했어요.","약속장소에 나타나지 않았어요."])
     }
   },[rate]); 
 
@@ -30,34 +30,6 @@ const CheckListBox = ({rate}) => {
         </CheckList>
           )
         })}
-        
-        {/* <CheckList>
-          <CheckBox>
-          <input type="checkbox" />
-          </CheckBox>
-          <ListContent>{rate>3 ? "2 친절하고 매너가 좋아요.": "2 별로."}</ListContent>
-        </CheckList>
-
-        <CheckList>
-          <CheckBox>
-          <input type="checkbox"/>
-          </CheckBox>
-          <ListContent>{rate>3? "3 친절하고 매너가 좋아요.": "3 별로."}</ListContent>
-        </CheckList>
-
-        <CheckList>
-          <CheckBox>
-          <input type="checkbox" />
-          </CheckBox>
-          <ListContent>{rate>3? "4 친절하고 매너가 좋아요.": "4 별로."}</ListContent>
-        </CheckList>
-
-        <CheckList>
-          <CheckBox>
-          <input type="checkbox" />
-          </CheckBox>
-          <ListContent>{rate>3? "5 친절하고 매너가 좋아요.": "5 별로."}</ListContent>
-        </CheckList>   */}
       </ReviewCheck>
 
 

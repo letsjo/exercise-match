@@ -4,6 +4,7 @@ import { FaPen } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { userSliceAction } from "../../redux/reducers/userReducer";
 import Swal from "sweetalert2";
+import { userAction } from "../../redux/actions/userAction";
 
 const InputEditButton = ({
   title = "",
@@ -59,7 +60,7 @@ const InputEditButton = ({
       cancelButtonText: "아니요.",
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(userSliceAction.setUserNickName(inputValue));
+        dispatch(userAction.editNickname(inputValue));
         Swal.fire(
           "변경완료!",
           "닉네임 변경을 성공적으로 완료했습니다.",

@@ -3,14 +3,14 @@ import styled, { css } from "styled-components";
 import { useDispatch } from "react-redux";
 import { userAction } from "../redux/actions/userAction";
 import { useNavigate } from "react-router-dom";
-
+import { userSliceAction } from "../redux/reducers/userReducer";
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState(false);
 
   const idRef = useRef();
   const pwRef = useRef();
-  const dispatch= useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const REST_API_KEY = "77c5975ead488c768a11d49f9320425c";
@@ -26,21 +26,28 @@ const Login = () => {
   const STATE_STRING = "state_test";
   const naverURL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${CLIENT_ID}&state=${STATE_STRING}&redirect_uri=${CALLBACK_URL}`;
 
-  const googleURL= ``;
+  const googleURL = `http://13.209.65.84:8080/oauth2/authorization/google`;
 
   const naverLogin = () => {
-    window.location.href = naverURL;
+    // window.location.href = naverURL;
+    window.location.href = googleURL;
   };
 
-  const clickLogin = () => {
-
+  const clickLogin = async () => {
     const idInputVal = idRef.current.value;
     const pwInputVal = pwRef.current.value;
 
-      const regex = new RegExp("^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$");
+    const regex = new RegExp(
+      "^([0-9a-zA-Z_.-]+)@([0-9a-zA-Z_-]+)(.[0-9a-zA-Z_-]+){1,2}$"
+    );
     const validId = regex.exec(idInputVal);
 
-    if (idRef.current.value === "" || pwRef.current.value === "" || !validId || pwInputVal.length < 5) {
+    if (
+      idRef.current.value === "" ||
+      pwRef.current.value === "" ||
+      !validId ||
+      pwInputVal.length < 5
+    ) {
       setErrorMessage(true);
       return;
     } else {
@@ -50,11 +57,19 @@ const Login = () => {
         password: pwRef.current.value,
       };
       console.log(LoginData);
-      dispatch(userAction.Login(LoginData))
+      try {
+        const response = await dispatch(userAction.userLogin(LoginData)).unwrap();
+        await dispatch(
+          userSliceAction.setLogin({
+            username: LoginData.username
+          })
+        );
+        console.log(response);
+      } catch (err) {
+        window.alert(err);
+      }
     }
-    
   };
-
 
   return (
     <LoginContainer>

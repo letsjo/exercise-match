@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
+import { userAction } from "../../redux/actions/userAction";
 import { modalSliceAction } from "../../redux/reducers/modalReducer";
 import { userSliceAction } from "../../redux/reducers/userReducer";
 import AlertBox from "../Signup/AlertBox";
@@ -72,7 +73,8 @@ const InterestFrame = () => {
 
   const buttonEditInterest = (e) => {
     e.preventDefault();
-    dispatch(userSliceAction.setUserInterest(editInterest));
+    console.log(editInterest);
+    dispatch(userAction.editConcern(editInterest));
     dispatch(modalSliceAction.modalClose());
   };
 
