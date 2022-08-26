@@ -107,6 +107,8 @@ const CategorySelect = styled.div`
   height: 63px;
   width: 1258px;
   border: 2px solid #f0f0f0;
+  border-left: 2px solid #f0f0f0;
+  border-bottom: none;
   border-right: none;
   display: flex;
   box-sizing: border-box;

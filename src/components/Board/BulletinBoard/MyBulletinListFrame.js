@@ -3,14 +3,17 @@ import styled,{css} from 'styled-components'
 import { useState } from 'react';
 import Pagination from '../BoardPublic/Pagination';
 import CommentCard from '../BoardPublic/CommentCard';
+import MyBulletin from '../MyWritePost/MyBulletin';
+import MyComment from "../MyWritePost/MyComment"
+import MyMatching from '../MyWritePost/MyMatching';
 
-const MyBulletinListFrame = () => {
+const MyBulletinListFrame = ({type}) => {
 
     const [page, setPage] =useState(1);
 
     const [boardType, setBoardType]=useState("write");
 
-    const writeOnClick=()=>{
+    const WriteOnClick=()=>{
         setBoardType("write")
     }
 
@@ -32,25 +35,20 @@ const MyBulletinListFrame = () => {
             <Text>나의 게시글</Text>
             </SelectTitle>
             <ButtonBox>
-                <Write boardType={boardType} onClick={writeOnClick} >작성 글</Write>
-                <Apply boardType={boardType} onClick={ApplyOnClick}>신청한 글</Apply>
+                
+                <Write boardType={boardType} onClick={WriteOnClick} >작성 글</Write>
+                {type=="mymatch"&&<Apply boardType={boardType} onClick={ApplyOnClick}>신청한 글</Apply>}
                 <Comment boardType={boardType} onClick={CommentOnClick}>작성 댓글</Comment>
             </ButtonBox>
     </SelectBox>
-    <CommentCard/>
-    <CommentCard/>
-    <CommentCard/>
-    <CommentCard/>    
-        <PageFrame>
-            <Frame>
-            <Pagination
-            total={5}
-            limit={2}
-            page={page}
-            setPage={setPage}
-            />
-            </Frame>
-        </PageFrame>
+    <MyCard>
+    {type=="mymatch"&&boardType=="write"&&<MyMatching/>}
+    {type=="myinfo"&&boardType=="write"&&<MyBulletin/>}
+    {boardType=="apply"&&<MyMatching/>}
+    {boardType=="comment"&&<MyComment/>}
+    </MyCard>
+   
+    
     </BoardListFrame>
     </>
   )
@@ -126,23 +124,16 @@ cursor: pointer;
     }}
     `;
 
-const PageFrame =styled.div`    
-    width:1000px;
-    height: 110px;
-    box-sizing: border-box;
-    display: flex;
-    `;
+    const MyCard=styled.div``;
 
-const Frame =styled.div`
-    margin: auto;
-`;
+
 
 
 const BoardListFrame = styled.div`
     height: 100%;
-    width: 1255px;  
+    width: 1258px;  
     border-top: 2px solid #f0f0f0;
-    border-left: 4px solid #f0f0f0;
+    border-left: 2px solid #f0f0f0;
     padding: 20px 50px 20px 70px;
     box-sizing: border-box;
 

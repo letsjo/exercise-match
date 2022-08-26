@@ -18,6 +18,8 @@ import UserInfo from "./pages/UserInfo";
 import ModalComponents from "./components/public/ModalComponents";
 import PostWrite from "./pages/PostWrite";
 import Detailpage from "./pages/Detailpage";
+import PasswordFind from "./pages/PasswordFind";
+import PasswordChange from "./pages/PasswordChange";
 
 
 function App() {
@@ -38,6 +40,8 @@ function App() {
         <Route path="/userinfo" element={<UserInfo/>}/>
         <Route path="/review" element={<Review/>}/>
         <Route path="/detailpage" element={<Detailpage/>}/>
+        <Route path="/passwordFind" element={<PasswordFind/>}/>
+        <Route path="/passwordChange" element={<PasswordChange/>}/>
         <Route path="/api/kakaologin" element={<KakaoLogin/>} />
         <Route path="/api/naverLogin" element={<NaverLogin/>}/>
       </Routes>

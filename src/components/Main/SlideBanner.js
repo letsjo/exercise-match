@@ -77,6 +77,7 @@ const SliderImageWrap = styled.div`
   img {
     width: 1440px;
     height: 360px;
+    object-fit: cover;
   }
 `;
 

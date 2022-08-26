@@ -87,9 +87,9 @@ const Board = () => {
           ) : type === "info" ? (
             <BulletinListFrame />
           ) : type ==="mymatch" ?(
-            <MyBulletinListFrame/>
+            <MyBulletinListFrame type={type}/>
           ) : type ==="myinfo"?(
-            <MyBulletinListFrame/>
+            <MyBulletinListFrame type={type}/>
           ):(<></>)}
           {/* <BulletinListFrame/> */}
           {/* <MatchingListFrame/> */}
