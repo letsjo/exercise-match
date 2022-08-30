@@ -19,7 +19,7 @@ const Main = () => {
   const { selectedCity, selectedGu } = useSelector(
     (state) => state.locationReducer
   );
-  
+
   return (
     <MainContainer>
       <NavBar />
@@ -36,12 +36,12 @@ const Main = () => {
       <PopularBoard
         iconImg="https://cdn-icons-png.flaticon.com/512/3066/3066961.png"
         title="헬스 실시간 인기 게시글"
-        boardUrl={`/board?type=match&cate=gym&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`}
+        boardUrl={`/board?type=matching&cate=gym&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`}
       />
       <PopularBoard
         iconImg="https://cdn-icons-png.flaticon.com/512/2528/2528207.png"
         title="테니스 실시간 인기 게시글"
-        boardUrl={`/board?type=match&cate=tennis&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`}
+        boardUrl={`/board?type=matching&cate=tennis&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`}
       />
       <OtherBoard />
     </MainContainer>
@@ -51,3 +51,5 @@ const Main = () => {
 const MainContainer = styled.div``;
 
 export default Main;
+
+

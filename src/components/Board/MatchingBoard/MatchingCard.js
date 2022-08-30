@@ -2,8 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 import BulletinLikeCard from "../BulletinBoard/BulletinLikeCard";
+import {BsCalendarCheck,BsFillPeopleFill} from "react-icons/bs";
 
-const BeforeMatchingCard = ({ completed=false }) => {
+const BeforeMatchingCard = ({ completed=false, category, title, date, number,context, writer, location}) => {
 
   const navigate = useNavigate();
 
@@ -11,41 +12,38 @@ const BeforeMatchingCard = ({ completed=false }) => {
     <Container onClick={()=>{navigate("/detail/5")}} completed={completed}>
       <MatchingOrNot completed={completed}>{completed ? "매칭완료" : "매칭중"}</MatchingOrNot>
       <TitleWrap>
-        <CategoryTag>배드민턴</CategoryTag>
-        <Title>글 제목 (테니스 같이칠 사람?</Title>
+        <CategoryTag>{category}</CategoryTag>
+        <Title>{title}</Title>
       </TitleWrap>
       <DateWrap>
         <Date>
-          <Icon></Icon>
-          <Text>8월 17일 수요일</Text>
+          <Icon>
+            <BsCalendarCheck size={20}/>
+          </Icon>
+          <Text>{date}</Text>
         </Date>
         <Personnel>
-          <Icon></Icon>
-          <Text>1/4 매칭</Text>
+          <Icon>
+          <BsFillPeopleFill size={20}/>
+          </Icon>
+          <Text> {number}매칭</Text>
         </Personnel>
       </DateWrap>
       <Context>
-        글 내용 (Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae
-        vestibulum sed at nullam odio. Lorem ipsum dolor sit amet, soo pretty,
-        consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-        adipiscing elit. Vitae vestibulum sed at 글 내용 (Lorem ipsum dolor sit
-        amet, consectetur adipiscing elit. Vitae vestibulum sed at nullam odio.
-        Lorem ipsum dolor sit amet, soo pretty, consectetur adipiscing elit.
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae
-        vestibulum sed at
+        {context}
       </Context>
       <WriterWrap>
         <InfoWrap>
           <ProfileImg />
-          <Write>작성자(홍길동)</Write>
+          <Write>{writer}</Write>
           <Dot>·</Dot>
-          <Write>위치(강릉시)</Write>
+          <Write>{location}</Write>
         </InfoWrap>
       </WriterWrap>
       {/* <LikeWrap>
           <Daysago>1일 전</Daysago>
       </LikeWrap> */}
-      <BulletinLikeCard/>
+      <BulletinLikeCard like="2" comment="3" daysago="4"/>
     </Container>
   );
 };
@@ -119,7 +117,10 @@ const Icon = styled.div`
   height: 24px;
   margin: auto 0;
   box-sizing: border-box;
-  background-color: aliceblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:gray;
 `;
 
 const Text = styled.div`
@@ -139,6 +140,7 @@ const Context = styled.div`
   margin-bottom: 6px;
   font-size: 15px;
   color: #494949;
+  height: 46px;
   text-overflow: ellipsis;
   overflow: hidden;
   word-break: break-word;

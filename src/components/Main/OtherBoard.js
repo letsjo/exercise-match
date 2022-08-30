@@ -11,7 +11,7 @@ const OtherBoard = () => {
   );
   return (
     <BoardWrapper>
-        <BoardInfo iconImg="http://cdn.onlinewebfonts.com/svg/img_224763.png" title="기타 실시간 인기 게시글" boardUrl={`/board?type=match&cate=etc&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`}/>
+        <BoardInfo iconImg="http://cdn.onlinewebfonts.com/svg/img_224763.png" title="기타 실시간 인기 게시글" boardUrl={`/board?type=matching&cate=etc&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`}/>
         <OtherPostCardBig/>
     </BoardWrapper>
   )

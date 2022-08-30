@@ -1,14 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const OtherPostCard = () => {
+const OtherPostCard = ({category, title, writer, image}) => {
   return (
     <CardWrap>
-        <Image/>
+        <Image>
+          <img src={image} alt=""/>
+        </Image>
         <ContentBox>
-        <Category>카테고리 종류</Category>
-        <ContentTitle>게시글 제목(Lorem ipsum dolor sit amet, consectetur)</ContentTitle>
-        <Writer>작성자</Writer>
+        <Category>{category}</Category>
+        <ContentTitle>{title}</ContentTitle>
+        <Writer>{writer}</Writer>
         </ContentBox>
     </CardWrap>
   )
@@ -32,6 +34,10 @@ const Image = styled.div`
     border-radius: 5px;
     border: 1px solid #dedede;
     margin-bottom:13px ;
+    img{
+      width: 100%;
+      height: 100%;
+    }
 `;
 
 const ContentBox = styled.div`

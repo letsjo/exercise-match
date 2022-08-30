@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const CommentCard = () => {
+const CommentCard = ({content, title, date}) => {
   return (
     <Container>
-        <Title>댓글 내용</Title>
-        <Content>글 제목 (테니스 같이칠 사람?</Content>
-        <Date>20xx.xx.xx</Date>
+        <Content>{content}</Content>
+        <Title>{title}</Title>
+        <Date>{date}</Date>
     </Container>
   )
 }
@@ -19,14 +19,14 @@ const Container=styled.div`
     border-top: 1px solid #dedede;
 `;
 
-const Title =styled.div`
+const Content =styled.div`
     height: 29px;
     font-size: 20px;
     margin-bottom: 10px;
     color:#000000;
 `;
 
-const Content =styled.div`
+const Title =styled.div`
     height:29px;
     width: 100%;
     font-size: 20px;

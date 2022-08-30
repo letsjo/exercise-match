@@ -1,19 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-const BulletinContextCard = () => {
+const BulletinContextCard = ({title, content}) => {
   return (
     <Container>
       <ContextBox>
-        <Title>글 제목(배드민턴은 이렇게!</Title>
+        <Title>{title}</Title>
         <Context>
-          글 내용 (Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Vitae vestibulum sed at nullam odio. Lorem ipsum dolor sit amet,
-          consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit. Vitae vestibulum sed at nullam odio. Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit
-          consectetur adipiscing elit Lorem ipsum dolor sit consectetur
-          adipiscing elit. Vitae vestibulum{" "}
+          {content}
         </Context>
       </ContextBox>
       <ImageBox>

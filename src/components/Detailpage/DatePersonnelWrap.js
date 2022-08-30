@@ -1,15 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
+import {BsCalendarCheck,BsFillPeopleFill} from "react-icons/bs";
 
 const DatePersonnelWrap = () => {
   return (
     <DateWrap>
         <Date>
-          <Icon></Icon>
+          <Icon>
+            <BsCalendarCheck size={20}/>
+          </Icon>
           <Text>8월 17일 수요일</Text>
         </Date>
         <Personnel>
-          <Icon></Icon>
+          <Icon>
+          <BsFillPeopleFill size={20}/>
+          </Icon>
           <Text>1/4 매칭</Text>
         </Personnel>
       </DateWrap>
@@ -32,7 +37,10 @@ const Icon = styled.div`
   height: 24px;
   margin: auto 0 auto 10px;
   box-sizing: border-box;
-  background-color: aliceblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:gray;
 `;
 
 const Text = styled.div`

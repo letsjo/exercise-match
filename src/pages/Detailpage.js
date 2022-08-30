@@ -4,6 +4,7 @@ import Comment from "../components/public/Comment";
 import NavBar from "../components/public/NavBar";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { BsHeart, BsHeartFill } from "react-icons/bs";
+import {MdComment} from "react-icons/md"
 import DetailpagePopover from "../components/Detailpage/DetailpagePopover";
 import TitleWrap from "../components/Detailpage/TitleWrap";
 import DatePersonnelWrap from "../components/Detailpage/DatePersonnelWrap";
@@ -124,7 +125,9 @@ const Detailpage = () => {
             )}
           </Icon>
           <Text>좋아요 0개</Text>
-          <CommentIcon />
+          <CommentIcon>
+            <MdComment size={24}/>
+          </CommentIcon>
           <Text>댓글 0개</Text>
         </InfoWrap>
         <Comment boardId={params.id} />
@@ -238,7 +241,6 @@ const CommentIcon = styled.div`
   height: 24px;
   width: 24px;
   margin: 2.5px 10px 2.5px 0px;
-  background-color: aliceblue;
 `;
 
 const Text = styled.div`
