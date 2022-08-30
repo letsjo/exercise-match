@@ -1,12 +1,13 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import { FiX } from "react-icons/fi";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { boardAction } from "../../redux/actions/boardAction";
 
-const Comment = () => {
+const Comment = ({boardId}) => {
   const inputRef = useRef();
+  const dispatch = useDispatch();
   const [commentButton, setCommentButton] = useState(false);
   const inputChange = () => {
     // console.log(inputRef.current.value);
@@ -20,6 +21,15 @@ const Comment = () => {
   useEffect(() => {
     dispatch(boardAction.loadComments(boardId));
   }, []);
+
+  const commentOnClick=(e)=>{
+    e.preventDefault();
+    if(inputRef.current.value===""){
+        return;
+    }
+    console.log(inputRef.current.value);
+    inputRef.current.value="";
+  }
 
   const Alert = (e, commentId = "1") => {
     e.preventDefault();
