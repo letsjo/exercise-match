@@ -1,20 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 
-const BoardCardBig = () => {
+const BoardCardBig = ({
+  title,
+  content,
+  writer, 
+  image
+}) => {
   return (
     <BoardCardFrame>
       <TopPhotoZone>
         <PhotoFrame>
-          <img src="https://placehold.jp/250x150.png" />
+          <img src={image} alt="" />
         </PhotoFrame>
       </TopPhotoZone>
       <BottomContentZone>
-        <TitleZone>게시글 제목</TitleZone>
-        <WriterZone>작성자</WriterZone>
+        <TitleZone>{title}</TitleZone>
+        <WriterZone>{writer}</WriterZone>
         <ContentZone>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae
-          vestibulum sed at nullam odio.
+         {content}
         </ContentZone>
       </BottomContentZone>
     </BoardCardFrame>

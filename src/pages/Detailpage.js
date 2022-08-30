@@ -231,6 +231,7 @@ const Icon = styled.div`
   height: 24px;
   width: 24px;
   margin: 2.5px 10px 2.5px 0px;
+  cursor: pointer;
 `;
 
 const CommentIcon = styled.div`

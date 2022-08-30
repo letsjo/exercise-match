@@ -1,12 +1,21 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
+import React, { useRef, useState } from "react";
+import styled, { css } from "styled-components";
 import { FiX } from "react-icons/fi";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { boardAction } from "../../redux/actions/boardAction";
 
-const Comment = ({ boardId }) => {
-  const dispatch = useDispatch();
+const Comment = () => {
+  const inputRef = useRef();
+  const [commentButton, setCommentButton] = useState(false);
+  const inputChange = () => {
+    // console.log(inputRef.current.value);
+    if (inputRef.current.value === "") {
+      setCommentButton(false);
+    } else {
+      setCommentButton(true);
+    }
+  };
 
   useEffect(() => {
     dispatch(boardAction.loadComments(boardId));
@@ -72,7 +81,14 @@ const Comment = ({ boardId }) => {
 
   return (
     <Container>
-      <CommentInput placeholder="댓글을 남겨주세요" />
+      <CommentInputArea>
+        <CommentInput
+          placeholder="댓글을 남겨주세요"
+          onChange={inputChange}
+          ref={inputRef}
+        />
+        <CommentBtn commentButton={commentButton} onClick={(e)=>commentOnClick(e)}>{commentButton && "등록"}</CommentBtn>
+      </CommentInputArea>
       <CommentWrap>
         <ProfileWrap>
           <Profile>
@@ -142,14 +158,45 @@ const Container = styled.div`
   box-sizing: border-box;
 `;
 
-const CommentInput = styled.input`
-  padding-left: 20px;
+const CommentInputArea = styled.form`
   width: 700px;
   height: 69px;
+  background: transparent;
+  display: flex;
+`;
+
+const CommentInput = styled.input`
+  padding-left: 20px;
+  width: 623px;
+  height: 69px;
   border: 1px solid #a8a8a8;
+  border-right: none;
   box-sizing: border-box;
-  border-radius: 10px;
+  border-radius: 10px 0 0 10px;
   margin-bottom: 30px;
+  font-size: 20px;
+  outline: none;
+`;
+
+const CommentBtn = styled.button`
+  width: 77px;
+  height: 69px;
+  border: 1px solid #a8a8a8;
+  border-left: none;
+  box-sizing: border-box;
+  border-radius: 0 10px 10px 0;
+  font-weight: bold;
+  font-size: 20px;
+  display: flex;
+  background-color:transparent ;
+  justify-content: center;
+  align-items: center;
+  ${({ commentButton }) => {
+    return css`
+   cursor: ${ commentButton? "pointer":"auto"}
+     
+    `;
+  }}
 `;
 
 const CommentWrap = styled.div`
