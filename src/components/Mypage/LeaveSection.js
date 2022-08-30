@@ -1,11 +1,14 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const LeaveSection = () => {
+
+  const navigate= useNavigate();
   return (
-    <Container>
+    <Container onClick={()=>navigate("/memberExit")}>
       <ContentFrame>
-        <TitleZone>회원탈퇴</TitleZone>
+        <TitleZone >회원탈퇴</TitleZone>
         <ArrowRightBox />
       </ContentFrame>
     </Container>
@@ -18,7 +21,7 @@ const Container = styled.div`
   border: 1px solid #dedede;
   margin-bottom: 47px;
   border-radius: 10px;
-  
+  cursor: pointer;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
   overflow: hidden;
 `;

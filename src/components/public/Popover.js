@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom"; 
 import { useDispatch } from "react-redux";
 import { userSliceAction } from "../../redux/reducers/userReducer";
+import Swal from "sweetalert2";
 
 const Popover = ({ onOpenerClick }) => {
   const settingsWindowRef = useRef(null);
@@ -36,7 +37,9 @@ const Popover = ({ onOpenerClick }) => {
     <Logout onClick={()=>{sessionStorage.removeItem("accesstoken") 
     sessionStorage.removeItem("refreshtoken")
     sessionStorage.removeItem("username") 
-    dispatch(userSliceAction.setLoginOut());
+    Swal.fire('로그아웃 되었습니다!')
+    dispatch(userSliceAction.setLoginOut()
+    );
     }}>로그아웃</Logout>
     </Wrapper>
   );
