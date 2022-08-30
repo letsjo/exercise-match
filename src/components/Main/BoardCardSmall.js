@@ -1,19 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 
-const BoardCardSmall = () => {
+const BoardCardSmall = ({ title, writer, content, image }) => {
   return (
     <BoardCardFrame>
       <LeftContentZone>
-        <TitleZone>게시글 제목</TitleZone>
-        <WriterZone>작성자</WriterZone>
+        <TitleZone>{title}</TitleZone>
+        <WriterZone>{writer}</WriterZone>
         <ContentZone>
-          게시글 내용 Lorem ipsum dolor sit amet, consectetur adipiscing
+          {content}
         </ContentZone>
       </LeftContentZone>
       <RightPhotoZone>
         <PhotoFrame>
-          <img src="https://placehold.jp/80x70.png" />
+          <img src={image} alt="" />
         </PhotoFrame>
       </RightPhotoZone>
     </BoardCardFrame>

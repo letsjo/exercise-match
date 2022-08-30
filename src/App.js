@@ -17,7 +17,8 @@ import Mypage from "./pages/Mypage";
 import Review from "./pages/Review";
 import UserInfo from "./pages/UserInfo";
 import ModalComponents from "./components/public/ModalComponents";
-import PostWrite from "./pages/PostWrite";
+import MatchingPostWrite from "./pages/MatchingPostWrite";
+import CommunityPostWrite from "./pages/CommunityPostWrite";
 import Detailpage from "./pages/Detailpage";
 import MemberExit from "./pages/MemberExit";
 import { useDispatch } from "react-redux";
@@ -26,6 +27,7 @@ import { userSliceAction } from "./redux/reducers/userReducer";
 import PasswordChange from "./pages/PasswordChange";
 import PasswordFind from "./pages/PasswordFind";
 import userAPI from "./apis/userAPI";
+
 
 
 export let sessionStorageLogin = sessionStorage;
@@ -68,7 +70,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/board" element={<Board/>}/>
-        <Route path="/postWrite" element={<PostWrite/>}/>
+        <Route path="/matchingpostWrite" element={<MatchingPostWrite/>}/>
+        <Route path="/communitypostWrite" element={<CommunityPostWrite/>}/>
         <Route path="/mypage" element={<Mypage/>}/>
         <Route path="/userinfo" element={<UserInfo/>}/>
         <Route path="/review" element={<Review/>}/>

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import { boardAction } from "../../redux/actions/boardAction";
@@ -7,6 +8,7 @@ import { boardAction } from "../../redux/actions/boardAction";
 const DetailpagePopover = ({ onOpenerClick, boardId }) => {
   const settingsWindowRef = useRef(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const pageClickEvent = (e) => {
@@ -88,7 +90,7 @@ const DetailpagePopover = ({ onOpenerClick, boardId }) => {
 
   return (
     <Wrapper ref={settingsWindowRef}>
-      <Text>게시글 수정</Text>
+      <Text onClick={()=>navigate("/matchingpostWrite")}>게시글 수정</Text>
       <Text onClick={Alert}>게시글 삭제</Text>
       <CloseBtn onClick={onClose}>닫기</CloseBtn>
     </Wrapper>

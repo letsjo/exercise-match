@@ -7,10 +7,15 @@ const MyComment = () => {
 
   const [page, setPage] =useState(1);
   return (<>
-    <CommentCard/>
-    <CommentCard/>
-    <CommentCard/>
-    <CommentCard/>    
+    <CommentCard content="댓글 내용" 
+    title="글 제목" 
+    date="20xx.xx.xx"/>
+    <CommentCard content="댓글 내용 들어가는 칸" 
+    title="글 제목입니다" 
+    date="20xx.xx.xx"/>
+    <CommentCard content="댓글입니다" 
+    title="글 제목" 
+    date="20xx.xx.xx"/>   
         <PageFrame>
             <Frame>
             <Pagination
