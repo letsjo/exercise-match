@@ -33,7 +33,7 @@ const Popover = ({ onOpenerClick }) => {
         <Hello>안녕하세요!</Hello>
         </ProfileBox>
         <Boxes onClick={()=>navigate("/mypage")}>마이페이지</Boxes>
-        <Boxes onClick={()=>navigate("/board?type=mymatch&cate=all&page=1&amount=12")}>나의 게시글</Boxes>
+        <Boxes onClick={()=>navigate("/board?type=mymatching&cate=all&page=1&amount=12")}>나의 게시글</Boxes>
     <Logout onClick={()=>{sessionStorage.removeItem("accesstoken") 
     sessionStorage.removeItem("refreshtoken")
     sessionStorage.removeItem("username") 

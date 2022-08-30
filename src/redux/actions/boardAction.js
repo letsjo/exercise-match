@@ -4,6 +4,7 @@ import userAPI from "../../apis/userAPI";
 
 function setBoardType(type, cate) {
   return async (dispatch) => {
+    dispatch(boardSliceAction.setBoardType({type,cate}))
     await userAPI
       .get(`/api/boards/${type}?cate=${cate}&page=1&amount=12`)
       .then((response) => {
@@ -68,6 +69,22 @@ const loadComments = (boardId) => {
   };
 };
 
+const postComment = createAsyncThunk(
+  "board/postComment",
+  async ( {boardId, comment}, { rejectWithValue }) => {
+    try {
+      const res = await userAPI.post(
+        `/api/board/${boardId}/comments`, comment
+      );
+      console.log(res);
+      return res;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data.error);
+    }
+  }
+);
+
 const delBoard = createAsyncThunk(
   "board/delBoard",
   async ({ boardId }, { rejectWithValue }) => {
@@ -125,4 +142,5 @@ export const boardAction = {
   delComment,
   delBoard,
   applyBoard,
+  postComment,
 };
