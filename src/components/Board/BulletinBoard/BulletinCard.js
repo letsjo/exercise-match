@@ -7,7 +7,7 @@ import BulletinLikeCard from "./BulletinLikeCard";
 const BulletinCard = () => {
   const navigate = useNavigate();
   return (
-    <Container onClick={()=>{navigate("/detailpage/5")}}>
+    <Container onClick={()=>{navigate("/detail/5")}}>
     <BulletinContextCard/>
     <BulletinLikeCard/>
     </Container>

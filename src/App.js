@@ -21,7 +21,7 @@ import PostWrite from "./pages/PostWrite";
 import Detailpage from "./pages/Detailpage";
 import MemberExit from "./pages/MemberExit";
 import { useDispatch } from "react-redux";
-import { locaionAction } from "./redux/actions/locationAction";
+import { locationAction } from "./redux/actions/locationAction";
 import { userSliceAction } from "./redux/reducers/userReducer";
 import PasswordChange from "./pages/PasswordChange";
 import PasswordFind from "./pages/PasswordFind";
@@ -42,7 +42,7 @@ function App() {
   });
 
   useEffect(() => {
-    dispatch(locaionAction.getLocation());
+    dispatch(locationAction.getLocation());
   }, []);
 
   useEffect(() => {
@@ -59,7 +59,7 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <Container>
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />
@@ -69,7 +69,7 @@ function App() {
         <Route path="/mypage" element={<Mypage/>}/>
         <Route path="/userinfo" element={<UserInfo/>}/>
         <Route path="/review" element={<Review/>}/>
-        <Route path="/detailpage/:id" element={<Detailpage/>}/>
+        <Route path="/detail/:id" element={<Detailpage/>}/>
         <Route path="/passwordFind" element={<PasswordFind/>}/>
         <Route path="/passwordChange" element={<PasswordChange/>}/>
         <Route path="/memberExit" element={<MemberExit/>}/>
@@ -78,8 +78,12 @@ function App() {
       </Routes>
       <ModalComponents />
       <span onClick={showMessenger}></span>
-    </div>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  user-select: none;
+`
 
 export default App;

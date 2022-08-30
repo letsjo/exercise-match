@@ -23,31 +23,31 @@ const Board = () => {
 
   useEffect(() => {
     if (!type || !cate) {
-      dispatch(boardAction.setBoardType(type ? type : "match", cate ? cate : "all"));
+      dispatch(boardAction.setBoardType(type?type:"matching",cate?cate:"all"));
       navigate(
-        `/board?type=${type ? type : "match"}&cate=${cate ? cate : "all"}&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+        `/board?type=${type?type:"matching"}&cate=${cate?cate:"all"}&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
       );
     }
   }, [selectedCity,selectedGu]);
 
   const MatchingOnClick = () => {
-    dispatch(boardAction.setBoardType("match", "all"));
-    navigate(`/board?type=match&cate=all&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
+    dispatch(boardAction.setBoardType("matching", "all"));
+    navigate(`/board?type=matching&cate=all&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
   };
 
   const InfoOnClick = () => {
-    dispatch(boardAction.setBoardType("info", "all"));
-    navigate(`/board?type=info&cate=all&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
+    dispatch(boardAction.setBoardType("information", "all"));
+    navigate(`/board?type=information&cate=all&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
   };
 
   const MyMatchingOnClick=()=>{
-    dispatch(boardAction.setBoardType("mymatch", category));
-    navigate(`/board?type=mymatch&cate=${category}&page=1&amount=12`);
+    dispatch(boardAction.setBoardType("mymatching", category));
+    navigate(`/board?type=mymatching&cate=${category}&page=1&amount=12`);
   }
 
   const MyInfoOnClick=()=>{
-    dispatch(boardAction.setBoardType("myinfo", category));
-    navigate(`/board?type=myinfo&cate=${category}&page=1&amount=12`);
+    dispatch(boardAction.setBoardType("myinformation", category));
+    navigate(`/board?type=myinformation&cate=${category}&page=1&amount=12`);
   }
 
   return (
@@ -79,13 +79,13 @@ const Board = () => {
           )} */}
         </CategoryFrame>
         <ContextFrame>
-          {type === "match" ? (
+          {type === "matching" ? (
             <MatchingListFrame />
-          ) : type === "info" ? (
+          ) : type === "information" ? (
             <BulletinListFrame />
-          ) : type ==="mymatch" ?(
+          ) : type ==="mymatching" ?(
             <MyBulletinListFrame type={type}/>
-          ) : type ==="myinfo"?(
+          ) : type ==="myinformation"?(
             <MyBulletinListFrame type={type}/>
           ):(<></>)}
         </ContextFrame>
@@ -122,7 +122,7 @@ const MatchingTitle = styled.div`
     return css`
       border-bottom: 2px solid #F0F0F0;
 
-      background-color: ${(type ==="match"||type ==="mymatch") ? "#F0F0F0" : ""};
+      background-color: ${(type ==="matching"||type ==="mymatching") ? "#F0F0F0" : ""};
     `;
   }}
 `;
@@ -139,7 +139,7 @@ const SelectMatching=styled.div`
   cursor: pointer;
   ${({type})=>{
     return css`
-      background-color: ${(type ==="match")? "#DEDEDE":""};
+      background-color: ${(type ==="matching")? "#DEDEDE":""};
     `;
   }}
 `;
@@ -156,7 +156,7 @@ const SelectInfo=styled.div`
   cursor: pointer;
   ${({type})=>{
     return css`
-      background-color: ${(type ==="info")? "#DEDEDE":""};
+      background-color: ${(type ==="information")? "#DEDEDE":""};
     `;
   }}
 `;
@@ -173,7 +173,7 @@ const SelectMyMatching=styled.div`
   cursor: pointer;
   ${({type})=>{
     return css`
-      background-color: ${(type ==="mymatch")? "#DEDEDE":""};
+      background-color: ${(type ==="mymatching")? "#DEDEDE":""};
     `;
   }}
 `;
@@ -190,7 +190,7 @@ const SelectMyBoard=styled.div`
   cursor: pointer;
   ${({type})=>{
     return css`
-      background-color: ${(type ==="myinfo")? "#DEDEDE":""};
+      background-color: ${(type ==="myinformation")? "#DEDEDE":""};
     `;
   }}
 `;
@@ -208,7 +208,7 @@ const InfoTitle = styled.div`
     return css`
       border-bottom: 2px solid #f0f0f0;
 
-      background-color: ${(type ==="info"||type ==="myinfo") ? "#f0f0f0" : ""};
+      background-color: ${(type ==="information"||type ==="myinformation") ? "#f0f0f0" : ""};
     `;
   }}
 `;

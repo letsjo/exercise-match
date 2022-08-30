@@ -1,11 +1,11 @@
-import React from 'react'
-import styled,{css} from 'styled-components'
-import { useState } from 'react';
-import Pagination from '../BoardPublic/Pagination';
-import CommentCard from '../BoardPublic/CommentCard';
-import MyBulletin from '../MyWritePost/MyBulletin';
-import MyComment from "../MyWritePost/MyComment"
-import MyMatching from '../MyWritePost/MyMatching';
+import React from "react";
+import styled, { css } from "styled-components";
+import { useState } from "react";
+import Pagination from "../BoardPublic/Pagination";
+import CommentCard from "../BoardPublic/CommentCard";
+import MyBulletin from "../MyWritePost/MyBulletin";
+import MyComment from "../MyWritePost/MyComment";
+import MyMatching from "../MyWritePost/MyMatching";
 
 const MyBulletinListFrame = ({ type }) => {
   const [page, setPage] = useState(1);
@@ -32,23 +32,28 @@ const MyBulletinListFrame = ({ type }) => {
         <SelectBox>
           <SelectTitle>
             <Text>나의 게시글</Text>
-            </SelectTitle>
-            <ButtonBox>
-                
-                <Write boardType={boardType} onClick={WriteOnClick} >작성 글</Write>
-                {type=="mymatch"&&<Apply boardType={boardType} onClick={ApplyOnClick}>신청한 글</Apply>}
-                <Comment boardType={boardType} onClick={CommentOnClick}>작성 댓글</Comment>
-            </ButtonBox>
-    </SelectBox>
-    <MyCard>
-    {type=="mymatch"&&boardType=="write"&&<MyMatching/>}
-    {type=="myinfo"&&boardType=="write"&&<MyBulletin/>}
-    {boardType=="apply"&&<MyMatching/>}
-    {boardType=="comment"&&<MyComment/>}
-    </MyCard>
-   
-    
-    </BoardListFrame>
+          </SelectTitle>
+          <ButtonBox>
+            <Write boardType={boardType} onClick={WriteOnClick}>
+              작성 글
+            </Write>
+            {type == "mymatching" && (
+              <Apply boardType={boardType} onClick={ApplyOnClick}>
+                신청한 글
+              </Apply>
+            )}
+            <Comment boardType={boardType} onClick={CommentOnClick}>
+              작성 댓글
+            </Comment>
+          </ButtonBox>
+        </SelectBox>
+        <MyCard>
+          {type == "mymatching" && boardType == "write" && <MyMatching />}
+          {type == "myinformation" && boardType == "write" && <MyBulletin />}
+          {boardType == "apply" && <MyMatching />}
+          {boardType == "comment" && <MyComment />}
+        </MyCard>
+      </BoardListFrame>
     </>
   );
 };
@@ -123,21 +128,19 @@ const Comment = styled.div`
   }}
 `;
 
-    const MyCard=styled.div``;
+const MyCard = styled.div``;
 
-
-const Frame =styled.div`
-    margin: auto;
+const Frame = styled.div`
+  margin: auto;
 `;
 
 const BoardListFrame = styled.div`
-    height: 100%;
-    width: 1255px;  
-    border-top: 2px solid #f0f0f0;
-    border-left: 4px solid #f0f0f0;
-    padding: 20px 50px 20px 70px;
-    box-sizing: border-box;
-
+  height: 100%;
+  width: 1255px;
+  border-top: 2px solid #f0f0f0;
+  border-left: 4px solid #f0f0f0;
+  padding: 20px 50px 20px 70px;
+  box-sizing: border-box;
 `;
 
-export default MyBulletinListFrame
+export default MyBulletinListFrame;

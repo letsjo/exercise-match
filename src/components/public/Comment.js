@@ -1,10 +1,13 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import { FiX } from "react-icons/fi";
 import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { boardAction } from "../../redux/actions/boardAction";
 
-const Comment = () => {
+const Comment = ({boardId}) => {
   const inputRef = useRef();
+  const dispatch = useDispatch();
   const [commentButton, setCommentButton] = useState(false);
   const inputChange = () => {
     // console.log(inputRef.current.value);
@@ -15,6 +18,10 @@ const Comment = () => {
     }
   };
 
+  useEffect(() => {
+    dispatch(boardAction.loadComments(boardId));
+  }, []);
+
   const commentOnClick=(e)=>{
     e.preventDefault();
     if(inputRef.current.value===""){
@@ -24,11 +31,11 @@ const Comment = () => {
     inputRef.current.value="";
   }
 
-  const Alert = (e) => {
+  const Alert = (e, commentId = "1") => {
     e.preventDefault();
     Swal.fire({
       // title: '',
-      text: "게시물을 삭제하시겠습니까?",
+      text: "댓글을 삭제하시겠습니까?",
       // icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: "#494949",
@@ -36,8 +43,49 @@ const Comment = () => {
       confirmButtonText: "삭제",
       cancelButtonText: "취소",
       width: 439,
+      hideClass: {
+        popup: "",
+      },
       // heightAuto:false,
       // height:'359px'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        let timerInterval;
+        try {
+          Swal.fire({
+            title: "삭제중",
+            width: 439,
+            timerProgressBar: true,
+            showClass: {
+              popup: "",
+            },
+            hideClass: {
+              popup: "",
+            },
+            didOpen: () => {
+              Swal.showLoading();
+            },
+          });
+          const resDel = await dispatch(
+            boardAction.delComment({ boardId, commentId })
+          ).unwrap();
+          console.log(resDel);
+          Swal.fire({
+            icon: "success",
+            title: "삭제완료!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } catch (e) {
+          console.log(e);
+          Swal.fire({
+            icon: "warning",
+            title: "삭제실패!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      }
     });
   };
 
