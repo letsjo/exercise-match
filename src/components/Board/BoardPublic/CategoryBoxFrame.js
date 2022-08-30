@@ -21,8 +21,8 @@ const CategoryBoxFrame = ({}) => {
         <CategoryCard
           onClick={(e) => {
             e.preventDefault();
-            dispatch(boardAction.setBoardType(boardType,"all"));
-            navigate(`/board?type=${boardType}&cate=all&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
+            dispatch(boardAction.setBoardType(type,"all"));
+            navigate(`/board?type=${type}&cate=all&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
           }}
           selected={cate === "all" ? true : false}
         >
