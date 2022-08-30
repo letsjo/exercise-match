@@ -19,6 +19,7 @@ import UserInfo from "./pages/UserInfo";
 import ModalComponents from "./components/public/ModalComponents";
 import PostWrite from "./pages/PostWrite";
 import Detailpage from "./pages/Detailpage";
+import MemberExit from "./pages/MemberExit";
 import { useDispatch } from "react-redux";
 import { locaionAction } from "./redux/actions/locationAction";
 import { userSliceAction } from "./redux/reducers/userReducer";
@@ -71,6 +72,7 @@ function App() {
         <Route path="/detailpage/:id" element={<Detailpage/>}/>
         <Route path="/passwordFind" element={<PasswordFind/>}/>
         <Route path="/passwordChange" element={<PasswordChange/>}/>
+        <Route path="/memberExit" element={<MemberExit/>}/>
         <Route path="/api/kakaologin" element={<KakaoLogin/>} />
         <Route path="/api/naverLogin" element={<NaverLogin/>}/>
       </Routes>

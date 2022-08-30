@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { userAction } from "../redux/actions/userAction";
 import { useNavigate } from "react-router-dom";
 import { userSliceAction } from "../redux/reducers/userReducer";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState(false);
@@ -33,7 +34,8 @@ const Login = () => {
     window.location.href = googleURL;
   };
 
-  const clickLogin = async () => {
+  const clickLogin = async (e) => {
+    e.preventDefault();
     const idInputVal = idRef.current.value;
     const pwInputVal = pwRef.current.value;
 
@@ -65,6 +67,7 @@ const Login = () => {
           })
         );
         console.log(response);
+        Swal.fire('로그인에 성공하셨습니다!');
         navigate("/");
       } catch (err) {
         window.alert(err);
@@ -95,7 +98,7 @@ const Login = () => {
             <br />
             입력하신 내용을 다시 확인해주세요.
           </ErrorMessage>
-          <LoginBtn onClick={clickLogin}>로그인하기</LoginBtn>
+          <LoginBtn onClick={(e)=>clickLogin(e)}>로그인하기</LoginBtn>
           <SignupBtn onClick={()=>{navigate("/signup")}}>아직 회원이 아니신가요?</SignupBtn>
           <LineWrap>
             <OrLine /> 또는 <OrLine />
@@ -139,7 +142,7 @@ const Wrap = styled.div`
   border-radius: 30px;
 `;
 
-const LoginWrap = styled.div`
+const LoginWrap = styled.form`
   margin: 50px 150px;
   /* background-color: beige; */
 `;
@@ -223,7 +226,7 @@ const ErrorMessage = styled.div`
   }}
 `;
 
-const LoginBtn = styled.div`
+const LoginBtn = styled.button`
   width: 500px;
   height: 59px;
   cursor: pointer;
@@ -235,6 +238,7 @@ const LoginBtn = styled.div`
   font-weight: bold;
   color: white;
   margin-top: 15px;
+  border: none;
 `;
 
 const SignupBtn = styled.div`
