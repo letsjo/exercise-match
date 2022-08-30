@@ -10,6 +10,7 @@ const loadLocalList = () => {
     await userAPI
       .get("/allow_info/dataRequest")
       .then((res) => {
+        dispatch(locationSliceAction.getLocalsName(res.data));
         console.log(res);
       })
       .catch((err) => {

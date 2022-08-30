@@ -32,10 +32,9 @@ const SelectCityCard = ({ localData }) => {
   };
 
   useEffect(() => {
-    selectedLocationRef.current?.scrollIntoView({ behavior: "smooth" });
+    selectedLocationRef.current?.scrollIntoView({ behavior: "auto", block: "center", inline: "nearest" });
   }, [selectedCity, selectedGu, currentLat, currentLon]);
 
-  // console.log(selectedCity, selectedGu);
 
   return (
     <Container>

@@ -22,13 +22,19 @@ const Comment = ({boardId}) => {
     dispatch(boardAction.loadComments(boardId));
   }, []);
 
-  const commentOnClick=(e)=>{
+  const commentOnClick= async (e)=>{
     e.preventDefault();
     if(inputRef.current.value===""){
         return;
     }
+    try{
+      const res = await dispatch(boardAction.postComment({boardId, comment:inputRef.current.value})).unwrap();
+      console.log(res);
+      inputRef.current.value="";
+    } catch(err) {
+      console.log(err);
+    }
     console.log(inputRef.current.value);
-    inputRef.current.value="";
   }
 
   const Alert = (e, commentId = "1") => {

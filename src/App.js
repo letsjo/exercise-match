@@ -41,7 +41,9 @@ function App() {
     console.log("Messenger opened!");
   });
 
+
   useEffect(() => {
+    dispatch(locationAction.loadLocalList());
     dispatch(locationAction.getLocation());
   }, []);
 
@@ -57,6 +59,7 @@ function App() {
         dispatch(userSliceAction.setLogin({username:sessionStorage.getItem("username")}))
     }
   }, []);
+  
 
   return (
     <Container>
