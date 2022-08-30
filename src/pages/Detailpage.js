@@ -10,6 +10,8 @@ import DatePersonnelWrap from "../components/Detailpage/DatePersonnelWrap";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { boardAction } from "../redux/actions/boardAction";
+import Swal from "sweetalert2";
+import KakaoMapForDetail from "../components/Board/MatchingBoard/KakaoMapForDetail";
 
 const Detailpage = () => {
   const dispatch = useDispatch();
@@ -22,23 +24,49 @@ const Detailpage = () => {
     setIsPopperShown(!isPopperShown);
   };
 
-  // const onClose = () => {
-  //   setIsPopperShown(false);
-  // };
-
   const [like, setLike] = useState(false);
 
   const likeOnClick = () => {
-    // if(like){
-    //   setLike(false);
-    // }else{
-    //   setLike(true);
-    // }
     setLike(!like);
-    dispatch(boardAction.likePost(params.id));
+    dispatch(boardAction.postLike(params.id));
   };
 
-  console.log(like,params.id);
+  const matchingApply = async () => {
+    let timerInterval;
+    try {
+      Swal.fire({
+        title: "매칭신청중...",
+        width: 439,
+        timerProgressBar: true,
+        hideClass: {
+          popup: "",
+        },
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+      const resApply = await dispatch(
+        boardAction.applyBoard(params.id)
+      ).unwrap();
+      clearInterval(timerInterval);
+      console.log(resApply);
+      Swal.fire({
+        icon: "success",
+        title: "매칭완료!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } catch (err) {
+      clearInterval(timerInterval);
+      console.log(err);
+      Swal.fire({
+        icon: "warning",
+        title: "매칭실패!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  };
 
   return (
     <>
@@ -60,6 +88,7 @@ const Detailpage = () => {
             {isPopperShown && (
               <DetailpagePopover
                 onOpenerClick={onOpenerClick}
+                boardId={params.id}
               ></DetailpagePopover>
             )}
           </Dot>
@@ -77,9 +106,15 @@ const Detailpage = () => {
         <ContentImage />
         <LocationWrap>
           <LocationTitle>장소 위치</LocationTitle>
-          <LocationImg></LocationImg>
+          <LocationImg>
+            <KakaoMapForDetail
+              // address={selectBoardData.address}
+              address={"장소주소 넣기"}
+              selectPosition={{La:128.6061745,Ma:35.86952722}}
+            />
+          </LocationImg>
         </LocationWrap>
-        <JoinButton>참여하기 X/X</JoinButton>
+        <JoinButton onClick={matchingApply}>참여하기 X/X</JoinButton>
         <InfoWrap>
           <Icon onClick={likeOnClick}>
             {like ? (
@@ -92,7 +127,7 @@ const Detailpage = () => {
           <CommentIcon />
           <Text>댓글 0개</Text>
         </InfoWrap>
-        <Comment />
+        <Comment boardId={params.id} />
       </Container>
     </>
   );
@@ -180,6 +215,7 @@ const JoinButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 
 const InfoWrap = styled.div`

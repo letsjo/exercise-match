@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { locaionAction } from "../../redux/actions/locationAction";
+import { locationAction } from "../../redux/actions/locationAction";
 import { locationSliceAction } from "../../redux/reducers/locationReducer";
 import { modalSliceAction } from "../../redux/reducers/modalReducer";
 import CurrentLocation from "../../utils/CurrentLocation";

@@ -1,14 +1,13 @@
 import { boardSliceAction } from "../reducers/boardReducer";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import userAPI from "../../apis/userAPI";
 
 function setBoardType(type, cate) {
   return async (dispatch) => {
     await userAPI
-      .get(
-        `/board/search?keyword=abc&city=대구&gu=북구&page=1&amount=12&sort=title`
-      )
+      .get(`/api/boards/${type}?cate=${cate}&page=1&amount=12`)
       .then((response) => {
-        // console.log(response);
+        console.log(response);
       })
       .catch((e) => {
         console.log(e);
@@ -16,7 +15,7 @@ function setBoardType(type, cate) {
   };
 }
 
-const boardPost = (tmpPostData) => {
+const postBoard = (tmpPostData) => {
   return async (dispatch) => {
     await userAPI
       .post("/api/board/create", tmpPostData)
@@ -29,7 +28,7 @@ const boardPost = (tmpPostData) => {
   };
 };
 
-const likePost = (boardId) => {
+const postLike = (boardId) => {
   return async (dispatch) => {
     await userAPI
       .post(`/board/${boardId}/likes`)
@@ -56,9 +55,74 @@ const loadBoard = (type, cate) => {
   };
 };
 
+const loadComments = (boardId) => {
+  return async (dispatch) => {
+    await userAPI
+      .get(`/api/board/${boardId}/comments`)
+      .then((response) => {
+        dispatch(boardSliceAction.loadCommentsData(response.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+const delBoard = createAsyncThunk(
+  "board/delBoard",
+  async ({ boardId }, { rejectWithValue }) => {
+    try {
+      const res = await userAPI.delete(
+        `/api/board/${boardId}`
+      );
+      console.log(res);
+      return res;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data.error);
+    }
+  }
+);
+
+const delComment = createAsyncThunk(
+  "board/delComment",
+  async ({ boardId, commentId }, { rejectWithValue }) => {
+    try {
+      const res = await userAPI.delete(
+        `/api/board/${boardId}/comments/${commentId}`
+      );
+      console.log(res);
+      return res;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data.error);
+    }
+  }
+);
+
+const applyBoard = createAsyncThunk(
+  "board/apply",
+  async ({ boardId }, { rejectWithValue }) => {
+    try {
+      const res = await userAPI.post(
+        `/board/${boardId}/matchingentry`
+      );
+      console.log(res);
+      return res;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data.error);
+    }
+  }
+);
+
 export const boardAction = {
   setBoardType,
-  boardPost,
-  likePost,
+  postBoard,
+  postLike,
   loadBoard,
+  loadComments,
+  delComment,
+  delBoard,
+  applyBoard,
 };

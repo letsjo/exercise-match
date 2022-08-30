@@ -2,11 +2,14 @@ import React from "react";
 import { useEffect } from "react";
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import KakaoMapForPost from "../components/Board/MatchingBoard/KakaoMapForPost";
 import NavBar from "../components/public/NavBar";
 import { boardAction } from "../redux/actions/boardAction";
 
 const PostWrite = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const category_ref = useRef(null);
   const person_ref = useRef(null);
@@ -14,6 +17,11 @@ const PostWrite = () => {
   const photoInput_ref = useRef();
   const titleInput_ref = useRef();
   const contentInput_ref = useRef();
+
+  // 카카오맵
+  const [Place, setPlace] = useState("");
+  const [markAddress, setMarkAddress] = useState("");
+  const [selectPosition, setSelectPosition] = useState();
 
   const [files, setFiles] = useState("");
 
@@ -56,12 +64,12 @@ const PostWrite = () => {
     const tmpPostData = {
       // boardType: "information",
       boardType: "matching",
-      category : "gym",
-      title : titleInput_ref.current.value,
+      category: "gym",
+      title: titleInput_ref.current.value,
       person: person_ref.current.value,
-      centent : contentInput_ref.current.value,
+      centent: contentInput_ref.current.value,
       // endDateAt : date_ref.current.value,
-    }
+    };
 
     const object = new FormData();
     object.append("locationImage", files[0]);
@@ -77,11 +85,12 @@ const PostWrite = () => {
     }
 
     try {
-      dispatch(boardAction.boardPost(tmpPostData));
+      dispatch(boardAction.postBoard(tmpPostData));
       console.log(object);
     } catch (e) {
       console.log(e);
     }
+    navigate("/detail/5");
   };
   //   console.log(category_ref);
 
@@ -131,16 +140,27 @@ const PostWrite = () => {
               <option value="default" disabled>
                 인원
               </option>
-              {Array.from({length:20}, (item, idx)=>{
-                return <option key={idx} value={idx+1}>{idx+1}</option>
+              {Array.from({ length: 20 }, (item, idx) => {
+                return (
+                  <option key={idx} value={idx + 1}>
+                    {idx + 1}
+                  </option>
+                );
               })}
             </PersonDrop>
             <GatherText>모집 날짜</GatherText>
-              <input type="date" ref={date_ref} name="date"/>
+            <input type="date" ref={date_ref} name="date" />
           </GatherWrap>
-          
+
           <Text>장소 위치</Text>
-          <LocationMap />
+          <LocationMap>
+            <KakaoMapForPost
+              setMarkAddress={setMarkAddress}
+              Place={Place}
+              setPlace={setPlace}
+              setSelectPosition={setSelectPosition}
+            />
+          </LocationMap>
 
           <ImageButton onClick={handleClick}>
             <input
@@ -153,8 +173,8 @@ const PostWrite = () => {
             />
             이미지 등록(0/1)
           </ImageButton>
-          <LocationImage className="img_box" name="locationImage" /> 
-          
+          <LocationImage className="img_box" name="locationImage" />
+
           <WriteButton type="submit">작성하기</WriteButton>
         </Container>
       </form>
@@ -166,7 +186,6 @@ const Container = styled.div`
   width: 700px;
   /* height: 1349px; */
   margin: 15px auto 50px;
-
 `;
 
 const Text = styled.div`
@@ -235,16 +254,16 @@ const PersonDrop = styled.select`
 
 const LocationMap = styled.div`
   width: 700px;
-  height:281px;
+  height: 281px;
   margin-bottom: 70px;
   box-sizing: border-box;
-  border:1px solid #d9d9d9;
+  border: 1px solid #d9d9d9;
 `;
 
 const LocationImage = styled.div`
   width: 700px;
-  height:317px;
-  margin-bottom: 70px;           // 매칭, 정보공유에 따라 수정 필요
+  height: 317px;
+  margin-bottom: 70px; // 매칭, 정보공유에 따라 수정 필요
   box-sizing: border-box;
   background-color: #d9d9d9;
   /* background-size: contain;

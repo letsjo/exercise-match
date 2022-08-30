@@ -12,8 +12,6 @@ const NavBar = () => {
 
   const { isLogin } = useSelector((state) => state.userReducer);
 
-  console.log(isLogin);
-
   const onOpenerClick = (e) => {
     e.stopPropagation();
     e.preventDefault();
@@ -79,6 +77,8 @@ const NavBarWrap = styled.div`
   align-items: center;
   /* background-color: aliceblue; */
   box-sizing: border-box;
+  
+  user-select: none;
 `;
 
 const Wrap = styled.div`

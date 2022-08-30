@@ -5,6 +5,7 @@ let initialState = {
     currentLon:126.977953,
     selectedCity: "전국",
     selectedGu: "",
+    localsNameList: []
 };
 
 const locationSlice = createSlice({
@@ -12,12 +13,15 @@ const locationSlice = createSlice({
     initialState,
     reducers:{
         currentLocation(state,action){
-            state.selectedCity=action.payload.currentLat;
-            state.selectedGu=action.payload.currentLon;
+            state.currentLat=action.payload.currentLat;
+            state.currentLon=action.payload.currentLon;
         },
         selectLocation(state,action){
             state.selectedCity=action.payload.selectedCity;
             state.selectedGu=action.payload.selectedGu;
+        },
+        getLocalsName(state,action){
+            state.localsNameList=action.payload;
         },
     }
 });

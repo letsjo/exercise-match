@@ -4,6 +4,7 @@ let initialState = {
     boardType:"match",
     category:"all",
     boardData:[],
+    comments:[],
 };
 
 const boardSlice = createSlice({
@@ -16,7 +17,10 @@ const boardSlice = createSlice({
         },
         loadBoardData(state,action){
             state.boardData = action.payload;
-        }
+        },
+        loadCommentsData(state,action){
+            state.comments = action.payload;
+        },
     }
 });
 

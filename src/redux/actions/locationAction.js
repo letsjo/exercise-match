@@ -1,10 +1,22 @@
 import mapAPI from "../../apis/mapAPI";
+import userAPI from "../../apis/userAPI";
 import CurrentLocation from "../../utils/CurrentLocation";
 import { locationSliceAction } from "../reducers/locationReducer";
 import { modalSliceAction } from "../reducers/modalReducer";
 import Swal from "sweetalert2";
 
-function loadLocalList() {}
+const loadLocalList = () => {
+  return async (dispatch) => {
+    await userAPI
+      .get("/allow_info/dataRequest")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
 
 const getLocation = () => {
   return async (dispatch) => {
@@ -41,7 +53,7 @@ const getLocation = () => {
   };
 };
 
-export const locaionAction = {
+export const locationAction = {
   loadLocalList,
   getLocation,
 };

@@ -1,9 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { locationAction } from "../../redux/actions/locationAction";
 import SelectCityCard from "./SelectCityCard";
 
 const SelectLocation = () => {
+  const dispatch = useDispatch();
   const tmpLocalName = [
     {
       city: "전국",
@@ -73,6 +75,10 @@ const SelectLocation = () => {
       ],
     },
   ];
+
+  useEffect(()=>{
+    dispatch(locationAction.loadLocalList());
+  },[])
 
   return (
     <Container>

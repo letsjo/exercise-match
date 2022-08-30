@@ -8,7 +8,7 @@ const BeforeMatchingCard = ({ completed=false }) => {
   const navigate = useNavigate();
 
   return (
-    <Container onClick={()=>{navigate("/detailpage/5")}} completed={completed}>
+    <Container onClick={()=>{navigate("/detail/5")}} completed={completed}>
       <MatchingOrNot completed={completed}>{completed ? "매칭완료" : "매칭중"}</MatchingOrNot>
       <TitleWrap>
         <CategoryTag>배드민턴</CategoryTag>
