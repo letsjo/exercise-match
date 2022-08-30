@@ -5,9 +5,21 @@ import BoardCardSmall from "./BoardCardSmall";
 const BoardListSmall = () => {
   return (
     <BoardListFrame>
-      <BoardCardSmall />
-      <BoardCardSmall />
-      <BoardCardSmall />
+      <BoardCardSmall
+      title="제목"
+      writer="글쓴"
+      content="내용칸입니당"
+      image="https://placehold.jp/80x70.png" />
+      <BoardCardSmall
+      title="제목들어올 자리"
+      writer="글쓴"
+      content="내용칸입니당"
+      image="https://placehold.jp/80x70.png" />
+      <BoardCardSmall
+      title="제목"
+      writer="글쓴"
+      content="내용칸입니당"
+      image="https://placehold.jp/80x70.png" />
     </BoardListFrame>
   );
 };

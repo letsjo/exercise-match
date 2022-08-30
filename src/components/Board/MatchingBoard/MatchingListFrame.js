@@ -28,18 +28,39 @@ const MatchingListFrame = () => {
         <ButtonBox>
           <WriteButton
             onClick={() => {
-              navigate("/postwrite");
+              navigate("/matchingpostwrite");
             }}
           >
             작성하기
           </WriteButton>
         </ButtonBox>
-        <MatchingCard completed={true} />
-        <MatchingCard />
-        <MatchingCard completed={true} />
-        <MatchingCard />
-        <MatchingCard />
-        <MatchingCard />
+        <MatchingCard 
+        completed={true}
+        category="헬스"
+        title="제목입니다" 
+        date="8월 30일 화요일" 
+        number="1/5"
+        context="내용들어가는 부분입니당" 
+        writer="닉네임" 
+        location="강릉시" />
+        <MatchingCard
+        category="헬스"
+        title="제목입니다" 
+        date="8월 30일 화요일" 
+        number="1/5"
+        context="내용들어가는 부분입니당" 
+        writer="닉네임" 
+        location="강릉시" />
+        <MatchingCard completed={true}
+        category="헬스"
+        title="제목입니다" 
+        date="8월 30일 화요일" 
+        number="1/5"
+        context="내용들어가는 부분입니당" 
+        writer="닉네임" 
+        location="강릉시" />
+        
+        
         <PageFrame>
           <Frame>
             <Pagination total={5} limit={2} page={page} setPage={setPage} />

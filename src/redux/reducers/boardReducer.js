@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 let initialState = {
-    boardType:"match",
+    boardType:"matching",
     category:"all",
     boardData:[],
     comments:[],

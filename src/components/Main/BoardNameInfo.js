@@ -16,7 +16,7 @@ const BoardInfo = ({
     <BoardInfoZone>
       <BoardTitle>
         <BoardIcon>
-          <img src={iconImg} />
+          <img src={iconImg} alt=""/>
         </BoardIcon>
         <div>{title}</div>
       </BoardTitle>
