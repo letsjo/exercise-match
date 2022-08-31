@@ -12,7 +12,7 @@ const BulletinListFrame = () => {
 
   return (
     <>
-      <CategoryBoxFrame />
+      <CategoryBoxFrame page={page} />
       <BoardListFrame>
         <ButtonBox>
           <WriteButton onClick={()=>{navigate("/communitypostWrite")}}>작성하기</WriteButton>

@@ -37,6 +37,9 @@ const userSlice = createSlice({
       state.userProfile = "";
       state.userNickName = "";
     },
+    setGoogleLogin(state){
+      state.isLogin=true;
+    },
     setUserNickName(state, action) {
       state.userNickName = action.payload;
     },

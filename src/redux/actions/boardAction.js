@@ -16,10 +16,10 @@ function setBoardType(type, cate) {
   };
 }
 
-const postBoard = (tmpPostData) => {
+const postBoard = (object) => {
   return async (dispatch) => {
     await userAPI
-      .post("/api/board/create", tmpPostData)
+      .post("/api/board/create", {data:object},{headers:{"Content-Type": 'multipart/form-data'}})
       .then((response) => {
         console.log(response);
       })
@@ -42,10 +42,11 @@ const postLike = (boardId) => {
   };
 };
 
-const loadBoard = (type, cate) => {
+const loadBoard = (type, cate,selectedCity, selectedGu, page) => {
   return async (dispatch) => {
     await userAPI
-      .get(`/api/boards/${type}/${cate}`)
+      .get(`/api/boards/${type}?cate=${cate}&page=${page}&amount=12&city=${selectedCity}&gu=${selectedGu}`
+      )
       .then((response) => {
         dispatch(boardSliceAction.loadBoardData(response.data));
         console.log(response);
@@ -58,6 +59,7 @@ const loadBoard = (type, cate) => {
 
 const loadComments = (boardId) => {
   return async (dispatch) => {
+
     await userAPI
       .get(`/api/board/${boardId}/comments`)
       .then((response) => {

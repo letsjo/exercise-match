@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const CommentCard = ({content, title, date}) => {
+const MyCommentCard = ({content, title, date}) => {
   return (
     <Container>
         <Content>{content}</Content>
@@ -41,4 +41,4 @@ const Date =styled.div`
 `;
 
 
-export default CommentCard
+export default MyCommentCard

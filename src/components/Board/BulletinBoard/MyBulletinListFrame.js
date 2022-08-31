@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { useState } from "react";
 import Pagination from "../BoardPublic/Pagination";
-import CommentCard from "../BoardPublic/CommentCard";
+import MyCommentCard from "../BoardPublic/MyCommentCard";
 import MyBulletin from "../MyWritePost/MyBulletin";
 import MyComment from "../MyWritePost/MyComment";
 import MyMatching from "../MyWritePost/MyMatching";
