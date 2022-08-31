@@ -12,7 +12,7 @@ const KakaoLogin = (props) => {
     dispatch(userAction.kakaoLogin(code));
   }, []);
 
-  return <div>KakaoLogin</div>;
+  return (<div>KakaoLogin</div>);
 };
 
 export default KakaoLogin;
