@@ -41,6 +41,27 @@ const naverLogin = (code) => {
   };
 };
 
+const googleLogin = createAsyncThunk(
+  "user/googleLogin",
+  async ({access_Token,refresh_Token}, { rejectWithValue }) => {
+    try {
+      userAPI.defaults.headers.common["accesstoken"] = access_Token;
+      userAPI.defaults.headers.common["refreshtoken"] = refresh_Token;
+
+      let sessionStorageLogin = sessionStorage;
+      sessionStorageLogin.setItem("accesstoken", access_Token);
+      sessionStorageLogin.setItem("refreshtoken", refresh_Token);
+      // sessionStorageLogin.setItem("nickname", LoginData.username); 닉네임
+      // sessionStorageLogin.setItem("profile", LoginData.username); 프로필 사진
+      
+      return ;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data.error);
+    }
+  }
+);
+
 const testJoin = () => {
   return async (dispatch) => {
     try {
@@ -237,6 +258,7 @@ const userLogin = createAsyncThunk(
 export const userAction = {
   kakaoLogin,
   naverLogin,
+  googleLogin,
   userLogin,
   refreshToken,
   checkEmail,

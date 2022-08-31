@@ -30,7 +30,11 @@ const Login = () => {
   const googleURL = `http://ec2-13-209-65-84.ap-northeast-2.compute.amazonaws.com/oauth2/authorization/google`;
 
   const naverLogin = () => {
-    // window.location.href = naverURL;
+    window.location.href = naverURL;
+    // window.location.href = googleURL;
+  };
+
+   const googleLogin = () => {
     window.location.href = googleURL;
   };
 
@@ -107,7 +111,7 @@ const Login = () => {
             <KakaoIcon onClick={kakaoLogin}>
               <img src="/images/kakao_logo.png" alt="" />
             </KakaoIcon>
-            <NaverIcon onClick={naverLogin}>
+            <NaverIcon onClick={googleLogin}>  
               <img src="/images/btnG_아이콘원형.png" alt="" />
             </NaverIcon>
           </IconBox>

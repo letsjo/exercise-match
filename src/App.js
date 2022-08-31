@@ -27,6 +27,7 @@ import { userSliceAction } from "./redux/reducers/userReducer";
 import PasswordChange from "./pages/PasswordChange";
 import PasswordFind from "./pages/PasswordFind";
 import userAPI from "./apis/userAPI";
+import GoogleLogin from "./pages/GoogleLogin";
 
 
 
@@ -81,6 +82,7 @@ function App() {
         <Route path="/memberExit" element={<MemberExit/>}/>
         <Route path="/api/kakaologin" element={<KakaoLogin/>} />
         <Route path="/api/naverLogin" element={<NaverLogin/>}/>
+        <Route path="/oauth2/redirect" element={<GoogleLogin/>}/>
       </Routes>
       <ModalComponents />
       <span onClick={showMessenger}></span>

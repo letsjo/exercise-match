@@ -5,7 +5,7 @@ import styled, { css } from "styled-components";
 import { boardAction } from "../../../redux/actions/boardAction";
 import SearchOption from "./SearchOption";
 
-const CategoryBoxFrame = ({}) => {
+const CategoryBoxFrame = ({page}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { boardType } = useSelector((state) => state.boardReducer);
@@ -14,6 +14,12 @@ const CategoryBoxFrame = ({}) => {
   const query = useLocation().search;
   const type = new URLSearchParams(query).get("type");
   const cate = new URLSearchParams(query).get("cate");
+
+  useEffect(() => {
+    dispatch(boardAction.loadBoard(type, cate, selectedCity, selectedGu, page));
+  }, [type, cate, selectedCity, selectedGu, page]);
+
+  
 
   return (
     <CategorySelect>
