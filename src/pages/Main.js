@@ -30,7 +30,7 @@ const Main = () => {
           "https://activeinternational.kr/wp-content/uploads/2021/08/%EA%B3%A8%ED%94%84%EC%9E%A5-Golf-Course.jpg",
         ]}
       />
-      <CurrentLocationCard/>
+      <CurrentLocationCard />
       <SelectCategoryBox />
       <HistoryBoard />
       <PopularBoard

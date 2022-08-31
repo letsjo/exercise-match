@@ -41,30 +41,6 @@ const naverLogin = (code) => {
   };
 };
 
-const userLogin = createAsyncThunk(
-  "user/userLogin",
-  async (LoginData, { rejectWithValue }) => {
-    try {
-      const res = await userAPI.post("/login", LoginData);
-      userAPI.defaults.headers.common["accesstoken"] = res.headers?.accesstoken;
-      userAPI.defaults.headers.common["refreshtoken"] =
-        res.headers?.refreshtoken;
-
-      let sessionStorageLogin = sessionStorage;
-      sessionStorageLogin.setItem("accesstoken", res.headers?.accesstoken);
-      sessionStorageLogin.setItem("refreshtoken", res.headers?.refreshtoken);
-      sessionStorageLogin.setItem("username", LoginData.username);
-
-      return res;
-      // sessionStorageLogin.setItem("nickname", response.data.userInfoDto.nickname);
-      // sessionStorageLogin.setItem("profile", response.data.userInfoDto.profile);
-    } catch (err) {
-      console.log(err);
-      return rejectWithValue(err.response.data.error);
-    }
-  }
-);
-
 const googleLogin = createAsyncThunk(
   "user/googleLogin",
   async ({access_Token,refresh_Token}, { rejectWithValue }) => {
@@ -181,15 +157,16 @@ const loadMyPage = () => {
     try {
       const myPageActionAPI = userAPI.get("/api/mypage/action");
       const myPageInfoAPI = userAPI.get("/api/mypage/info");
-      const myPageProfileAPI = userAPI.get("/api/mypage/profile");
+      // const myPageProfileAPI = userAPI.get("/api/mypage/profile");
 
       let [responseAction, responseInfo, responseProfile] = await Promise.all([
         myPageActionAPI,
         myPageInfoAPI,
-        myPageProfileAPI,
+        // myPageProfileAPI,
       ]);
 
-      console.log(responseAction, responseInfo, responseProfile);
+      // console.log(responseAction, responseInfo, responseProfile);
+      console.log(responseAction, responseInfo);
     } catch (e) {
       console.log(e);
     }
@@ -253,6 +230,30 @@ const editBirth = (birthYear, birthMonth, birthDay) => {
     }
   };
 };
+
+const userLogin = createAsyncThunk(
+  "user/userLogin",
+  async (LoginData, { rejectWithValue }) => {
+    try {
+      const res = await userAPI.post("/login", LoginData);
+      userAPI.defaults.headers.common["accesstoken"] = res.headers?.accesstoken;
+      userAPI.defaults.headers.common["refreshtoken"] =
+        res.headers?.refreshtoken;
+
+      let sessionStorageLogin = sessionStorage;
+      sessionStorageLogin.setItem("accesstoken", res.headers?.accesstoken);
+      sessionStorageLogin.setItem("refreshtoken", res.headers?.refreshtoken);
+      sessionStorageLogin.setItem("username", LoginData.username);
+
+      return res;
+      // sessionStorageLogin.setItem("nickname", response.data.userInfoDto.nickname);
+      // sessionStorageLogin.setItem("profile", response.data.userInfoDto.profile);
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data.error);
+    }
+  }
+);
 
 export const userAction = {
   kakaoLogin,
