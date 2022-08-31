@@ -59,21 +59,18 @@ const CommunityPostWrite = () => {
   const onHandleSubmit = async (e) => {
     e.preventDefault();
 
-    const tmpPostData = {
-      // boardType: "information",
-      boardType: "matching",
-      category: "gym",
-      title: titleInput_ref.current.value,
-      person: person_ref.current.value,
-      centent: contentInput_ref.current.value,
-      // endDateAt : date_ref.current.value,
-    };
 
     const object = new FormData();
-    object.append("locationImage", files[0]);
+    object.append("boardType", "information");
+    object.append("boardImage", files[0]);
+    object.append("endDateAt", null);
+    object.append("maxEntry", null);
+    object.append("city", null);
+    object.append("gu", null);
+    object.append("lat", null);
+    object.append("lng", null);
     object.append("category", category_ref.current.value);
-    object.append("person", person_ref.current.value);
-    object.append("date", date_ref.current.value);
+    object.append("person", null);
     object.append("title", titleInput_ref.current.value);
     object.append("content", contentInput_ref.current.value);
     console.log(e.target);
@@ -83,19 +80,18 @@ const CommunityPostWrite = () => {
     }
 
     try {
-      dispatch(boardAction.postBoard(tmpPostData));
+      dispatch(boardAction.postBoard(object));
       console.log(object);
     } catch (e) {
       console.log(e);
     }
-    navigate("/detail/5");
   };
   //   console.log(category_ref);
 
   return (
     <>
       <NavBar />
-      <form onSubmit={onHandleSubmit}>
+      <form onSubmit={onHandleSubmit} >
         <Container>
           <Text>카테고리</Text>
           <CategoryDrop
@@ -223,7 +219,7 @@ const LocationImage = styled.div`
   background-size: cover;
 `;
 
-const ImageButton = styled.button`
+const ImageButton = styled.div`
   width: 700px;
   height: 50px;
   box-sizing: border-box;

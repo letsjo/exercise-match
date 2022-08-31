@@ -1,29 +1,24 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import Pagination from "../BoardPublic/Pagination";
 import { useState } from "react";
 import MatchingCard from "./MatchingCard";
 import CategoryBoxFrame from "../BoardPublic/CategoryBoxFrame";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { boardAction } from "../../../redux/actions/boardAction";
+import { useSelector } from "react-redux";
+
 
 const MatchingListFrame = () => {
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(boardAction.loadBoard("matching", "gym"));
-  }, []);
-
-  const { boardData } = useSelector((state)=>state.boardReducer);
+  const{ boardData } = useSelector((state)=>state.boardReducer);
 
   console.log(boardData);
 
   return (
     <>
-      <CategoryBoxFrame />
+      <CategoryBoxFrame page={page}/>
       <BoardListFrame>
         <ButtonBox>
           <WriteButton

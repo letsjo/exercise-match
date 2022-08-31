@@ -80,7 +80,7 @@ const Board = () => {
         </CategoryFrame>
         <ContextFrame>
           {type === "matching" ? (
-            <MatchingListFrame />
+            <MatchingListFrame/>
           ) : type === "information" ? (
             <BulletinListFrame />
           ) : type ==="mymatching" ?(

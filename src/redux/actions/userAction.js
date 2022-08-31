@@ -45,7 +45,7 @@ const userLogin = createAsyncThunk(
   "user/userLogin",
   async (LoginData, { rejectWithValue }) => {
     try {
-      const res = await userAPI.post("user/login", LoginData);
+      const res = await userAPI.post("/login", LoginData);
       userAPI.defaults.headers.common["accesstoken"] = res.headers?.accesstoken;
       userAPI.defaults.headers.common["refreshtoken"] =
         res.headers?.refreshtoken;
@@ -58,6 +58,27 @@ const userLogin = createAsyncThunk(
       return res;
       // sessionStorageLogin.setItem("nickname", response.data.userInfoDto.nickname);
       // sessionStorageLogin.setItem("profile", response.data.userInfoDto.profile);
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data.error);
+    }
+  }
+);
+
+const googleLogin = createAsyncThunk(
+  "user/googleLogin",
+  async ({access_Token,refresh_Token}, { rejectWithValue }) => {
+    try {
+      userAPI.defaults.headers.common["accesstoken"] = access_Token;
+      userAPI.defaults.headers.common["refreshtoken"] = refresh_Token;
+
+      let sessionStorageLogin = sessionStorage;
+      sessionStorageLogin.setItem("accesstoken", access_Token);
+      sessionStorageLogin.setItem("refreshtoken", refresh_Token);
+      // sessionStorageLogin.setItem("nickname", LoginData.username); 닉네임
+      // sessionStorageLogin.setItem("profile", LoginData.username); 프로필 사진
+      
+      return ;
     } catch (err) {
       console.log(err);
       return rejectWithValue(err.response.data.error);
@@ -221,7 +242,7 @@ const editBirth = (birthYear, birthMonth, birthDay) => {
   return async (dispatch) => {
     try {
       const res = await userAPI.put("/api/mypage/infoedit/birth", {
-        birthday: birthYear+birthMonth+birthDay,
+        birth: birthYear+birthMonth+birthDay,
       });
       dispatch(userSliceAction.setUserBirthYear(birthYear));
       dispatch(userSliceAction.setUserBirthMonth(birthMonth));
@@ -236,6 +257,7 @@ const editBirth = (birthYear, birthMonth, birthDay) => {
 export const userAction = {
   kakaoLogin,
   naverLogin,
+  googleLogin,
   userLogin,
   refreshToken,
   checkEmail,

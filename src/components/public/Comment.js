@@ -1,14 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
-import { FiX } from "react-icons/fi";
-import Swal from "sweetalert2";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { boardAction } from "../../redux/actions/boardAction";
+import CommentCard from "./CommentCard";
 
-const Comment = ({boardId}) => {
+const Comment = ({ boardId }) => {
   const inputRef = useRef();
   const dispatch = useDispatch();
   const [commentButton, setCommentButton] = useState(false);
+  const { username } = useSelector((state) => state.userReducer);
+  const { comments } = useSelector((state) => state.boardReducer);
+  // console.log(user);
   const inputChange = () => {
     // console.log(inputRef.current.value);
     if (inputRef.current.value === "") {
@@ -22,77 +24,21 @@ const Comment = ({boardId}) => {
     dispatch(boardAction.loadComments(boardId));
   }, []);
 
-  const commentOnClick= async (e)=>{
+  const commentOnClick = async (e) => {
     e.preventDefault();
-    if(inputRef.current.value===""){
-        return;
+    if (inputRef.current.value === "") {
+      return;
     }
-    try{
-      const res = await dispatch(boardAction.postComment({boardId, comment:inputRef.current.value})).unwrap();
+    try {
+      const res = await dispatch(
+        boardAction.postComment({ boardId, comment: inputRef.current.value })
+      ).unwrap();
       console.log(res);
-      inputRef.current.value="";
-    } catch(err) {
+      inputRef.current.value = "";
+    } catch (err) {
       console.log(err);
     }
     console.log(inputRef.current.value);
-  }
-
-  const Alert = (e, commentId = "1") => {
-    e.preventDefault();
-    Swal.fire({
-      // title: '',
-      text: "댓글을 삭제하시겠습니까?",
-      // icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: "#494949",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "삭제",
-      cancelButtonText: "취소",
-      width: 439,
-      hideClass: {
-        popup: "",
-      },
-      // heightAuto:false,
-      // height:'359px'
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        let timerInterval;
-        try {
-          Swal.fire({
-            title: "삭제중",
-            width: 439,
-            timerProgressBar: true,
-            showClass: {
-              popup: "",
-            },
-            hideClass: {
-              popup: "",
-            },
-            didOpen: () => {
-              Swal.showLoading();
-            },
-          });
-          const resDel = await dispatch(
-            boardAction.delComment({ boardId, commentId })
-          ).unwrap();
-          console.log(resDel);
-          Swal.fire({
-            icon: "success",
-            title: "삭제완료!",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        } catch (e) {
-          console.log(e);
-          Swal.fire({
-            icon: "warning",
-            title: "삭제실패!",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        }
-      }
-    });
   };
 
   return (
@@ -103,68 +49,24 @@ const Comment = ({boardId}) => {
           onChange={inputChange}
           ref={inputRef}
         />
-        <CommentBtn commentButton={commentButton} onClick={(e)=>commentOnClick(e)}>{commentButton && "등록"}</CommentBtn>
+        <CommentBtn
+          commentButton={commentButton}
+          onClick={(e) => commentOnClick(e)}
+        >
+          {commentButton && "등록"}
+        </CommentBtn>
       </CommentInputArea>
-      <CommentWrap>
-        <ProfileWrap>
-          <Profile>
-            <img
-              src="http://file3.instiz.net/data/cached_img/upload/2018/09/15/0/28998558fac5abcead6e6e942d53194f.jpg"
-              alt=""
-            />
-          </Profile>
-          <Nickname>홍길동</Nickname>
-          <Delete>
-            <FiX size={20} onClick={Alert} />
-          </Delete>
-        </ProfileWrap>
-        <Content>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </Content>
-        <Date>
-          <div>22.xx.xx</div>
-        </Date>
-      </CommentWrap>
-
-      <CommentWrap>
-        <ProfileWrap>
-          <Profile>
-            <img
-              src="http://file3.instiz.net/data/cached_img/upload/2018/09/15/0/28998558fac5abcead6e6e942d53194f.jpg"
-              alt=""
-            />
-          </Profile>
-          <Nickname>홍길동</Nickname>
-        </ProfileWrap>
-        <Content>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra elit
-          donec nunc posuere pulvinar libero fermentum mi. Lorem ipsum dolor sit
-          amet, consectetur adipiscing elit. Viverra elit donec nunc posuere
-          pulvinar libero fermentum mi.
-        </Content>
-        <Date>
-          <div>22.xx.xx</div>
-        </Date>
-      </CommentWrap>
-
-      <CommentWrap>
-        <ProfileWrap>
-          <Profile>
-            <img
-              src="http://file3.instiz.net/data/cached_img/upload/2018/09/15/0/28998558fac5abcead6e6e942d53194f.jpg"
-              alt=""
-            />
-          </Profile>
-          <Nickname>홍길동</Nickname>
-        </ProfileWrap>
-        <Content>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra elit
-          donec nunc posuere pulvinar libero fermentum mi.
-        </Content>
-        <Date>
-          <div>22.xx.xx</div>
-        </Date>
-      </CommentWrap>
+      {comments.map((comment, idx) => (
+        <CommentCard
+          key={idx}
+          myComment={username===comment.writer.username}
+          boardId={boardId}
+          image={comment.writer.profile}
+          nickname={comment.writer.nickname}
+          content={comment.content}
+          date={comment.createdAt}
+        />
+      ))}
     </Container>
   );
 };
@@ -204,13 +106,12 @@ const CommentBtn = styled.button`
   font-weight: bold;
   font-size: 20px;
   display: flex;
-  background-color:transparent ;
+  background-color: transparent;
   justify-content: center;
   align-items: center;
   ${({ commentButton }) => {
     return css`
-   cursor: ${ commentButton? "pointer":"auto"}
-     
+      cursor: ${commentButton ? "pointer" : "auto"};
     `;
   }}
 `;

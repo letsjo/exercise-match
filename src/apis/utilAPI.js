@@ -2,6 +2,7 @@ import axios from "axios";
 
 const utilAPI = axios.create({
   headers: { "Content-Type": "application/json" },
+
 });
 
 // Add a request interceptor
