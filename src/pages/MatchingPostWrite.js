@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import styled,{css} from "styled-components";
 import KakaoMapForPost from "../components/Board/MatchingBoard/KakaoMapForPost";
 import NavBar from "../components/public/NavBar";
 import { boardAction } from "../redux/actions/boardAction";
@@ -157,7 +157,7 @@ const PostWrite = () => {
             />
           </LocationMap>
 
-          <ImageButton onClick={handleClick}>
+          <ImageButton onClick={handleClick} photoInput_ref={photoInput_ref.current?.value}>
             <input
               type="file"
               id="image"
@@ -166,9 +166,10 @@ const PostWrite = () => {
               style={{ display: "none" }}
               ref={photoInput_ref}
             />
-            이미지 등록(0/1)
+            이미지 등록({photoInput_ref.current?.value?"1":"0"}/1)
           </ImageButton>
-          <LocationImage className="img_box" name="locationImage" />
+          {photoInput_ref.current?.value&&<LocationImage className="img_box" name="locationImage" />}
+          
 
           <WriteButton type="submit">작성하기</WriteButton>
         </Container>
@@ -250,7 +251,7 @@ const PersonDrop = styled.select`
 const LocationMap = styled.div`
   width: 700px;
   height: 281px;
-  margin-bottom: 70px;
+  /* margin-bottom: 70px; */
   box-sizing: border-box;
   border: 1px solid #d9d9d9;
 `;
@@ -266,14 +267,23 @@ const LocationImage = styled.div`
   background-size: cover;
 `;
 
-const ImageButton = styled.button`
+const ImageButton = styled.div`
   width: 700px;
   height: 50px;
   box-sizing: border-box;
-  background-color: #dedede;
+  margin-top: 70px;
   font-size: 20px;
   border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 20px;
+  ${({photoInput_ref})=>{
+    return css`
+    background-color: ${photoInput_ref?"#a8a8a8":"#dedede"};
+    `;
+  }}
 `;
 
 const WriteButton = styled.button`

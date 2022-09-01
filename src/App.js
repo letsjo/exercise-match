@@ -21,7 +21,7 @@ import MatchingPostWrite from "./pages/MatchingPostWrite";
 import CommunityPostWrite from "./pages/CommunityPostWrite";
 import Detailpage from "./pages/Detailpage";
 import MemberExit from "./pages/MemberExit";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { locationAction } from "./redux/actions/locationAction";
 import { userSliceAction } from "./redux/reducers/userReducer";
 import PasswordChange from "./pages/PasswordChange";
@@ -38,6 +38,7 @@ export const is_authorization = sessionStorage.getItem("accesstoken")
 
 function App() {
   const dispatch = useDispatch();
+  // const {isLogin} =useSelector((state)=>state.userReducer);
 
   const { showMessenger } = useChannelIOApi();
   useChannelIOEvent("onShowMessenger", () => {
@@ -59,7 +60,8 @@ function App() {
         sessionStorage.getItem("refreshtoken");
         console.log(sessionStorage.getItem("accesstoken"));
         console.log(sessionStorage.getItem("refreshtoken"));
-        dispatch(userSliceAction.setLogin({username:sessionStorage.getItem("username")}))
+        dispatch(userSliceAction.setLogin({username:sessionStorage.getItem("username"),nickname:sessionStorage.getItem("nickname"),profile:sessionStorage.getItem("profile")}))
+        // navigate("/");
     }
   }, []);
   
