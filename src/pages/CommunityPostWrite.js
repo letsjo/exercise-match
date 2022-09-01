@@ -64,8 +64,7 @@ const CommunityPostWrite = () => {
     object.append("title", titleInput_ref.current.value);
     object.append("category", category_ref.current.value);
     object.append("content", contentInput_ref.current.value);
-    object.append("maxEntry", null);
-    object.append("person", null);
+    object.append("maxEntry", "0");
     object.append("endDateAt", null);
     object.append("city", null);
     object.append("gu", null);
