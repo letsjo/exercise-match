@@ -10,16 +10,9 @@ const CommunityPostWrite = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const category_ref = useRef(null);
-  const person_ref = useRef(null);
-  const date_ref = useRef(null);
   const photoInput_ref = useRef(null);
   const titleInput_ref = useRef();
   const contentInput_ref = useRef();
-
-  // 카카오맵
-  const [Place, setPlace] = useState("");
-  const [markAddress, setMarkAddress] = useState("");
-  const [selectPosition, setSelectPosition] = useState();
 
   const [files, setFiles] = useState("");
 
@@ -82,7 +75,6 @@ const CommunityPostWrite = () => {
       console.log(e);
     }
   };
-  //   console.log(category_ref);
 
   return (
     <>

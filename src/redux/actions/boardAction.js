@@ -5,14 +5,14 @@ import userAPI from "../../apis/userAPI";
 function setBoardType(type, cate) {
   return async (dispatch) => {
     dispatch(boardSliceAction.setBoardType({type,cate}))
-    await userAPI
-      .get(`/api/boards/${type}?cate=${cate}&page=1&amount=12`)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    // await userAPI
+    //   .get(`/api/boards/${type}?cate=${cate}&page=1&amount=12`)
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((e) => {
+    //     console.log(e);
+    //   });
   };
 }
 

@@ -8,7 +8,6 @@ import SearchOption from "./SearchOption";
 const CategoryBoxFrame = ({page}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { boardType } = useSelector((state) => state.boardReducer);
   const { selectedCity, selectedGu } = useSelector((state) => state.locationReducer);
 
   const query = useLocation().search;
