@@ -36,8 +36,7 @@ const CommunityPostWrite = () => {
   useEffect(() => {
     preview();
 
-    return () => preview();
-  });
+  },[files]);
 
   const preview = () => {
     if (!files) return false;
