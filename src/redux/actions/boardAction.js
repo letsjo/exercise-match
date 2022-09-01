@@ -16,10 +16,10 @@ function setBoardType(type, cate) {
   };
 }
 
-const postBoard = (object) => {
+const postBoard = (data) => {
   return async (dispatch) => {
     await userAPI
-      .post("/api/board/create", {data:object},{headers:{"Content-Type": 'multipart/form-data'}})
+      .post("/api/board/create", data,{headers:{'Content-Type': 'multipart/form-data'}})
       .then((response) => {
         console.log(response);
       })
@@ -44,9 +44,14 @@ const postLike = (boardId) => {
 
 const loadBoard = (type, cate,selectedCity, selectedGu, page) => {
   return async (dispatch) => {
+    let loadURL;
+    if (type === "matching") 
+      loadURL = `/api/boards/${type}?cate=${cate}&page=${page}&amount=12&city=${selectedCity?selectedCity:"all"}&gu=${selectedGu?selectedGu:"all"}`;
+    else
+      loadURL = `/api/boards/${type}?cate=${cate}&page=${page}&amount=12`;
+    
     await userAPI
-      .get(`/api/boards/${type}?cate=${cate}&page=${page}&amount=12&city=${selectedCity}&gu=${selectedGu}`
-      )
+      .get(loadURL)
       .then((response) => {
         dispatch(boardSliceAction.loadBoardData(response.data));
         console.log(response);
