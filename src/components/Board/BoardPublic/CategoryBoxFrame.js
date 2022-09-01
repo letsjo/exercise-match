@@ -19,8 +19,6 @@ const CategoryBoxFrame = ({page}) => {
     dispatch(boardAction.loadBoard(type, cate, selectedCity, selectedGu, page));
   }, [type, cate, selectedCity, selectedGu, page]);
 
-  
-
   return (
     <CategorySelect>
       <CategoryBox>
@@ -30,77 +28,77 @@ const CategoryBoxFrame = ({page}) => {
             dispatch(boardAction.setBoardType(type,"all"));
             navigate(`/board?type=${type}&cate=all&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
           }}
-          selected={cate === "all" ? true : false}
+          selected={cate === "all"}
         >
           전체
         </CategoryCard>
         <CategoryCard
           onClick={(e) => {
             e.preventDefault();
-            dispatch(boardAction.setBoardType(boardType,"gym"));
-            navigate(`/board?type=${boardType}&cate=gym&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
+            dispatch(boardAction.setBoardType(type,"gym"));
+            navigate(`/board?type=${type}&cate=gym&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
           }}
-          selected={cate === "gym" ? true : false}
+          selected={cate === "gym"}
         >
           헬스
         </CategoryCard>
         <CategoryCard
           onClick={(e) => {
             e.preventDefault();
-            dispatch(boardAction.setBoardType(boardType,"running"));
-            navigate(`/board?type=${boardType}&cate=running&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
+            dispatch(boardAction.setBoardType(type,"running"));
+            navigate(`/board?type=${type}&cate=running&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
           }}
-          selected={cate === "running" ? true : false}
+          selected={cate === "running"}
         >
           조깅&러닝
         </CategoryCard>
         <CategoryCard
           onClick={(e) => {
             e.preventDefault();
-            dispatch(boardAction.setBoardType(boardType,"ridding"));
-            navigate(`/board?type=${boardType}&cate=ridding&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
+            dispatch(boardAction.setBoardType(type,"ridding"));
+            navigate(`/board?type=${type}&cate=ridding&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
           }}
-          selected={cate === "ridding" ? true : false}
+          selected={cate === "ridding"}
         >
           라이딩
         </CategoryCard>
         <CategoryCard
           onClick={(e) => {
             e.preventDefault();
-            dispatch(boardAction.setBoardType(boardType,"badminton"));
-            navigate(`/board?type=${boardType}&cate=badminton&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
+            dispatch(boardAction.setBoardType(type,"badminton"));
+            navigate(`/board?type=${type}&cate=badminton&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
           }}
-          selected={cate === "badminton" ? true : false}
+          selected={cate === "badminton"}
         >
           배드민턴
         </CategoryCard>
         <CategoryCard
           onClick={(e) => {
             e.preventDefault();
-            dispatch(boardAction.setBoardType(boardType,"tennis"));
-            navigate(`/board?type=${boardType}&cate=tennis&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
+            dispatch(boardAction.setBoardType(type,"tennis"));
+            navigate(`/board?type=${type}&cate=tennis&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
           }}
-          selected={cate === "tennis" ? true : false}
+          selected={cate === "tennis"}
         >
           테니스
         </CategoryCard>
         <CategoryCard
           onClick={(e) => {
             e.preventDefault();
-            dispatch(boardAction.setBoardType(boardType,"golf"));
-            navigate(`/board?type=${boardType}&cate=golf&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
+            dispatch(boardAction.setBoardType(type,"golf"));
+            navigate(`/board?type=${type}&cate=golf&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
           }}
-          selected={cate === "golf" ? true : false}
+          selected={cate === "golf"}
         >
           골프
         </CategoryCard>
         <CategoryCard
           onClick={(e) => {
             e.preventDefault();
-            dispatch(boardAction.setBoardType(boardType,"etc"));
-            navigate(`/board?type=${boardType}&cate=etc&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
+            dispatch(boardAction.setBoardType(type,"etc"));
+            navigate(`/board?type=${type}&cate=etc&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
           }}
-          selected={cate === "etc" ? true : false}
+          selected={cate === "etc"}
         >
           기타
         </CategoryCard>

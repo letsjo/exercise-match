@@ -35,7 +35,6 @@ const CommunityPostWrite = () => {
 
   useEffect(() => {
     preview();
-
   },[files]);
 
   const preview = () => {
@@ -61,18 +60,17 @@ const CommunityPostWrite = () => {
 
     const object = new FormData();
     object.append("boardType", "information");
-    object.append("boardImage", files[0]);
-    object.append("endDateAt", null);
+    object.append("data", files[0]);
+    object.append("title", titleInput_ref.current.value);
+    object.append("category", category_ref.current.value);
+    object.append("content", contentInput_ref.current.value);
     object.append("maxEntry", null);
+    object.append("person", null);
+    object.append("endDateAt", null);
     object.append("city", null);
     object.append("gu", null);
     object.append("lat", "0");
     object.append("lng", "0");
-    object.append("category", category_ref.current.value);
-    object.append("person", null);
-    object.append("title", titleInput_ref.current.value);
-    object.append("content", contentInput_ref.current.value);
-    console.log(e.target);
 
     for (var key of object.entries()) {
       console.log(`${key}`);

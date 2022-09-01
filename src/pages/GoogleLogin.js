@@ -9,8 +9,8 @@ const GoogleLogin = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   let params = new URL(document.location).searchParams;
-  let access_Token = params.get("access_Token");
-  let refresh_Token = params.get("refresh_Token");
+  let access_Token = "Bearer " + params.get("access_Token");
+  let refresh_Token = "Bearer " + params.get("refresh_Token");
   let username = params.get("username");
   let nickname = params.get("nickname");
   let profile = params.get("profile");
