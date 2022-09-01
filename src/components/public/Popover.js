@@ -37,6 +37,8 @@ const Popover = ({ onOpenerClick }) => {
     <Logout onClick={()=>{sessionStorage.removeItem("accesstoken") 
     sessionStorage.removeItem("refreshtoken")
     sessionStorage.removeItem("username") 
+    sessionStorage.removeItem("nickname") 
+    sessionStorage.removeItem("profile") 
     Swal.fire('로그아웃 되었습니다!')
     dispatch(userSliceAction.setLoginOut()
     );

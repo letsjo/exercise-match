@@ -18,9 +18,7 @@ const BulletinListFrame = () => {
           <WriteButton onClick={()=>{navigate("/communitypostWrite")}}>작성하기</WriteButton>
         </ButtonBox>
         <BulletinCard />
-        <BulletinCard />
-        <BulletinCard />
-        <BulletinCard />
+        
         <PageFrame>
           <Frame>
             <Pagination total={5} limit={2} page={page} setPage={setPage} />
