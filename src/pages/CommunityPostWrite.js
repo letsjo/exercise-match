@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import KakaoMapForPost from "../components/Board/MatchingBoard/KakaoMapForPost";
 import NavBar from "../components/public/NavBar";
 import { boardAction } from "../redux/actions/boardAction";
@@ -12,7 +12,7 @@ const CommunityPostWrite = () => {
   const category_ref = useRef(null);
   const person_ref = useRef(null);
   const date_ref = useRef(null);
-  const photoInput_ref = useRef();
+  const photoInput_ref = useRef(null);
   const titleInput_ref = useRef();
   const contentInput_ref = useRef();
 
@@ -67,8 +67,8 @@ const CommunityPostWrite = () => {
     object.append("maxEntry", null);
     object.append("city", null);
     object.append("gu", null);
-    object.append("lat", null);
-    object.append("lng", null);
+    object.append("lat", "0");
+    object.append("lng", "0");
     object.append("category", category_ref.current.value);
     object.append("person", null);
     object.append("title", titleInput_ref.current.value);
@@ -118,7 +118,7 @@ const CommunityPostWrite = () => {
             ref={titleInput_ref}
           />
 
-            <ImageButton onClick={handleClick}>
+            <ImageButton onClick={handleClick} photoInput_ref={photoInput_ref.current?.value}>
             <input
               type="file"
               id="image"
@@ -127,10 +127,10 @@ const CommunityPostWrite = () => {
               style={{ display: "none" }}
               ref={photoInput_ref}
             />
-            이미지 등록(0/1)
+            이미지 등록({photoInput_ref.current?.value ?"1":"0"}/1)
+            
           </ImageButton>
-          <LocationImage className="img_box" name="locationImage" />
-
+          {photoInput_ref.current?.value && <LocationImage className="img_box" name="locationImage"/>}
           <Text>내용</Text>
           <ContentInput
             placeholder="내용을 입력해주세요"
@@ -223,10 +223,19 @@ const ImageButton = styled.div`
   width: 700px;
   height: 50px;
   box-sizing: border-box;
-  background-color: #dedede;
   font-size: 20px;
   border: none;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  ${({photoInput_ref})=>{
+    return css`
+      background-color: ${photoInput_ref?"#a8a8a8":"#dedede"};
+    `;
+  }}
+  
 `;
 
 const WriteButton = styled.button`
