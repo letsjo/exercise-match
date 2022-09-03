@@ -6,7 +6,7 @@ import BoardInfo from "./BoardNameInfo";
 const HistoryBoard = () => {
   return (
     <BoardWrapper>
-      <BoardInfo iconImg="https://cdn-icons-png.flaticon.com/512/5053/5053917.png" title="나의 게시글" boardUrl="/board?type=mymatching&cate=all&page=1&amount=12"/>
+      <BoardInfo iconImg="https://cdn-icons-png.flaticon.com/512/5053/5053917.png" title="나의 매칭 게시글" boardUrl="/board?type=mymatching&cate=all&page=1&amount=12"/>
       <BoardListHistory />
     </BoardWrapper>
   );
@@ -14,7 +14,6 @@ const HistoryBoard = () => {
 
 const BoardWrapper = styled.div`
   width: 100%;
-  height: 350px;
   display: flex;
   flex-direction: column;
   justify-content: center;

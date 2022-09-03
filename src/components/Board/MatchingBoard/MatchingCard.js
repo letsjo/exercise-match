@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import BulletinLikeCard from "../BulletinBoard/BulletinLikeCard";
 import {BsCalendarCheck,BsFillPeopleFill} from "react-icons/bs";
 
-const BeforeMatchingCard = ({ completed=false, category, title, date, number,context, writer, location}) => {
+const BeforeMatchingCard = ({ completed=false, category, title, date, currentEntry,maxEntry,context, writer, location,like, comment, createdAt}) => {
 
   const navigate = useNavigate();
 
@@ -26,7 +26,7 @@ const BeforeMatchingCard = ({ completed=false, category, title, date, number,con
           <Icon>
           <BsFillPeopleFill size={20}/>
           </Icon>
-          <Text> {number}매칭</Text>
+          <Text> {currentEntry}/{maxEntry}매칭</Text>
         </Personnel>
       </DateWrap>
       <Context>
@@ -43,7 +43,7 @@ const BeforeMatchingCard = ({ completed=false, category, title, date, number,con
       {/* <LikeWrap>
           <Daysago>1일 전</Daysago>
       </LikeWrap> */}
-      <BulletinLikeCard like="2" comment="3" daysago="4"/>
+      <BulletinLikeCard like={like} comment={comment} createdAt={createdAt}/>
     </Container>
   );
 };
@@ -130,7 +130,7 @@ const Text = styled.div`
 `;
 
 const Personnel = styled.div`
-  width: 108px;
+  /* width: 108px; */
   height: 29px;
   display: flex;
 `;

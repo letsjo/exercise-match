@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const BulletinContextCard = ({title, content}) => {
+const BulletinContextCard = ({title, content, image}) => {
   return (
     <Container>
       <ContextBox>
@@ -11,7 +11,7 @@ const BulletinContextCard = ({title, content}) => {
         </Context>
       </ContextBox>
       <ImageBox>
-        <Image />
+        <Image src={image} />
       </ImageBox>
     </Container>
   );

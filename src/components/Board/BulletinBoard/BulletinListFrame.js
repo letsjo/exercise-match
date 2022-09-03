@@ -5,10 +5,18 @@ import Pagination from "../BoardPublic/Pagination";
 import { useState } from "react";
 import CategoryBoxFrame from "../BoardPublic/CategoryBoxFrame";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const BulletinListFrame = () => {
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
+  const {boardResponseDtoList} = useSelector((state)=>state.boardReducer.boardData);
+
+  const now = new Date();
+
+  const createdAtDay = now.getDate()-new Date(boardResponseDtoList&&boardResponseDtoList[0].createdAt).getDate();
+  console.log(createdAtDay,"minus");
+
 
   return (
     <>
@@ -17,7 +25,17 @@ const BulletinListFrame = () => {
         <ButtonBox>
           <WriteButton onClick={()=>{navigate("/communitypostWrite")}}>작성하기</WriteButton>
         </ButtonBox>
-        <BulletinCard />
+        {boardResponseDtoList&&boardResponseDtoList.map((list, idx)=>(
+          <BulletinCard 
+          key={idx}
+        title={list.title}
+        content={list.content}
+        comment={list.commentCount}
+      like={list.likeCount}
+      createdAt={createdAtDay}
+      image={list.boardimage}/>
+        ))}
+        
         
         <PageFrame>
           <Frame>
