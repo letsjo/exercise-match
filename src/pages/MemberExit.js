@@ -20,7 +20,6 @@ const MemberExit = () => {
     <TextWrap>
         <Title>홍길동님 잠시만요 !</Title>
         <ContentWrap>
-            <Content>● 회원 탈퇴 시 현재 계정으로 작성한 게시글, 댓글 등을 수정할 수 없습니다.</Content>
             <Content>● 탈퇴 후에는 계정을 다시 살리거나 데이터를 복구할 수 없습니다.</Content>
             <Content>● 본 계정으로 다시는 로그인 할 수 없습니다.</Content>
             <Content>● 회원 탈퇴 시 현재 계정으로 작성한 게시글, 댓글 등을 수정할 수 없습니다.</Content>
@@ -40,15 +39,20 @@ const MemberExit = () => {
   )
 }
 
-const Container=styled.div``;
+const Container=styled.div`
+height: 100vh;
+background-color:#DCF6FC;
+`;
+
+
 
 const BackgroundWrap=styled.div`
 height: 800px;
 width: 800px;
 margin: 18px auto auto;
-border: 1px solid gray;
 padding:74px 10px;
 box-sizing: border-box;
+background-color: white;
 `;
 
 const ExitWrap=styled.div`
@@ -72,7 +76,7 @@ const Title=styled.div`
 `;
 
 const ContentWrap=styled.div`
-    height: 152px;
+    height: 109px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -107,6 +111,7 @@ const CancelBtn=styled.div`
     height: 69px;
     background-color: #a8a8a8;
     font-size: 20px;
+    border-radius: 5px;
     color:white;
     font-weight: bold;
     display: flex;
@@ -123,6 +128,7 @@ const ExitBtn=styled.div`
     color:white;
     font-weight: bold;
     display: flex;
+    border-radius: 5px;
     justify-content: center;
     align-items: center;
     cursor: pointer;

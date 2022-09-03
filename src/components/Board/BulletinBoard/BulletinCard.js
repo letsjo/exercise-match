@@ -4,16 +4,17 @@ import styled from 'styled-components';
 import BulletinContextCard from "./BulletinContextCard";
 import BulletinLikeCard from "./BulletinLikeCard";
 
-const BulletinCard = () => {
+const BulletinCard = ({title, content, comment, like, createdAt, image}) => {
   const navigate = useNavigate();
   return (
     <Container onClick={()=>{navigate("/detail/5")}}>
-    <BulletinContextCard title="글 제목입니다"
-      content="글 내용 부분 "
+    <BulletinContextCard title={title}
+      content={content}
+      image={image}
       />
-    <BulletinLikeCard comment="3"
-      like="2"
-      daysago="4"/>
+    <BulletinLikeCard comment={comment}
+      like={like}
+      createdAt={createdAt}/>
     </Container>
   )
 }

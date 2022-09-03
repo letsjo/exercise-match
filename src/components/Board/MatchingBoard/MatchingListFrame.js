@@ -12,9 +12,20 @@ const MatchingListFrame = () => {
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
 
-  const{ boardData } = useSelector((state)=>state.boardReducer);
+  const{ boardResponseDtoList} = useSelector((state)=>state.boardReducer.boardData );
 
-  console.log(boardData);
+  console.log(boardResponseDtoList);
+
+  const now = new Date();
+  const c = new Date(boardResponseDtoList&&boardResponseDtoList[0].createdAt).getDate();
+  console.log(c,"이거 1!1");
+
+  // const createdAtDay = now.getDate()-new Date(boardResponseDtoList&&boardResponseDtoList[0].createdAt).getDate();
+  // console.log(createdAtDay,"minus");
+
+
+  const reducer = useSelector((state)=>state.boardReducer);
+  console.log(reducer);
 
   return (
     <>
@@ -29,33 +40,24 @@ const MatchingListFrame = () => {
             작성하기
           </WriteButton>
         </ButtonBox>
-        <MatchingCard 
-        completed={true}
-        category="헬스"
-        title="제목입니다" 
-        date="8월 30일 화요일" 
-        number="1/5"
-        context="내용들어가는 부분입니당" 
-        writer="닉네임" 
-        location="강릉시" />
-        <MatchingCard
-        category="헬스"
-        title="제목입니다" 
-        date="8월 30일 화요일" 
-        number="1/5"
-        context="내용들어가는 부분입니당" 
-        writer="닉네임" 
-        location="강릉시" />
-        <MatchingCard completed={true}
-        category="헬스"
-        title="제목입니다" 
-        date="8월 30일 화요일" 
-        number="1/5"
-        context="내용들어가는 부분입니당" 
-        writer="닉네임" 
-        location="강릉시" />
-        
-        
+        {boardResponseDtoList&&boardResponseDtoList.map((list, idx)=>
+        ( <MatchingCard 
+          key={idx}
+          // completed={true}
+          category={list.category}
+          title={list.title}
+          date={list.endDateAt}
+          currentEntry={list.currentEntry}
+          maxEntry={list.maxEntry}
+          context={list.context}
+          writer={list.memberSimpleDto.nickname} 
+          location={list.city}
+          like={list.likeCount}
+          comment={list.commentCount}
+          // createdAt={createdAtDay}
+           />
+          )
+        )}
         <PageFrame>
           <Frame>
             <Pagination total={5} limit={2} page={page} setPage={setPage} />
