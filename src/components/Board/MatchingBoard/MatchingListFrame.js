@@ -16,7 +16,7 @@ const MatchingListFrame = () => {
 
   console.log(boardResponseDtoList);
 
-  const now = new Date();
+  // const now = new Date();
   const c = new Date(boardResponseDtoList&&boardResponseDtoList[0]?.createdAt).getDate();
   console.log(c,"이거 1!1");
 

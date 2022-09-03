@@ -12,11 +12,39 @@ const BulletinListFrame = () => {
   const navigate = useNavigate();
   const {boardResponseDtoList} = useSelector((state)=>state.boardReducer.boardData);
 
-  const now = new Date();
+  // const now = new Date();
+  // const createdAtDay = now.getDate()-new Date(boardResponseDtoList&&boardResponseDtoList[0]?.createdAt).getDate();
+  // console.log(createdAtDay,"minus");
 
-  const createdAtDay = now.getDate()-new Date(boardResponseDtoList&&boardResponseDtoList[0]?.createdAt).getDate();
-  console.log(createdAtDay,"minus");
 
+  const timeSetting = (stringTime) => {
+    const objectDate = new Date(stringTime);
+    console.log(objectDate);
+    var timestampInput = objectDate.getTime();
+    var timestampNow = Date.now();
+    var gap_time = timestampNow - timestampInput;
+    console.log(gap_time);
+    if (gap_time < 3600000) {
+      return Math.ceil(gap_time / 60000) + " 분 전";
+    } else {
+      var date = new Date(timestampInput);
+      return (
+        date.getFullYear() +
+        "/" +
+        (date.getMonth() + 1) +
+        "/" +
+        date.getDate() +
+        " " +
+        date.getHours() +
+        ":" +
+        date.getMinutes() +
+        ":" +
+        date.getSeconds()
+      );
+    }
+  };
+
+  console.log(timeSetting);
 
   console.log("rander Frame");
 
@@ -34,7 +62,7 @@ const BulletinListFrame = () => {
         content={list.content}
         comment={list.commentCount}
       like={list.likeCount}
-      createdAt={createdAtDay}
+      createdAt={timeSetting(list.createdAt)}
       image={list.boardimage}/>
         ))}
         
