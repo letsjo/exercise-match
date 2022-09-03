@@ -29,7 +29,7 @@ const SelectCategoryBox = () => {
             );
           }}
         >
-          <CgGym size={52} />
+          <CgGym size={38} />
         </IconImage>
         <CategoryName>헬스</CategoryName>
       </IconBox>
@@ -42,7 +42,7 @@ const SelectCategoryBox = () => {
             );
           }}
         >
-          <GiRunningShoe size={52} />
+          <GiRunningShoe size={38} />
         </IconImage>
         <CategoryName>런닝&조깅</CategoryName>
       </IconBox>
@@ -55,7 +55,7 @@ const SelectCategoryBox = () => {
             );
           }}
         >
-          <GiTennisRacket size={52} />
+          <GiTennisRacket size={38} />
         </IconImage>
         <CategoryName>배드민턴</CategoryName>
       </IconBox>
@@ -68,7 +68,7 @@ const SelectCategoryBox = () => {
             );
           }}
         >
-          <GiTennisBall size={52} />
+          <GiTennisBall size={38} />
         </IconImage>
         <CategoryName>테니스</CategoryName>
       </IconBox>
@@ -81,7 +81,7 @@ const SelectCategoryBox = () => {
             );
           }}
         >
-          <RiRidingLine size={52} />
+          <RiRidingLine size={38} />
         </IconImage>
         <CategoryName>라이딩</CategoryName>
       </IconBox>
@@ -94,7 +94,7 @@ const SelectCategoryBox = () => {
             );
           }}
         >
-          <GiGolfTee size={52} />
+          <GiGolfTee size={38} />
         </IconImage>
         <CategoryName>골프</CategoryName>
       </IconBox>
@@ -107,7 +107,7 @@ const SelectCategoryBox = () => {
             );
           }}
         >
-          <HiOutlineDotsHorizontal size={52} />
+          <HiOutlineDotsHorizontal size={38} />
         </IconImage>
         <CategoryName>기타</CategoryName>
       </IconBox>
@@ -118,25 +118,34 @@ const SelectCategoryBox = () => {
 const BoxWrap = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 802px;
+  width: 1000px;
   height: 80px;
-  margin: auto auto 70px;
+  margin: auto auto 50px;
 `;
 
 const IconBox = styled.div`
-  /* width: 52px; */
+  width:100px;
+  height: 80px;
+  border-radius: 70px;
+  background: #FFFFFF;
+box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
+  box-sizing: border-box;
+  &:hover{
+    background: #F0F0F0;
+    transition: 0.2s;
+  }
 `;
 
 const IconImage = styled.div`
   width: 52px;
   height: 52px;
-  border-radius: 25px;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0px auto 5px;
+  margin: 2.5px auto 0;
   cursor: pointer;
+  box-sizing: border-box;
 `;
 
 const CategoryName = styled.div`

@@ -10,7 +10,7 @@ const Comment = ({ boardId }) => {
   const [commentButton, setCommentButton] = useState(false);
   const { username } = useSelector((state) => state.userReducer);
   const { comments } = useSelector((state) => state.boardReducer);
-  // console.log(user);
+  console.log(comments);
   const inputChange = () => {
     // console.log(inputRef.current.value);
     if (inputRef.current.value === "") {

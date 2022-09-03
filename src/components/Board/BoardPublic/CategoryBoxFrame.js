@@ -16,10 +16,11 @@ const CategoryBoxFrame = ({page}) => {
   const cate = new URLSearchParams(query).get("cate");
 
   useEffect(() => {
-    dispatch(boardSliceAction.setBoardType({type,cate}));
+    dispatch(boardSliceAction.setBoardType({type, cate}));
     dispatch(boardAction.loadBoard(type, cate, selectedCity, selectedGu, page));
-  }, [type, cate, selectedCity, selectedGu, page]);
 
+  }, [type, cate, selectedCity, selectedGu, page]);
+  
   return (
     <CategorySelect>
       <CategoryBox>
@@ -35,6 +36,7 @@ const CategoryBoxFrame = ({page}) => {
         <CategoryCard
           onClick={(e) => {
             e.preventDefault();
+
             navigate(`/board?type=${type}&cate=gym&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
           }}
           selected={cate === "gym"}
@@ -44,6 +46,7 @@ const CategoryBoxFrame = ({page}) => {
         <CategoryCard
           onClick={(e) => {
             e.preventDefault();
+
             navigate(`/board?type=${type}&cate=running&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
           }}
           selected={cate === "running"}
@@ -53,6 +56,7 @@ const CategoryBoxFrame = ({page}) => {
         <CategoryCard
           onClick={(e) => {
             e.preventDefault();
+
             navigate(`/board?type=${type}&cate=ridding&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
           }}
           selected={cate === "ridding"}
@@ -62,6 +66,7 @@ const CategoryBoxFrame = ({page}) => {
         <CategoryCard
           onClick={(e) => {
             e.preventDefault();
+
             navigate(`/board?type=${type}&cate=badminton&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
           }}
           selected={cate === "badminton"}
@@ -71,6 +76,7 @@ const CategoryBoxFrame = ({page}) => {
         <CategoryCard
           onClick={(e) => {
             e.preventDefault();
+
             navigate(`/board?type=${type}&cate=tennis&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
           }}
           selected={cate === "tennis"}
@@ -80,6 +86,7 @@ const CategoryBoxFrame = ({page}) => {
         <CategoryCard
           onClick={(e) => {
             e.preventDefault();
+
             navigate(`/board?type=${type}&cate=golf&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
           }}
           selected={cate === "golf"}
@@ -89,6 +96,7 @@ const CategoryBoxFrame = ({page}) => {
         <CategoryCard
           onClick={(e) => {
             e.preventDefault();
+
             navigate(`/board?type=${type}&cate=etc&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
           }}
           selected={cate === "etc"}
