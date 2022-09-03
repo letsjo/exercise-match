@@ -18,6 +18,8 @@ const BulletinListFrame = () => {
   console.log(createdAtDay,"minus");
 
 
+  console.log("rander Frame");
+
   return (
     <>
       <CategoryBoxFrame page={page} />

@@ -193,7 +193,7 @@ const editConcern = (editInterest) => {
   return async (dispatch) => {
     try {
       const res = await userAPI.put("/api/mypage/actionedit/concern", {
-        concern: editInterest,
+        concern1:editInterest[0],concern2:editInterest[1],concern3:editInterest[2]
       });
       dispatch(userSliceAction.setUserInterest(editInterest));
       console.log(res);
