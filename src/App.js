@@ -97,6 +97,8 @@ function App() {
 
 const Container = styled.div`
   user-select: none;
+  min-height: 100vh;
+height: 100%;
 `
 
 export default App;

@@ -81,7 +81,7 @@ const postComment = createAsyncThunk(
   async ( {boardId, comment}, { rejectWithValue }) => {
     try {
       const res = await userAPI.post(
-        `/api/board/${boardId}/comments`, comment
+        `/api/board/${boardId}/comments`, {content:comment}
       );
       console.log(res);
       return res;

@@ -40,8 +40,12 @@ const MemberExit = () => {
 }
 
 const Container=styled.div`
-height: 100vh;
-background-color:#DCF6FC;
+min-height: 100vh;
+background-color:#f0f0f0;
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+align-items: center;
 `;
 
 
@@ -49,7 +53,7 @@ background-color:#DCF6FC;
 const BackgroundWrap=styled.div`
 height: 800px;
 width: 800px;
-margin: 18px auto auto;
+margin: 18px auto 112px;
 padding:74px 10px;
 box-sizing: border-box;
 background-color: white;
