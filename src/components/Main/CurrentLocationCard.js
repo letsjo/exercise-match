@@ -19,7 +19,7 @@ const CurrentLocationCard = () => {
 
   return (
     <Container>
-      <LocationFrame onClick={OpenLocationModal}>{selectedCity + " " + selectedGu}</LocationFrame>
+      <LocationFrame onClick={OpenLocationModal}>{selectedCity==="all"?("전국"):(selectedCity + " " + selectedGu)}</LocationFrame>
     </Container>
   );
 };

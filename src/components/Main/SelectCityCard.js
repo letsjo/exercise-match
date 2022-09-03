@@ -32,8 +32,8 @@ const SelectCityCard = ({ localData }) => {
   };
 
   useEffect(() => {
-    selectedLocationRef.current?.scrollIntoView({ behavior: "auto", block: "center", inline: "nearest" });
-  }, [selectedCity, selectedGu, currentLat, currentLon]);
+    selectedLocationRef.current?.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+  }, []);
 
 
   return (
@@ -64,7 +64,7 @@ const SelectCityCard = ({ localData }) => {
                 <GuNameZone>{guName}</GuNameZone>
                 {selectedCity == localData?.city && selectedGu == guName && (
                   <CheckZone ref={selectedLocationRef}>
-                    <AiOutlineCheck size={26} />
+                    <AiOutlineCheck size={26} color={"#00CFFF"}/>
                   </CheckZone>
                 )}
               </GuSection>
@@ -102,6 +102,10 @@ const GuSection = styled.div`
   border-top: 1px solid #a8a8a8;
   display: flex;
   flex-direction: row;
+  transition: all 0.2s ease;
+  &:hover{
+    background-color: #DCF6FC;
+  }
 `;
 
 const GuNameZone = styled.div`

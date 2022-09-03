@@ -24,7 +24,7 @@ const InputEditToggle = ({
       <InputFrame>
         <InputLine>
           {initialState?.map((interest, index) => (
-            <InterestBox key={index}>{interest}</InterestBox>
+            <InterestBox key={index}>{interest["ko"]}</InterestBox>
           ))}
         </InputLine>
         <IconFrame onClick={(e) => EditButton(e)} editBt={editBt}>

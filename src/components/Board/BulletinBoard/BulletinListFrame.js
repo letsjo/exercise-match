@@ -10,6 +10,8 @@ const BulletinListFrame = () => {
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
 
+  console.log("rander Frame");
+
   return (
     <>
       <CategoryBoxFrame page={page} />

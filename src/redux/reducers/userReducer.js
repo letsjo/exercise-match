@@ -18,7 +18,7 @@ let initialState = {
     golf: 0,
     ect: 0,
   },
-  userInterest: ["hiking", "swimming"],
+  userInterest: [],
 };
 
 const userSlice = createSlice({

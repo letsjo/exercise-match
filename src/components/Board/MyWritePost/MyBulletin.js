@@ -9,6 +9,14 @@ const MyBulletin = () => {
   return (
     <>
       <BulletinCard />
+      <BulletinCard />
+      <BulletinCard />
+      <BulletinCard />
+      <BulletinCard />
+      <BulletinCard />
+      <BulletinCard />
+      <BulletinCard />
+      <BulletinCard />
       <PageFrame>
         <Frame>
           <Pagination total={5} limit={2} page={page} setPage={setPage} />

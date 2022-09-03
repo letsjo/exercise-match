@@ -34,7 +34,7 @@ const Login = () => {
     // window.location.href = googleURL;
   };
 
-   const googleLogin = () => {
+  const googleLogin = () => {
     window.location.href = googleURL;
   };
 
@@ -64,14 +64,16 @@ const Login = () => {
       };
       console.log(LoginData);
       try {
-        const response = await dispatch(userAction.userLogin(LoginData)).unwrap();
-        await dispatch(
+        const response = await dispatch(
+          userAction.userLogin(LoginData)
+        ).unwrap();
+        dispatch(
           userSliceAction.setLogin({
-            username: LoginData.username
+            username: LoginData.username,
           })
         );
         console.log(response);
-        Swal.fire('로그인에 성공하셨습니다!');
+        Swal.fire("로그인에 성공하셨습니다!");
         navigate("/");
       } catch (err) {
         window.alert(err);
@@ -93,7 +95,11 @@ const Login = () => {
             placeholder="비밀번호를 입력해주세요."
           />
           <FindBoxWrap>
-            <FindBox onClick={()=>{navigate("/passwordFind")}}>
+            <FindBox
+              onClick={() => {
+                navigate("/passwordFind");
+              }}
+            >
               <div>비밀번호 찾기</div>
             </FindBox>
           </FindBoxWrap>
@@ -102,8 +108,14 @@ const Login = () => {
             <br />
             입력하신 내용을 다시 확인해주세요.
           </ErrorMessage>
-          <LoginBtn onClick={(e)=>clickLogin(e)}>로그인하기</LoginBtn>
-          <SignupBtn onClick={()=>{navigate("/signup")}}>아직 회원이 아니신가요?</SignupBtn>
+          <LoginBtn onClick={(e) => clickLogin(e)}>로그인하기</LoginBtn>
+          <SignupBtn
+            onClick={() => {
+              navigate("/signup");
+            }}
+          >
+            아직 회원이 아니신가요?
+          </SignupBtn>
           <LineWrap>
             <OrLine /> 또는 <OrLine />
           </LineWrap>
@@ -111,7 +123,7 @@ const Login = () => {
             <KakaoIcon onClick={kakaoLogin}>
               <img src="/images/kakao_logo.png" alt="" />
             </KakaoIcon>
-            <NaverIcon onClick={googleLogin}>  
+            <NaverIcon onClick={googleLogin}>
               <img src="/images/btnG_아이콘원형.png" alt="" />
             </NaverIcon>
           </IconBox>
@@ -186,7 +198,15 @@ const Input = styled.input`
   font-size: 20px;
   border-radius: 0%;
   border: 1px solid #dedede;
+  padding: 1px;
   /* padding:10px; */
+  outline: none;
+  transition: all 0.1s ease;
+  &:focus {
+    border: 2px solid #a2e9fa;
+    padding: 0px;
+    box-shadow: 0px 0px 5px rgba(162, 233, 250, 0.5);
+  }
   &::placeholder {
     color: #dedede;
   }

@@ -11,41 +11,31 @@ const InterestFrame = () => {
   const dispatch = useDispatch();
 
   const interestLists = [
-    [
-      ["running", "조깅&러닝"],
-      ["riding", "라이딩"],
-      ["gym", "헬스"],
-      ["hiking", "등산"],
-      ["ballet", "발레"],
-    ],
-    [
-      ["climbing", "클라이밍"],
-      ["pilates", "필라테스"],
-      ["swimming", "수영"],
-      ["boxing", "복싱"],
-      ["bowling", "볼링"],
-    ],
-    [
-      ["badminton", "배드민턴"],
-      ["crossfit", "크로스핏"],
-      ["gymnastics", "체조"],
-      ["skateboard", "보드"],
-      ["golf", "골프"],
-    ],
-    [
-      ["skate", "스케이트"],
-      ["pocketball", "당구"],
-      ["ski", "스키"],
-      ["futsal", "풋살"],
-      ["tennis", "테니스"],
-    ],
-    [
-      ["pingpong", "탁구"],
-      ["basketball", "농구"],
-      ["soccer", "축구"],
-      ["volleyball", "배구"],
-      ["baseball", "야구"],
-    ],
+      {en:"running",ko:"조깅&러닝"},
+      {en:"riding",ko:"라이딩"},
+      {en:"gym",ko:"헬스"},
+      {en:"hiking",ko:"등산"},
+      {en:"ballet",ko:"발레"},
+      {en:"climbing",ko:"클라이밍"},
+      {en:"pilates",ko:"필라테스"},
+      {en:"swimming",ko:"수영"},
+      {en:"boxing",ko:"복싱"},
+      {en:"bowling",ko:"볼링"},
+      {en:"badminton",ko:"배드민턴"},
+      {en:"crossfit",ko:"크로스핏"},
+      {en:"gymnastics",ko:"체조"},
+      {en:"skateboard",ko:"보드"},
+      {en:"golf",ko:"골프"},
+      {en:"skate",ko:"스케이트"},
+      {en:"pocketball",ko:"당구"},
+      {en:"ski",ko:"스키"},
+      {en:"futsal",ko:"풋살"},
+      {en:"tennis",ko:"테니스"},
+      {en:"pingpong",ko:"탁구"},
+      {en:"basketball",ko:"농구"},
+      {en:"soccer",ko:"축구"},
+      {en:"volleyball",ko:"배구"},
+      {en:"baseball",ko:"야구"},
   ];
 
 
@@ -73,26 +63,20 @@ const InterestFrame = () => {
 
   const buttonEditInterest = (e) => {
     e.preventDefault();
-    console.log(editInterest);
     dispatch(userAction.editConcern(editInterest));
     dispatch(modalSliceAction.modalClose());
   };
 
   const onClick = (e, interest) => {
     e.preventDefault();
-    const findIndex = editInterest.indexOf(interest[0]);
+    const findIndex = editInterest.findIndex(i => i.en == interest["en"]);
     if (editInterest.length < 3 && findIndex === -1) {
-      setEditInterest([...editInterest, interest[0]]);
-      setEditInterestKo([...editInterestKo, interest[1]]);
+      setEditInterest([...editInterest, interest]);
       //   dispatch(userSliceAction.setInterest(userInterest));
     } else if (editInterest.length <= 3 && findIndex >= 0) {
       setEditInterest([
         ...editInterest.slice(0, findIndex),
         ...editInterest.slice(findIndex + 1),
-      ]);
-      setEditInterestKo([
-        ...editInterestKo.slice(0, findIndex),
-        ...editInterestKo.slice(findIndex + 1),
       ]);
     } else {
       setAlertSent(true);
@@ -118,19 +102,18 @@ const InterestFrame = () => {
         ) : (
           <></>
         )}
-        {interestLists.map((interestList, line) => (
-          <LineFrame key={line}>
-            {interestList.map((interest, index) => (
-              <InterestBox
+          <LineFrame>
+            {interestLists.map((interest, index) => {
+              return <InterestBox
                 onClick={(e) => onClick(e, interest)}
-                selected={editInterest.indexOf(interest[0]) >= 0 ? true : false}
+                selected={editInterest.findIndex(i => i.en == interest["en"]) >= 0 ? true : false}
+                value={interest["en"]}
                 key={index}
               >
-                {interest[1]}
+                {interest["ko"]}
               </InterestBox>
-            ))}
+            })}
           </LineFrame>
-        ))}
         <ButtonFrame
           onClick={(e) => buttonEditInterest(e)}
           editInterest={editInterest}
@@ -159,12 +142,13 @@ const ContentsWrap = styled.div`
 const LineFrame = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  gap: 40px;
+  justify-content: space-between;
+  gap: 20px 40px;
   width: 100%;
   font-weight: 700;
   font-size: 20px;
   line-height: 29px;
+  flex-wrap : wrap;
 `;
 
 const InterestBox = styled.div`

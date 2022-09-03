@@ -2,9 +2,15 @@
 import { useEffect } from "react";
 import styled from "styled-components";
 import { Route, Routes } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { useChannelIOApi, useChannelIOEvent } from "react-channel-plugin";
 
 // components
+
+
+// redux
+import { locationAction } from "./redux/actions/locationAction";
+import { userSliceAction } from "./redux/reducers/userReducer";
 
 //pages
 import Main from "./pages/Main";
@@ -21,9 +27,6 @@ import MatchingPostWrite from "./pages/MatchingPostWrite";
 import CommunityPostWrite from "./pages/CommunityPostWrite";
 import Detailpage from "./pages/Detailpage";
 import MemberExit from "./pages/MemberExit";
-import { useDispatch, useSelector } from "react-redux";
-import { locationAction } from "./redux/actions/locationAction";
-import { userSliceAction } from "./redux/reducers/userReducer";
 import PasswordChange from "./pages/PasswordChange";
 import PasswordFind from "./pages/PasswordFind";
 import userAPI from "./apis/userAPI";

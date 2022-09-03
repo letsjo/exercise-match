@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { boardAction } from "../../../redux/actions/boardAction";
+import { boardSliceAction } from "../../../redux/reducers/boardReducer";
 import SearchOption from "./SearchOption";
 
 const CategoryBoxFrame = ({page}) => {
@@ -15,6 +16,7 @@ const CategoryBoxFrame = ({page}) => {
   const cate = new URLSearchParams(query).get("cate");
 
   useEffect(() => {
+    dispatch(boardSliceAction.setBoardType({type,cate}));
     dispatch(boardAction.loadBoard(type, cate, selectedCity, selectedGu, page));
   }, [type, cate, selectedCity, selectedGu, page]);
 
@@ -24,7 +26,6 @@ const CategoryBoxFrame = ({page}) => {
         <CategoryCard
           onClick={(e) => {
             e.preventDefault();
-            dispatch(boardAction.setBoardType(type,"all"));
             navigate(`/board?type=${type}&cate=all&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
           }}
           selected={cate === "all"}
@@ -34,7 +35,6 @@ const CategoryBoxFrame = ({page}) => {
         <CategoryCard
           onClick={(e) => {
             e.preventDefault();
-            dispatch(boardAction.setBoardType(type,"gym"));
             navigate(`/board?type=${type}&cate=gym&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
           }}
           selected={cate === "gym"}
@@ -44,7 +44,6 @@ const CategoryBoxFrame = ({page}) => {
         <CategoryCard
           onClick={(e) => {
             e.preventDefault();
-            dispatch(boardAction.setBoardType(type,"running"));
             navigate(`/board?type=${type}&cate=running&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
           }}
           selected={cate === "running"}
@@ -54,7 +53,6 @@ const CategoryBoxFrame = ({page}) => {
         <CategoryCard
           onClick={(e) => {
             e.preventDefault();
-            dispatch(boardAction.setBoardType(type,"ridding"));
             navigate(`/board?type=${type}&cate=ridding&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
           }}
           selected={cate === "ridding"}
@@ -64,7 +62,6 @@ const CategoryBoxFrame = ({page}) => {
         <CategoryCard
           onClick={(e) => {
             e.preventDefault();
-            dispatch(boardAction.setBoardType(type,"badminton"));
             navigate(`/board?type=${type}&cate=badminton&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
           }}
           selected={cate === "badminton"}
@@ -74,7 +71,6 @@ const CategoryBoxFrame = ({page}) => {
         <CategoryCard
           onClick={(e) => {
             e.preventDefault();
-            dispatch(boardAction.setBoardType(type,"tennis"));
             navigate(`/board?type=${type}&cate=tennis&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
           }}
           selected={cate === "tennis"}
@@ -84,7 +80,6 @@ const CategoryBoxFrame = ({page}) => {
         <CategoryCard
           onClick={(e) => {
             e.preventDefault();
-            dispatch(boardAction.setBoardType(type,"golf"));
             navigate(`/board?type=${type}&cate=golf&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
           }}
           selected={cate === "golf"}
@@ -94,7 +89,6 @@ const CategoryBoxFrame = ({page}) => {
         <CategoryCard
           onClick={(e) => {
             e.preventDefault();
-            dispatch(boardAction.setBoardType(type,"etc"));
             navigate(`/board?type=${type}&cate=etc&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
           }}
           selected={cate === "etc"}
