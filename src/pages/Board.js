@@ -9,6 +9,7 @@ import MyBulletinListFrame from "../components/Board/BulletinBoard/MyBulletinLis
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { boardAction } from "../redux/actions/boardAction";
+import { locationSliceAction } from "../redux/reducers/locationReducer";
 
 const Board = () => {
   const navigate = useNavigate();
@@ -20,24 +21,30 @@ const Board = () => {
   const query = useLocation().search;
   const type = new URLSearchParams(query).get("type");
   const cate = new URLSearchParams(query).get("cate");
+  const city = new URLSearchParams(query).get("city");
+  const gu = new URLSearchParams(query).get("gu");
+
+  if(city && gu && (selectedCity!=city || selectedGu!=gu)){
+    dispatch(locationSliceAction.selectLocation({selectedCity:city,selectedGu:gu}))
+  }
 
   useEffect(() => {
-    if (!type || !cate) {
+    if (!type || !cate ) {
       dispatch(boardAction.setBoardType(type?type:"matching",cate?cate:"all"));
       navigate(
-        `/board?type=${type?type:"matching"}&cate=${cate?cate:"all"}&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+        `/board?type=${type?type:"matching"}&cate=${cate?cate:"all"}&city=${city?city:selectedCity}&gu=${gu?gu:selectedGu}&page=1&amount=12`
       );
     }
   }, [selectedCity,selectedGu]);
 
   const MatchingOnClick = () => {
     dispatch(boardAction.setBoardType("matching", "all"));
-    navigate(`/board?type=matching&cate=all&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
+    navigate(`/board?type=matching&cate=all&city=${city?city:selectedCity}&gu=${gu?gu:selectedGu}&page=1&amount=12`);
   };
 
   const InfoOnClick = () => {
     dispatch(boardAction.setBoardType("information", "all"));
-    navigate(`/board?type=information&cate=all&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
+    navigate(`/board?type=information&cate=all&city=${city?city:selectedCity}&gu=${gu?gu:selectedGu}&page=1&amount=12`);
   };
 
   const MyMatchingOnClick=()=>{

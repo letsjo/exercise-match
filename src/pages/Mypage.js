@@ -38,10 +38,11 @@ const Mypage = () => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   background-color: #f0f0f0;
   user-select: none;
+  min-height: 100vh;
 `;
 
 const PageFrame = styled.div`

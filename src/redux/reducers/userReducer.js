@@ -5,6 +5,7 @@ let initialState = {
   username: "hyunoh.jo@gmail.com",
   userNickName: "조현오",
   userProfile: "",
+  userStar:1,
   userGender: "male",
   userBirthYear: "1991",
   userBirthMonth: "1",
@@ -36,6 +37,21 @@ const userSlice = createSlice({
       state.username = "";
       state.userProfile = "";
       state.userNickName = "";
+    },
+    setMypageProfile(state,action) {
+      state.userProfile = action.payload?.profile;
+      state.userStar = action.payload?.star;
+    },
+    setMypageInfo(state,action) {
+      state.userBirthYear = action.payload?.birthYear;
+      state.userBirthMonth = action.payload?.birthMonth;
+      state.userBirthDay = action.payload?.birthDay;
+      state.userGender  = action.payload?.gender;
+    },
+    setMypageAction(state,action) {
+      state.userNickName = action.payload.nickname;
+      state.userInterest = action.payload?.concern;
+      state.userJoinList = action.payload?.joinNum;
     },
     setUserNickName(state, action) {
       state.userNickName = action.payload;

@@ -25,7 +25,6 @@ const MatchingListFrame = () => {
 
 
   const reducer = useSelector((state)=>state.boardReducer);
-  console.log(reducer);
 
   return (
     <>
