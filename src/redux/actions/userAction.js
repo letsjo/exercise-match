@@ -159,16 +159,20 @@ const loadMyPage = () => {
     try {
       const myPageActionAPI = userAPI.get("/api/mypage/action");
       const myPageInfoAPI = userAPI.get("/api/mypage/info");
-      // const myPageProfileAPI = userAPI.get("/api/mypage/profile");
+      const myPageProfileAPI = userAPI.get("/api/mypage/profile");
 
       let [responseAction, responseInfo, responseProfile] = await Promise.all([
         myPageActionAPI,
         myPageInfoAPI,
-        // myPageProfileAPI,
+        myPageProfileAPI,
       ]);
 
-      // console.log(responseAction, responseInfo, responseProfile);
-      console.log(responseAction, responseInfo);
+      dispatch(userSliceAction.setMypageProfile({profile:myPageProfileAPI.profile,star:myPageProfileAPI.star}));
+      dispatch(userSliceAction.setMypageInfo({birthYear:myPageInfoAPI.birth,birthMonth:myPageInfoAPI.birth,birthDay:myPageInfoAPI.birth,gender:myPageInfoAPI.gender}));
+      dispatch(userSliceAction.setMypageAction({nickname:myPageActionAPI.nickname,concern:myPageActionAPI.concern,joinNum:myPageActionAPI.joinCnt}));
+
+      console.log(responseAction, responseInfo, responseProfile);
+      // console.log(responseAction, responseInfo);
     } catch (e) {
       console.log(e);
     }
@@ -193,7 +197,9 @@ const editConcern = (editInterest) => {
   return async (dispatch) => {
     try {
       const res = await userAPI.put("/api/mypage/actionedit/concern", {
-        concern1:editInterest[0],concern2:editInterest[1],concern3:editInterest[2]
+        concern1En:editInterest[0].en,concern1Kor:editInterest[0].ko,
+        concern2En:editInterest[1].en,concern2Kor:editInterest[1].ko,
+        concern3En:editInterest[2].en,concern3Kor:editInterest[2].ko,
       });
       dispatch(userSliceAction.setUserInterest(editInterest));
       console.log(res);

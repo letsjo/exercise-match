@@ -54,7 +54,6 @@ const loadBoard = (type, cate,selectedCity, selectedGu, page) => {
       .get(loadURL)
       .then((response) => {
         dispatch(boardSliceAction.loadBoardData(response.data));
-        console.log(response);
       })
       .catch((err) => {
         console.log(err);

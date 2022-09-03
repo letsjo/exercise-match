@@ -17,7 +17,7 @@ const MatchingListFrame = () => {
   console.log(boardResponseDtoList);
 
   const now = new Date();
-  const c = new Date(boardResponseDtoList&&boardResponseDtoList[0].createdAt).getDate();
+  const c = new Date(boardResponseDtoList&&boardResponseDtoList[0]?.createdAt).getDate();
   console.log(c,"이거 1!1");
 
   // const createdAtDay = now.getDate()-new Date(boardResponseDtoList&&boardResponseDtoList[0].createdAt).getDate();
@@ -25,7 +25,6 @@ const MatchingListFrame = () => {
 
 
   const reducer = useSelector((state)=>state.boardReducer);
-  console.log(reducer);
 
   return (
     <>

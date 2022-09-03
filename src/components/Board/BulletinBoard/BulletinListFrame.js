@@ -14,7 +14,7 @@ const BulletinListFrame = () => {
 
   const now = new Date();
 
-  const createdAtDay = now.getDate()-new Date(boardResponseDtoList&&boardResponseDtoList[0].createdAt).getDate();
+  const createdAtDay = now.getDate()-new Date(boardResponseDtoList&&boardResponseDtoList[0]?.createdAt).getDate();
   console.log(createdAtDay,"minus");
 
 
