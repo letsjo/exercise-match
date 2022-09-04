@@ -48,29 +48,40 @@ const InputEditButton = ({
     if (setInputValue) setInputValue(e.target.value);
   };
 
-  const onClose = () => {
+  const onClose = async () => {
     setModifyable(true);
-    Swal.fire({
-      title: `닉네임을 [ ${inputValue} ]로 변경하시겠습니까?`,
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "네, 변경해주세요.",
-      cancelButtonText: "아니요.",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        dispatch(userAction.editNickname(inputValue));
-        Swal.fire(
-          "변경완료!",
-          "닉네임 변경을 성공적으로 완료했습니다.",
-          "success"
-        );
-      } else {
+    if(inputBeforeRef.current!=inputValue)
+      try {
+        Swal.fire({
+          title: "변경중...",
+          width: 439,
+          timerProgressBar: true,
+          hideClass: {
+            popup: "",
+          },
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
+        const res = await dispatch(userAction.editNickname(inputValue)).unwrap();
+        dispatch(userSliceAction.setUserNickName(inputValue));
+        Swal.fire({
+          icon: 'success',
+          title: '변경완료!',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        console.log(res);
+      } catch (e) {
         setInputValue(inputBeforeRef.current);
         inputRef.current.value = inputBeforeRef.current;
+        Swal.fire({
+          icon: 'warning',
+          title: '변경실패!',
+          text:"이미 중복된 닉네임이 있거나, 변경에 실패했습니다.",
+        });
+        console.log(e);
       }
-    });
   };
 
   const EditButton = (e) => {
@@ -87,12 +98,12 @@ const InputEditButton = ({
         <InputLine
           onChange={(e) => onChange(e)}
           ref={inputRef}
-          value={inputValue}
+          value={initialState}
           disabled={modifyable}
           fontSize={fontSize}
           onKeyPress={handleKeyPress}
         />
-        <IconFrame onClick={(e) => EditButton(e)} editBt={editBt}>
+        <IconFrame onClick={(e) => EditButton(e)} modifyable={modifyable} editBt={editBt}>
           <FaPen size={24} />
         </IconFrame>
       </InputFrame>
@@ -146,11 +157,11 @@ const InputLine = styled.input`
 `;
 
 const IconFrame = styled.div`
-  ${({ editBt }) => {
+  ${({ modifyable, editBt }) => {
     return css`
       width: 36px;
       height: 36px;
-      display: ${editBt ? "flex" : "none"};
+      display: ${editBt&&modifyable ? "flex" : "none"};
       justify-content: center;
       align-items: center;
       cursor: pointer;

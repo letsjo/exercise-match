@@ -2,15 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { CgGym } from "react-icons/cg";
-import {
-  GiRunningShoe,
-  GiTennisRacket,
-  GiTennisBall,
-  GiGolfTee,
-} from "react-icons/gi";
-import { RiRidingLine } from "react-icons/ri";
-import { HiOutlineDotsHorizontal } from "react-icons/hi";
 
 const SelectCategoryBox = () => {
   const { selectedCity, selectedGu } = useSelector(
@@ -21,93 +12,93 @@ const SelectCategoryBox = () => {
 
   return (
     <BoxWrap>
-      <IconBox>
-        <IconImage
-          onClick={() => {
-            navigate(
-              `/board?type=matching&cate=gym&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
-            );
-          }}
-        >
-          <CgGym size={38} />
+      <IconBox
+        onClick={() => {
+          navigate(
+            `/board?type=matching&cate=gym&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+          );
+        }}
+      >
+        <IconImage>
+          <img src="/images/cate00_gym.png" alt="" />
         </IconImage>
         <CategoryName>헬스</CategoryName>
       </IconBox>
 
-      <IconBox>
-        <IconImage
-          onClick={() => {
-            navigate(
-              `/board?type=matching&cate=running&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
-            );
-          }}
-        >
-          <GiRunningShoe size={38} />
+      <IconBox
+        onClick={() => {
+          navigate(
+            `/board?type=matching&cate=running&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+          );
+        }}
+      >
+        <IconImage>
+          <img src="/images/cate01_running.png" alt="" />
         </IconImage>
         <CategoryName>런닝&조깅</CategoryName>
       </IconBox>
 
-      <IconBox>
-        <IconImage
-          onClick={() => {
-            navigate(
-              `/board?type=matching&cate=badminton&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
-            );
-          }}
-        >
-          <GiTennisRacket size={38} />
+      <IconBox
+        onClick={() => {
+          navigate(
+            `/board?type=matching&cate=badminton&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+          );
+        }}
+      >
+        <IconImage>
+          <img src="/images/cate03_badminton.png" alt="" />
         </IconImage>
         <CategoryName>배드민턴</CategoryName>
       </IconBox>
 
-      <IconBox>
-        <IconImage
-          onClick={() => {
-            navigate(
-              `/board?type=matching&cate=tennis&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
-            );
-          }}
-        >
-          <GiTennisBall size={38} />
+      <IconBox
+        onClick={() => {
+          navigate(
+            `/board?type=matching&cate=tennis&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+          );
+        }}
+      >
+        <IconImage>
+          <img src="/images/cate04_tennis.png" alt="" />
         </IconImage>
         <CategoryName>테니스</CategoryName>
       </IconBox>
 
-      <IconBox>
-        <IconImage
-          onClick={() => {
-            navigate(
-              `/board?type=matching&cate=ridding&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
-            );
-          }}
-        >
-          <RiRidingLine size={38} />
+      <IconBox
+        onClick={() => {
+          navigate(
+            `/board?type=matching&cate=ridding&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+          );
+        }}
+      >
+        <IconImage>
+          <img src="/images/cate05_riding.png" alt="" />
         </IconImage>
         <CategoryName>라이딩</CategoryName>
       </IconBox>
 
-      <IconBox>
-        <IconImage
-          onClick={() => {
-            navigate(
-              `/board?type=matching&cate=golf&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
-            );
-          }}
-        >
-          <GiGolfTee size={38} />
+      <IconBox
+        onClick={() => {
+          navigate(
+            `/board?type=matching&cate=golf&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+          );
+        }}
+      >
+        <IconImage>
+          <img src="/images/cate06_golf.png" alt="" />
         </IconImage>
         <CategoryName>골프</CategoryName>
       </IconBox>
 
-      <IconBox>
-        <IconImage
-          onClick={() => {
-            navigate(
-              `/board?type=matching&cate=etc&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
-            );
-          }}
-        >
-          <HiOutlineDotsHorizontal size={38} />
+      <IconBox
+        onClick={() => {
+          navigate(
+            `/board?type=matching&cate=etc&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+          );
+        }}
+      >
+        <IconImage>
+          <img src="/images/cate07_etc.png" alt="" />
         </IconImage>
         <CategoryName>기타</CategoryName>
       </IconBox>
@@ -124,14 +115,15 @@ const BoxWrap = styled.div`
 `;
 
 const IconBox = styled.div`
-  width:100px;
+  width: 100px;
   height: 80px;
   border-radius: 70px;
-  background: #FFFFFF;
-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
+  background: #ffffff;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
   box-sizing: border-box;
-  &:hover{
-    background: #F0F0F0;
+  cursor: pointer;
+  &:hover {
+    background: #f0f0f0;
     transition: 0.2s;
   }
 `;
@@ -144,8 +136,11 @@ const IconImage = styled.div`
   justify-content: center;
   align-items: center;
   margin: 2.5px auto 0;
-  cursor: pointer;
   box-sizing: border-box;
+  img {
+    width: 38px;
+    height: 38px;
+  }
 `;
 
 const CategoryName = styled.div`

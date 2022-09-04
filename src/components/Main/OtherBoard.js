@@ -4,14 +4,11 @@ import BoardInfo from "./BoardNameInfo";
 import OtherPostCardBig from './OtherPostCardBig';
 import { useSelector } from "react-redux";
 
-const OtherBoard = () => {
+const OtherBoard = ({iconImg,title,boardUrl}) => {
 
-  const { selectedCity, selectedGu } = useSelector(
-    (state) => state.locationReducer
-  );
   return (
     <BoardWrapper>
-        <BoardInfo iconImg="http://cdn.onlinewebfonts.com/svg/img_224763.png" title="기타 실시간 인기 게시글" boardUrl={`/board?type=matching&cate=etc&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`}/>
+        <BoardInfo iconImg={iconImg} title={title} boardUrl={boardUrl}/>
         <OtherPostCardBig/>
     </BoardWrapper>
   )

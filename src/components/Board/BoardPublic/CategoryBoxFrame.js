@@ -6,28 +6,31 @@ import { boardAction } from "../../../redux/actions/boardAction";
 import { boardSliceAction } from "../../../redux/reducers/boardReducer";
 import SearchOption from "./SearchOption";
 
-const CategoryBoxFrame = ({page}) => {
+const CategoryBoxFrame = ({ page }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { selectedCity, selectedGu } = useSelector((state) => state.locationReducer);
+  const { selectedCity, selectedGu } = useSelector(
+    (state) => state.locationReducer
+  );
 
   const query = useLocation().search;
   const type = new URLSearchParams(query).get("type");
   const cate = new URLSearchParams(query).get("cate");
 
   useEffect(() => {
-    dispatch(boardSliceAction.setBoardType({type, cate}));
+    dispatch(boardSliceAction.setBoardType({ type, cate }));
     dispatch(boardAction.loadBoard(type, cate, selectedCity, selectedGu, page));
-
   }, [type, cate, selectedCity, selectedGu, page]);
-  
+
   return (
     <CategorySelect>
       <CategoryBox>
         <CategoryCard
           onClick={(e) => {
             e.preventDefault();
-            navigate(`/board?type=${type}&cate=all&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
+            navigate(
+              `/board?type=${type}&cate=all&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+            );
           }}
           selected={cate === "all"}
         >
@@ -37,7 +40,9 @@ const CategoryBoxFrame = ({page}) => {
           onClick={(e) => {
             e.preventDefault();
 
-            navigate(`/board?type=${type}&cate=gym&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
+            navigate(
+              `/board?type=${type}&cate=gym&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+            );
           }}
           selected={cate === "gym"}
         >
@@ -47,7 +52,9 @@ const CategoryBoxFrame = ({page}) => {
           onClick={(e) => {
             e.preventDefault();
 
-            navigate(`/board?type=${type}&cate=running&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
+            navigate(
+              `/board?type=${type}&cate=running&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+            );
           }}
           selected={cate === "running"}
         >
@@ -57,7 +64,9 @@ const CategoryBoxFrame = ({page}) => {
           onClick={(e) => {
             e.preventDefault();
 
-            navigate(`/board?type=${type}&cate=ridding&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
+            navigate(
+              `/board?type=${type}&cate=ridding&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+            );
           }}
           selected={cate === "ridding"}
         >
@@ -67,7 +76,9 @@ const CategoryBoxFrame = ({page}) => {
           onClick={(e) => {
             e.preventDefault();
 
-            navigate(`/board?type=${type}&cate=badminton&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
+            navigate(
+              `/board?type=${type}&cate=badminton&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+            );
           }}
           selected={cate === "badminton"}
         >
@@ -77,7 +88,9 @@ const CategoryBoxFrame = ({page}) => {
           onClick={(e) => {
             e.preventDefault();
 
-            navigate(`/board?type=${type}&cate=tennis&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
+            navigate(
+              `/board?type=${type}&cate=tennis&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+            );
           }}
           selected={cate === "tennis"}
         >
@@ -87,7 +100,9 @@ const CategoryBoxFrame = ({page}) => {
           onClick={(e) => {
             e.preventDefault();
 
-            navigate(`/board?type=${type}&cate=golf&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
+            navigate(
+              `/board?type=${type}&cate=golf&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+            );
           }}
           selected={cate === "golf"}
         >
@@ -97,7 +112,9 @@ const CategoryBoxFrame = ({page}) => {
           onClick={(e) => {
             e.preventDefault();
 
-            navigate(`/board?type=${type}&cate=etc&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`);
+            navigate(
+              `/board?type=${type}&cate=etc&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+            );
           }}
           selected={cate === "etc"}
         >

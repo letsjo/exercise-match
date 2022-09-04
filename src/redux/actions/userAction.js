@@ -47,7 +47,6 @@ const naverLogin = (code) => {
 //     try {
 //       userAPI.defaults.headers.common["accesstoken"] = access_Token;
 //       userAPI.defaults.headers.common["refreshtoken"] = refresh_Token;
-      
 
 //       let sessionStorageLogin = sessionStorage;
 //       sessionStorageLogin.setItem("accesstoken", access_Token);
@@ -55,7 +54,7 @@ const naverLogin = (code) => {
 //       sessionStorageLogin.setItem("nickname", nickname); //닉네임
 //       sessionStorageLogin.setItem("username", username); //아이디
 //       sessionStorageLogin.setItem("profile", profile); //프로필 사진
-      
+
 //       return ;
 //     } catch (err) {
 //       console.log(err);
@@ -122,7 +121,7 @@ const checkAuthkey = (authNum) => {
     } catch (e) {
       console.log(e);
     }
-  }
+  };
 };
 
 const checkPassword = (password, passwordCheck) => {
@@ -161,15 +160,37 @@ const loadMyPage = () => {
       const myPageInfoAPI = userAPI.get("/api/mypage/info");
       const myPageProfileAPI = userAPI.get("/api/mypage/profile");
 
-      let [responseAction, responseInfo, responseProfile] = await Promise.all([
-        myPageActionAPI,
-        myPageInfoAPI,
-        myPageProfileAPI,
-      ]);
+      let [responseAction, responseInfo, responseProfile] =
+        await Promise.allSettled([
+          myPageActionAPI,
+          myPageInfoAPI,
+          myPageProfileAPI,
+        ]);
 
-      dispatch(userSliceAction.setMypageProfile({profile:myPageProfileAPI.profile,star:myPageProfileAPI.star}));
-      dispatch(userSliceAction.setMypageInfo({birthYear:myPageInfoAPI.birth,birthMonth:myPageInfoAPI.birth,birthDay:myPageInfoAPI.birth,gender:myPageInfoAPI.gender}));
-      dispatch(userSliceAction.setMypageAction({nickname:myPageActionAPI.nickname,concern:myPageActionAPI.concern,joinNum:myPageActionAPI.joinCnt}));
+      if (responseProfile.status == "fulfilled")
+        dispatch(
+          userSliceAction.setMypageProfile({
+            profile: responseProfile.value.data.profile,
+            star: responseProfile.value.data.star,
+          })
+        );
+      if (responseInfo.status == "fulfilled")
+        dispatch(
+          userSliceAction.setMypageInfo({
+            birthYear: responseInfo.value.data.birth,
+            birthMonth: responseInfo.value.data.birth,
+            birthDay: responseInfo.value.data.birth,
+            gender: responseInfo.value.data.gender,
+          })
+        );
+      if (responseAction.status == "fulfilled")
+        dispatch(
+          userSliceAction.setMypageAction({
+            nickname: responseAction.value.data.nickname,
+            // concern: responseAction.value.data.concern,
+            joinNum: responseAction.value.data.joinCnt,
+          })
+        );
 
       console.log(responseAction, responseInfo, responseProfile);
       // console.log(responseAction, responseInfo);
@@ -179,65 +200,74 @@ const loadMyPage = () => {
   };
 };
 
-const editNickname = (inputValue) => {
-  return async (dispatch) => {
+const editNickname = createAsyncThunk(
+  "user/editNickname",
+  async (inputValue, { rejectWithValue }) => {
     try {
       const res = await userAPI.put("/api/mypage/actionedit/nickname", {
         nickname: inputValue,
       });
-      dispatch(userSliceAction.setUserNickName(inputValue));
       console.log(res);
+      return res;
     } catch (err) {
       console.log(err);
+      return rejectWithValue(err.response.data.error);
     }
-  };
-};
+  }
+);
 
-const editConcern = (editInterest) => {
-  return async (dispatch) => {
+const editConcern = createAsyncThunk(
+  "user/editConcern",
+  async (editInterest, { rejectWithValue }) => {
     try {
       const res = await userAPI.put("/api/mypage/actionedit/concern", {
-        concern1En:editInterest[0].en,concern1Kor:editInterest[0].ko,
-        concern2En:editInterest[1].en,concern2Kor:editInterest[1].ko,
-        concern3En:editInterest[2].en,concern3Kor:editInterest[2].ko,
+        concern1En: editInterest[0].en,
+        concern1Kor: editInterest[0].ko,
+        concern2En: editInterest[1].en,
+        concern2Kor: editInterest[1].ko,
+        concern3En: editInterest[2].en,
+        concern3Kor: editInterest[2].ko,
       });
-      dispatch(userSliceAction.setUserInterest(editInterest));
       console.log(res);
+      return res;
     } catch (err) {
       console.log(err);
+      return rejectWithValue(err.response.data.error);
     }
-  };
-};
+  }
+);
 
-const editGender = (gender) => {
-  return async (dispatch) => {
+const editGender = createAsyncThunk(
+  "user/editGender",
+  async (gender, { rejectWithValue }) => {
     try {
       const res = await userAPI.put("/api/mypage/infoedit/gender", {
         gender,
       });
-      dispatch(userSliceAction.setUserGender(gender));
       console.log(res);
+      return res;
     } catch (err) {
       console.log(err);
+      return rejectWithValue(err.response.data.error);
     }
-  };
-};
+  }
+);
 
-const editBirth = (birthYear, birthMonth, birthDay) => {
-  return async (dispatch) => {
+const editBirth = createAsyncThunk(
+  "user/editBirth",
+  async ({ birthYear, birthMonth, birthDay }, { rejectWithValue }) => {
     try {
       const res = await userAPI.put("/api/mypage/infoedit/birth", {
-        birth: birthYear+birthMonth+birthDay,
+        birth: birthYear + birthMonth + birthDay,
       });
-      dispatch(userSliceAction.setUserBirthYear(birthYear));
-      dispatch(userSliceAction.setUserBirthMonth(birthMonth));
-      dispatch(userSliceAction.setUserBirthDay(birthDay));
       console.log(res);
+      return res;
     } catch (err) {
       console.log(err);
+      return rejectWithValue(err.response.data.error);
     }
-  };
-};
+  }
+);
 
 const userLogin = createAsyncThunk(
   "user/userLogin",

@@ -7,7 +7,7 @@ import PersonalSection from "./PersonalSection";
 
 const MyPersonalData = () => {
 
-  const {username,userGender,userBirthYear,userBirthMonth,userBirthDay} = useSelector((state) => state.userReducer);
+  const {username,userGender} = useSelector((state) => state.userReducer);
 
   return (
     <Container>
@@ -15,8 +15,8 @@ const MyPersonalData = () => {
         <TitleZone>개인정보</TitleZone>
         <DataZone>
           <PersonalSection title="아이디(이메일)" data={username} editBt={false} />
-          <PersonalRadio type="gender" title="성별" data={userGender} />
-          <PersonalBirth title="생년월일" data={{Year:userBirthYear,Month:userBirthMonth,Day:userBirthDay}}/>
+          <PersonalRadio type="gender" title="성별" />
+          <PersonalBirth title="생년월일"/>
           <PersonalSection title="비밀번호" data="●●●●●●●●●●●●●" />
         </DataZone>
       </DataFrame>

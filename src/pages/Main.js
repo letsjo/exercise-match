@@ -11,11 +11,9 @@ import HistoryBoard from "../components/Main/HistoryBoard";
 import SelectCategoryBox from "../components/Main/SelectCategoryBox";
 import OtherBoard from "../components/Main/OtherBoard";
 import CurrentLocationCard from "../components/Main/CurrentLocationCard";
-import { useDispatch } from "react-redux";
-import { modalSliceAction } from "../redux/reducers/modalReducer";
+import BannerCate from "../components/Main/BannerCate";
 
 const Main = () => {
-    
   const { selectedCity, selectedGu } = useSelector(
     (state) => state.locationReducer
   );
@@ -33,17 +31,27 @@ const Main = () => {
       <CurrentLocationCard />
       <SelectCategoryBox />
       <HistoryBoard />
+      <BannerCate
+        iconImg=""
+        title="HOT 매칭 게시글"
+        boardUrl={`/board?type=matching&cate=gym&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`}
+        buttonCate={true}
+      />
       <PopularBoard
-        iconImg="https://cdn-icons-png.flaticon.com/512/3066/3066961.png"
+        iconImg="/images/cate00_gym.png"
         title="헬스 실시간 인기 게시글"
         boardUrl={`/board?type=matching&cate=gym&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`}
       />
       <PopularBoard
-        iconImg="https://cdn-icons-png.flaticon.com/512/2528/2528207.png"
+        iconImg="/images/cate04_tennis.png"
         title="테니스 실시간 인기 게시글"
         boardUrl={`/board?type=matching&cate=tennis&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`}
       />
-      <OtherBoard />
+      <OtherBoard
+        iconImg="/images/cate07_etc.png"
+        title="기타 실시간 인기 게시글"
+        boardUrl={`/board?type=matching&cate=etc&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`}
+      />
     </MainContainer>
   );
 };
@@ -51,5 +59,3 @@ const Main = () => {
 const MainContainer = styled.div``;
 
 export default Main;
-
-

@@ -4,22 +4,27 @@ import { FaPen } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { userSliceAction } from "../../redux/reducers/userReducer";
 import { userAction } from "../../redux/actions/userAction";
+import Swal from "sweetalert2";
 
 const PersonalBirth = ({ title, data, editBt = true }) => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
+
+  const {userBirthYear,userBirthMonth,userBirthDay} = useSelector((state) => state.userReducer);
+
   const [available, setAvailable] = useState(true);
+  const [birthYear, setBirthYear] = useState(userBirthYear);
+  const [birthMonth, setBirthMonth] = useState(userBirthMonth);
+  const [birthDay, setBirthDay] = useState(userBirthDay);
 
-  const [birthYear, setBirthYear] = useState(data.Year);
-  const [birthMonth, setBirthMonth] = useState(data.Month);
-  const [birthDay, setBirthDay] = useState(data.Day);
-
-  const inputRef = useRef(null);
-  const birthRef = useRef(null);
+  const inputBeforeYearRef = useRef(null);
+  const inputBeforeMonthRef = useRef(null);
+  const inputBeforeDayRef = useRef(null);
+  const birthFrameRef = useRef(null);
 
   useEffect(() => {
     if (!available) {
       const pageClickEvent = (e) => {
-        if (!birthRef.current.contains(e.target)) {
+        if (!birthFrameRef.current.contains(e.target)) {
           onClose(e);
         }
       };
@@ -32,8 +37,6 @@ const PersonalBirth = ({ title, data, editBt = true }) => {
     }
   });
 
-  console.log(birthYear, birthMonth, birthDay);
-
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       onClose(e);
@@ -42,6 +45,9 @@ const PersonalBirth = ({ title, data, editBt = true }) => {
 
   const EditButton = (e) => {
     e.preventDefault();
+    inputBeforeYearRef.current = birthYear;
+    inputBeforeMonthRef.current = birthMonth;
+    inputBeforeDayRef.current = birthDay;
     setAvailable(!available);
   };
 
@@ -60,21 +66,63 @@ const PersonalBirth = ({ title, data, editBt = true }) => {
     if (setBirthDay) setBirthDay(e.target.value);
   };
 
-  const onClose = (e) => {
+  const onClose = async (e) => {
     e.preventDefault();
     setAvailable(true);
-    dispatch(userAction.editBirth(birthYear,birthMonth,birthDay));
+
+    if (
+      inputBeforeYearRef.current != birthYear ||
+      inputBeforeMonthRef.current != birthMonth ||
+      inputBeforeDayRef.current != birthDay
+    )
+      try {
+        Swal.fire({
+          title: "변경중...",
+          width: 439,
+          timerProgressBar: true,
+          hideClass: {
+            popup: "",
+          },
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
+        const res = await dispatch(
+          userAction.editBirth({ birthYear, birthMonth, birthDay })
+        ).unwrap();
+
+        dispatch(userSliceAction.setUserBirth({birthYear,birthMonth,birthDay}));
+
+        Swal.fire({
+          icon: "success",
+          title: "변경완료!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        console.log(res);
+      } catch (e) {
+        Swal.fire({
+          icon: "warning",
+          title: "변경실패!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setBirthYear(inputBeforeYearRef.current);
+        setBirthMonth(inputBeforeMonthRef.current);
+        setBirthDay(inputBeforeDayRef.current);
+
+        console.log(e);
+      }
   };
 
   return (
-    <Container ref={birthRef}>
+    <Container>
       <TitleZone>{title}</TitleZone>
       <DataZone>
-        <InputFrame>
+        <InputFrame ref={birthFrameRef}>
           <InputLine
             onChange={(e) => onChangeYear(e)}
-            ref={inputRef}
-            value={birthYear}
+            value={userBirthYear}
             disabled={available}
             available={available}
             fontSize={"20px"}
@@ -83,7 +131,7 @@ const PersonalBirth = ({ title, data, editBt = true }) => {
           년
           <InputLine
             onChange={(e) => onChangeMonth(e)}
-            value={birthMonth}
+            value={userBirthMonth}
             disabled={available}
             available={available}
             fontSize={"20px"}
@@ -92,7 +140,7 @@ const PersonalBirth = ({ title, data, editBt = true }) => {
           월
           <InputLine
             onChange={(e) => onChangeDay(e)}
-            value={birthDay}
+            value={userBirthDay}
             disabled={available}
             available={available}
             fontSize={"20px"}
@@ -100,7 +148,11 @@ const PersonalBirth = ({ title, data, editBt = true }) => {
           />
           일
         </InputFrame>
-        <IconFrame onClick={(e) => EditButton(e)} editBt={editBt}>
+        <IconFrame
+          onClick={(e) => EditButton(e)}
+          available={available}
+          editBt={editBt}
+        >
           <FaPen size={24} />
         </IconFrame>
       </DataZone>
@@ -163,11 +215,11 @@ const InputLine = styled.input`
 `;
 
 const IconFrame = styled.div`
-  ${({ editBt }) => {
+  ${({ available, editBt }) => {
     return css`
       width: 36px;
       height: 36px;
-      display: ${editBt ? "flex" : "none"};
+      display: ${available && editBt ? "flex" : "none"};
       justify-content: center;
       align-items: center;
       margin-right: 16px;
