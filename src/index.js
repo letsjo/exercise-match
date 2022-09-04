@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import { ReactChannelIO } from "react-channel-plugin";
+import ScrollToTop from "./utils/ScrollTop";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -18,6 +19,7 @@ root.render(
         language="en"
         autoBoot
       >
+        <ScrollToTop/>
         <App />
       </ReactChannelIO>
     </BrowserRouter>

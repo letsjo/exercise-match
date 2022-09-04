@@ -54,7 +54,7 @@ const SelectCityCard = ({ localData }) => {
             <GuNameZone>{localData?.city} 전체</GuNameZone>
             {selectedCity == localData?.city && selectedGu == "" && (
               <CheckZone ref={selectedLocationRef}>
-                <AiOutlineCheck size={26} />
+                <AiOutlineCheck size={26} color={"#00CFFF"}/>
               </CheckZone>
             )}
           </GuSection>

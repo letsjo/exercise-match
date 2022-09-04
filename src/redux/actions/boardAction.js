@@ -75,6 +75,38 @@ const loadComments = (boardId) => {
   };
 };
 
+const loadReview = createAsyncThunk(
+  "board/loadReview",
+  async ( {id}, { rejectWithValue }) => {
+    try {
+      const res = await userAPI.get(
+        `/api/reviewstar`
+      );
+      console.log(res);
+      return res;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data.error);
+    }
+  }
+);
+
+const postReview = createAsyncThunk(
+  "board/loadReview",
+  async ( {boardId}, { rejectWithValue }) => {
+    try {
+      const res = await userAPI.get(
+        `/api/reviewstar`
+      );
+      console.log(res);
+      return res;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data.error);
+    }
+  }
+);
+
 const postComment = createAsyncThunk(
   "board/postComment",
   async ( {boardId, comment}, { rejectWithValue }) => {
@@ -149,4 +181,6 @@ export const boardAction = {
   delBoard,
   applyBoard,
   postComment,
+  loadReview,
+  postReview,
 };

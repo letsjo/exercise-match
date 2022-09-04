@@ -65,25 +65,25 @@ const Board = () => {
           <MatchingTitle type={type} onClick={MatchingOnClick}>
             매칭(구합니다)
           </MatchingTitle>
-          {/* {(type ==="match"||type === "mymatch") && (
-            <> */}
+          {(type ==="matching"||type === "mymatching") && (
+            <>
             <SelectMatching type={type} onClick={MatchingOnClick}>
               매칭 게시판 
               </SelectMatching>
             <SelectMyMatching type={type} onClick={MyMatchingOnClick}>
               나의 게시글</SelectMyMatching> 
-            {/* </>
-          )} */}
+            </>
+          )}
             
           <InfoTitle type={type} onClick={InfoOnClick}>
             정보 공유 게시판
           </InfoTitle>
-          {/* {(type === "info"||type === "myinfo") && (
-            <> */}
+          {(type === "information"||type === "myinformation") && (
+            <>
             <SelectInfo type={type} onClick={InfoOnClick}>정보 공유 </SelectInfo>
             <SelectMyBoard type={type} onClick={MyInfoOnClick}>나의 게시글</SelectMyBoard> 
-            {/* </>
-          )} */}
+            </>
+          )}
         </CategoryFrame>
         <ContextFrame>
           {type === "matching" ? (

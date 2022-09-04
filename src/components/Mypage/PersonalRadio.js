@@ -3,17 +3,27 @@ import styled, { css } from "styled-components";
 import { FaPen } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { userAction } from "../../redux/actions/userAction";
+import { userSliceAction } from "../../redux/reducers/userReducer";
+import Swal from "sweetalert2";
 
-const PersonalRadio = ({ title, data, editBt = true }) => {
+const PersonalRadio = ({ title, editBt = true }) => {
   const dispatch = useDispatch();
-  const [available, setAvailable] = useState(true);
-  const [gender, setGender] = useState(data);
-  const radioRef = useRef(null);
 
+  const { userGender } = useSelector((state) => state.userReducer);
+
+  const [available, setAvailable] = useState(true);
+  const [gender, setGender] = useState(userGender);
+  const radioFrameRef = useRef(null);
+  const radioBeforeRef = useRef(null);
+
+  useEffect(() =>{
+    setGender(userGender);
+  },[userGender])
+  
   useEffect(() => {
     if (!available) {
       const pageClickEvent = (e) => {
-        if (!radioRef.current.contains(e.target)) {
+        if (!radioFrameRef.current.contains(e.target)) {
           onClose(e);
         }
       };
@@ -28,69 +38,88 @@ const PersonalRadio = ({ title, data, editBt = true }) => {
 
   const EditButton = (e) => {
     e.preventDefault();
+    radioBeforeRef.current = gender;
     setAvailable(!available);
   };
 
-  const onClose = (e) => {
+  const onClose = async (e) => {
     e.preventDefault();
     setAvailable(true);
-    console.log(gender);
-    dispatch(userAction.editGender(gender));
+    if (radioBeforeRef.current != gender)
+      try {
+        Swal.fire({
+          title: "변경중...",
+          width: 439,
+          timerProgressBar: true,
+          hideClass: {
+            popup: "",
+          },
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
+        const res = await dispatch(userAction.editGender(gender)).unwrap();
+        dispatch(userSliceAction.setUserGender(gender));
+        Swal.fire({
+          icon: "success",
+          title: "변경완료!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        console.log(res);
+      } catch (e) {
+        Swal.fire({
+          icon: "warning",
+          title: "변경실패!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setGender(radioBeforeRef.current);
+
+        console.log("실패 복귀:", radioBeforeRef.current);
+        console.log(e);
+      }
   };
-  
+
   return (
-    <Container ref={radioRef}>
+    <Container>
       <TitleZone>{title}</TitleZone>
       <DataZone>
-        <Gender available={available}>
+        <Gender ref={radioFrameRef} available={available}>
           <RadioSection
             onClick={(e) => {
               if (!available) setGender("male");
             }}
           >
-            {gender == "male" ? (
               <input
                 type="radio"
-                id="men"
+                value="male"
                 name="radio-group"
-                disabled={available}
-                defaultChecked
-              />
-            ) : (
-              <input
-                type="radio"
-                id="men"
-                name="radio-group"
+                checked={gender === "male"}
                 disabled={available}
               />
-            )}
-            <label htmlFor="men">남성</label>
+            <label htmlFor="male">남성</label>
           </RadioSection>
           <RadioSection
             onClick={(e) => {
               if (!available) setGender("female");
             }}
           >
-            {gender == "female" ? (
               <input
                 type="radio"
-                id="women"
+                value="female"
                 name="radio-group"
-                disabled={available}
-                defaultChecked
-              />
-            ) : (
-              <input
-                type="radio"
-                id="women"
-                name="radio-group"
+                checked={gender === "female"}
                 disabled={available}
               />
-            )}
-            <label htmlFor="women">여성</label>
+            <label htmlFor="female">여성</label>
           </RadioSection>
         </Gender>
-        <IconFrame onClick={(e) => EditButton(e)} editBt={editBt}>
+        <IconFrame
+          onClick={(e) => EditButton(e)}
+          available={available}
+          editBt={editBt}
+        >
           <FaPen size={24} />
         </IconFrame>
       </DataZone>
@@ -206,11 +235,11 @@ const RadioSection = styled.div`
 `;
 
 const IconFrame = styled.div`
-  ${({ editBt, fontSize }) => {
+  ${({ editBt, available, fontSize }) => {
     return css`
       width: 36px;
       height: 36px;
-      display: ${editBt ? "flex" : "none"};
+      display: ${editBt && available ? "flex" : "none"};
       justify-content: center;
       align-items: center;
       margin-right: 16px;

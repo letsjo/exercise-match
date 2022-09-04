@@ -1,20 +1,37 @@
-import React from "react";
-import styled, {css} from "styled-components";
+import React, { useEffect } from "react";
+import styled, { css } from "styled-components";
 import { BsStarFill, BsStar } from "react-icons/bs";
 import { useState, useRef } from "react";
 import ReviewBoxAfter from "./ReviewBoxAfter";
+import { useDispatch } from "react-redux";
+import { boardAction } from "../../redux/actions/boardAction";
 
 const ReviewBox = () => {
+  const dispatch = useDispatch();
   const [rate, setRate] = useState(5);
   const [show, setShow] = useState(false);
+  const [hovered, setHovered] = useState(null);
 
   const checkboxRefForm = useRef();
+  
+  useEffect(()=>{
+    loadReview("1");
+  }, [])
 
-  const save = (e) => {
+  const loadReview = async(id) =>{
+    try{
+      const res = await dispatch(boardAction.loadReview({id})).unwrap();
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const save = async (e) => {
     e.preventDefault();
 
-    const res = {
-      starRates: rate,
+    const reviewData = {
+      score : rate,
       checkList: {
         1: checkboxRefForm.current[0].checked,
         2: checkboxRefForm.current[1].checked,
@@ -25,8 +42,15 @@ const ReviewBox = () => {
       review: checkboxRefForm.current[5].value,
     };
 
-    console.log(res);
+    console.log(reviewData);
     console.log(checkboxRefForm);
+
+    try{
+      const res = await dispatch(boardAction.postReview(reviewData));
+    } catch(e){
+      console.log(e);
+    }
+
   };
 
   return (
@@ -37,14 +61,16 @@ const ReviewBox = () => {
       </ReviewTitle>
       <StarForm show={show} ref={checkboxRefForm} onSubmit={(e) => save(e)}>
         <StarBox show={show}>
-          {Array.from({ length: 5 }, (item, idx) => {
-            return rate < idx + 1 ? (
+          {Array.from({ length: 5 }, (_, idx) => {
+            return  (!show && hovered < idx + 1 ) || (show && rate < idx + 1)? (
               <Star
                 key={idx}
                 onClick={() => {
-                  setRate(idx + 1);
-                  setShow(true);
+                  if (!show) setRate(idx + 1);
+                  setShow(!show);
                 }}
+                onMouseEnter={() => {if (!show) setHovered(idx + 1)}}
+                onMouseLeave={() => {if (!show) setHovered(null)}}
               >
                 <BsStar size={42} />
               </Star>
@@ -52,11 +78,13 @@ const ReviewBox = () => {
               <Star
                 key={idx}
                 onClick={() => {
-                  setRate(idx + 1);
-                  setShow(true);
+                  if (!show) setRate(idx + 1);
+                  setShow(!show);
                 }}
-              >  
-                <BsStarFill size={42} />
+                onMouseEnter={() => {if (!show) setHovered(idx + 1)}}
+                onMouseLeave={() => {if (!show) setHovered(null)}}
+              >
+                <BsStarFill size={42} color="#00CFFF" />
               </Star>
             );
           })}
@@ -87,12 +115,12 @@ const ReviewTitle = styled.div`
   margin: auto;
 `;
 
-const StarForm=styled.form`
+const StarForm = styled.form`
   transition: all 0.2s ease;
-  ${({show})=>{
+  ${({ show }) => {
     return css`
-      transform: ${show?"translateY(-40px)":""};
-    `
+      transform: ${show ? "translateY(-40px)" : "translateY(+40px)"};
+    `;
   }}
 `;
 
@@ -101,13 +129,12 @@ const StarBox = styled.div`
   height: 60px;
   margin: 50px auto 50px;
   display: flex;
-  justify-content: space-between;
-  gap: 5px;
+  justify-content: center;
   transition: transform 0.2s ease;
-  ${({show})=>{
+  ${({ show }) => {
     return css`
-    transform: ${show? "scale(60%)":""} ;
-    `
+      transform: ${show ? "scale(60%)" : "scale(100%)"};
+    `;
   }}
 `;
 
@@ -117,6 +144,7 @@ const Star = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.2s ease;
 `;
 
 export default ReviewBox;

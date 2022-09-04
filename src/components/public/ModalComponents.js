@@ -170,7 +170,7 @@ const ModalInterestSelect = styled.div`
   transform: translate(-50%, -50%);
   background: white;
   border-radius: 20px;
-  min-width: 640px;
+  min-width: 630px;
   height: 85%;
   max-height: 543px;
 `;

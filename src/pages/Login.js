@@ -254,7 +254,7 @@ const LoginBtn = styled.button`
   width: 500px;
   height: 59px;
   cursor: pointer;
-  background-color: #494949;
+  background-color: #00CFFF;
   display: flex;
   align-items: center;
   justify-content: center;

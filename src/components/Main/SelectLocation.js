@@ -6,10 +6,10 @@ import SelectCityCard from "./SelectCityCard";
 
 const SelectLocation = () => {
   // const tmpLocalName = [
-  //   {
-  //     city: "전국",
-  //     gu: [],
-  //   },
+    // {
+    //   city: "전국",
+    //   gu: [],
+    // },
   //   {
   //     city: "서울",
   //     gu: [
@@ -75,7 +75,7 @@ const SelectLocation = () => {
   //   },
   // ];
 
-  const { localsNameList } = useSelector((state)=> state.locationReducer)
+  const { localsNameList } = useSelector((state) => state.locationReducer);
 
   return (
     <Container>
@@ -83,12 +83,10 @@ const SelectLocation = () => {
         <TitleZone>어느 지역의 정보를 원하세요?</TitleZone>
       </TitleFrame>
       <ContentsFrame>
+        <SelectCityCard localData={{city: "전국",gu: []}} />
         {localsNameList &&
           localsNameList.map((cityInfo, index) => (
-            <SelectCityCard
-              key={index}
-              localData={cityInfo}
-            />
+            <SelectCityCard key={index} localData={cityInfo} />
           ))}
       </ContentsFrame>
     </Container>

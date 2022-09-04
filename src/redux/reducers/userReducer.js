@@ -2,14 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 let initialState = {
   isLogin: false,
-  username: "hyunoh.jo@gmail.com",
-  userNickName: "조현오",
+  username: "",
+  userNickName: "",
   userProfile: "",
   userStar:1,
-  userGender: "male",
-  userBirthYear: "1991",
-  userBirthMonth: "1",
-  userBirthDay: "4",
+  userGender: "null",
+  userBirthYear: "",
+  userBirthMonth: "",
+  userBirthDay: "",
   userJoinList: {
     gym: 1,
     running: 0,
@@ -62,14 +62,10 @@ const userSlice = createSlice({
     setUserGender(state, action) {
       state.userGender = action.payload;
     },
-    setUserBirthYear(state, action) {
-      state.userBirthYear = action.payload;
-    },
-    setUserBirthMonth(state, action) {
-      state.userBirthMonth = action.payload;
-    },
-    setUserBirthDay(state, action) {
-      state.userBirthDay = action.payload;
+    setUserBirth(state, action) {
+      state.userBirthYear = action.payload.birthYear;
+      state.userBirthMonth = action.payload.birthMonth;
+      state.userBirthDay = action.payload.birthDay;
     },
     setUserJoinList(state, action) {
       state.userJoinList = action.payload;
