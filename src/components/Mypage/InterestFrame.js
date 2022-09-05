@@ -96,11 +96,11 @@ const InterestFrame = () => {
 
   const onClick = (e, interest) => {
     e.preventDefault();
-    const findIndex = editInterest.findIndex((i) => i.en == interest["en"]);
-    if (editInterest.length < 3 && findIndex === -1) {
+    const findIndex = editInterest?.findIndex((i) => i.en == interest["en"]);
+    if (editInterest && editInterest?.length < 3 && findIndex === -1) {
       setEditInterest([...editInterest, interest]);
       //   dispatch(userSliceAction.setInterest(userInterest));
-    } else if (editInterest.length <= 3 && findIndex >= 0) {
+    } else if (editInterest?.length <= 3 && findIndex >= 0) {
       setEditInterest([
         ...editInterest.slice(0, findIndex),
         ...editInterest.slice(findIndex + 1),

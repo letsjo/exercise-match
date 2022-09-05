@@ -17,8 +17,12 @@ const InputEditButton = ({
 
   const [inputValue, setInputValue] = useState(initialState);
   const [modifyable, setModifyable] = useState(true);
-  const inputRef = useRef(null);
+  const inputRef = useRef(initialState);
   const inputBeforeRef = useRef(null);
+
+  useEffect(()=>{
+    setInputValue(initialState);
+  },[initialState])
 
   useEffect(() => {
     inputRef.current.focus();
@@ -91,6 +95,8 @@ const InputEditButton = ({
     setModifyable(!modifyable);
   };
 
+  console.log(initialState,inputValue)
+
   return (
     <Container border={border}>
       <TitleFrame title={title}>{title}</TitleFrame>
@@ -98,7 +104,7 @@ const InputEditButton = ({
         <InputLine
           onChange={(e) => onChange(e)}
           ref={inputRef}
-          value={initialState}
+          value={inputValue}
           disabled={modifyable}
           fontSize={fontSize}
           onKeyPress={handleKeyPress}
