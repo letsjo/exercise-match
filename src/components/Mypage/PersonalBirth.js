@@ -6,7 +6,7 @@ import { userSliceAction } from "../../redux/reducers/userReducer";
 import { userAction } from "../../redux/actions/userAction";
 import Swal from "sweetalert2";
 
-const PersonalBirth = ({ title, data, editBt = true }) => {
+const PersonalBirth = ({ title, editBt = true }) => {
   const dispatch = useDispatch();
 
   const {userBirthYear,userBirthMonth,userBirthDay} = useSelector((state) => state.userReducer);

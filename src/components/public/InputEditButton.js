@@ -17,7 +17,7 @@ const InputEditButton = ({
 
   const [inputValue, setInputValue] = useState(initialState);
   const [modifyable, setModifyable] = useState(true);
-  const inputRef = useRef(null);
+  const inputRef = useRef(initialState);
   const inputBeforeRef = useRef(null);
 
   useEffect(()=>{
@@ -96,6 +96,8 @@ const InputEditButton = ({
     console.log(inputBeforeRef.current);
     setModifyable(!modifyable);
   };
+
+  console.log(initialState,inputValue)
 
   return (
     <Container border={border}>
