@@ -20,6 +20,10 @@ const InputEditButton = ({
   const inputRef = useRef(null);
   const inputBeforeRef = useRef(null);
 
+  useEffect(()=>{
+    setInputValue(initialState);
+    },[initialState])
+    
   useEffect(() => {
     inputRef.current.focus();
     if (!modifyable) {
@@ -65,6 +69,8 @@ const InputEditButton = ({
         });
         const res = await dispatch(userAction.editNickname(inputValue)).unwrap();
         dispatch(userSliceAction.setUserNickName(inputValue));
+        let sessionStorageLogin = sessionStorage;
+        sessionStorageLogin.setItem("nickname", inputValue);
         Swal.fire({
           icon: 'success',
           title: '변경완료!',
@@ -98,7 +104,7 @@ const InputEditButton = ({
         <InputLine
           onChange={(e) => onChange(e)}
           ref={inputRef}
-          value={initialState}
+          value={inputValue}
           disabled={modifyable}
           fontSize={fontSize}
           onKeyPress={handleKeyPress}

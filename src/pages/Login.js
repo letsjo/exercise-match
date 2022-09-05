@@ -27,13 +27,13 @@ const Login = () => {
   const STATE_STRING = "state_test";
   const naverURL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${CLIENT_ID}&state=${STATE_STRING}&redirect_uri=${CALLBACK_URL}`;
 
-  const googleURL = `http://ec2-13-209-65-84.ap-northeast-2.compute.amazonaws.com/oauth2/authorization/google`;
+  const googleURL = `http://ec2-13-124-51-222.ap-northeast-2.compute.amazonaws.com/oauth2/authorization/google`;
 
   const naverLogin = () => {
     window.location.href = naverURL;
     // window.location.href = googleURL;
   };
-
+  
   const googleLogin = () => {
     window.location.href = googleURL;
   };
@@ -123,9 +123,9 @@ const Login = () => {
             <KakaoIcon onClick={kakaoLogin}>
               <img src="/images/kakao_logo.png" alt="" />
             </KakaoIcon>
-            <NaverIcon onClick={googleLogin}>
-              <img src="/images/btnG_아이콘원형.png" alt="" />
-            </NaverIcon>
+            <GoogleIcon onClick={googleLogin}>
+              <img src="/images/free-icon-google-2702602.png" alt="" />
+            </GoogleIcon>
           </IconBox>
         </LoginWrap>
       </Wrap>
@@ -310,7 +310,7 @@ const KakaoIcon = styled.div`
   }
 `;
 
-const NaverIcon = styled.div`
+const GoogleIcon = styled.div`
   img {
     width: 50px;
     height: 50px;
