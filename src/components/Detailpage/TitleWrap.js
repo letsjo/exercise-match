@@ -1,18 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const TitleWrap = () => {
+const TitleWrap = ({isMatching, category, title, writeDate}) => {
   return (
     <Container>
           <FirstLine>
             {/* <Category>헬스</Category> */}
-            <Matching>매칭중</Matching>
+            <Matching>{isMatching?"매칭완료":"매칭중"}</Matching>
             </FirstLine>
           <SecondLine>
-          <Category>헬스</Category>
-            <Title>헬스장 같이 등록할 사람?</Title>
+          <Category>{category}</Category>
+            <Title>{title}</Title>
             </SecondLine>
-          <Date>20xx.xx.xx</Date>
+          <Date>{writeDate}</Date>
         </Container>
   )
 }

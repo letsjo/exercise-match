@@ -17,7 +17,7 @@ const MyProfileShow = ({ mypage = true, profileImg }) => {
       <LeftFrame>
         <LeftZone>
           <PhotoFrame>
-            <img src={profileImg?profileImg:"https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg"} />
+            <img src={profileImg?profileImg:"https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg"} alt=""/>
           </PhotoFrame>
           <InfoFrame>
             <NameZone>{userNickName}</NameZone>

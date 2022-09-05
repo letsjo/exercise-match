@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Comment from "../components/public/Comment";
 import NavBar from "../components/public/NavBar";
@@ -9,7 +9,7 @@ import DetailpagePopover from "../components/Detailpage/DetailpagePopover";
 import TitleWrap from "../components/Detailpage/TitleWrap";
 import DatePersonnelWrap from "../components/Detailpage/DatePersonnelWrap";
 import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { boardAction } from "../redux/actions/boardAction";
 import Swal from "sweetalert2";
 import KakaoMapForDetail from "../components/Board/MatchingBoard/KakaoMapForDetail";
@@ -69,6 +69,14 @@ const Detailpage = () => {
     }
   };
 
+  useEffect(()=>{
+    dispatch(boardAction.loadDetail(params.id));
+  },[]);
+
+  const {detailData} = useSelector(state=>state.boardReducer);
+
+  console.log(detailData);
+
   return (
     <>
       <NavBar />
@@ -77,11 +85,11 @@ const Detailpage = () => {
           <>
             <Profile>
               <img
-                src="http://file3.instiz.net/data/cached_img/upload/2018/09/15/0/28998558fac5abcead6e6e942d53194f.jpg"
+                src={detailData.memberSimpleDto?.profile}
                 alt=""
               />
             </Profile>
-            <Nickname>홍길동</Nickname>
+            <Nickname>{detailData.memberSimpleDto?.nickname}</Nickname>
           </>
           <Dot>
             <BiDotsVerticalRounded size={30} onClick={onOpenerClick} />
@@ -94,15 +102,16 @@ const Detailpage = () => {
             )}
           </Dot>
         </ProfileWrap>
-        <TitleWrap />
+        <TitleWrap
+        isMatching={detailData.currentEntry >= detailData.maxEntry}
+        category={detailData.category}
+        title={detailData.title}
+        writeDate={detailData.createdAt}/>
 
         <DatePersonnelWrap />
 
         <ContentWrap>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra elit
-          donec nunc posuere pulvinar libero fermentum mi. Lobortis vulputate
-          consectetur suspendisse massa mauris. Lacus odio pretium enim gravida.
-          Netus sit a, enim enim quam quam egestas arcu.
+         {detailData.content}
         </ContentWrap>
         <ContentImage />
         <LocationWrap>
@@ -124,11 +133,11 @@ const Detailpage = () => {
               <BsHeart size={24} />
             )}
           </Icon>
-          <Text>좋아요 0개</Text>
+          <Text>좋아요 {detailData.likeCount}개</Text>
           <CommentIcon>
             <MdComment size={24}/>
           </CommentIcon>
-          <Text>댓글 0개</Text>
+          <Text>댓글 {detailData.commentCount}개</Text>
         </InfoWrap>
         <Comment boardId={params.id} />
       </Container>

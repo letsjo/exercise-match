@@ -4,12 +4,12 @@ import styled, { css } from "styled-components";
 import BulletinLikeCard from "../BulletinBoard/BulletinLikeCard";
 import {BsCalendarCheck,BsFillPeopleFill} from "react-icons/bs";
 
-const BeforeMatchingCard = ({ completed=false, category, title, date, currentEntry,maxEntry,context, writer, location,like, comment, createdAt}) => {
+const BeforeMatchingCard = ({ completed=false, category, title, date, currentEntry,maxEntry,context, writer, location,like, comment, createdAt, boardId}) => {
 
   const navigate = useNavigate();
 
   return (
-    <Container onClick={()=>{navigate("/detail/5")}} completed={completed}>
+    <Container onClick={()=>{navigate(`/detail/${boardId}`)}} completed={completed}>
       <MatchingOrNot completed={completed}>{completed ? "매칭완료" : "매칭중"}</MatchingOrNot>
       <TitleWrap>
         <CategoryTag>{category}</CategoryTag>
