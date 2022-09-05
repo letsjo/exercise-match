@@ -42,6 +42,7 @@ const MatchingListFrame = () => {
         {boardResponseDtoList&&boardResponseDtoList.map((list, idx)=>
         ( <MatchingCard 
           key={idx}
+          boardId={list.id}
           // completed={true}
           category={list.category}
           title={list.title}

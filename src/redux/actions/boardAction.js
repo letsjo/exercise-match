@@ -171,6 +171,21 @@ const applyBoard = createAsyncThunk(
   }
 );
 
+const loadDetail = (boardId) => {
+  return async (dispatch) => {
+
+    await userAPI
+      .get(`/api/boards/matching/${boardId}`)
+      .then((response) => {
+        dispatch(boardSliceAction.loadDetailData(response.data));
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
 export const boardAction = {
   setBoardType,
   postBoard,
@@ -183,4 +198,5 @@ export const boardAction = {
   postComment,
   loadReview,
   postReview,
+  loadDetail,
 };
