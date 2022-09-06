@@ -19,7 +19,7 @@ const Container = styled.div`
   width: 100%;
   background-color: white;
   border: 1px solid #dedede;
-  margin-bottom: 47px;
+  margin-bottom:112px;
   border-radius: 10px;
   cursor: pointer;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);

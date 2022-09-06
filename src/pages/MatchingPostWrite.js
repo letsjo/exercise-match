@@ -181,7 +181,7 @@ const PostWrite = () => {
 const Container = styled.div`
   width: 700px;
   /* height: 1349px; */
-  margin: 15px auto 50px;
+  margin: 15px auto 112px;
 `;
 
 const Text = styled.div`
@@ -273,7 +273,7 @@ const ImageButton = styled.div`
   box-sizing: border-box;
   margin-top: 70px;
   font-size: 20px;
-  border: none;
+  border: 1px solid #DEDEDE;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -281,7 +281,7 @@ const ImageButton = styled.div`
   margin-bottom: 20px;
   ${({photoInput_ref})=>{
     return css`
-    background-color: ${photoInput_ref?"#a8a8a8":"#dedede"};
+    background-color: ${photoInput_ref?"#a8a8a8":"#A2E9FA"};
     `;
   }}
 `;
@@ -290,11 +290,11 @@ const WriteButton = styled.button`
   width: 700px;
   height: 89px;
   box-sizing: border-box;
-  background-color: #494949;
+  background-color: #00CFFF;
   color: white;
   font-size: 20px;
   font-weight: bold;
-  border: none;
+  border: 1px solid #A8A8A8;
   margin-top: 70px;
 `;
 

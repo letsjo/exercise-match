@@ -58,6 +58,7 @@ const BulletinListFrame = () => {
         {boardResponseDtoList&&boardResponseDtoList.map((list, idx)=>(
           <BulletinCard 
           key={idx}
+          boardId={list.id}
         title={list.title}
         content={list.content}
         comment={list.commentCount}

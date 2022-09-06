@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import {BsCalendarCheck} from "react-icons/bs";
+import {MdPeople} from "react-icons/md";
 
 const BannerCateCard = () => {
   return (
@@ -9,14 +11,24 @@ const BannerCateCard = () => {
           </ImageBox>
           <ContentBox>
             <Category>배드민턴</Category>
-            <Title>제목</Title>
+            <Title>게시글 제목(Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae ves Lorem ipsum dolor sit amet, 게시글 제목(Lorem ipsum dolor </Title>
             <Nickname>홍길동</Nickname>
-            <DateBox>
-              {/* <Date></Date> */}c
-            </DateBox>
-            <PersonalBox>
-              {/* <Personal></Personal> */}c
-            </PersonalBox>
+            <Box>
+              <Icon>
+              <BsCalendarCheck size={15}/>
+              </Icon>
+              <Text>
+              8월 17일 수요일
+              </Text>
+            </Box>
+            <Box>
+            <Icon>
+                <MdPeople size={18}/>
+              </Icon>
+              <Text>
+              1/4 매칭
+              </Text>
+            </Box>
           </ContentBox>
       </BoardCard>
   );
@@ -42,24 +54,64 @@ const ContentBox=styled.div`
 `;
 
 const Category=styled.div`
+padding: 1px 5px;
 height:19px;
-margin-bottom:
+width:max-content;
+margin-bottom: 4px;
+box-sizing: border-box;
+border: 1px solid #A2E9FA;
+border-radius: 5px;
+color:#494949;
+font-size: 10px;
+font-weight: bold;
+display: flex;
+justify-content: center;
+align-items: center;
 `;
 
 const Title=styled.div`
-
+height: 42px;
+font-weight: 500;
+font-size: 15px;
+line-height: 140%;
+margin-bottom: 5px;
+box-sizing: border-box;
+text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; // 원하는 라인수
+  -webkit-box-orient: vertical;
 `;
 
 const Nickname=styled.div`
-
+height: 15px;
+font-weight: 400;
+font-size: 10px;
+line-height: 150%;
+color: #494949;
+margin-bottom: 5px;
+box-sizing: border-box;
 `;
 
-const DateBox=styled.div`
-
+const Box=styled.div`
+  display:flex; 
 `;
 
-const PersonalBox =styled.div`
+const Icon=styled.div`
+  width:20px;
+  height: 20px;
+  margin: auto 10px auto 0px;
+  box-sizing: border-box;
+  color: #494949;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
+const Text= styled.div`
+  font-size: 15px;
+  height:23px;
 `;
 
 export default BannerCateCard;

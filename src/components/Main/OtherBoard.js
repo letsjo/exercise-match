@@ -22,7 +22,7 @@ const BoardWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 5px;
-  margin-bottom: 100px;
+  margin-bottom: 112px;
 `;
 
 export default OtherBoard

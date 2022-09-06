@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import BulletinContextCard from "./BulletinContextCard";
 import BulletinLikeCard from "./BulletinLikeCard";
 
-const BulletinCard = ({title, content, comment, like, createdAt, image}) => {
+const BulletinCard = ({title, content, comment, like, createdAt, image, boardId}) => {
   const navigate = useNavigate();
   return (
-    <Container onClick={()=>{navigate("/detail/5")}}>
+    <Container onClick={()=>{navigate(`/detail/information/${boardId}`)}}>
     <BulletinContextCard title={title}
       content={content}
       image={image}

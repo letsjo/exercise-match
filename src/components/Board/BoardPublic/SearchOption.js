@@ -29,6 +29,8 @@ const Container= styled.select`
     padding-left: 10px;
     box-sizing: border-box;
     font-size:15px;
+    /* color: aliceblue; */
+    /* background-color: aliceblue; */
 `;
 
 export default SearchOption;

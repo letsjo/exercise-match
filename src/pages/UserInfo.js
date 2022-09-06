@@ -39,7 +39,7 @@ const PageFrame = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  margin-bottom: 68px;
+  margin-bottom: 112px;
 `;
 
 export default UserInfo;

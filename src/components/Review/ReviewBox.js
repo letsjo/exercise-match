@@ -101,7 +101,7 @@ const Container = styled.div`
   padding: 80px 100px;
   box-sizing: border-box;
   border-radius: 20px;
-  margin: 31px auto;
+  margin: 31px auto 112px;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
 `;
 
