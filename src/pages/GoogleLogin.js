@@ -31,8 +31,7 @@ const GoogleLogin = (props) => {
   sessionStorageLogin.setItem("profile", profile); //프로필 사진
 
   dispatch(userSliceAction.setLogin({username, nickname, profile}));
-  // navigate("/");
-
+ 
   useEffect(()=>{
     navigate("/")
   })

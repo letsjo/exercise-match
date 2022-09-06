@@ -9,7 +9,7 @@ const BeforeMatchingCard = ({ completed=false, category, title, date, currentEnt
   const navigate = useNavigate();
 
   return (
-    <Container onClick={()=>{navigate(`/detail/${boardId}`)}} completed={completed}>
+    <Container onClick={()=>{navigate(`/detail/matching/${boardId}`)}} completed={completed}>
       <MatchingOrNot completed={completed}>{completed ? "매칭완료" : "매칭중"}</MatchingOrNot>
       <TitleWrap>
         <CategoryTag>{category}</CategoryTag>

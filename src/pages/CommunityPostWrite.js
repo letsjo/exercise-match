@@ -79,7 +79,7 @@ const CommunityPostWrite = () => {
   return (
     <>
       <NavBar />
-      <form onSubmit={onHandleSubmit} >
+      <Form onSubmit={onHandleSubmit} >
         <Container>
           <Text>카테고리</Text>
           <CategoryDrop
@@ -127,15 +127,19 @@ const CommunityPostWrite = () => {
           />
           <WriteButton type="submit">작성하기</WriteButton>
         </Container>
-      </form>
+      </Form>
     </>
   );
 };
 
+const Form=styled.form`
+  margin-bottom: 112px;
+`;
+
 const Container = styled.div`
   width: 700px;
   /* height: 1349px; */
-  margin: 15px auto 50px;
+  margin: 15px auto;
 `;
 
 const Text = styled.div`
@@ -211,8 +215,8 @@ const ImageButton = styled.div`
   width: 700px;
   height: 50px;
   box-sizing: border-box;
+  border: 1px solid #DEDEDE;
   font-size: 20px;
-  border: none;
   margin-bottom: 20px;
   display: flex;
   justify-content: center;
@@ -220,7 +224,7 @@ const ImageButton = styled.div`
   cursor: pointer;
   ${({photoInput_ref})=>{
     return css`
-      background-color: ${photoInput_ref?"#a8a8a8":"#dedede"};
+      background-color: ${photoInput_ref?"#a8a8a8":"#A2E9FA"};
     `;
   }}
   
@@ -230,11 +234,11 @@ const WriteButton = styled.button`
   width: 700px;
   height: 89px;
   box-sizing: border-box;
-  background-color: #494949;
+  border: 1px solid #A8A8A8;
+  background-color: #00CFFF;
   color: white;
   font-size: 20px;
   font-weight: bold;
-  border: none;
   margin-top: 70px;
 `;
 

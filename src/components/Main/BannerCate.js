@@ -36,7 +36,7 @@ const BoardWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 120px;
+  margin-bottom: 100px;
 `;
 
 const BoardFrame = styled.div`

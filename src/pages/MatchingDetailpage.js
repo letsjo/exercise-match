@@ -14,7 +14,7 @@ import { boardAction } from "../redux/actions/boardAction";
 import Swal from "sweetalert2";
 import KakaoMapForDetail from "../components/Board/MatchingBoard/KakaoMapForDetail";
 
-const Detailpage = () => {
+const MatchingDetailpage = () => {
   const dispatch = useDispatch();
   const params = useParams();
 
@@ -149,7 +149,7 @@ const Detailpage = () => {
 
 const Container = styled.div`
   width: 700px;
-  margin: 15px auto;
+  margin: 15px auto 112px;
 `;
 
 const ProfileWrap = styled.div`
@@ -222,7 +222,8 @@ const LocationImg = styled.div`
 
 const JoinButton = styled.div`
   height: 89px;
-  background-color: #494949;
+  background-color: #00CFFF;
+  border: 1px solid #A8A8A8;
   font-size: 20px;
   font-weight: bold;
   color: white;
@@ -262,4 +263,4 @@ const Text = styled.div`
   margin-right: 39px;
 `;
 
-export default Detailpage;
+export default MatchingDetailpage;

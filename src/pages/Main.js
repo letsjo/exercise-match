@@ -37,25 +37,45 @@ const Main = () => {
         boardUrl={`/board?type=matching&cate=gym&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`}
         buttonCate={true}
       />
+      <InputContainer>
+      <InputDesign/>
+      </InputContainer>
+      
       <PopularBoard
         iconImg="/images/cate00_gym.png"
-        title="헬스 실시간 인기 게시글"
+        title="- 실시간 인기 게시글"
         boardUrl={`/board?type=matching&cate=gym&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`}
       />
       <PopularBoard
         iconImg="/images/cate04_tennis.png"
-        title="테니스 실시간 인기 게시글"
+        title="- 실시간 인기 게시글"
         boardUrl={`/board?type=matching&cate=tennis&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`}
       />
       <OtherBoard
-        iconImg="/images/cate07_etc.png"
-        title="기타 실시간 인기 게시글"
+        iconImg=""
+        title="[기타] - 실시간 인기 게시글"
         boardUrl={`/board?type=matching&cate=etc&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`}
       />
     </MainContainer>
   );
 };
 
-const MainContainer = styled.div``;
+const MainContainer = styled.div`
+`;
+
+const InputContainer=styled.div`
+width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 100px;
+`;
+
+const InputDesign=styled.div`
+  width:1010px;
+  height:120px;
+  background-color: #dedede;
+
+`;
 
 export default Main;

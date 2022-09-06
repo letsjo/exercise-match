@@ -157,7 +157,7 @@ const CategoryCard = styled.div`
       font-weight: bold;
       box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
 
-      background: ${selected ? "#a8a8a8" : "#ffffff"};
+      background: ${selected ? "#00CFFF;" : "#ffffff"};
       border: 1px solid ${selected ? "#f0f0f0" : "#ffffff"};
       color: ${selected ? "#ffffff" : "black"};
     `;

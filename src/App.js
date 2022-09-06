@@ -25,11 +25,12 @@ import UserInfo from "./pages/UserInfo";
 import ModalComponents from "./components/public/ModalComponents";
 import MatchingPostWrite from "./pages/MatchingPostWrite";
 import CommunityPostWrite from "./pages/CommunityPostWrite";
-import Detailpage from "./pages/Detailpage";
+import MatchingDetailpage from "./pages/MatchingDetailpage";
 import MemberExit from "./pages/MemberExit";
 import PasswordChange from "./pages/PasswordChange";
 import PasswordFind from "./pages/PasswordFind";
 import userAPI from "./apis/userAPI";
+import SearchPage from "./pages/SearchPage";
 import GoogleLogin from "./pages/GoogleLogin";
 
 
@@ -81,10 +82,11 @@ function App() {
         <Route path="/mypage" element={<Mypage/>}/>
         <Route path="/userinfo" element={<UserInfo/>}/>
         <Route path="/review" element={<Review/>}/>
-        <Route path="/detail/:id" element={<Detailpage/>}/>
+        <Route path="/detail/:type/:id" element={<MatchingDetailpage/>}/>
         <Route path="/passwordFind" element={<PasswordFind/>}/>
         <Route path="/passwordChange" element={<PasswordChange/>}/>
         <Route path="/memberExit" element={<MemberExit/>}/>
+        <Route path="/search" element={<SearchPage/>}/>
         <Route path="/api/kakaologin" element={<KakaoLogin/>} />
         <Route path="/api/naverLogin" element={<NaverLogin/>}/>
         <Route path="/oauth2/redirect" element={<GoogleLogin/>}/>
