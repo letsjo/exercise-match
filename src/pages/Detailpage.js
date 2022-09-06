@@ -18,6 +18,8 @@ const Detailpage = () => {
   const dispatch = useDispatch();
   const params = useParams();
 
+  console.log(params.id);
+
   const [isPopperShown, setIsPopperShown] = useState(false);
   const onOpenerClick = (e) => {
     e.stopPropagation();

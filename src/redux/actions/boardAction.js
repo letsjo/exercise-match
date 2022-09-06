@@ -125,7 +125,7 @@ const postComment = createAsyncThunk(
 
 const delBoard = createAsyncThunk(
   "board/delBoard",
-  async ({ boardId }, { rejectWithValue }) => {
+  async ( boardId, { rejectWithValue }) => {
     try {
       const res = await userAPI.delete(
         `/api/board/${boardId}`
@@ -157,7 +157,7 @@ const delComment = createAsyncThunk(
 
 const applyBoard = createAsyncThunk(
   "board/apply",
-  async ({ boardId }, { rejectWithValue }) => {
+  async (boardId, { rejectWithValue }) => {
     try {
       const res = await userAPI.post(
         `/board/${boardId}/matchingentry`

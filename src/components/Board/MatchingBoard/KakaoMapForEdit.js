@@ -1,22 +1,43 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+import GetAddressName from "../../../utils/GetAddressName";
 
 const { kakao } = window;
 
-const KakaoMapForEdit = ({ searchPlace, setMarkAddress, setSelectPosition }) => {
+let map;
+
+const KakaoMapForEdit = ({
+  searchPlace,
+  setMarkAddress,
+  setSelectPosition,
+}) => {
+  const { currentLat, currentLon } = useSelector(
+    (state) => state.locationReducer
+  );
+
+  const [position, setPosition] = useState({
+    lat: currentLat ? currentLat : "33.450701",
+    lon: currentLon ? currentLon : "126.570667",
+  });
+
   useEffect(() => {
-    var infowindow = new kakao.maps.InfoWindow({ zIndex: 2 });
     const container = document.getElementById("myMap");
     const options = {
-      center: new kakao.maps.LatLng(33.450701, 126.570667),
+      center: new kakao.maps.LatLng(position.lat, position.lon),
       level: 3,
     };
-    const map = new kakao.maps.Map(container, options);
 
+    if (!map) {
+      map = new kakao.maps.Map(container, options);
+      console.log(map);
+    }
     var geocoder = new kakao.maps.services.Geocoder(); // 주소-좌표 변환 객체를 생성합니다
+    var marker = new kakao.maps.Marker(); // 클릭한 위치를 표시할 마커입니다
+    var infowindow = new kakao.maps.InfoWindow({ zIndex: 2 }); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
+    var ps = new kakao.maps.services.Places();
 
-    var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
-      infowindow = new kakao.maps.InfoWindow({ zindex: 2 }); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
+    ps.keywordSearch(searchPlace, placesSearchCB);
 
     // 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
     searchAddrFromCoords(map.getCenter(), displayCenterInfo);
@@ -36,11 +57,13 @@ const KakaoMapForEdit = ({ searchPlace, setMarkAddress, setSelectPosition }) => 
 
           // 마커를 클릭한 위치에 표시합니다
           setSelectPosition(mouseEvent.latLng);
-          console.log(mouseEvent.latLng);
-          setMarkAddress(detailAddr);
+          // setMarkAddress(detailAddr);
           marker.setPosition(mouseEvent.latLng);
           marker.setMap(map);
-
+          GetAddressName(
+            { lat: mouseEvent.latLng.Ma, lng: mouseEvent.latLng.La },
+            setMarkAddress
+          );
           // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
           infowindow.setContent(content);
           infowindow.open(map, marker);
@@ -81,9 +104,6 @@ const KakaoMapForEdit = ({ searchPlace, setMarkAddress, setSelectPosition }) => 
     ////////////////////
     /// 검색으로 찾기 ///
     ////////////////////
-    const ps = new kakao.maps.services.Places();
-
-    ps.keywordSearch(searchPlace, placesSearchCB);
 
     function placesSearchCB(data, status, pagination) {
       if (status === kakao.maps.services.Status.OK) {
@@ -115,7 +135,6 @@ const KakaoMapForEdit = ({ searchPlace, setMarkAddress, setSelectPosition }) => 
         infowindow.open(map, marker);
       });
     }
-    
   }, [searchPlace]);
 
   return (
@@ -149,7 +168,7 @@ const Map_wrap = styled.div`
     top: 10px;
     border-radius: 2px;
     background: rgba(255, 255, 255, 0.8);
-    z-index: 0;
+    z-index: 1;
     padding: 5px;
     #centerAddr {
       display: block;
