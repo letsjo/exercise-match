@@ -86,10 +86,10 @@ const KakaoMapSearchInput = styled.input`
 
 const KakaoMapSearchButton = styled.button`
   outline: none;
-  border: 1.35rem solid #0c8ce9;
+  border: 1.35rem solid #A2E9FA;
   border-radius: 0 10px 0 0;
-  background: #0c8ce9;
-  color: white;
+  background: #A2E9FA;
+  color: black;
   width: 30%;
   height: 100%;
   cursor: pointer;
