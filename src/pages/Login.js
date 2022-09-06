@@ -27,7 +27,7 @@ const Login = () => {
   const STATE_STRING = "state_test";
   const naverURL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${CLIENT_ID}&state=${STATE_STRING}&redirect_uri=${CALLBACK_URL}`;
 
-  const googleURL = `http://ec2-13-124-51-222.ap-northeast-2.compute.amazonaws.com/oauth2/authorization/google`;
+  const googleURL = ` http://ec2-3-35-9-167.ap-northeast-2.compute.amazonaws.com/oauth2/authorization/google`;
 
   const naverLogin = () => {
     window.location.href = naverURL;

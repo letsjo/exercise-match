@@ -75,7 +75,7 @@ const NavBarWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: aliceblue; */
+  background-color: #ffffff;
   box-sizing: border-box;
   
   user-select: none;
