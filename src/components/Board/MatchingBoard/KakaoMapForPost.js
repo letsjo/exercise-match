@@ -14,6 +14,7 @@ const KakaoMapForPost = ( { Place, setPlace, setMarkAddress, setSelectPosition }
     setPlace(InputText);
     setInputText("");
   };
+
   return (
     <KakaoMapWrap>
       <KakaoMapSearchWarp>
@@ -25,7 +26,7 @@ const KakaoMapForPost = ( { Place, setPlace, setMarkAddress, setSelectPosition }
               value={InputText}
             />
           </KakaoMapSearchInputWarp>
-            <KakaoMapSearchButton type="submit" onClick={(e)=>handleSubmit(e)}>위치 찾기</KakaoMapSearchButton>
+            <KakaoMapSearchButton onClick={(e)=>handleSubmit(e)}>위치 찾기</KakaoMapSearchButton>
             {/* <button
           onClick={(e) => {
             console.log(selectPosition);
@@ -57,7 +58,7 @@ const KakaoMapSearchWarp = styled.div`
   width: 100%;
 `;
 
-const KakaoMapSearchFrom = styled.form`
+const KakaoMapSearchFrom = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -85,10 +86,10 @@ const KakaoMapSearchInput = styled.input`
 
 const KakaoMapSearchButton = styled.button`
   outline: none;
-  border: 1.35rem solid #0c8ce9;
+  border: 1.35rem solid #A2E9FA;
   border-radius: 0 10px 0 0;
-  background: #0c8ce9;
-  color: white;
+  background: #A2E9FA;
+  color: black;
   width: 30%;
   height: 100%;
   cursor: pointer;

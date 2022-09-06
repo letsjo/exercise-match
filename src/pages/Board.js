@@ -44,7 +44,7 @@ const Board = () => {
 
   const InfoOnClick = () => {
     dispatch(boardAction.setBoardType("information", "all"));
-    navigate(`/board?type=information&cate=all&city=${city?city:selectedCity}&gu=${gu?gu:selectedGu}&page=1&amount=12`);
+    navigate(`/board?type=information&cate=all&page=1&amount=12`);
   };
 
   const MyMatchingOnClick=()=>{

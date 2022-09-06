@@ -7,7 +7,6 @@ import NavBar from "../components/public/NavBar";
 import { boardAction } from "../redux/actions/boardAction";
 
 const PostWrite = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const category_ref = useRef(null);
   const person_ref = useRef(null);
@@ -35,8 +34,6 @@ const PostWrite = () => {
 
   useEffect(() => {
     preview();
-
-    return () => preview();
   });
 
   const preview = () => {
@@ -54,11 +51,8 @@ const PostWrite = () => {
     console.log(reader, "reader!!");
   };
 
-  console.log(files[0]);
-
   const onHandleSubmit = async (e) => {
     e.preventDefault();
-
 
     const object = new FormData();
     object.append("boardType", "information");
@@ -87,8 +81,12 @@ const PostWrite = () => {
     }
 
   };
+
+  console.log(markAddress);
+  console.log(selectPosition);
   //   console.log(category_ref);
 
+ 
   return (
     <>
       <NavBar />
