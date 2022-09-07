@@ -26,6 +26,7 @@ import ModalComponents from "./components/public/ModalComponents";
 import MatchingPostWrite from "./pages/MatchingPostWrite";
 import CommunityPostWrite from "./pages/CommunityPostWrite";
 import MatchingDetailpage from "./pages/MatchingDetailpage";
+import InformationDetailPage from "./pages/InformationDetailPage";
 import MemberExit from "./pages/MemberExit";
 import PasswordChange from "./pages/PasswordChange";
 import PasswordFind from "./pages/PasswordFind";
@@ -82,7 +83,8 @@ function App() {
         <Route path="/mypage" element={<Mypage/>}/>
         <Route path="/userinfo" element={<UserInfo/>}/>
         <Route path="/review" element={<Review/>}/>
-        <Route path="/detail/:type/:id" element={<MatchingDetailpage/>}/>
+        <Route path="/detail/matching/:id" element={<MatchingDetailpage/>}/>
+        <Route path="/detail/information/:id" element={<InformationDetailPage/>}/>
         <Route path="/passwordFind" element={<PasswordFind/>}/>
         <Route path="/passwordChange" element={<PasswordChange/>}/>
         <Route path="/memberExit" element={<MemberExit/>}/>

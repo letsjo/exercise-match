@@ -1,16 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import Popover from "./Popover";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { boardAction } from "../../redux/actions/boardAction";
 
 const NavBar = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const inputRef = useRef();
 
   const [isPopperShown, setIsPopperShown] = useState(false);
+  const [search, setSearch] = useState();
 
   const { isLogin } = useSelector((state) => state.userReducer);
+
+  const onSubmitSearch = async (e) => {
+    if (e.key === "Enter") {
+      if (inputRef.current.value) {
+        console.log("검색된다!!!");
+        e.preventDefault();
+        setSearch(inputRef.current.value);
+        // console.log(search);
+        try {
+          const res = await dispatch(
+            boardAction.searchBoard({ keyword: inputRef.current.value })
+          ).unwrap();
+          console.log(res);
+        } catch (e) {
+          console.log(e);
+        }
+      } else {
+        window.alert("검색어를 입력해주세요!");
+      }
+    }
+  };
+
+  console.log(search);
 
   const onOpenerClick = (e) => {
     e.stopPropagation();
@@ -27,7 +54,12 @@ const NavBar = () => {
             <SearchIcon>
               <img src="/images/pngwing.com (2).png" alt="" />
             </SearchIcon>
-            <SearchInput placeholder="어떤 서비스가 필요하세요?" />
+            <SearchInput
+              placeholder="어떤 서비스가 필요하세요?"
+              type="search"
+              onKeyPress={onSubmitSearch}
+              ref={inputRef}
+            />
           </SearchWrap>
         </SearchBox>
         {isLogin ? (
@@ -77,7 +109,7 @@ const NavBarWrap = styled.div`
   align-items: center;
   background-color: #ffffff;
   box-sizing: border-box;
-  
+
   user-select: none;
 `;
 

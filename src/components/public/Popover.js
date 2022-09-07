@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom"; 
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { userSliceAction } from "../../redux/reducers/userReducer";
 import Swal from "sweetalert2";
 
@@ -24,11 +24,12 @@ const Popover = ({ onOpenerClick }) => {
 
   const navigate=useNavigate();
   const dispatch = useDispatch();
+  const  {userNickName}  = useSelector((state) => state.userReducer);
 
   return (
     <Wrapper ref={settingsWindowRef}>
       <ProfileBox>
-        <Nickname>닉네임</Nickname>
+        <Nickname>{userNickName}</Nickname>
         <Nim>님</Nim>
         <Hello>안녕하세요!</Hello>
         </ProfileBox>
@@ -68,7 +69,7 @@ const ProfileBox = styled.div`
 `;
 
 const Nickname = styled.div`
-  width: 42px;
+  /* width: 42px; */
   font-weight: bold;
   font-size: 15px;
   margin-right: 5px;
