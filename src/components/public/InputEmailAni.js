@@ -39,15 +39,15 @@ const InputEmailAni = ({
     if (setInputEmail) setInputEmail(e.target.value);
     if (ValidationCheck(e)) {
       validation.setValidationState(true);
-      try {
-        const checkResponse = dispatch(
-          userAction.checkEmail(e.target.value)
-        ).unwrap();
-        console.log(checkResponse);
-      } catch (err) {
-        setValidationLine(false);
-        window.alert(err);
-      }
+      // try {
+      //   const checkResponse = dispatch(
+      //     userAction.checkEmail(e.target.value)
+      //   ).unwrap();
+      //   console.log(checkResponse);
+      // } catch (err) {
+      //   setValidationLine(false);
+      //   window.alert(err);
+      // }
     } else {
       validation.setValidationState(false);
     }

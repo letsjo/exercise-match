@@ -79,7 +79,6 @@ const PostWrite = () => {
     } catch (e) {
       console.log(e);
     }
-
   };
 
   console.log(markAddress[0]?.address);
@@ -248,10 +247,9 @@ const PersonDrop = styled.select`
 
 const LocationMap = styled.div`
   width: 700px;
-  height: 281px;
+  height: 350px;
   /* margin-bottom: 70px; */
   box-sizing: border-box;
-  border: 1px solid #d9d9d9;
 `;
 
 const LocationImage = styled.div`

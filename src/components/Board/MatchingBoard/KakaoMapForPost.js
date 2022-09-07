@@ -49,7 +49,7 @@ const KakaoMapWrap = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 1px solid #0c8ce9;
+  border: 1px solid #A2E9FA;
   border-radius: 10px;
 `;
 const KakaoMapSearchWarp = styled.div`
@@ -71,7 +71,7 @@ const KakaoMapSearchInputWarp = styled.div`
   border: 3px solid transparent;
   border-radius: 10px 0 0 0;
   &:focus-within {
-    border: 3px solid #0c8ce9;
+    border: 3px solid #A2E9FA;
   }
 `;
 
