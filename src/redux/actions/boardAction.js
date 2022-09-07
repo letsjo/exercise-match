@@ -29,10 +29,10 @@ const postBoard = (data) => {
   };
 };
 
-const postLike = (boardId) => {
+const postLike = ({boardId,type,isLike}) => {
   return async (dispatch) => {
     await userAPI
-      .post(`/board/${boardId}/likes`)
+      .post(`/board/likes`,{boardType:"matching",boardId:boardId, isLike:isLike})
       .then((response) => {
         console.log(response);
       })
@@ -157,10 +157,12 @@ const delComment = createAsyncThunk(
 
 const applyBoard = createAsyncThunk(
   "board/apply",
-  async (boardId, { rejectWithValue }) => {
+  async ({boardId,isMatching}, { rejectWithValue }) => {
+    console.log(boardId, isMatching);
     try {
       const res = await userAPI.post(
-        `/board/${boardId}/matchingentry`
+        `/board/matchingentry`
+        ,{boardId:boardId, isMatching:isMatching}
       );
       console.log(res);
       return res;
@@ -186,6 +188,23 @@ const loadDetail = (boardId) => {
   };
 };
 
+const searchBoard = createAsyncThunk(
+  "board/search",
+  async({keyword},{rejectWithValue})=>{
+    console.log(keyword);
+    try{
+      const res =await userAPI.get(
+        `/board/search?page=1&amount=10&city=울산&gu=남구&sort=title_Content&keyword=${keyword}&boardType=matching`
+      )
+      console.log(res);
+      return res;
+    } catch(err) {
+      console.log(err);
+      return rejectWithValue(err.response.data.error);
+    }
+  }
+);
+
 export const boardAction = {
   setBoardType,
   postBoard,
@@ -199,4 +218,5 @@ export const boardAction = {
   loadReview,
   postReview,
   loadDetail,
+  searchBoard,
 };

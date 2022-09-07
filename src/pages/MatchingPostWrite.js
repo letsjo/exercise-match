@@ -55,14 +55,14 @@ const PostWrite = () => {
     e.preventDefault();
 
     const object = new FormData();
-    object.append("boardType", "information");
+    object.append("boardType", "matching");
     object.append("boardImage", files[0]);
     object.append("endDateAt", date_ref.current.value);
-    object.append("maxEntry", null);
-    object.append("city", null);
-    object.append("gu", null);
-    object.append("lat", null);
-    object.append("lng", null);
+    object.append("maxEntry", "3");
+    object.append("city", markAddress[0]?.address.region_1depth_name);
+    object.append("gu", markAddress[0]?.address.region_2depth_name);
+    object.append("lat", selectPosition.Ma);
+    object.append("lng", selectPosition.La);
     object.append("category", category_ref.current.value);
     object.append("title", titleInput_ref.current.value);
     object.append("content", contentInput_ref.current.value);
@@ -81,7 +81,7 @@ const PostWrite = () => {
     }
   };
 
-  console.log(markAddress);
+  console.log(markAddress[0]?.address);
   console.log(selectPosition);
   //   console.log(category_ref);
 

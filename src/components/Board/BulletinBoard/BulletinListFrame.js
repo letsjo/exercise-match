@@ -11,6 +11,7 @@ const BulletinListFrame = () => {
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
   const {boardResponseDtoList} = useSelector((state)=>state.boardReducer.boardData);
+  const { isLogin } = useSelector((state) => state.userReducer);
 
   // const now = new Date();
   // const createdAtDay = now.getDate()-new Date(boardResponseDtoList&&boardResponseDtoList[0]?.createdAt).getDate();
@@ -53,7 +54,8 @@ const BulletinListFrame = () => {
       <CategoryBoxFrame page={page} />
       <BoardListFrame>
         <ButtonBox>
-          <WriteButton onClick={()=>{navigate("/communitypostWrite")}}>작성하기</WriteButton>
+          {isLogin?( <WriteButton onClick={()=>{navigate("/communitypostWrite")}}>작성하기</WriteButton>):""}
+         
         </ButtonBox>
         {boardResponseDtoList&&boardResponseDtoList.map((list, idx)=>(
           <BulletinCard 
