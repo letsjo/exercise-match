@@ -28,15 +28,19 @@ const MatchingDetailpage = () => {
   };
 
   const [like, setLike] = useState(false);
+  const [matching, setMatching]=useState(true);
 
   const likeOnClick = () => {
     setLike(!like);
-    dispatch(boardAction.postLike(params.id));
+    dispatch(boardAction.postLike({boardType:params.type,boardId:params.id,isLike:like}));
   };
 
   const matchingApply = async () => {
     let timerInterval;
+   
     try {
+      setMatching(!matching);
+      console.log(matching);
       Swal.fire({
         title: "매칭신청중...",
         width: 439,
@@ -49,7 +53,7 @@ const MatchingDetailpage = () => {
         },
       });
       const resApply = await dispatch(
-        boardAction.applyBoard(params.id)
+        boardAction.applyBoard({boardId:params.id,isMatching:matching})
       ).unwrap();
       clearInterval(timerInterval);
       console.log(resApply);

@@ -25,19 +25,23 @@ const MatchingListFrame = () => {
 
 
   const reducer = useSelector((state)=>state.boardReducer);
+  const { isLogin } = useSelector((state) => state.userReducer);
 
   return (
     <>
       <CategoryBoxFrame page={page}/>
       <BoardListFrame>
         <ButtonBox>
-          <WriteButton
+          {isLogin?(
+            <WriteButton
             onClick={() => {
               navigate("/matchingpostwrite");
             }}
           >
             작성하기
           </WriteButton>
+          ):""}
+          
         </ButtonBox>
         {boardResponseDtoList&&boardResponseDtoList.map((list, idx)=>
         ( <MatchingCard 
@@ -54,7 +58,7 @@ const MatchingListFrame = () => {
           location={list.city}
           like={list.likeCount}
           comment={list.commentCount}
-          // createdAt={createdAtDay}
+          createdAt={list.createdAt}
            />
           )
         )}
