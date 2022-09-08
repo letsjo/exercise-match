@@ -136,7 +136,7 @@ const SignupAuth = ({
 
   const AuthOnChange = (e) => {
     e.preventDefault();
-    if (AuthKeywordRef.current.value.length >= 7) {
+    if (AuthKeywordRef.current.value.length >= 6) {
       setNextAvailable(true);
       rightState.setRightArrow(true);
     } else {
@@ -206,7 +206,7 @@ const SignupAuth = ({
             <Input>
               <AuthInput
                 ref={AuthKeywordRef}
-                maxLength={7}
+                maxLength={6}
                 onChange={(e) => AuthOnChange(e)}
               />
               <TimeLeft>{showTimer}</TimeLeft>

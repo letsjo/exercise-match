@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import BulletinCard from "../BulletinBoard/BulletinCard";
 import Pagination from "../BoardPublic/Pagination";
@@ -11,12 +11,7 @@ const MyBulletin = () => {
       <BulletinCard />
       <BulletinCard />
       <BulletinCard />
-      <BulletinCard />
-      <BulletinCard />
-      <BulletinCard />
-      <BulletinCard />
-      <BulletinCard />
-      <BulletinCard />
+     
       <PageFrame>
         <Frame>
           <Pagination total={5} limit={2} page={page} setPage={setPage} />

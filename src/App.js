@@ -84,7 +84,7 @@ function App() {
         <Route path="/userinfo" element={<UserInfo/>}/>
         <Route path="/review" element={<Review/>}/>
         <Route path="/detail/matching/:id" element={<MatchingDetailpage/>}/>
-        <Route path="/detail/information/:id" element={<InformationDetailPage/>}/>
+        <Route path="/detail/:type/:id" element={<InformationDetailPage/>}/>
         <Route path="/passwordFind" element={<PasswordFind/>}/>
         <Route path="/passwordChange" element={<PasswordChange/>}/>
         <Route path="/memberExit" element={<MemberExit/>}/>

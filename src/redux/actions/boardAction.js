@@ -188,6 +188,21 @@ const loadDetail = (boardId) => {
   };
 };
 
+const loadInfoDetail=(boardId)=> {
+  return async (dispatch) => {
+
+    await userAPI
+      .get(`/api/boards/information/${boardId}`)
+      .then((response) => {
+        dispatch(boardSliceAction.loadInfoDetailData(response.data));
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
 const searchBoard = createAsyncThunk(
   "board/search",
   async({keyword},{rejectWithValue})=>{
@@ -197,6 +212,21 @@ const searchBoard = createAsyncThunk(
         `/board/search?page=1&amount=10&city=울산&gu=남구&sort=title_Content&keyword=${keyword}&boardType=matching`
       )
       console.log(res);
+      return res;
+    } catch(err) {
+      console.log(err);
+      return rejectWithValue(err.response.data.error);
+    }
+  }
+);
+
+const loadMyComments = createAsyncThunk(
+  "board/loadMyComments",
+  async({},{rejectWithValue})=>{
+    try{
+      const res = await userAPI.get(
+        `/api/mycomment`
+      )
       return res;
     } catch(err) {
       console.log(err);
@@ -218,5 +248,7 @@ export const boardAction = {
   loadReview,
   postReview,
   loadDetail,
+  loadInfoDetail,
   searchBoard,
+  loadMyComments,
 };
