@@ -125,7 +125,7 @@ const postComment = createAsyncThunk(
 
 const delBoard = createAsyncThunk(
   "board/delBoard",
-  async ( boardId, { rejectWithValue }) => {
+  async ( {boardId}, { rejectWithValue }) => {
     try {
       const res = await userAPI.delete(
         `/api/board/${boardId}`
@@ -209,7 +209,7 @@ const searchBoard = createAsyncThunk(
     console.log(keyword);
     try{
       const res =await userAPI.get(
-        `/board/search?page=1&amount=10&city=울산&gu=남구&sort=title_Content&keyword=${keyword}&boardType=matching`
+        `/board/search?page=1&amount=10&city=대구&gu=달서구&sort=title_Content&keyword=${keyword}&boardType=matching`
       )
       console.log(res);
       return res;

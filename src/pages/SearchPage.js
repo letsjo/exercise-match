@@ -3,6 +3,7 @@ import NavBar from "../components/public/NavBar";
 import styled from "styled-components";
 import NoResultCards from "../components/Board/SearchBoard/NoResultCards";
 import ResultCards from "../components/Board/SearchBoard/ResultCards";
+import BulletinCard from "../components/Board/BulletinBoard/BulletinCard";
 
 const SearchPage = () => {
   return (
@@ -10,6 +11,7 @@ const SearchPage = () => {
       <NavBar />
       {/* <NoResultCards/> */}
       <ResultCards/>
+      {/* <BulletinCard/> */}
     </Container>
   );
 };
