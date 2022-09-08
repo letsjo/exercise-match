@@ -16,7 +16,7 @@ const MyComment = () => {
 
   const loadMyComments = async () => {
     try {
-      const res = await dispatch(boardAction.loadMyComments()).unwrap();
+      const res = await dispatch(boardAction.loadMyComments({})).unwrap();
       console.log(res);
     } catch (e) {
       console.log(e);

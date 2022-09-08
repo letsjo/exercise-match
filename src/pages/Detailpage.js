@@ -4,7 +4,7 @@ import Comment from "../components/public/Comment";
 import NavBar from "../components/public/NavBar";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { BsHeart, BsHeartFill } from "react-icons/bs";
-import {MdComment} from "react-icons/md"
+import { MdComment } from "react-icons/md";
 import DetailpagePopover from "../components/Detailpage/DetailpagePopover";
 import TitleWrap from "../components/Detailpage/TitleWrap";
 import DatePersonnelWrap from "../components/Detailpage/DatePersonnelWrap";
@@ -28,8 +28,13 @@ const Detailpage = () => {
   const [like, setLike] = useState(false);
 
   const likeOnClick = () => {
-    setLike(!like);
-    dispatch(boardAction.postLike(params.id));
+    try {
+      setLike(!like);
+      const res = dispatch(boardAction.postLike({boardId:params.id,isLike:like})).unwrap();
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const matchingApply = async () => {
@@ -69,11 +74,11 @@ const Detailpage = () => {
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(boardAction.loadDetail(params.id));
-  },[]);
+  }, []);
 
-  const {detailData} = useSelector(state=>state.boardReducer);
+  const { detailData } = useSelector((state) => state.boardReducer);
 
   console.log(detailData);
 
@@ -84,10 +89,7 @@ const Detailpage = () => {
         <ProfileWrap>
           <>
             <Profile>
-              <img
-                src={detailData.memberSimpleDto?.profile}
-                alt=""
-              />
+              <img src={detailData.memberSimpleDto?.profile} alt="" />
             </Profile>
             <Nickname>{detailData.memberSimpleDto?.nickname}</Nickname>
           </>
@@ -103,16 +105,15 @@ const Detailpage = () => {
           </Dot>
         </ProfileWrap>
         <TitleWrap
-        isMatching={detailData.currentEntry >= detailData.maxEntry}
-        category={detailData.category}
-        title={detailData.title}
-        writeDate={detailData.createdAt}/>
+          isMatching={detailData.currentEntry >= detailData.maxEntry}
+          category={detailData.category}
+          title={detailData.title}
+          writeDate={detailData.createdAt}
+        />
 
         <DatePersonnelWrap />
 
-        <ContentWrap>
-         {detailData.content}
-        </ContentWrap>
+        <ContentWrap>{detailData.content}</ContentWrap>
         <ContentImage />
         <LocationWrap>
           <LocationTitle>장소 위치</LocationTitle>
@@ -120,7 +121,7 @@ const Detailpage = () => {
             <KakaoMapForDetail
               // address={selectBoardData.address}
               address={"장소주소 넣기"}
-              selectPosition={{La:128.6061745,Ma:35.86952722}}
+              selectPosition={{ La: 128.6061745, Ma: 35.86952722 }}
             />
           </LocationImg>
         </LocationWrap>
@@ -135,7 +136,7 @@ const Detailpage = () => {
           </Icon>
           <Text>좋아요 {detailData.likeCount}개</Text>
           <CommentIcon>
-            <MdComment size={24}/>
+            <MdComment size={24} />
           </CommentIcon>
           <Text>댓글 {detailData.commentCount}개</Text>
         </InfoWrap>

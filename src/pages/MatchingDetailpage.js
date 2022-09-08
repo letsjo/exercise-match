@@ -18,6 +18,9 @@ const MatchingDetailpage = () => {
   const dispatch = useDispatch();
   const params = useParams();
 
+  
+  const {detailData} = useSelector(state=>state.boardReducer);
+
   console.log(params.id);
 
   const [isPopperShown, setIsPopperShown] = useState(false);
@@ -28,11 +31,19 @@ const MatchingDetailpage = () => {
   };
 
   const [like, setLike] = useState(false);
+  const [likeCount, setLikeCount] = useState(detailData?.likeCount);
+
   const [matching, setMatching]=useState(true);
 
-  const likeOnClick = () => {
-    setLike(!like);
-    dispatch(boardAction.postLike({boardType:params.type,boardId:params.id,isLike:like}));
+  const likeOnClick = async () => {
+    try {
+      const res = await dispatch(boardAction.postLike({boardId:params.id,isLike:like})).unwrap();
+      setLike(!like);
+      console.log(res);
+      setLikeCount(res);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const matchingApply = async () => {
@@ -79,7 +90,6 @@ const MatchingDetailpage = () => {
     dispatch(boardAction.loadDetail(params.id));
   },[]);
 
-  const {detailData} = useSelector(state=>state.boardReducer);
 
   console.log(detailData);
 

@@ -1,9 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom"; 
-import { useDispatch,useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { userSliceAction } from "../../redux/reducers/userReducer";
 import Swal from "sweetalert2";
+import { userAction } from "../../redux/actions/userAction";
 
 const Popover = ({ onOpenerClick }) => {
   const settingsWindowRef = useRef(null);
@@ -15,16 +16,16 @@ const Popover = ({ onOpenerClick }) => {
       }
     };
 
-      window.addEventListener("click", pageClickEvent, true);
+    window.addEventListener("click", pageClickEvent, true);
 
-      return () => {
-        window.removeEventListener("click", pageClickEvent, true);
-      };
+    return () => {
+      window.removeEventListener("click", pageClickEvent, true);
+    };
   });
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const  {userNickName}  = useSelector((state) => state.userReducer);
+  const { userNickName } = useSelector((state) => state.userReducer);
 
   return (
     <Wrapper ref={settingsWindowRef}>
@@ -32,26 +33,37 @@ const Popover = ({ onOpenerClick }) => {
         <Nickname>{userNickName}</Nickname>
         <Nim>님</Nim>
         <Hello>안녕하세요!</Hello>
-        </ProfileBox>
-        <Boxes onClick={()=>navigate("/mypage")}>마이페이지</Boxes>
-        <Boxes onClick={()=>navigate("/board?type=mymatching&cate=all&page=1&amount=12")}>나의 게시글</Boxes>
-    <Logout onClick={()=>{sessionStorage.removeItem("accesstoken") 
-    sessionStorage.removeItem("refreshtoken")
-    sessionStorage.removeItem("username") 
-    sessionStorage.removeItem("nickname") 
-    sessionStorage.removeItem("profile") 
-    Swal.fire('로그아웃 되었습니다!')
-    dispatch(userSliceAction.setLoginOut()
-    );
-    }}>로그아웃</Logout>
+      </ProfileBox>
+      <Boxes onClick={() => navigate("/mypage")}>마이페이지</Boxes>
+      <Boxes
+        onClick={() =>
+          navigate("/board?type=mymatching&cate=all&page=1&amount=12")
+        }
+      >
+        나의 게시글
+      </Boxes>
+      <Logout
+        onClick={async () => {
+          try{
+            const res = await dispatch(userAction.userLogOut({})).unwrap();            
+            dispatch(userSliceAction.setLoginOut());
+            Swal.fire("로그아웃 되었습니다!");
+            console.log(res);
+          } catch(e){
+            console.log(e);
+          }
+        }}
+      >
+        로그아웃
+      </Logout>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   position: absolute;
-  background-color:white;
-  width:300px;
+  background-color: white;
+  width: 300px;
   height: 274px;
   right: 0;
   top: 58px;

@@ -18,6 +18,8 @@ const InformationDetailPage = () => {
   const dispatch = useDispatch();
   const params = useParams();
 
+  const {detailData} = useSelector(state=>state.boardReducer);
+
   console.log(params.id);
 
   const [isPopperShown, setIsPopperShown] = useState(false);
@@ -28,23 +30,25 @@ const InformationDetailPage = () => {
   };
 
   const [like, setLike] = useState(false);
+  const [likeCount, setLikeCount] = useState(detailData?.likeCount);
 
-  const likeOnClick = () => {
-    setLike(!like);
-    dispatch(boardAction.postLike({boardType:params.type,boardId:params.id,isLike:like}));
+  const likeOnClick = async () => {
+    try {
+      const res = await dispatch(boardAction.postLike({boardId:params.id,isLike:like})).unwrap();   
+      console.log(res);
+      setLike(!like);
+      setLikeCount(res);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
-  
   useEffect(()=>{
     dispatch(boardAction.loadInfoDetail(params.id));
   },[]);
 
-  const {detailData} = useSelector(state=>state.boardReducer);
-
   console.log(detailData);
-
   console.log(params.type);
-
 
   return (
    <>
