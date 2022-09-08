@@ -119,7 +119,9 @@ const MatchingDetailpage = () => {
         <ContentWrap>
          {detailData.content}
         </ContentWrap>
-        <ContentImage />
+        <ContentImage >
+          <img src={detailData.boardimage} alt=""/>
+        </ContentImage>
         <LocationWrap>
           <LocationTitle>장소 위치</LocationTitle>
           <LocationImg>
@@ -204,6 +206,11 @@ const ContentImage = styled.div`
   height: 317px;
   margin-bottom: 30px;
   background-color: #d9d9d9;
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
 `;
 
 const LocationWrap = styled.div`

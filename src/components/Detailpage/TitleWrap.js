@@ -1,16 +1,22 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const TitleWrap = ({isMatching, category, title, writeDate}) => {
+const TitleWrap = ({isMatching, category, title, writeDate, board}) => {
+  console.log(board);
   return (
     <Container>
           <FirstLine>
-            {/* <Category>헬스</Category> */}
-            <Matching>{isMatching?"매칭완료":"매칭중"}</Matching>
+            {board=="information"?(<Category>{category}</Category>):( <Matching>{isMatching?"매칭완료":"매칭중"}</Matching>)}
+            
+           
             </FirstLine>
           <SecondLine>
+          {board=="information"?(<Title>{title}</Title>):(
+            <>
           <Category>{category}</Category>
             <Title>{title}</Title>
+            </>)}
+          
             </SecondLine>
           <Date>{writeDate}</Date>
         </Container>
