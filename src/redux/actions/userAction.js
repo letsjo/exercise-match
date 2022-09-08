@@ -177,9 +177,9 @@ const loadMyPage = () => {
       if (responseInfo.status == "fulfilled")
         dispatch(
           userSliceAction.setMypageInfo({
-            birthYear: responseInfo.value.data.birth,
-            birthMonth: responseInfo.value.data.birth,
-            birthDay: responseInfo.value.data.birth,
+            birthYear: responseInfo.value.data.birthYear,
+            birthMonth: responseInfo.value.data.birthMonth,
+            birthDay: responseInfo.value.data.birthDay,
             gender: responseInfo.value.data.gender,
           })
         );
@@ -258,7 +258,7 @@ const editBirth = createAsyncThunk(
   async ({ birthYear, birthMonth, birthDay }, { rejectWithValue }) => {
     try {
       const res = await userAPI.put("/api/mypage/infoedit/birth", {
-        birth: birthYear + birthMonth + birthDay,
+        birthYear, birthMonth, birthDay,
       });
       console.log(res);
       return res;
@@ -293,6 +293,43 @@ const userLogin = createAsyncThunk(
   }
 );
 
+const userLogOut = createAsyncThunk(
+  "user/userLogOut",
+  async ({}, { rejectWithValue }) => {
+    try {
+      const res = await userAPI.get("/api/logout");
+      sessionStorage.removeItem("accesstoken");
+      sessionStorage.removeItem("refreshtoken");
+      sessionStorage.removeItem("username");
+      sessionStorage.removeItem("nickname");
+      sessionStorage.removeItem("profile");
+      console.log(res);
+      return res;
+      // sessionStorageLogin.setItem("nickname", response.data.userInfoDto.nickname);
+      // sessionStorageLogin.setItem("profile", response.data.userInfoDto.profile);
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data.error);
+    }
+  }
+);
+
+const signUpCheckAuth = createAsyncThunk(
+  "signUp/checkAuth",
+  async ({ birthYear, birthMonth, birthDay }, { rejectWithValue }) => {
+    try {
+      const res = await userAPI.put("/api/mypage/infoedit/birth", {
+        birth: birthYear + birthMonth + birthDay,
+      });
+      console.log(res);
+      return res;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data.error);
+    }
+  }
+);
+
 export const userAction = {
   kakaoLogin,
   naverLogin,
@@ -309,4 +346,5 @@ export const userAction = {
   editConcern,
   editGender,
   editBirth,
+  userLogOut,
 };

@@ -58,7 +58,7 @@ const PostWrite = () => {
     object.append("boardType", "matching");
     object.append("data", files[0]);
     object.append("endDateAt", date_ref.current.value);
-    object.append("maxEntry", "3");
+    object.append("maxEntry", person_ref.current.value);
     object.append("city", markAddress[0]?.address.region_1depth_name);
     object.append("gu", markAddress[0]?.address.region_2depth_name);
     object.append("lat", selectPosition.Ma);
@@ -66,7 +66,6 @@ const PostWrite = () => {
     object.append("category", category_ref.current.value);
     object.append("title", titleInput_ref.current.value);
     object.append("content", contentInput_ref.current.value);
-    object.append("person", person_ref.current.value);
     console.log(e.target);
 
     for (var key of object.entries()) {

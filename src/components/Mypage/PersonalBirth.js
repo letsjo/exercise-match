@@ -90,7 +90,6 @@ const PersonalBirth = ({ title, editBt = true }) => {
         const res = await dispatch(
           userAction.editBirth({ birthYear, birthMonth, birthDay })
         ).unwrap();
-
         dispatch(userSliceAction.setUserBirth({birthYear,birthMonth,birthDay}));
 
         Swal.fire({
