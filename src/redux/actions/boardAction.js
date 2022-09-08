@@ -33,10 +33,10 @@ const postBoard = (data) => {
 
 const postLike = createAsyncThunk(
   "board/postLike",
-  async ({ boardId, type, isLike }, { rejectWithValue }) => {
+  async ({ boardType, boardId, isLike }, { rejectWithValue }) => {
     try {
       const res = await userAPI.post(`/board/likes`, {
-        boardType: "matching",
+        boardType: boardType,
         boardId: boardId,
         isLike: isLike,
       });
@@ -206,10 +206,10 @@ const searchBoard = createAsyncThunk(
   "board/search",
   async ({ keyword }, { rejectWithValue }) => {
     console.log(keyword);
-    try {
-      const res = await userAPI.get(
-        `/board/search?page=1&amount=10&city=울산&gu=남구&sort=title_Content&keyword=${keyword}&boardType=matching`
-      );
+    try{
+      const res =await userAPI.get(
+        `/board/search?page=1&amount=10&city=대구&gu=달서구&sort=title_Content&keyword=${keyword}&boardType=matching`
+      )
       console.log(res);
       return res;
     } catch (err) {

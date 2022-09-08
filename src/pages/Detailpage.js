@@ -30,7 +30,7 @@ const Detailpage = () => {
   const likeOnClick = () => {
     try {
       setLike(!like);
-      const res = dispatch(boardAction.postLike(params.id)).unwrap();
+      const res = dispatch(boardAction.postLike({boardId:params.id,isLike:like})).unwrap();
       console.log(res);
     } catch (e) {
       console.log(e);

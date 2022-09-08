@@ -28,6 +28,7 @@ const NavBar = () => {
             boardAction.searchBoard({ keyword: inputRef.current.value })
           ).unwrap();
           console.log(res);
+          navigate("/search");
         } catch (e) {
           console.log(e);
         }
