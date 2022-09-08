@@ -25,6 +25,9 @@ const boardSlice = createSlice({
         loadDetailData(state,action){
             state.detailData=action.payload;
         },
+        loadInfoDetailData(state, action){
+            state.detailData=action.payload;
+        }
     }
 });
 

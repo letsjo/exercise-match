@@ -188,6 +188,21 @@ const loadDetail = (boardId) => {
   };
 };
 
+const loadInfoDetail=(boardId)=> {
+  return async (dispatch) => {
+
+    await userAPI
+      .get(`/api/boards/information/${boardId}`)
+      .then((response) => {
+        dispatch(boardSliceAction.loadInfoDetailData(response.data));
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
 const searchBoard = createAsyncThunk(
   "board/search",
   async({keyword},{rejectWithValue})=>{
@@ -218,5 +233,6 @@ export const boardAction = {
   loadReview,
   postReview,
   loadDetail,
+  loadInfoDetail,
   searchBoard,
 };

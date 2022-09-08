@@ -56,7 +56,7 @@ const PostWrite = () => {
 
     const object = new FormData();
     object.append("boardType", "matching");
-    object.append("boardImage", files[0]);
+    object.append("data", files[0]);
     object.append("endDateAt", date_ref.current.value);
     object.append("maxEntry", "3");
     object.append("city", markAddress[0]?.address.region_1depth_name);
