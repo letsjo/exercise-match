@@ -65,6 +65,7 @@ const Comment = ({ boardId }) => {
           boardId={boardId}
           image={comment.writer.profile}
           nickname={comment.writer.nickname}
+          commentId={comment.id}
           content={comment.comment}
           date={comment.createdAt}
         />

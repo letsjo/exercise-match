@@ -37,8 +37,6 @@ const NavBar = () => {
     }
   };
 
-  console.log(search);
-
   const onOpenerClick = (e) => {
     e.stopPropagation();
     e.preventDefault();

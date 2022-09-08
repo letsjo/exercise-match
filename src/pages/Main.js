@@ -18,6 +18,8 @@ const Main = () => {
     (state) => state.locationReducer
   );
 
+    console.log(selectedCity,selectedGu);
+
   return (
     <MainContainer>
       <NavBar />

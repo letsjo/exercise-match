@@ -220,6 +220,21 @@ const searchBoard = createAsyncThunk(
   }
 );
 
+const loadMyComments = createAsyncThunk(
+  "board/loadMyComments",
+  async({},{rejectWithValue})=>{
+    try{
+      const res = await userAPI.get(
+        `/api/mycomment`
+      )
+      return res;
+    } catch(err) {
+      console.log(err);
+      return rejectWithValue(err.response.data.error);
+    }
+  }
+);
+
 export const boardAction = {
   setBoardType,
   postBoard,
@@ -235,4 +250,5 @@ export const boardAction = {
   loadDetail,
   loadInfoDetail,
   searchBoard,
+  loadMyComments,
 };

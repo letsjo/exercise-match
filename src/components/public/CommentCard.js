@@ -5,11 +5,11 @@ import Swal from "sweetalert2";
 import { useDispatch} from 'react-redux';
 import { boardAction } from "../../redux/actions/boardAction";
 
-const CommentCard = ({myComment ,image, nickname, content, date, boardId}) => {
+const CommentCard = ({myComment ,image, nickname, content, date, boardId, commentId}) => {
 
   const dispatch=useDispatch();
 
-  const Alert = (e, commentId = "1") => {
+  const Alert = (e) => {
     e.preventDefault();
     Swal.fire({
       // title: '',
