@@ -14,7 +14,7 @@ const NavBar = () => {
   const [isPopperShown, setIsPopperShown] = useState(false);
   const [search, setSearch] = useState();
 
-  const { isLogin } = useSelector((state) => state.userReducer);
+  const { isLogin, userProfile } = useSelector((state) => state.userReducer);
 
   const onSubmitSearch = async (e) => {
     if (e.key === "Enter") {
@@ -65,7 +65,7 @@ const NavBar = () => {
           <AfterLoginBox>
             <ProfileImg onClick={onOpenerClick}>
               <img
-                src="https://cdn.clien.net/web/api/file/F01/11059505/25fb954e3ed280.jpg"
+                src={userProfile&&userProfile!="undefined"?userProfile:"/images/anonymousProfile.png"}
                 alt=""
               />
             </ProfileImg>

@@ -1,24 +1,25 @@
-import React from 'react'
-import { useState, useEffect } from 'react';
+import React from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import styled from 'styled-components'
-import NavBar from '../components/public/NavBar';
+import styled from "styled-components";
+import NavBar from "../components/public/NavBar";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { BsHeart, BsHeartFill } from "react-icons/bs";
-import {MdComment} from "react-icons/md"
+import { MdComment } from "react-icons/md";
 import Swal from "sweetalert2";
-import DetailpagePopover from '../components/Detailpage/DetailpagePopover';
-import TitleWrap from '../components/Detailpage/TitleWrap';
+import DetailpagePopover from "../components/Detailpage/DetailpagePopover";
+import TitleWrap from "../components/Detailpage/TitleWrap";
 import { boardAction } from "../redux/actions/boardAction";
-import Comment from '../components/public/Comment';
+import Comment from "../components/public/Comment";
+import TranslateCates from "../utils/TranslateCates";
+import GetDate from "../utils/GetDate";
 
 const InformationDetailPage = () => {
-
   const dispatch = useDispatch();
   const params = useParams();
 
-  const {detailData} = useSelector(state=>state.boardReducer);
+  const { detailData } = useSelector((state) => state.boardReducer);
 
   console.log(params.id);
 
@@ -34,7 +35,9 @@ const InformationDetailPage = () => {
 
   const likeOnClick = async () => {
     try {
-      const res = await dispatch(boardAction.postLike({boardId:params.id,isLike:like})).unwrap();   
+      const res = await dispatch(
+        boardAction.postLike({ boardId: params.id, isLike: like })
+      ).unwrap();
       console.log(res);
       setLike(!like);
       setLikeCount(res);
@@ -43,70 +46,67 @@ const InformationDetailPage = () => {
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(boardAction.loadInfoDetail(params.id));
-  },[]);
+  }, []);
 
   console.log(detailData);
   console.log(params.type);
 
   return (
-   <>
-    <NavBar/>
-    <Container>
-    <ProfileWrap>
-      <>
-        <Profile>
-          <img
-            src={detailData.memberSimpleDto?.profile}
-            alt=""
-          />
-        </Profile>
-        <Nickname>{detailData.memberSimpleDto?.nickname}</Nickname>
-      </>
-      <Dot>
-        <BiDotsVerticalRounded size={30} onClick={onOpenerClick} />
+    <>
+      <NavBar />
+      <Container>
+        <ProfileWrap>
+          <>
+            <Profile>
+              <img src={detailData.memberSimpleDto?.profile} alt="" />
+            </Profile>
+            <Nickname>{detailData.memberSimpleDto?.nickname}</Nickname>
+          </>
+          <Dot>
+            <BiDotsVerticalRounded size={30} onClick={onOpenerClick} />
 
-        {isPopperShown && (
-          <DetailpagePopover
-            onOpenerClick={onOpenerClick}
-            boardId={params.id}
-          ></DetailpagePopover>
+            {isPopperShown && (
+              <DetailpagePopover
+                onOpenerClick={onOpenerClick}
+                boardId={params.id}
+              ></DetailpagePopover>
+            )}
+          </Dot>
+        </ProfileWrap>
+        <TitleWrap
+          board={params.type}
+          isMatching={detailData.currentEntry >= detailData.maxEntry}
+          category={TranslateCates(detailData.category)}
+          title={detailData.title}
+          writeDate={GetDate(detailData.createdAt)}
+        />
+        <ContentWrap>{detailData.content}</ContentWrap>
+        {detailData.boardimage && (
+          <ContentImage>
+            <img src={detailData.boardimage} alt="" />
+          </ContentImage>
         )}
-      </Dot>
-    </ProfileWrap>
-    <TitleWrap
-    board={params.type}
-    isMatching={detailData.currentEntry >= detailData.maxEntry}
-    category={detailData.category}
-    title={detailData.title}
-    writeDate={detailData.createdAt}/>
-    <ContentWrap>
-     {detailData.content}
-    </ContentWrap>
-    <ContentImage >
-      <img src={detailData.boardimage} alt=""/>
-    </ContentImage>
- 
-    <InfoWrap>
-      <Icon onClick={likeOnClick}>
-        {like ? (
-          <BsHeartFill color="red" size={24} />
-        ) : (
-          <BsHeart size={24} />
-        )}
-      </Icon>
-      <Text>좋아요 {detailData.likeCount}개</Text>
-      <CommentIcon>
-        <MdComment size={24}/>
-      </CommentIcon>
-      <Text>댓글 {detailData.commentCount}개</Text>
-    </InfoWrap>
-    <Comment boardId={params.id} />
-  </Container>
-  </>
-    )
-}
+        <InfoWrap>
+          <Icon onClick={likeOnClick}>
+            {like ? (
+              <BsHeartFill color="red" size={24} />
+            ) : (
+              <BsHeart size={24} />
+            )}
+          </Icon>
+          <Text>좋아요 {likeCount}개</Text>
+          <CommentIcon>
+            <MdComment size={24} />
+          </CommentIcon>
+          <Text>댓글 {detailData.commentCount}개</Text>
+        </InfoWrap>
+        <Comment boardId={params.id} />
+      </Container>
+    </>
+  );
+};
 
 const Container = styled.div`
   width: 700px;
@@ -158,9 +158,7 @@ const ContentWrap = styled.div`
 `;
 
 const ContentImage = styled.div`
-  height: 317px;
   margin-bottom: 30px;
-  background-color: #d9d9d9;
   img {
     height: 100%;
     width: 100%;
@@ -188,8 +186,8 @@ const LocationImg = styled.div`
 
 const JoinButton = styled.div`
   height: 89px;
-  background-color: #00CFFF;
-  border: 1px solid #A8A8A8;
+  background-color: #00cfff;
+  border: 1px solid #a8a8a8;
   font-size: 20px;
   font-weight: bold;
   color: white;
@@ -229,6 +227,4 @@ const Text = styled.div`
   margin-right: 39px;
 `;
 
-
-
-export default InformationDetailPage
+export default InformationDetailPage;

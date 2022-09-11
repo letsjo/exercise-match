@@ -16,9 +16,6 @@ const boardSlice = createSlice({
             state.boardType = action.payload.type;
             state.category = action.payload.cate;
         },
-        loadBoardData(state,action){
-            state.boardData = action.payload;
-        },
         loadCommentsData(state,action){
             state.comments = action.payload;
         },

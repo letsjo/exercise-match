@@ -46,11 +46,18 @@ const Popover = ({ onOpenerClick }) => {
         onClick={async () => {
           try{
             const res = await dispatch(userAction.userLogOut({})).unwrap();            
-            dispatch(userSliceAction.setLoginOut());
-            Swal.fire("로그아웃 되었습니다!");
             console.log(res);
           } catch(e){
             console.log(e);
+          } finally {
+            sessionStorage.removeItem("accesstoken");
+            sessionStorage.removeItem("refreshtoken");
+            sessionStorage.removeItem("username");
+            sessionStorage.removeItem("nickname");
+            sessionStorage.removeItem("profile");
+            sessionStorage.removeItem("social");
+            dispatch(userSliceAction.setLoginOut());
+            Swal.fire("로그아웃 되었습니다!");
           }
         }}
       >

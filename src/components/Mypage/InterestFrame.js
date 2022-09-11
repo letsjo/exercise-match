@@ -4,6 +4,7 @@ import styled, { css } from "styled-components";
 import { userAction } from "../../redux/actions/userAction";
 import { modalSliceAction } from "../../redux/reducers/modalReducer";
 import { userSliceAction } from "../../redux/reducers/userReducer";
+import TranslateCates from "../../utils/TranslateCates";
 import AlertBox from "../Signup/AlertBox";
 import Swal from "sweetalert2";
 
@@ -12,35 +13,35 @@ const InterestFrame = () => {
   const dispatch = useDispatch();
 
   const interestLists = [
-    { en: "running", ko: "조깅&러닝" },
-    { en: "riding", ko: "라이딩" },
-    { en: "gym", ko: "헬스" },
-    { en: "hiking", ko: "등산" },
-    { en: "ballet", ko: "발레" },
-    { en: "climbing", ko: "클라이밍" },
-    { en: "pilates", ko: "필라테스" },
-    { en: "swimming", ko: "수영" },
-    { en: "boxing", ko: "복싱" },
-    { en: "bowling", ko: "볼링" },
-    { en: "badminton", ko: "배드민턴" },
-    { en: "crossfit", ko: "크로스핏" },
-    { en: "gymnastics", ko: "체조" },
-    { en: "skateboard", ko: "보드" },
-    { en: "golf", ko: "골프" },
-    { en: "skate", ko: "스케이트" },
-    { en: "pocketball", ko: "당구" },
-    { en: "ski", ko: "스키" },
-    { en: "futsal", ko: "풋살" },
-    { en: "tennis", ko: "테니스" },
-    { en: "pingpong", ko: "탁구" },
-    { en: "basketball", ko: "농구" },
-    { en: "soccer", ko: "축구" },
-    { en: "volleyball", ko: "배구" },
-    { en: "baseball", ko: "야구" },
+    "running",
+    "riding",
+    "gym",
+    "hiking",
+    "ballet",
+    "climbing",
+    "pilates",
+    "swimming",
+    "boxing",
+    "bowling",
+    "badminton",
+    "crossfit",
+    "gymnastics",
+    "skateboard",
+    "golf",
+    "skate",
+    "pocketball",
+    "ski",
+    "futsal",
+    "tennis",
+    "pingpong",
+    "basketball",
+    "soccer",
+    "volleyball",
+    "baseball",
   ];
 
   const { userInterest } = useSelector((state) => state.userReducer);
-  const [editInterest, setEditInterest] = useState(userInterest);
+  const [editInterest, setEditInterest] = useState([]);
   const [alertcomment, setAlertcomment] = useState(
     "관심사는 최대 3개까지 선택이 가능합니다."
   );
@@ -96,10 +97,9 @@ const InterestFrame = () => {
 
   const onClick = (e, interest) => {
     e.preventDefault();
-    const findIndex = editInterest?.findIndex((i) => i.en == interest["en"]);
+    const findIndex = editInterest?.findIndex((i) => i == interest);
     if (editInterest && editInterest?.length < 3 && findIndex === -1) {
       setEditInterest([...editInterest, interest]);
-      //   dispatch(userSliceAction.setInterest(userInterest));
     } else if (editInterest?.length <= 3 && findIndex >= 0) {
       setEditInterest([
         ...editInterest.slice(0, findIndex),
@@ -108,6 +108,7 @@ const InterestFrame = () => {
     } else {
       setAlertSent(true);
     }
+    console.log(editInterest);
   };
 
   const onClose = () => {
@@ -136,14 +137,15 @@ const InterestFrame = () => {
                 <InterestBox
                   onClick={(e) => onClick(e, interest)}
                   selected={
-                    editInterest && editInterest.findIndex((i) => i.en == interest["en"]) >= 0
+                    editInterest &&
+                    editInterest.findIndex((i) => i == interest) >= 0
                       ? true
                       : false
                   }
-                  value={interest["en"]}
+                  value={interest}
                   key={index}
                 >
-                  {interest["ko"]}
+                  {TranslateCates(interest)}
                 </InterestBox>
               );
             })}
@@ -212,7 +214,9 @@ const InterestBox = styled.div`
 const ButtonFrame = styled.div`
   ${({ editInterest }) => {
     return css`
-      background: ${editInterest && editInterest.length > 0 ? "#494949" : "#DEDEDE"};
+      background: ${editInterest && editInterest.length > 0
+        ? "#494949"
+        : "#DEDEDE"};
       cursor: ${editInterest && editInterest.length > 0 ? "pointer" : "auto"};
     `;
   }}

@@ -67,7 +67,7 @@ const SelectCategoryBox = () => {
       <IconBox
         onClick={() => {
           navigate(
-            `/board?type=matching&cate=ridding&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+            `/board?type=matching&cate=riding&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
           );
         }}
       >

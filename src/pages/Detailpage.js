@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { boardAction } from "../redux/actions/boardAction";
 import Swal from "sweetalert2";
 import KakaoMapForDetail from "../components/Board/MatchingBoard/KakaoMapForDetail";
+import TranslateCates from "../utils/TranslateCates";
 
 const Detailpage = () => {
   const dispatch = useDispatch();
@@ -26,11 +27,13 @@ const Detailpage = () => {
   };
 
   const [like, setLike] = useState(false);
+  const [likeCount, setLikeCount] = useState(false);
 
   const likeOnClick = () => {
     try {
       setLike(!like);
       const res = dispatch(boardAction.postLike({boardId:params.id,isLike:like})).unwrap();
+
       console.log(res);
     } catch (e) {
       console.log(e);
@@ -106,7 +109,7 @@ const Detailpage = () => {
         </ProfileWrap>
         <TitleWrap
           isMatching={detailData.currentEntry >= detailData.maxEntry}
-          category={detailData.category}
+          category={TranslateCates(detailData.category)}
           title={detailData.title}
           writeDate={detailData.createdAt}
         />

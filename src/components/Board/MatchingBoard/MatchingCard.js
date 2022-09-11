@@ -2,15 +2,37 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 import BulletinLikeCard from "../BulletinBoard/BulletinLikeCard";
-import {BsCalendarCheck,BsFillPeopleFill} from "react-icons/bs";
+import { BsCalendarCheck, BsFillPeopleFill } from "react-icons/bs";
 
-const BeforeMatchingCard = ({ completed=false, category, title, date, currentEntry,maxEntry,context, writer, location,like, comment, createdAt, boardId}) => {
-
+const BeforeMatchingCard = ({
+  completed = false,
+  category,
+  title,
+  date,
+  currentEntry,
+  maxEntry,
+  context,
+  writerNickname,
+  writerProfile,
+  locationCity,
+  locationGu,
+  like,
+  comment,
+  createdAt,
+  boardId,
+}) => {
   const navigate = useNavigate();
 
   return (
-    <Container onClick={()=>{navigate(`/detail/matching/${boardId}`)}} completed={completed}>
-      <MatchingOrNot completed={completed}>{completed ? "매칭완료" : "매칭중"}</MatchingOrNot>
+    <Container
+      onClick={() => {
+        navigate(`/detail/matching/${boardId}`);
+      }}
+      completed={completed}
+    >
+      <MatchingOrNot completed={completed}>
+        {completed ? "매칭완료" : "매칭중"}
+      </MatchingOrNot>
       <TitleWrap>
         <CategoryTag>{category}</CategoryTag>
         <Title>{title}</Title>
@@ -18,32 +40,35 @@ const BeforeMatchingCard = ({ completed=false, category, title, date, currentEnt
       <DateWrap>
         <Date>
           <Icon>
-            <BsCalendarCheck size={20}/>
+            <BsCalendarCheck size={20} />
           </Icon>
           <Text>{date}</Text>
         </Date>
         <Personnel>
           <Icon>
-          <BsFillPeopleFill size={20}/>
+            <BsFillPeopleFill size={20} />
           </Icon>
-          <Text> {currentEntry}/{maxEntry}매칭</Text>
+          <Text>
+            {" "}
+            {currentEntry}/{maxEntry}매칭
+          </Text>
         </Personnel>
       </DateWrap>
-      <Context>
-        {context}
-      </Context>
+      <Context>{context}</Context>
       <WriterWrap>
         <InfoWrap>
-          <ProfileImg />
-          <Write>{writer}</Write>
+          <ProfileImg>
+            {writerProfile && <img src={writerProfile} alt=""/>}
+          </ProfileImg>
+          <Write>{writerNickname}</Write>
           <Dot>·</Dot>
-          <Write>{location}</Write>
+          <Write>{locationCity + " " + locationGu}</Write>
         </InfoWrap>
       </WriterWrap>
       {/* <LikeWrap>
           <Daysago>1일 전</Daysago>
       </LikeWrap> */}
-      <BulletinLikeCard like={like} comment={comment} createdAt={createdAt}/>
+      <BulletinLikeCard like={like} comment={comment} createdAt={createdAt} />
     </Container>
   );
 };
@@ -56,20 +81,20 @@ const Container = styled.div`
       width: 950px;
       box-sizing: border-box;
       padding: 30px 10px;
-      background-color: ${completed?"#F0F0F0":"white"};
+      background-color: ${completed ? "#F0F0F0" : "white"};
       cursor: pointer;
     `;
   }}
 `;
 
 const MatchingOrNot = styled.div`
-  ${({completed})=>{
+  ${({ completed }) => {
     return css`
-    height: 29px;
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: ${completed?"#a8a8a8":"#000000"};
+      height: 29px;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: ${completed ? "#a8a8a8" : "#000000"};
     `;
   }}
 `;
@@ -106,7 +131,7 @@ const DateWrap = styled.div`
 `;
 
 const Date = styled.div`
-  width: 169px;
+  width: 300px;
   height: 29px;
   display: flex;
   margin-bottom: 6px;
@@ -120,7 +145,7 @@ const Icon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color:gray;
+  color: gray;
 `;
 
 const Text = styled.div`
@@ -155,9 +180,9 @@ const WriterWrap = styled.div`
   box-sizing: border-box;
 `;
 
-const LikeWrap=styled.div`
-margin-top: 14px;
-box-sizing: border-box;
+const LikeWrap = styled.div`
+  margin-top: 14px;
+  box-sizing: border-box;
   height: 24px;
   display: flex;
   justify-content: space-between;
@@ -169,10 +194,16 @@ const InfoWrap = styled.div`
   display: flex;
 `;
 
-const ProfileImg = styled.img`
+const ProfileImg = styled.div`
   width: 20px;
   height: 20px;
+  overflow: hidden;
+  border-radius: 10px;
   margin-right: 4px;
+  img{
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const Write = styled.div`

@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { boardAction } from "../../../redux/actions/boardAction";
+import GetDate from "../../../utils/GetDate";
 import MyCommentCard from "../BoardPublic/MyCommentCard";
 import Pagination from "../BoardPublic/Pagination";
 
 const MyComment = () => {
   const [page, setPage] = useState(1);
+  const [commentsList, setCommentsList] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -18,6 +20,7 @@ const MyComment = () => {
     try {
       const res = await dispatch(boardAction.loadMyComments({})).unwrap();
       console.log(res);
+      setCommentsList(res.data.commentInfo);
     } catch (e) {
       console.log(e);
     }
@@ -25,7 +28,16 @@ const MyComment = () => {
 
   return (
     <>
-      <MyCommentCard content="댓글 내용" title="글 제목" date="20xx.xx.xx" />
+      {commentsList.map((comment) => {
+        <MyCommentCard
+          boardId={comment?.boardid}
+          commentId = {comment?.id}
+          content={comment?.comment}
+          title={comment?.comment}
+          date={GetDate(comment?.createdAt)}
+        />;
+      })}
+
       {/* <MyCommentCard content="댓글 내용 들어가는 칸" 
     title="글 제목입니다" 
     date="20xx.xx.xx"/>

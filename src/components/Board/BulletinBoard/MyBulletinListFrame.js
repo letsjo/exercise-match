@@ -48,9 +48,9 @@ const MyBulletinListFrame = ({ type }) => {
           </ButtonBox>
         </SelectBox>
         <MyCard>
-          {type == "mymatching" && boardType == "write" && <MyMatching />}
+          {type == "mymatching" && boardType == "write" && <MyMatching type="writer"/>}
           {type == "myinformation" && boardType == "write" && <MyBulletin />}
-          {boardType == "apply" && <MyMatching />}
+          {boardType == "apply" && <MyMatching type="entry"/>}
           {boardType == "comment" && <MyComment />}
         </MyCard>
       </BoardListFrame>

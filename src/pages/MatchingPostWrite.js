@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import styled,{css} from "styled-components";
+import styled, { css } from "styled-components";
 import KakaoMapForPost from "../components/Board/MatchingBoard/KakaoMapForPost";
 import NavBar from "../components/public/NavBar";
 import { boardAction } from "../redux/actions/boardAction";
@@ -24,7 +24,6 @@ const PostWrite = () => {
 
   const onLoadFile = (e) => {
     const file = e.target.files;
-    console.log(file);
     setFiles(file);
   };
 
@@ -34,17 +33,22 @@ const PostWrite = () => {
 
   useEffect(() => {
     preview();
-  });
+  },[files]);
 
   const preview = () => {
-    if (!files) return false;
-
-    const imgEL = document.querySelector(".img_box");
+    if (!files[0]) return false;
 
     const reader = new FileReader();
 
-    reader.onload = () =>
-      (imgEL.style.backgroundImage = `url(${reader.result})`);
+    reader.onload = function (event) {
+      if (event.target.result) {
+        const previewImage = document.getElementById("preview-image");
+        previewImage.src = event.target.result;
+      }
+    };
+
+    // reader.onload = () =>
+    //   (imgEL.style.backgroundImage = `url(${reader.result})`);
 
     reader.readAsDataURL(files[0]);
 
@@ -84,11 +88,10 @@ const PostWrite = () => {
   console.log(selectPosition);
   //   console.log(category_ref);
 
- 
   return (
     <>
       <NavBar />
-      <form onSubmit={onHandleSubmit} >
+      <form onSubmit={onHandleSubmit}>
         <Container>
           <Text>카테고리</Text>
           <CategoryDrop
@@ -153,7 +156,10 @@ const PostWrite = () => {
             />
           </LocationMap>
 
-          <ImageButton onClick={handleClick} photoInput_ref={photoInput_ref.current?.value}>
+          <ImageButton
+            onClick={handleClick}
+            photoInput_ref={photoInput_ref.current?.value}
+          >
             <input
               type="file"
               id="image"
@@ -162,10 +168,13 @@ const PostWrite = () => {
               style={{ display: "none" }}
               ref={photoInput_ref}
             />
-            이미지 등록({photoInput_ref.current?.value?"1":"0"}/1)
+            이미지 등록({photoInput_ref.current?.value ? "1" : "0"}/1)
           </ImageButton>
-          {photoInput_ref.current?.value&&<LocationImage className="img_box" name="locationImage" />}
-          
+          {photoInput_ref.current?.value && (
+            <LocationImage>
+              <img id="preview-image" src="" alt="" />
+            </LocationImage>
+          )}
 
           <WriteButton type="submit">작성하기</WriteButton>
         </Container>
@@ -253,13 +262,15 @@ const LocationMap = styled.div`
 
 const LocationImage = styled.div`
   width: 700px;
-  height: 317px;
   margin-bottom: 70px; // 매칭, 정보공유에 따라 수정 필요
   box-sizing: border-box;
   background-color: #d9d9d9;
   /* background-size: contain;
   background-repeat: no-repeat; */
   background-size: cover;
+  img {
+    width: 100%;
+  }
 `;
 
 const ImageButton = styled.div`
@@ -268,15 +279,15 @@ const ImageButton = styled.div`
   box-sizing: border-box;
   margin-top: 70px;
   font-size: 20px;
-  border: 1px solid #DEDEDE;
+  border: 1px solid #dedede;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
-  ${({photoInput_ref})=>{
+  ${({ photoInput_ref }) => {
     return css`
-    background-color: ${photoInput_ref?"#a8a8a8":"#A2E9FA"};
+      background-color: ${photoInput_ref ? "#a8a8a8" : "#A2E9FA"};
     `;
   }}
 `;
@@ -285,11 +296,11 @@ const WriteButton = styled.button`
   width: 700px;
   height: 89px;
   box-sizing: border-box;
-  background-color: #00CFFF;
+  background-color: #00cfff;
   color: white;
   font-size: 20px;
   font-weight: bold;
-  border: 1px solid #A8A8A8;
+  border: 1px solid #a8a8a8;
   margin-top: 70px;
 `;
 

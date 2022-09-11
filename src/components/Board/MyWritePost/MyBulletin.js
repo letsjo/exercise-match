@@ -2,16 +2,46 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import BulletinCard from "../BulletinBoard/BulletinCard";
 import Pagination from "../BoardPublic/Pagination";
+import { useDispatch } from "react-redux";
+import { boardAction } from "../../../redux/actions/boardAction";
+import GetDate from "../../../utils/GetDate";
 
 const MyBulletin = () => {
   const [page, setPage] = useState(1);
+  const [boardsList, setBoardsList] = useState([]);
+  const dispatch = useDispatch();
+  let boardData = [];
+
+  useEffect(() => {
+    loadMyInformation();
+  }, [page]);
+
+  const loadMyInformation = async () => {
+    try {
+      const res = await dispatch(boardAction.loadMyInformation({})).unwrap();
+      boardData = res.data.boardInfo?.map((resDate) => {
+        // var date = new Date(new Date(resDate.endDateAt).getTime());
+        // resDate["endDateAtYear"] = date.getFullYear();
+        // resDate["endDateAtMonth"] = date.getMonth() + 1;
+        // resDate["endDateAtDate"] = date.getDate();
+        // resDate["endDateAtWeek"] = WEEKDAY[date.getDay()];
+        resDate["created"] = GetDate(resDate.createdAt)
+        return resDate;
+      });
+      setBoardsList(boardData);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  console.log(boardsList);
 
   return (
     <>
       <BulletinCard />
       <BulletinCard />
       <BulletinCard />
-     
+
       <PageFrame>
         <Frame>
           <Pagination total={5} limit={2} page={page} setPage={setPage} />

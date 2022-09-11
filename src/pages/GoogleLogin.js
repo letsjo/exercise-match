@@ -14,6 +14,7 @@ const GoogleLogin = (props) => {
   let username = params.get("username");
   let nickname = decodeURI(params.get("nickname"));
   let profile = params.get("profile");
+  let social = true;
   console.log("access_Token", access_Token);
   console.log("refresh_Token", refresh_Token);
   console.log("username", username);
@@ -29,8 +30,9 @@ const GoogleLogin = (props) => {
   sessionStorageLogin.setItem("nickname", nickname); //닉네임
   sessionStorageLogin.setItem("username", username); //아이디
   sessionStorageLogin.setItem("profile", profile); //프로필 사진
+  sessionStorageLogin.setItem("social", social); //일반로그인 체크
 
-  dispatch(userSliceAction.setLogin({username, nickname, profile}));
+  dispatch(userSliceAction.setLogin({username, nickname, profile, social}));
  
   useEffect(()=>{
     navigate("/")

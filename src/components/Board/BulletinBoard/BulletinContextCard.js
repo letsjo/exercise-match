@@ -1,18 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 
-const BulletinContextCard = ({title, content, image}) => {
+const BulletinContextCard = ({ title, content, image }) => {
   return (
     <Container>
       <ContextBox>
         <Title>{title}</Title>
-        <Context>
-          {content}
-        </Context>
+        <Context>{content}</Context>
       </ContextBox>
-      <ImageBox>
-        <Image src={image} />
-      </ImageBox>
+      {image && (
+        <ImageBox>
+          <Image src={image} />
+        </ImageBox>
+      )}
     </Container>
   );
 };

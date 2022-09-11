@@ -8,7 +8,7 @@ function Pagination({ total, limit, page, setPage }) {
         <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
           &lt;
         </Button>
-        {Array(numPages)
+        {Array(numPages<11?numPages:10)
           .fill()
           .map((_, i) => (
             <Button

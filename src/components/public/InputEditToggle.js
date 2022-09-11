@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import { FaPen } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { modalSliceAction } from "../../redux/reducers/modalReducer";
+import TranslateCates from "../../utils/TranslateCates";
 
 const InputEditToggle = ({
   title = "",
@@ -23,8 +24,8 @@ const InputEditToggle = ({
       <TitleFrame title={title}>{title}</TitleFrame>
       <InputFrame>
         <InputLine>
-          {initialState?.map((interest, index) => (
-            <InterestBox key={index}>{interest["ko"]}</InterestBox>
+          {initialState && initialState?.map((interest, index) => (
+            <InterestBox key={index}>{TranslateCates(interest)}</InterestBox>
           ))}
         </InputLine>
         <IconFrame onClick={(e) => EditButton(e)} editBt={editBt}>
