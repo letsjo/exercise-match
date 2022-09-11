@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import styled, {css} from "styled-components";
+import styled, { css } from "styled-components";
 import KakaoMapForPost from "../components/Board/MatchingBoard/KakaoMapForPost";
 import NavBar from "../components/public/NavBar";
 import { boardAction } from "../redux/actions/boardAction";
@@ -28,17 +28,22 @@ const CommunityPostWrite = () => {
 
   useEffect(() => {
     preview();
-  },[files]);
+  }, [files]);
 
   const preview = () => {
-    if (!files) return false;
-
-    const imgEL = document.querySelector(".img_box");
+    if (!files[0]) return false;
 
     const reader = new FileReader();
 
-    reader.onload = () =>
-      (imgEL.style.backgroundImage = `url(${reader.result})`);
+    reader.onload = function (event) {
+      if (event.target.result) {
+        const previewImage = document.getElementById("preview-image");
+        previewImage.src = event.target.result;
+      }
+    };
+
+    // reader.onload = () =>
+    //   (imgEL.style.backgroundImage = `url(${reader.result})`);
 
     reader.readAsDataURL(files[0]);
 
@@ -49,7 +54,6 @@ const CommunityPostWrite = () => {
 
   const onHandleSubmit = async (e) => {
     e.preventDefault();
-
 
     const object = new FormData();
     object.append("boardType", "information");
@@ -79,7 +83,7 @@ const CommunityPostWrite = () => {
   return (
     <>
       <NavBar />
-      <Form onSubmit={onHandleSubmit} >
+      <Form onSubmit={onHandleSubmit}>
         <Container>
           <Text>카테고리</Text>
           <CategoryDrop
@@ -106,7 +110,10 @@ const CommunityPostWrite = () => {
             ref={titleInput_ref}
           />
 
-            <ImageButton onClick={handleClick} photoInput_ref={photoInput_ref.current?.value}>
+          <ImageButton
+            onClick={handleClick}
+            photoInput_ref={photoInput_ref.current?.value}
+          >
             <input
               type="file"
               id="image"
@@ -115,10 +122,13 @@ const CommunityPostWrite = () => {
               style={{ display: "none" }}
               ref={photoInput_ref}
             />
-            이미지 등록({photoInput_ref.current?.value ?"1":"0"}/1)
-            
+            이미지 등록({photoInput_ref.current?.value ? "1" : "0"}/1)
           </ImageButton>
-          {photoInput_ref.current?.value && <LocationImage className="img_box" name="locationImage"/>}
+          {photoInput_ref.current?.value && (
+            <LocationImage>
+              <img id="preview-image" src="" alt="" />
+            </LocationImage>
+          )}
           <Text>내용</Text>
           <ContentInput
             placeholder="내용을 입력해주세요"
@@ -132,7 +142,7 @@ const CommunityPostWrite = () => {
   );
 };
 
-const Form=styled.form`
+const Form = styled.form`
   margin-bottom: 112px;
 `;
 
@@ -202,40 +212,40 @@ const GatherText = styled.div`
 
 const LocationImage = styled.div`
   width: 700px;
-  height: 317px;
   margin-bottom: 70px; // 매칭, 정보공유에 따라 수정 필요
   box-sizing: border-box;
-  background-color: #d9d9d9;
   /* background-size: contain;
   background-repeat: no-repeat; */
   background-size: cover;
+  img {
+    width: 100%;
+  }
 `;
 
 const ImageButton = styled.div`
   width: 700px;
   height: 50px;
   box-sizing: border-box;
-  border: 1px solid #DEDEDE;
+  border: 1px solid #dedede;
   font-size: 20px;
   margin-bottom: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  ${({photoInput_ref})=>{
+  ${({ photoInput_ref }) => {
     return css`
-      background-color: ${photoInput_ref?"#a8a8a8":"#A2E9FA"};
+      background-color: ${photoInput_ref ? "#a8a8a8" : "#A2E9FA"};
     `;
   }}
-  
 `;
 
 const WriteButton = styled.button`
   width: 700px;
   height: 89px;
   box-sizing: border-box;
-  border: 1px solid #A8A8A8;
-  background-color: #00CFFF;
+  border: 1px solid #a8a8a8;
+  background-color: #00cfff;
   color: white;
   font-size: 20px;
   font-weight: bold;

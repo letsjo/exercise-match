@@ -49,26 +49,6 @@ const postLike = createAsyncThunk(
   }
 );
 
-const loadBoard = (type, cate, selectedCity, selectedGu, page) => {
-  return async (dispatch) => {
-    let loadURL;
-    if (type === "matching")
-      loadURL = `/api/boards/${type}?cate=${cate}&page=${page}&amount=12&city=${
-        selectedCity ? selectedCity : "all"
-      }&gu=${selectedGu ? selectedGu : "all"}`;
-    else loadURL = `/api/boards/${type}?cate=${cate}&page=${page}&amount=12`;
-
-    await userAPI
-      .get(loadURL)
-      .then((response) => {
-        dispatch(boardSliceAction.loadBoardData(response.data));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-};
-
 const loadComments = (boardId) => {
   return async (dispatch) => {
     await userAPI
@@ -206,10 +186,10 @@ const searchBoard = createAsyncThunk(
   "board/search",
   async ({ keyword }, { rejectWithValue }) => {
     console.log(keyword);
-    try{
-      const res =await userAPI.get(
+    try {
+      const res = await userAPI.get(
         `/board/search?page=1&amount=10&city=대구&gu=달서구&sort=title_Content&keyword=${keyword}&boardType=matching`
-      )
+      );
       console.log(res);
       return res;
     } catch (err) {
@@ -232,11 +212,101 @@ const loadMyComments = createAsyncThunk(
   }
 );
 
+const loadMyMatchings = createAsyncThunk(
+  "board/loadMyMatchings",
+  async ({ page }, { rejectWithValue }) => {
+    try {
+      const res = await userAPI.get(`/api/mypost/matching`);
+      return res;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data.error);
+    }
+  }
+);
+
+const loadMyEntrys = createAsyncThunk(
+  "board/loadMyEntrys",
+  async ({ page }, { rejectWithValue }) => {
+    try {
+      const res = await userAPI.get(`/api/myentry`);
+      return res;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data.error);
+    }
+  }
+);
+
+const loadMyInformation = createAsyncThunk(
+  "board/loadMyInformation",
+  async ({ page }, { rejectWithValue }) => {
+    try {
+      const res = await userAPI.get(`/api/mypost/information`);
+      return res;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data.error);
+    }
+  }
+);
+
+const loadInformation = createAsyncThunk(
+  "board/loadInformation",
+  async ({ cate, page }, { rejectWithValue }) => {
+    try {
+      const res = await userAPI.get(
+        `/api/boards/information?cate=${cate}&page=${page}&amount=12`
+      );
+      return res;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data.error);
+    }
+  }
+);
+
+const loadMatching = createAsyncThunk(
+  "board/loadMatching",
+  async ({ cate, page, city, gu }, { rejectWithValue }) => {
+    try {
+      const res = await userAPI.get(
+        `/api/boards/matching?cate=${cate}&page=${page}&amount=12&city=${
+          city ? city : "all"
+        }&gu=${gu ? gu : "all"}`
+      );
+      return res;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data.error);
+    }
+  }
+);
+
+// const loadBoard = (type, cate, selectedCity, selectedGu, page) => {
+//   return async (dispatch) => {
+//     let loadURL;
+//     if (type === "matching")
+//       loadURL = `/api/boards/${type}?cate=${cate}&page=${page}&amount=12&city=${
+//         selectedCity ? selectedCity : "all"
+//       }&gu=${selectedGu ? selectedGu : "all"}`;
+//     else loadURL = `/api/boards/${type}?cate=${cate}&page=${page}&amount=12`;
+
+//     await userAPI
+//       .get(loadURL)
+//       .then((response) => {
+//         dispatch(boardSliceAction.loadBoardData(response.data));
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//       });
+//   };
+// };
+
 export const boardAction = {
   setBoardType,
   postBoard,
   postLike,
-  loadBoard,
   loadComments,
   delComment,
   delBoard,
@@ -248,4 +318,9 @@ export const boardAction = {
   loadInfoDetail,
   searchBoard,
   loadMyComments,
+  loadMyMatchings,
+  loadMyEntrys,
+  loadMyInformation,
+  loadInformation,
+  loadMatching,
 };

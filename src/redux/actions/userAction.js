@@ -41,28 +41,6 @@ const naverLogin = (code) => {
   };
 };
 
-// const googleLogin = createAsyncThunk(
-//   "user/googleLogin",
-//   async ({access_Token,refresh_Token,nickname, username, profile}, { rejectWithValue }) => {
-//     try {
-//       userAPI.defaults.headers.common["accesstoken"] = access_Token;
-//       userAPI.defaults.headers.common["refreshtoken"] = refresh_Token;
-
-//       let sessionStorageLogin = sessionStorage;
-//       sessionStorageLogin.setItem("accesstoken", access_Token);
-//       sessionStorageLogin.setItem("refreshtoken", refresh_Token);
-//       sessionStorageLogin.setItem("nickname", nickname); //닉네임
-//       sessionStorageLogin.setItem("username", username); //아이디
-//       sessionStorageLogin.setItem("profile", profile); //프로필 사진
-
-//       return ;
-//     } catch (err) {
-//       console.log(err);
-//       return rejectWithValue(err.response.data.error);
-//     }
-//   }
-// );
-
 const testJoin = () => {
   return async (dispatch) => {
     try {
@@ -71,7 +49,6 @@ const testJoin = () => {
         password: "1231231",
         passwordCheck: "1231231",
       });
-      // dispatch(userSliceAction.setLogin({username:res.data.username, nickname: res.data.nickname, profile: res.data.profile }))
     } catch (e) {
       console.log(e);
     }
@@ -82,7 +59,6 @@ const refreshToken = () => {
   return async (dispatch) => {
     try {
       const res = await userAPI.GET("/api/refresh");
-      // dispatch(userSliceAction.setLogin({username:res.data.username, nickname: res.data.nickname, profile: res.data.profile }))
     } catch (e) {
       console.log(e);
     }
@@ -170,16 +146,16 @@ const loadMyPage = () => {
       if (responseProfile.status == "fulfilled")
         dispatch(
           userSliceAction.setMypageProfile({
-            profile: responseProfile.value.data.profile,
+            profile: responseProfile.value.data.profileimgurl,
             star: responseProfile.value.data.star,
           })
         );
       if (responseInfo.status == "fulfilled")
         dispatch(
           userSliceAction.setMypageInfo({
-            birthYear: responseInfo.value.data.birthYear,
-            birthMonth: responseInfo.value.data.birthMonth,
-            birthDay: responseInfo.value.data.birthDay,
+            birthYear: responseInfo.value.data.birth.birthYear,
+            birthMonth: responseInfo.value.data.birth.birthMonth,
+            birthDay: responseInfo.value.data.birth.birthDay,
             gender: responseInfo.value.data.gender,
           })
         );
@@ -187,13 +163,10 @@ const loadMyPage = () => {
         dispatch(
           userSliceAction.setMypageAction({
             nickname: responseAction.value.data.nickname,
-            // concern: responseAction.value.data.concern,
+            concern: responseAction.value.data.concern,
             joinNum: responseAction.value.data.joinCnt,
           })
         );
-
-      console.log(responseAction, responseInfo, responseProfile);
-      // console.log(responseAction, responseInfo);
     } catch (e) {
       console.log(e);
     }
@@ -258,7 +231,9 @@ const editBirth = createAsyncThunk(
   async ({ birthYear, birthMonth, birthDay }, { rejectWithValue }) => {
     try {
       const res = await userAPI.put("/api/mypage/infoedit/birth", {
-        birthYear, birthMonth, birthDay,
+        birthYear,
+        birthMonth,
+        birthDay,
       });
       console.log(res);
       return res;
@@ -275,17 +250,15 @@ const userLogin = createAsyncThunk(
     try {
       const res = await userAPI.post("/login", LoginData);
       userAPI.defaults.headers.common["accesstoken"] = res.headers?.accesstoken;
-      userAPI.defaults.headers.common["refreshtoken"] =
-        res.headers?.refreshtoken;
 
       let sessionStorageLogin = sessionStorage;
       sessionStorageLogin.setItem("accesstoken", res.headers?.accesstoken);
-      sessionStorageLogin.setItem("refreshtoken", res.headers?.refreshtoken);
       sessionStorageLogin.setItem("username", LoginData.username);
+      sessionStorageLogin.setItem("nickname", res.headers?.nickname);
+      sessionStorageLogin.setItem("profile", res.headers?.profile);
+      sessionStorageLogin.setItem("social", false);
 
       return res;
-      // sessionStorageLogin.setItem("nickname", response.data.userInfoDto.nickname);
-      // sessionStorageLogin.setItem("profile", response.data.userInfoDto.profile);
     } catch (err) {
       console.log(err);
       return rejectWithValue(err.response.data.error);
@@ -303,6 +276,7 @@ const userLogOut = createAsyncThunk(
       sessionStorage.removeItem("username");
       sessionStorage.removeItem("nickname");
       sessionStorage.removeItem("profile");
+      sessionStorage.removeItem("social");
       console.log(res);
       return res;
       // sessionStorageLogin.setItem("nickname", response.data.userInfoDto.nickname);
@@ -330,6 +304,22 @@ const signUpCheckAuth = createAsyncThunk(
   }
 );
 
+const userWithdraw = createAsyncThunk(
+  "signUp/userWithdraw",
+  async ({ password }, { rejectWithValue }) => {
+    try {
+      const res = await userAPI.post("/api/withdraw", {
+        password,
+      });
+      console.log(res);
+      return res;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data.error);
+    }
+  }
+);
+
 export const userAction = {
   kakaoLogin,
   naverLogin,
@@ -347,4 +337,5 @@ export const userAction = {
   editGender,
   editBirth,
   userLogOut,
+  userWithdraw,
 };

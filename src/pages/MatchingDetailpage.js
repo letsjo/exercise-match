@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Comment from "../components/public/Comment";
 import NavBar from "../components/public/NavBar";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { BsHeart, BsHeartFill } from "react-icons/bs";
-import {MdComment} from "react-icons/md"
+import { MdComment } from "react-icons/md";
 import DetailpagePopover from "../components/Detailpage/DetailpagePopover";
 import TitleWrap from "../components/Detailpage/TitleWrap";
 import DatePersonnelWrap from "../components/Detailpage/DatePersonnelWrap";
@@ -13,13 +13,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { boardAction } from "../redux/actions/boardAction";
 import Swal from "sweetalert2";
 import KakaoMapForDetail from "../components/Board/MatchingBoard/KakaoMapForDetail";
+import TranslateCates from "../utils/TranslateCates";
 
 const MatchingDetailpage = () => {
   const dispatch = useDispatch();
   const params = useParams();
 
-  
-  const {detailData} = useSelector(state=>state.boardReducer);
+  const { detailData } = useSelector((state) => state.boardReducer);
 
   console.log(params.id);
 
@@ -31,15 +31,17 @@ const MatchingDetailpage = () => {
   };
 
   const [like, setLike] = useState(false);
-  const [likeCount, setLikeCount] = useState(detailData?.likeCount);
+  const [likeCount, setLikeCount] = useState(0);
 
-  const [matching, setMatching]=useState(true);
+  const [matching, setMatching] = useState(true);
 
   const likeOnClick = async () => {
     try {
-      const res = await dispatch(boardAction.postLike({boardId:params.id,isLike:like})).unwrap();
-      setLike(!like);
+      const res = await dispatch(
+        boardAction.postLike({ boardId: params.id, isLike: like })
+      ).unwrap();
       console.log(res);
+      setLike(!like);
       setLikeCount(res);
     } catch (e) {
       console.log(e);
@@ -48,7 +50,7 @@ const MatchingDetailpage = () => {
 
   const matchingApply = async () => {
     let timerInterval;
-   
+
     try {
       setMatching(!matching);
       console.log(matching);
@@ -64,7 +66,7 @@ const MatchingDetailpage = () => {
         },
       });
       const resApply = await dispatch(
-        boardAction.applyBoard({boardId:params.id,isMatching:matching})
+        boardAction.applyBoard({ boardId: params.id, isMatching: matching })
       ).unwrap();
       clearInterval(timerInterval);
       console.log(resApply);
@@ -86,10 +88,13 @@ const MatchingDetailpage = () => {
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(boardAction.loadDetail(params.id));
-  },[]);
+  }, []);
 
+  useEffect(() => {
+    setLikeCount(detailData.likeCount);
+  }, [detailData]);
 
   console.log(detailData);
 
@@ -100,10 +105,7 @@ const MatchingDetailpage = () => {
         <ProfileWrap>
           <>
             <Profile>
-              <img
-                src={detailData.memberSimpleDto?.profile}
-                alt=""
-              />
+              <img src={detailData.memberSimpleDto?.profile} alt="" />
             </Profile>
             <Nickname>{detailData.memberSimpleDto?.nickname}</Nickname>
           </>
@@ -119,30 +121,38 @@ const MatchingDetailpage = () => {
           </Dot>
         </ProfileWrap>
         <TitleWrap
-        isMatching={detailData.currentEntry >= detailData.maxEntry}
-        category={detailData.category}
-        title={detailData.title}
-        writeDate={detailData.createdAt}/>
+          isMatching={detailData.currentEntry >= detailData.maxEntry}
+          category={TranslateCates(detailData.category)}
+          title={detailData.title}
+          writeDate={detailData.createdAt}
+        />
 
         <DatePersonnelWrap />
 
-        <ContentWrap>
-         {detailData.content}
-        </ContentWrap>
-        <ContentImage >
-          <img src={detailData.boardimage} alt=""/>
-        </ContentImage>
+        <ContentWrap>{detailData.content}</ContentWrap>
+        {detailData.boardimage && (
+          <ContentImage>
+            <img src={detailData.boardimage} alt="" />
+          </ContentImage>
+        )}
         <LocationWrap>
           <LocationTitle>장소 위치</LocationTitle>
           <LocationImg>
             <KakaoMapForDetail
               // address={selectBoardData.address}
               address={"장소주소 넣기"}
-              selectPosition={{La:128.6061745,Ma:35.86952722}}
+              selectPosition={{ La: 128.6061745, Ma: 35.86952722 }}
             />
           </LocationImg>
         </LocationWrap>
-        <JoinButton onClick={matchingApply}>참여하기 X/X</JoinButton>
+        {detailData.currentEntry >= detailData.maxEntry ? (
+          <JoinButton isMatchingCompleted={true}>매칭이 종료되었습니다.</JoinButton>
+        ) : (
+          <JoinButton isMatchingCompleted={false} onClick={matchingApply}>
+            참여하기 {detailData?.currentEntry}/{detailData?.maxEntry}
+          </JoinButton>
+        )}
+
         <InfoWrap>
           <Icon onClick={likeOnClick}>
             {like ? (
@@ -151,9 +161,9 @@ const MatchingDetailpage = () => {
               <BsHeart size={24} />
             )}
           </Icon>
-          <Text>좋아요 {detailData.likeCount}개</Text>
+          <Text>좋아요 {likeCount}개</Text>
           <CommentIcon>
-            <MdComment size={24}/>
+            <MdComment size={24} />
           </CommentIcon>
           <Text>댓글 {detailData.commentCount}개</Text>
         </InfoWrap>
@@ -242,9 +252,14 @@ const LocationImg = styled.div`
 `;
 
 const JoinButton = styled.div`
+  ${({ isMatchingCompleted }) => {
+    return css`
+    background-color: ${isMatchingCompleted?"#a8a8a8":"#00cfff"};
+  `;
+  }}
   height: 89px;
-  background-color: #00CFFF;
-  border: 1px solid #A8A8A8;
+  background-color: #00cfff;
+  border: 1px solid #a8a8a8;
   font-size: 20px;
   font-weight: bold;
   color: white;

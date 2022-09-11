@@ -15,7 +15,7 @@ const BulletinLikeCard = ({like, comment, createdAt}) => {
         <MdChatBubble size={24} color= "#a8a8a8"/> <Text>{comment}개</Text>
         </IconBox>
     </LikeCommentBox>
-    <Daysago>{createdAt}일 전</Daysago>
+    <Daysago>{createdAt}</Daysago>
     </Container>
   )
 }
@@ -24,13 +24,13 @@ const Container =styled.div`
     height: 24px;
     width: 100%;
     display: flex;
+    justify-content: space-between;
 `;
 
 const LikeCommentBox = styled.div`
     height: 24px;
     width: 146px;
     margin-left: 10px;
-    margin-right: 732px;
     display: flex;
     justify-content: space-between;
 `;
@@ -50,9 +50,10 @@ const Text =styled.div`
 `;
 
 const Daysago = styled.div`
-    width:45px;
+    width:200px;
     font-size:15px;
     color: #a8a8a8;
+    text-align: right;
     margin-right:20px;
     box-sizing: border-box;
 `;

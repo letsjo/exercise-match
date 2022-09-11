@@ -69,7 +69,10 @@ const Login = () => {
         ).unwrap();
         dispatch(
           userSliceAction.setLogin({
-            username: LoginData.username,
+            username: LoginData?.username,
+            nickname: response.headers?.nickname,
+            profile: response.headers?.profile,
+            social: false,
           })
         );
         console.log(response);

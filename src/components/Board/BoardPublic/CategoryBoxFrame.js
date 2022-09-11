@@ -19,8 +19,7 @@ const CategoryBoxFrame = ({ page }) => {
 
   useEffect(() => {
     dispatch(boardSliceAction.setBoardType({ type, cate }));
-    dispatch(boardAction.loadBoard(type, cate, selectedCity, selectedGu, page));
-  }, [type, cate, selectedCity, selectedGu, page]);
+  }, [type, cate]);
 
   return (
     <CategorySelect>
@@ -65,10 +64,10 @@ const CategoryBoxFrame = ({ page }) => {
             e.preventDefault();
 
             navigate(
-              `/board?type=${type}&cate=ridding&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+              `/board?type=${type}&cate=riding&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
             );
           }}
-          selected={cate === "ridding"}
+          selected={cate === "riding"}
         >
           라이딩
         </CategoryCard>

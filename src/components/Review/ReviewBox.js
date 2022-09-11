@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { BsStarFill, BsStar } from "react-icons/bs";
 import { useState, useRef } from "react";
 import ReviewBoxAfter from "./ReviewBoxAfter";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { boardAction } from "../../redux/actions/boardAction";
 
 const ReviewBox = () => {
@@ -14,6 +14,8 @@ const ReviewBox = () => {
 
   const checkboxRefForm = useRef();
   
+  const {userNickName} = useSelector((state)=>state.userReducer);
+
   useEffect(()=>{
     loadReview("1");
   }, [])
@@ -56,7 +58,7 @@ const ReviewBox = () => {
   return (
     <Container>
       <ReviewTitle>
-        홍길동님 ,<br />
+        {userNickName} 님 ,<br />
         ___님과 매칭은 어떠셨나요?
       </ReviewTitle>
       <StarForm show={show} ref={checkboxRefForm} onSubmit={(e) => save(e)}>

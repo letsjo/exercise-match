@@ -6,22 +6,33 @@ import InputEditButton from "../public/InputEditButton";
 import InputEditToggle from "../public/InputEditToggle";
 import InputJoinList from "../public/InputJoinList";
 import ShowStarScore from "../public/ShowStarScore";
+import { FaPen } from "react-icons/fa";
 
 const MyProfileShow = ({ mypage = true, profileImg }) => {
   const navigate = useNavigate();
 
-  const { userNickName, userJoinList, userInterest } = useSelector((state) => state.userReducer);
+  const { userNickName, userJoinList, userInterest, userProfile } = useSelector(
+    (state) => state.userReducer
+  );
 
   return (
     <Container>
       <LeftFrame>
         <LeftZone>
-          <PhotoFrame>
-            <img src={profileImg?profileImg:"https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg"} alt=""/>
-          </PhotoFrame>
+          <PhotoContainer>
+            <PhotoFrame>
+              <img
+                src={userProfile ? userProfile : "/images/anonymousProfile.png"}
+                alt=""
+              />
+            </PhotoFrame>
+            <ModifyButton>
+              <FaPen size={15} />
+            </ModifyButton>
+          </PhotoContainer>
           <InfoFrame>
             <NameZone>{userNickName}</NameZone>
-            <ShowStarScore score={4} width={128} height={25}/>
+            <ShowStarScore score={4} width={133.25} height={25} />
           </InfoFrame>
         </LeftZone>
       </LeftFrame>
@@ -40,12 +51,12 @@ const MyProfileShow = ({ mypage = true, profileImg }) => {
           />
           <InputJoinList
             title="참여횟수"
-            initialState={`헬스 ${userJoinList["gym"]}회 | 런닝&조깅 ${userJoinList["running"]}회 | 배드민턴 ${userJoinList["badminton"]}회 | 테니스 ${userJoinList["tennis"]}회 | 라이딩 ${userJoinList["ridding"]}회 | 골프 ${userJoinList["golf"]}회 | 기타 ${userJoinList["etc"]}회`}
+            initialState={`헬스 ${userJoinList["gym"]}회 | 런닝&조깅 ${userJoinList["running"]}회 | 배드민턴 ${userJoinList["badminton"]}회 | 테니스 ${userJoinList["tennis"]}회 | 라이딩 ${userJoinList["riding"]}회 | 골프 ${userJoinList["golf"]}회 | 기타 ${userJoinList["etc"]}회`}
             editBt={false}
             fontSize="15px"
           />
           {mypage ? (
-            <ButtonZone onClick={(e)=>navigate("/userinfo")}>
+            <ButtonZone onClick={(e) => navigate("/userinfo")}>
               <button>회원정보 보기</button>
             </ButtonZone>
           ) : (
@@ -65,7 +76,7 @@ const Container = styled.div`
   border-radius: 10px;
   border: 1px solid #dedede;
   overflow: hidden;
-  
+
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
 `;
 
@@ -88,6 +99,10 @@ const LeftZone = styled.div`
   justify-content: center;
 `;
 
+const PhotoContainer = styled.div`
+  position: relative;
+`;
+
 const PhotoFrame = styled.div`
   width: 127px;
   height: 127px;
@@ -101,6 +116,20 @@ const PhotoFrame = styled.div`
     height: 100%;
     object-fit: cover;
   }
+`;
+
+const ModifyButton = styled.div`
+  position: absolute;
+  background-color: #a8a8a8;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  bottom: 2px;
+  right: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
 `;
 
 const InfoFrame = styled.div`

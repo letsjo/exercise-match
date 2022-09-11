@@ -2,11 +2,41 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import SubNavbar from '../components/public/SubNavbar';
+import { useDispatch } from 'react-redux';
+import { userAction } from '../redux/actions/userAction';
+import Swal from 'sweetalert2';
 
 const MemberExit = () => {
     const [leftArrow,setLeftArrow] = useState(true);
   const [rightArrow,setRightArrow] = useState(false);
   const navigate=useNavigate();
+  const dispatch = useDispatch();
+
+  const withdrawButton = (e) =>{
+    e.preventDefault();
+    Swal.fire({
+        title: '비밀번호 입력해주세요.',
+        text: '회원 탈퇴 후에는 복구가 불가능합니다.',
+        input: 'password',
+        inputPlaceholder: '비밀번호를 입력해주세요.',
+        inputAttributes: {
+          autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        confirmButtonText: '확인',
+        showLoaderOnConfirm: true,
+        cancelButtonText: '취소',
+        preConfirm: async (password) => { 
+            try {
+                const res = await dispatch(userAction.userWithdraw(password)).unwarp();
+                console.log(res);
+            } catch(err){
+                console.log(err);
+            }
+          console.log(password);
+        },
+      })
+  }
 
   return (
     <Container>
@@ -30,7 +60,7 @@ const MemberExit = () => {
         <Message>정말 탈퇴하시겠습니까?</Message>
         <Button>
         <CancelBtn onClick={ () => navigate(-1) }>취소</CancelBtn>
-        <ExitBtn>탈퇴</ExitBtn>
+        <ExitBtn onClick={(e) => withdrawButton(e)}>탈퇴</ExitBtn>
         </Button>
     </ButtonWrap>
     </ExitWrap>

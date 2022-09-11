@@ -14,7 +14,7 @@ const BulletinCard = ({title, content, comment, like, createdAt, image, boardId}
       />
     <BulletinLikeCard comment={comment}
       like={like}
-      createdAt={createdAt}/>
+      createdAt={createdAt?.year?(createdAt?.year+"년 "+createdAt?.month+"월 "+createdAt?.day+"일 "+createdAt?.week+"요일"):("")}/>
     </Container>
   )
 }

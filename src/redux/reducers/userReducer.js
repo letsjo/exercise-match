@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 let initialState = {
   isLogin: false,
+  social: "",
   username: "",
   userNickName: "",
   userProfile: "",
@@ -15,7 +16,7 @@ let initialState = {
     running: 0,
     badminton: 0,
     badminton: 2,
-    ridding: 3,
+    riding: 3,
     golf: 0,
     ect: 0,
   },
@@ -31,12 +32,14 @@ const userSlice = createSlice({
       state.username = action.payload?.username;
       state.userProfile = action.payload?.profile;
       state.userNickName = action.payload?.nickname;
+      state.social = action.payload?.social;
     },
     setLoginOut(state) {
       state.isLogin= false;
       state.username = "";
       state.userProfile = "";
       state.userNickName = "";
+      state.social = "";
     },
     setMypageProfile(state,action) {
       state.userProfile = action.payload?.profile;

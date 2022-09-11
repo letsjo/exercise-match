@@ -1,36 +1,53 @@
 import React from "react";
 import styled from "styled-components";
 import Pagination from "../BoardPublic/Pagination";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MatchingCard from "./MatchingCard";
 import CategoryBoxFrame from "../BoardPublic/CategoryBoxFrame";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import TranslateCates from "../../../utils/TranslateCates";
+import GetDate from "../../../utils/GetDate";
+import { boardAction } from "../../../redux/actions/boardAction";
+import CurrentLocationCard from "../../Main/CurrentLocationCard";
 
 
 const MatchingListFrame = () => {
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const{ boardResponseDtoList} = useSelector((state)=>state.boardReducer.boardData );
-
-  console.log(boardResponseDtoList);
-
-  // const now = new Date();
-  const c = new Date(boardResponseDtoList&&boardResponseDtoList[0]?.createdAt).getDate();
-  console.log(c,"이거 1!1");
-
-  // const createdAtDay = now.getDate()-new Date(boardResponseDtoList&&boardResponseDtoList[0].createdAt).getDate();
-  // console.log(createdAtDay,"minus");
-
-
-  const reducer = useSelector((state)=>state.boardReducer);
   const { isLogin } = useSelector((state) => state.userReducer);
 
+  const [boardsList, setBoardsList] = useState([]);
+  const query = useLocation().search;  
+  const cate = new URLSearchParams(query).get("cate");
+  const city = new URLSearchParams(query).get("city");
+  const gu = new URLSearchParams(query).get("gu");
+  let boardData = [];
+    
+  useEffect(() => {
+    loadMatching();
+  }, [page,cate,city,gu]);
+
+  const loadMatching = async () => {
+    try {
+      const res = await dispatch(boardAction.loadMatching({ cate, page, city, gu })).unwrap();
+      boardData = res.data.boardResponseDtoList?.map((resDate) => {
+        resDate["endDate"] = GetDate(resDate.endDateAt);
+        return resDate;
+      });
+      setBoardsList(boardData);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  
   return (
     <>
       <CategoryBoxFrame page={page}/>
       <BoardListFrame>
+        <CurrentLocationCard isDetail={true}/>
         <ButtonBox>
           {isLogin?(
             <WriteButton
@@ -43,19 +60,22 @@ const MatchingListFrame = () => {
           ):""}
           
         </ButtonBox>
-        {boardResponseDtoList&&boardResponseDtoList.map((list, idx)=>
+        {boardsList && boardsList.map((list, idx)=>
         ( <MatchingCard 
           key={idx}
           boardId={list.id}
           // completed={true}
-          category={list.category}
+          category={TranslateCates(list.category)}
           title={list.title}
           date={list.endDateAt}
+
           currentEntry={list.currentEntry}
           maxEntry={list.maxEntry}
           context={list.context}
-          writer={list.memberSimpleDto.nickname} 
-          location={list.city}
+          writerNickname={list.memberSimpleDto.nickname} 
+          writerProfile={list.memberSimpleDto.profile} 
+          locationCity={list.city}
+          locationGu={list.gu}
           like={list.likeCount}
           comment={list.commentCount}
           createdAt={list.createdAt}

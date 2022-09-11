@@ -93,11 +93,8 @@ const InputEditButton = ({
   const EditButton = (e) => {
     e.preventDefault();
     inputBeforeRef.current = inputValue;
-    console.log(inputBeforeRef.current);
     setModifyable(!modifyable);
   };
-
-  console.log(initialState,inputValue)
 
   return (
     <Container border={border}>

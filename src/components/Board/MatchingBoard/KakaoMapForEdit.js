@@ -5,8 +5,6 @@ import GetAddressName from "../../../utils/GetAddressName";
 
 const { kakao } = window;
 
-let map;
-
 const KakaoMapForEdit = ({
   searchPlace,
   setMarkAddress,
@@ -16,6 +14,7 @@ const KakaoMapForEdit = ({
     (state) => state.locationReducer
   );
 
+  let map;
   const [position, setPosition] = useState({
     lat: currentLat ? currentLat : "33.450701",
     lon: currentLon ? currentLon : "126.570667",
@@ -32,8 +31,30 @@ const KakaoMapForEdit = ({
       map = new kakao.maps.Map(container, options);
       console.log(map);
     }
+
+    var imageSrc = "/images/marker.png", // 마커이미지의 주소입니다
+      imageSize = new kakao.maps.Size(42, 42), // 마커이미지의 크기입니다
+      imageOption = { offset: new kakao.maps.Point(20, 38) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+
+    // // 마커를 생성합니다
+    // var markerCurrent = new kakao.maps.Marker({
+    //   position: new kakao.maps.LatLng(position.lat, position.lon),
+    // });
+
+    // markerCurrent.setMap(map);
+
+    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+    var markerImage = new kakao.maps.MarkerImage(
+      imageSrc,
+      imageSize,
+      imageOption,
+    );
+
     var geocoder = new kakao.maps.services.Geocoder(); // 주소-좌표 변환 객체를 생성합니다
-    var marker = new kakao.maps.Marker(); // 클릭한 위치를 표시할 마커입니다
+    var marker = new kakao.maps.Marker({
+      image: markerImage,
+    }); // 클릭한 위치를 표시할 마커입니다
     var infowindow = new kakao.maps.InfoWindow({ zIndex: 2 }); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
     var ps = new kakao.maps.services.Places();
 
@@ -137,6 +158,17 @@ const KakaoMapForEdit = ({
     }
   }, [searchPlace]);
 
+  //처음 지도 그리기
+  function panTo(e) {
+    e.preventDefault();
+    // 이동할 위도 경도 위치를 생성합니다.
+    var moveLatLon = new kakao.maps.LatLng(currentLat, currentLon);
+
+    // 지도 중심을 부드럽게 이동시킵니다
+    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    map.panTo(moveLatLon);
+  }
+
   return (
     <Map_wrap>
       <div
@@ -150,6 +182,9 @@ const KakaoMapForEdit = ({
         <span className="title">주소정보</span>
         <span id="centerAddr"></span>
       </div>
+      <CurrentButton onClick={(e) => panTo(e)}>
+        <img src="/images/target.png" alt="" />
+      </CurrentButton>
     </Map_wrap>
   );
 };
@@ -181,6 +216,24 @@ const Map_wrap = styled.div`
         white-space: nowrap;
       }
     }
+  }
+`;
+
+const CurrentButton = styled.div`
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 32px;
+  height: 32px;
+  z-index: 1;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 70%;
   }
 `;
 
