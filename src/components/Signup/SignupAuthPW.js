@@ -9,6 +9,8 @@ const SignupAuthPW = ({
   setInputPassword,
   leftState,
   rightState,
+  inputPasswordCheck,
+  setInputPasswordCheck,
 }) => {
   const { email, password, repassword } = useSelector(
     (state) => state.signupReducer.info
@@ -34,6 +36,7 @@ const SignupAuthPW = ({
       setNextAvailable(true);
       rightState.setRightArrow(false);
       setInputPassword(RefFirstPassword.current.value);
+      setInputPasswordCheck(RefSecondPassword.current.value);
     } else {
       setNextAvailable(false);
       rightState.setRightArrow(false);
