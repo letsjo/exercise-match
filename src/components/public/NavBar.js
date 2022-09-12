@@ -16,22 +16,24 @@ const NavBar = () => {
 
   const { isLogin, userProfile } = useSelector((state) => state.userReducer);
 
-  const onSubmitSearch = async (e) => {
+  const onSubmitSearch = (e) => {
     if (e.key === "Enter") {
       if (inputRef.current.value) {
         console.log("검색된다!!!");
         e.preventDefault();
         setSearch(inputRef.current.value);
-        // console.log(search);
-        try {
-          const res = await dispatch(
-            boardAction.searchBoard({ keyword: inputRef.current.value })
-          ).unwrap();
-          console.log(res);
-          navigate("/search");
-        } catch (e) {
-          console.log(e);
-        }
+        const keyword= inputRef.current.value;
+        // console.log(keyword);
+        navigate(`/search?keyword=${keyword}`); 
+        // try {
+        //   const res = await dispatch(
+        //     boardAction.searchBoard({ keyword: inputRef.current.value })
+        //   ).unwrap();
+        //   console.log(res);
+           
+        // } catch (e) {
+        //   console.log(e);
+        // }
       } else {
         window.alert("검색어를 입력해주세요!");
       }

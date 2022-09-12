@@ -30,6 +30,9 @@ const boardSlice = createSlice({
         },
         loadInfoDetailData(state, action){
             state.detailData=action.payload;
+        },
+        loadSearchData(state, action){
+            state.detailData=action.payload;
         }
     }
 });
