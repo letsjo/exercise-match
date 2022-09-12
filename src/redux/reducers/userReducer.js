@@ -11,15 +11,7 @@ let initialState = {
   userBirthYear: "",
   userBirthMonth: "",
   userBirthDay: "",
-  userJoinList: {
-    gym: 0,
-    running: 0,
-    badminton: 0,
-    badminton: 2,
-    riding: 3,
-    golf: 0,
-    ect: 0,
-  },
+  userJoinList: {},
   userInterest: [],
 };
 

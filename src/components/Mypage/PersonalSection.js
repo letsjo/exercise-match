@@ -9,7 +9,6 @@ const PersonalSection = ({ title, data, editBt = true }) => {
   const EditButton = (e) => {
     e.preventDefault();
     navigate("/passwordChange")
-    console.log("비밀번호 변경 페이지 연결")
   };
 
   return (

@@ -25,7 +25,6 @@ const PasswordFindAuthPW = ({
   const RefFirstPassword = useRef("");
   const RefSecondPassword = useRef("");
   const RefThirdPassword = useRef("");
-  const [validationComment, setValidationComment] = useState("");
 
   const ValidationCheck = () => {
     if (
@@ -33,7 +32,7 @@ const PasswordFindAuthPW = ({
       RefSecondPassword.current.value == RefThirdPassword.current.value
     ) {
       setNextAvailable(true);
-      rightState.setRightArrow(false);
+      rightState.setRightArrow(true);
       setInputPassword(RefFirstPassword.current.value);
     } else {
       setNextAvailable(false);

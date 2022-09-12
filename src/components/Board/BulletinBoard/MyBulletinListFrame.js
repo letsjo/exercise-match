@@ -1,15 +1,11 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { useState } from "react";
-import Pagination from "../BoardPublic/Pagination";
-import MyCommentCard from "../BoardPublic/MyCommentCard";
 import MyBulletin from "../MyWritePost/MyBulletin";
 import MyComment from "../MyWritePost/MyComment";
 import MyMatching from "../MyWritePost/MyMatching";
 
 const MyBulletinListFrame = ({ type }) => {
-  const [page, setPage] = useState(1);
-
   const [boardType, setBoardType] = useState("write");
 
   const WriteOnClick = () => {
@@ -48,9 +44,11 @@ const MyBulletinListFrame = ({ type }) => {
           </ButtonBox>
         </SelectBox>
         <MyCard>
-          {type == "mymatching" && boardType == "write" && <MyMatching type="writer"/>}
+          {type == "mymatching" && boardType == "write" && (
+            <MyMatching type="writer" />
+          )}
           {type == "myinformation" && boardType == "write" && <MyBulletin />}
-          {boardType == "apply" && <MyMatching type="entry"/>}
+          {boardType == "apply" && <MyMatching type="entry" />}
           {boardType == "comment" && <MyComment />}
         </MyCard>
       </BoardListFrame>

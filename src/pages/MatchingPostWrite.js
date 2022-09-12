@@ -264,7 +264,6 @@ const LocationImage = styled.div`
   width: 700px;
   margin-bottom: 70px; // 매칭, 정보공유에 따라 수정 필요
   box-sizing: border-box;
-  background-color: #d9d9d9;
   /* background-size: contain;
   background-repeat: no-repeat; */
   background-size: cover;

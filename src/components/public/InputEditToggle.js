@@ -82,7 +82,8 @@ const InterestBox = styled.div`
   justify-content: center;
   align-items: center;
   height: 31px;
-  border: 1px solid #494949;
+  border: 1px solid #00CFFF;
+  color: #00CFFF;
   border-radius: 5px;
 
   margin-top: 5px;

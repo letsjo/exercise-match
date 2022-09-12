@@ -247,26 +247,27 @@ const loadMyInformationComments = createAsyncThunk(
 
 const loadMyMatchings = createAsyncThunk(
   "board/loadMyMatchings",
-  async ({ page }, { rejectWithValue }) => {
+  async ({ page, amount }, { rejectWithValue }) => {
     try {
-      const res = await userAPI.get(`/api/mypost/matching`);
+      const res = await userAPI.get(`/api/mypost/matching?page=${page}&amount=${amount}`);
+      console.log(res);
       return res;
     } catch (err) {
       console.log(err);
-      return rejectWithValue(err.response.data.error);
+      return rejectWithValue(err);
     }
   }
 );
 
 const loadMyEntrys = createAsyncThunk(
   "board/loadMyEntrys",
-  async ({ page }, { rejectWithValue }) => {
+  async ({ page, amount }, { rejectWithValue }) => {
     try {
-      const res = await userAPI.get(`/api/myentry`);
+      const res = await userAPI.get(`/api/myentry?page=${page}&amount=${amount}`);
       return res;
     } catch (err) {
       console.log(err);
-      return rejectWithValue(err.response.data.error);
+      return rejectWithValue(err);
     }
   }
 );
@@ -279,17 +280,17 @@ const loadMyInformation = createAsyncThunk(
       return res;
     } catch (err) {
       console.log(err);
-      return rejectWithValue(err.response.data.error);
+      return rejectWithValue(err);
     }
   }
 );
 
 const loadInformation = createAsyncThunk(
   "board/loadInformation",
-  async ({ cate, page }, { rejectWithValue }) => {
+  async ({ cate, page, amount }, { rejectWithValue }) => {
     try {
       const res = await userAPI.get(
-        `/api/boards/information?cate=${cate}&page=${page}&amount=12`
+        `/api/boards/information?cate=${cate}&page=${page}&amount=${amount}`
       );
       return res;
     } catch (err) {
@@ -301,10 +302,10 @@ const loadInformation = createAsyncThunk(
 
 const loadMatching = createAsyncThunk(
   "board/loadMatching",
-  async ({ cate, page, city, gu }, { rejectWithValue }) => {
+  async ({ cate, page, amount, city, gu }, { rejectWithValue }) => {
     try {
       const res = await userAPI.get(
-        `/api/boards/matching?cate=${cate}&page=${page}&amount=12&city=${
+        `/api/boards/matching?cate=${cate}&page=${page}&amount=${amount}&city=${
           city ? city : "all"
         }&gu=${gu ? gu : "all"}`
       );
