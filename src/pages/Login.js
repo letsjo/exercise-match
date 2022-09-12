@@ -71,7 +71,7 @@ const Login = () => {
           userSliceAction.setLogin({
             username: LoginData?.username,
             nickname: response.headers?.nickname,
-            profile: response.headers?.profile,
+            profile: response.headers?.profile?response.headers?.profile:"/images/anonymousProfile.png",
             social: false,
           })
         );
@@ -124,10 +124,10 @@ const Login = () => {
           </LineWrap>
           <IconBox>
             <KakaoIcon onClick={kakaoLogin}>
-              <img src="/images/kakao_logo.png" alt="" />
+              <img src="/images/iconKakaoTalk.png" alt="" />
             </KakaoIcon>
             <GoogleIcon onClick={googleLogin}>
-              <img src="/images/free-icon-google-2702602.png" alt="" />
+              <img src="/images/iconNaver.png" alt="" />
             </GoogleIcon>
           </IconBox>
         </LoginWrap>

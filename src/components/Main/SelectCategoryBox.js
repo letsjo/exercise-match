@@ -111,7 +111,7 @@ const BoxWrap = styled.div`
   justify-content: space-between;
   width: 1000px;
   height: 80px;
-  margin: auto auto 50px;
+  margin: auto auto 70px;
 `;
 
 const IconBox = styled.div`

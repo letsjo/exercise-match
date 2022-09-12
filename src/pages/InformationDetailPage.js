@@ -30,7 +30,7 @@ const InformationDetailPage = () => {
     setIsPopperShown(!isPopperShown);
   };
 
-  const [like, setLike] = useState(false);
+  const [like, setLike] = useState(true);
   const [likeCount, setLikeCount] = useState(detailData?.likeCount);
 
   const likeOnClick = async () => {

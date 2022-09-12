@@ -10,6 +10,7 @@ const MyBulletin = () => {
   const [page, setPage] = useState(1);
   const [boardsList, setBoardsList] = useState([]);
   const dispatch = useDispatch();
+
   let boardData = [];
 
   useEffect(() => {
@@ -25,7 +26,7 @@ const MyBulletin = () => {
         // resDate["endDateAtMonth"] = date.getMonth() + 1;
         // resDate["endDateAtDate"] = date.getDate();
         // resDate["endDateAtWeek"] = WEEKDAY[date.getDay()];
-        resDate["created"] = GetDate(resDate.createdAt)
+        resDate["created"] = GetDate(resDate.createdAt);
         return resDate;
       });
       setBoardsList(boardData);
@@ -38,10 +39,19 @@ const MyBulletin = () => {
 
   return (
     <>
-      <BulletinCard />
-      <BulletinCard />
-      <BulletinCard />
-
+      {boardsList &&
+        boardsList?.map((board, idx) => (
+          <BulletinCard
+            key={idx}
+            title={board.title}
+            content={board.content}
+            comment={board.commentCount}
+            like={board.likeCount}
+            createdAt={board.created}
+            image={board.boardimage}
+            boardId={board.boardId}
+          />
+        ))}
       <PageFrame>
         <Frame>
           <Pagination total={5} limit={2} page={page} setPage={setPage} />

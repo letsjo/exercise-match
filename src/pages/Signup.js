@@ -11,34 +11,41 @@ import SignupAuthPW from "../components/Signup/SignupAuthPW";
 import { useDispatch, useSelector } from "react-redux";
 import { signupSliceAction } from "../redux/reducers/signupReducer";
 import { useNavigate } from "react-router-dom";
+import { userAction } from "../redux/actions/userAction";
 
 const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { email, password } = useSelector((state)=> state.signupReducer.info);
+  const { email, password } = useSelector((state) => state.signupReducer.info);
   const [page, setPage] = useState(1);
+  const [authNum, setAuthNum] = useState("");
   const [nextAvailable, setNextAvailable] = useState(false);
   const [leftArrow, setLeftArrow] = useState(true);
   const [rightArrow, setRightArrow] = useState(false);
-  
+
   const [inputEmail, setInputEmail] = useState(email);
   const [inputPassword, setInputPassword] = useState(password);
 
   const NextPageAllow = (e) => {
     e.preventDefault();
     if (nextAvailable && page == 1) {
-      dispatch(signupSliceAction.getInfo({inputEmail,inputPassword}));
-      setPage(page + 1);
+      try{
+        const res = dispatch(userAction.signUpCheckAuth(authNum)).unwrap();
+        console.log(res);
+        setPage(page + 1);
+      } catch(e) {
+        console.log(e);
+      }
     } else if (nextAvailable && page >= 2) {
       Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: '회원가입이 완료되었습니다.',
+        position: "center",
+        icon: "success",
+        title: "회원가입이 완료되었습니다.",
         showConfirmButton: false,
-        timer: 1500
-      })
-      navigate('/');
+        timer: 1500,
+      });
+      navigate("/");
     } else {
       WarningAlert(e);
     }
@@ -47,8 +54,8 @@ const Signup = () => {
   const WarningAlert = (e) => {
     e.preventDefault();
     Swal.fire({
-      confirmButtonColor: '#3085d6',
-      confirmButtonText: '확인',
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "확인",
       icon: "warning",
       title: "미작성된 항목이 있습니다.",
       text: "필수 항목을 모두 작성해주세요.",
@@ -71,6 +78,7 @@ const Signup = () => {
               <SignupAuth
                 setNextAvailable={setNextAvailable}
                 inputEmail={inputEmail}
+                setAuthNum={setAuthNum}
                 setInputEmail={setInputEmail}
                 leftState={{ leftArrow, setLeftArrow }}
                 rightState={{ rightArrow, setRightArrow }}
@@ -88,7 +96,7 @@ const Signup = () => {
             )}
           </ContentZone>
           <ButtonBigMain
-            name={page == 2?("회원가입 완료"):("다음")}
+            name={page == 2 ? "회원가입 완료" : "다음"}
             nextAvailable={nextAvailable}
             NextPageAllow={NextPageAllow}
           />

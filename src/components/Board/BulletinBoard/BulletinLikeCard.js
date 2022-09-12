@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import {AiOutlineHeart} from "react-icons/ai"
 import {MdChatBubble} from "react-icons/md"
 
-const BulletinLikeCard = ({like, comment, createdAt}) => {
+const BulletinLikeCard = ({like, comment, createDate}) => {
   return (
     <Container>
     <LikeCommentBox>
@@ -15,7 +15,7 @@ const BulletinLikeCard = ({like, comment, createdAt}) => {
         <MdChatBubble size={24} color= "#a8a8a8"/> <Text>{comment}개</Text>
         </IconBox>
     </LikeCommentBox>
-    <Daysago>{createdAt}</Daysago>
+    <Daysago>{createDate?.year?(createDate?.year+"년 "+createDate?.month+"월 "+createDate?.day+"일 ("+createDate?.week+") "+createDate?.hour+":"+createDate?.min+":"+createDate?.sec):("")}</Daysago>
     </Container>
   )
 }

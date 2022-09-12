@@ -16,7 +16,9 @@ const Board = () => {
   const dispatch = useDispatch();
 
   const { boardType, category } = useSelector((state) => state.boardReducer);
-  const { selectedCity, selectedGu } = useSelector((state) => state.locationReducer);
+  const { selectedCity, selectedGu } = useSelector(
+    (state) => state.locationReducer
+  );
 
   const query = useLocation().search;
   const type = new URLSearchParams(query).get("type");
@@ -24,22 +26,43 @@ const Board = () => {
   const city = new URLSearchParams(query).get("city");
   const gu = new URLSearchParams(query).get("gu");
 
-  if(city && gu && (selectedCity!=city || selectedGu!=gu)){
-    dispatch(locationSliceAction.selectLocation({selectedCity:city,selectedGu:gu}))
-  }
-
   useEffect(() => {
-    if (!type || !cate ) {
-      dispatch(boardAction.setBoardType(type?type:"matching",cate?cate:"all"));
+    if (city && gu && (selectedCity != city || selectedGu != gu)) {
+      dispatch(
+        locationSliceAction.selectLocation({
+          selectedCity: selectedCity? selectedCity : "all",
+          selectedGu: selectedGu ? selectedGu : "",
+        })
+      );
       navigate(
-        `/board?type=${type?type:"matching"}&cate=${cate?cate:"all"}&city=${city?city:selectedCity}&gu=${gu?gu:selectedGu}&page=1&amount=12`
+        `/board?type=${type ? type : "matching"}&cate=${
+          cate ? cate : "all"
+        }&city=${selectedCity ? selectedCity : "all"}&gu=${
+          selectedGu ? selectedGu : ""
+        }&page=1&amount=12`
       );
     }
-  }, [selectedCity,selectedGu]);
+    if (!type || !cate) {
+      dispatch(
+        boardAction.setBoardType(type ? type : "matching", cate ? cate : "all")
+      );
+      navigate(
+        `/board?type=${type ? type : "matching"}&cate=${
+          cate ? cate : "all"
+        }&city=${selectedCity ? selectedCity : "all"}&gu=${
+          selectedGu ? selectedGu : ""
+        }&page=1&amount=12`
+      );
+    }
+  }, [selectedCity, selectedGu]);
 
   const MatchingOnClick = () => {
     dispatch(boardAction.setBoardType("matching", "all"));
-    navigate(`/board?type=matching&cate=all&city=${city?city:selectedCity}&gu=${gu?gu:selectedGu}&page=1&amount=12`);
+    navigate(
+      `/board?type=matching&cate=all&city=${city ? city : selectedCity}&gu=${
+        gu ? gu : selectedGu
+      }&page=1&amount=12`
+    );
   };
 
   const InfoOnClick = () => {
@@ -47,15 +70,15 @@ const Board = () => {
     navigate(`/board?type=information&cate=all&page=1&amount=12`);
   };
 
-  const MyMatchingOnClick=()=>{
+  const MyMatchingOnClick = () => {
     dispatch(boardAction.setBoardType("mymatching", category));
     navigate(`/board?type=mymatching&cate=${category}&page=1&amount=12`);
-  }
+  };
 
-  const MyInfoOnClick=()=>{
+  const MyInfoOnClick = () => {
     dispatch(boardAction.setBoardType("myinformation", category));
     navigate(`/board?type=myinformation&cate=${category}&page=1&amount=12`);
-  }
+  };
 
   return (
     <Container>
@@ -65,36 +88,43 @@ const Board = () => {
           <MatchingTitle type={type} onClick={MatchingOnClick}>
             매칭(구합니다)
           </MatchingTitle>
-          {(type ==="matching"||type === "mymatching") && (
+          {(type === "matching" || type === "mymatching") && (
             <>
-            <SelectMatching type={type} onClick={MatchingOnClick}>
-              매칭 게시판 
+              <SelectMatching type={type} onClick={MatchingOnClick}>
+                매칭 게시판
               </SelectMatching>
-            <SelectMyMatching type={type} onClick={MyMatchingOnClick}>
-              나의 게시글</SelectMyMatching> 
+              <SelectMyMatching type={type} onClick={MyMatchingOnClick}>
+                나의 게시글
+              </SelectMyMatching>
             </>
           )}
-            
+
           <InfoTitle type={type} onClick={InfoOnClick}>
             정보 공유 게시판
           </InfoTitle>
-          {(type === "information"||type === "myinformation") && (
+          {(type === "information" || type === "myinformation") && (
             <>
-            <SelectInfo type={type} onClick={InfoOnClick}>정보 공유 </SelectInfo>
-            <SelectMyBoard type={type} onClick={MyInfoOnClick}>나의 게시글</SelectMyBoard> 
+              <SelectInfo type={type} onClick={InfoOnClick}>
+                정보 공유{" "}
+              </SelectInfo>
+              <SelectMyBoard type={type} onClick={MyInfoOnClick}>
+                나의 게시글
+              </SelectMyBoard>
             </>
           )}
         </CategoryFrame>
         <ContextFrame>
           {type === "matching" ? (
-            <MatchingListFrame/>
+            <MatchingListFrame />
           ) : type === "information" ? (
             <BulletinListFrame />
-          ) : type ==="mymatching" ?(
-            <MyBulletinListFrame type={type}/>
-          ) : type ==="myinformation"?(
-            <MyBulletinListFrame type={type}/>
-          ):(<></>)}
+          ) : type === "mymatching" ? (
+            <MyBulletinListFrame type={type} />
+          ) : type === "myinformation" ? (
+            <MyBulletinListFrame type={type} />
+          ) : (
+            <></>
+          )}
         </ContextFrame>
       </MainFrame>
     </Container>
@@ -127,77 +157,79 @@ const MatchingTitle = styled.div`
   border-top: 2px solid #f0f0f0;
   ${({ type }) => {
     return css`
-      border-bottom: 2px solid #F0F0F0;
+      border-bottom: 2px solid #f0f0f0;
 
-      background-color: ${(type ==="matching"||type ==="mymatching") ? "#F0F0F0" : ""};
+      background-color: ${type === "matching" || type === "mymatching"
+        ? "#F0F0F0"
+        : ""};
     `;
   }}
 `;
 
-const SelectMatching=styled.div`
+const SelectMatching = styled.div`
   width: 180px;
   height: 39px;
   padding: 8px 40px;
   box-sizing: border-box;
   font-size: 15px;
   font-weight: bold;
-  color:#494949;
-  border-bottom: 2px solid #F0F0F0;
+  color: #494949;
+  border-bottom: 2px solid #f0f0f0;
   cursor: pointer;
-  ${({type})=>{
+  ${({ type }) => {
     return css`
-      background-color: ${(type ==="matching")? "#DEDEDE":""};
+      background-color: ${type === "matching" ? "#DEDEDE" : ""};
     `;
   }}
 `;
 
-const SelectInfo=styled.div`
+const SelectInfo = styled.div`
   width: 180px;
   height: 39px;
   padding: 8px 40px;
   box-sizing: border-box;
   font-size: 15px;
   font-weight: bold;
-  color:#494949;
-  border-bottom: 2px solid #F0F0F0;
+  color: #494949;
+  border-bottom: 2px solid #f0f0f0;
   cursor: pointer;
-  ${({type})=>{
+  ${({ type }) => {
     return css`
-      background-color: ${(type ==="information")? "#DEDEDE":""};
+      background-color: ${type === "information" ? "#DEDEDE" : ""};
     `;
   }}
 `;
 
-const SelectMyMatching=styled.div`
+const SelectMyMatching = styled.div`
   width: 180px;
   height: 39px;
   padding: 8px 40px;
   box-sizing: border-box;
   font-size: 15px;
   font-weight: bold;
-  color:#494949;
-  border-bottom: 2px solid #F0F0F0;
+  color: #494949;
+  border-bottom: 2px solid #f0f0f0;
   cursor: pointer;
-  ${({type})=>{
+  ${({ type }) => {
     return css`
-      background-color: ${(type ==="mymatching")? "#DEDEDE":""};
+      background-color: ${type === "mymatching" ? "#DEDEDE" : ""};
     `;
   }}
 `;
 
-const SelectMyBoard=styled.div`
+const SelectMyBoard = styled.div`
   width: 180px;
   height: 39px;
   padding: 8px 40px;
   box-sizing: border-box;
   font-size: 15px;
   font-weight: bold;
-  color:#494949;
-  border-bottom: 2px solid #F0F0F0;
+  color: #494949;
+  border-bottom: 2px solid #f0f0f0;
   cursor: pointer;
-  ${({type})=>{
+  ${({ type }) => {
     return css`
-      background-color: ${(type ==="myinformation")? "#DEDEDE":""};
+      background-color: ${type === "myinformation" ? "#DEDEDE" : ""};
     `;
   }}
 `;
@@ -215,7 +247,9 @@ const InfoTitle = styled.div`
     return css`
       border-bottom: 2px solid #f0f0f0;
 
-      background-color: ${(type ==="information"||type ==="myinformation") ? "#f0f0f0" : ""};
+      background-color: ${type === "information" || type === "myinformation"
+        ? "#f0f0f0"
+        : ""};
     `;
   }}
 `;

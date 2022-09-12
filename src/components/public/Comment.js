@@ -3,18 +3,19 @@ import styled, { css } from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { boardAction } from "../../redux/actions/boardAction";
 import CommentCard from "./CommentCard";
+import ClipLoader from "react-spinners/ClipLoader";
+import GetDate from "../../utils/GetDate";
+import { boardSliceAction } from "../../redux/reducers/boardReducer";
 
 const Comment = ({ boardId }) => {
   const inputRef = useRef();
   const dispatch = useDispatch();
   const [commentButton, setCommentButton] = useState(false);
-  const { username } = useSelector((state) => state.userReducer);
-  const {comments}  = useSelector((state) => state.boardReducer);
-  console.log(comments);
-  // const comment = useSelector((state) => state.boardReducer);
-  // console.log(comment);
+  const { isLogin, username } = useSelector((state) => state.userReducer);
+  const { isCommentLoading } = useSelector((state) => state.boardReducer);
+  const [commentsList, setCommentsList] = useState([]);
+  let commentsData = [];
   const inputChange = () => {
-    // console.log(inputRef.current.value);
     if (inputRef.current.value === "") {
       setCommentButton(false);
     } else {
@@ -23,8 +24,26 @@ const Comment = ({ boardId }) => {
   };
 
   useEffect(() => {
-    dispatch(boardAction.loadComments(boardId));
+    loadComments();
   }, []);
+
+  const loadComments = async () => {
+    try {
+      await dispatch(boardSliceAction.requestCommentsList());
+      const res = await dispatch(
+        boardAction.loadComments({ boardId })
+      ).unwrap();
+      commentsData = res.data?.map((resDate) => {
+        resDate["created"] = GetDate(resDate.createdAt);
+        return resDate;
+      });
+      setCommentsList(commentsData);
+      await dispatch(boardSliceAction.requestDoneCommentsList());
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const commentOnClick = async (e) => {
     e.preventDefault();
@@ -37,42 +56,81 @@ const Comment = ({ boardId }) => {
       ).unwrap();
       console.log(res);
       inputRef.current.value = "";
+      loadComments();
     } catch (err) {
       console.log(err);
     }
     console.log(inputRef.current.value);
   };
 
+  console.log(commentsList);
+
   return (
     <Container>
-      <CommentInputArea>
-        <CommentInput
-          placeholder="댓글을 남겨주세요"
-          onChange={inputChange}
-          ref={inputRef}
-        />
-        <CommentBtn
-          commentButton={commentButton}
-          onClick={(e) => commentOnClick(e)}
-        >
-          {commentButton && "등록"}
-        </CommentBtn>
-      </CommentInputArea>
-      {comments.map((comment, idx) => (
-        <CommentCard
-          key={idx}
-          myComment={username===comment.writer.username}
-          boardId={boardId}
-          image={comment.writer.profile}
-          nickname={comment.writer.nickname}
-          commentId={comment.id}
-          content={comment.comment}
-          date={comment.createdAt}
-        />
-      ))}
+      {isLogin && (
+        <CommentInputArea>
+          <CommentInput
+            placeholder="댓글을 남겨주세요"
+            onChange={inputChange}
+            ref={inputRef}
+          />
+          <CommentBtn
+            commentButton={commentButton}
+            onClick={(e) => commentOnClick(e)}
+          >
+            {commentButton && "등록"}
+          </CommentBtn>
+        </CommentInputArea>
+      )}
+      {isCommentLoading ? (
+        <SpinnerWrap>
+          <ClipLoader color="black" loading={isCommentLoading} size={50} />
+        </SpinnerWrap>
+      ) : (
+        commentsList &&
+        commentsList.map((comment, idx) => (
+          <CommentCard
+            key={idx}
+            myComment={username === comment?.writer.username}
+            boardId={boardId}
+            image={comment?.writer.profile}
+            nickname={comment?.writer.nickname}
+            commentId={comment?.id}
+            content={comment?.comment}
+            date={
+              comment.created?.year
+                ? comment.created?.year +
+                  "년 " +
+                  comment.created?.month +
+                  "월 " +
+                  comment.created?.day +
+                  "일 " +
+                  comment.created?.week +
+                  "요일"
+                : ""
+            }
+          />
+        ))
+      )}
     </Container>
   );
 };
+
+const SpinnerWrap = styled.div`
+  display: flex;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  width: 100%;
+  height: 100vh;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+
+  @media screen and (min-width: 1024px) {
+    max-width: 1400px;
+    margin: 60px auto 0px;
+  }
+`;
 
 const Container = styled.div`
   width: 700px;

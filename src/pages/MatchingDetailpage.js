@@ -30,7 +30,7 @@ const MatchingDetailpage = () => {
     setIsPopperShown(!isPopperShown);
   };
 
-  const [like, setLike] = useState(false);
+  const [like, setLike] = useState(true);
   const [likeCount, setLikeCount] = useState(0);
 
   const [matching, setMatching] = useState(true);
@@ -146,7 +146,9 @@ const MatchingDetailpage = () => {
           </LocationImg>
         </LocationWrap>
         {detailData.currentEntry >= detailData.maxEntry ? (
-          <JoinButton isMatchingCompleted={true}>매칭이 종료되었습니다.</JoinButton>
+          <JoinButton isMatchingCompleted={true}>
+            매칭이 종료되었습니다.
+          </JoinButton>
         ) : (
           <JoinButton isMatchingCompleted={false} onClick={matchingApply}>
             참여하기 {detailData?.currentEntry}/{detailData?.maxEntry}
@@ -156,9 +158,9 @@ const MatchingDetailpage = () => {
         <InfoWrap>
           <Icon onClick={likeOnClick}>
             {like ? (
-              <BsHeartFill color="red" size={24} />
-            ) : (
               <BsHeart size={24} />
+            ) : (
+              <BsHeartFill color="red" size={24} />
             )}
           </Icon>
           <Text>좋아요 {likeCount}개</Text>
@@ -223,9 +225,7 @@ const ContentWrap = styled.div`
 `;
 
 const ContentImage = styled.div`
-  height: 317px;
   margin-bottom: 30px;
-  background-color: #d9d9d9;
   img {
     height: 100%;
     width: 100%;
@@ -254,8 +254,8 @@ const LocationImg = styled.div`
 const JoinButton = styled.div`
   ${({ isMatchingCompleted }) => {
     return css`
-    background-color: ${isMatchingCompleted?"#a8a8a8":"#00cfff"};
-  `;
+      background-color: ${isMatchingCompleted ? "#a8a8a8" : "#00cfff"};
+    `;
   }}
   height: 89px;
   background-color: #00cfff;

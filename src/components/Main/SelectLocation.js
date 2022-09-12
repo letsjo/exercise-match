@@ -5,7 +5,8 @@ import { locationAction } from "../../redux/actions/locationAction";
 import SelectCityCard from "./SelectCityCard";
 
 const SelectLocation = () => {
-  const { localsNameList } = useSelector((state) => state.locationReducer);
+
+  const { selectedCity, selectedGu, localsNameList } = useSelector((state) => state.locationReducer);
 
   return (
     <Container>
@@ -16,7 +17,7 @@ const SelectLocation = () => {
         <SelectCityCard localData={{city: "전국",gu: []}} />
         {localsNameList &&
           localsNameList.map((cityInfo, index) => (
-            <SelectCityCard key={index} localData={cityInfo} />
+            <SelectCityCard key={index} selectedCity={selectedCity} selectedGu={selectedGu} localData={cityInfo} />
           ))}
       </ContentsFrame>
     </Container>

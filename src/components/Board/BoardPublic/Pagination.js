@@ -1,28 +1,29 @@
-import styled from "styled-components"
+import styled from "styled-components";
+import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
 
 function Pagination({ total, limit, page, setPage }) {
   const numPages = Math.ceil(total / limit);
 
   return (
-      <Nav>
-        <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
-          &lt;
-        </Button>
-        {Array(numPages<11?numPages:10)
-          .fill()
-          .map((_, i) => (
-            <Button
-              key={i + 1}
-              onClick={() => setPage(i + 1)}
-              aria-current={page === i + 1 ? "page" : null}
-            >
-              {i + 1}
-            </Button>
-          ))}
-        <Button onClick={() => setPage(page + 1)} disabled={page === numPages}>
-          &gt;
-        </Button>
-      </Nav>
+    <Nav>
+      <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
+        <HiOutlineChevronLeft size={20} />
+      </Button>
+      {Array(numPages < 11 ? numPages : 10)
+        .fill()
+        .map((_, i) => (
+          <Button
+            key={i + 1}
+            onClick={() => setPage(i + 1)}
+            aria-current={page === i + 1 ? "page" : null}
+          >
+            {i + 1}
+          </Button>
+        ))}
+      <Button onClick={() => setPage(page + 1)} disabled={page === numPages}>
+        <HiOutlineChevronRight size={20} />
+      </Button>
+    </Nav>
   );
 }
 
@@ -44,6 +45,10 @@ const Button = styled.button`
   color: rgba(79, 79, 79, 1);
   font-weight: bold;
   font-size: 15px;
+  line-height: 150%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &:hover {
     color: rgba(79, 79, 79, 1);
@@ -65,7 +70,7 @@ const Button = styled.button`
   }
 
   &[aria-current] {
-    background-color:#dedede;
+    background-color: #dcf6fc;
     color: rgba(79, 79, 79, 1);
     font-weight: bold;
     cursor: revert;

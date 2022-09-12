@@ -34,6 +34,7 @@ const MatchingListFrame = () => {
     try {
       const res = await dispatch(boardAction.loadMatching({ cate, page, city, gu })).unwrap();
       boardData = res.data.boardResponseDtoList?.map((resDate) => {
+        resDate["createDate"] = GetDate(resDate.createdAt);
         resDate["endDate"] = GetDate(resDate.endDateAt);
         return resDate;
       });
@@ -67,7 +68,7 @@ const MatchingListFrame = () => {
           // completed={true}
           category={TranslateCates(list.category)}
           title={list.title}
-          date={list.endDateAt}
+          endDate={list.endDate}
 
           currentEntry={list.currentEntry}
           maxEntry={list.maxEntry}
@@ -78,7 +79,7 @@ const MatchingListFrame = () => {
           locationGu={list.gu}
           like={list.likeCount}
           comment={list.commentCount}
-          createdAt={list.createdAt}
+          createDate={list.createDate}
            />
           )
         )}
