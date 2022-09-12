@@ -54,7 +54,7 @@ const MyBulletin = () => {
         ))}
       <PageFrame>
         <Frame>
-          <Pagination total={5} limit={2} page={page} setPage={setPage} />
+          <Pagination total={5} amount={2} page={page} setPage={setPage} />
         </Frame>
       </PageFrame>
     </>

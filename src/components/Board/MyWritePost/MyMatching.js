@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { boardAction } from "../../../redux/actions/boardAction";
 import GetDate from "../../../utils/GetDate";
@@ -7,11 +8,17 @@ import Pagination from "../BoardPublic/Pagination";
 import MatchingCard from "../MatchingBoard/MatchingCard";
 
 const MyMatching = ({ type }) => {
-  const [page, setPage] = useState(1);
   const [boardsList, setBoardsList] = useState([]);
   const dispatch = useDispatch();
   let res;
   let boardData = [];
+  
+  const query = useLocation().search;
+  const pageNumber = new URLSearchParams(query).get("page");
+  const amount = new URLSearchParams(query).get("amount");
+
+  
+  const [page, setPage] = useState(pageNumber?pageNumber:1);
 
   useEffect(() => {
     loadMyMatchings();
@@ -20,10 +27,11 @@ const MyMatching = ({ type }) => {
   const loadMyMatchings = async () => {
     try {
       if (type == "writer") {
-        res = await dispatch(boardAction.loadMyMatchings({ page })).unwrap();
+        res = await dispatch(boardAction.loadMyMatchings({ page, amount })).unwrap();
       } else {
-        res = await dispatch(boardAction.loadMyEntrys({ page })).unwrap();
+        res = await dispatch(boardAction.loadMyEntrys({ page, amount })).unwrap();
       }
+      console.log(res);
       boardData = res.data.boardInfo?.map((resDate) => {
         // var date = new Date(new Date(resDate.endDateAt).getTime());
         // resDate["endDateAtYear"] = date.getFullYear();
@@ -46,7 +54,11 @@ const MyMatching = ({ type }) => {
       {boardsList?.map((board, idx) => (
         <MatchingCard
           key={idx}
-          type={board.maxEntry == board.currentEntry?"apply":""}
+          type={
+            type == "type" && board.maxEntry == board.currentEntry
+              ? "apply"
+              : ""
+          }
           completed={board.maxEntry == board.currentEntry}
           category="카테고리"
           title={board.title}
@@ -72,7 +84,7 @@ const MyMatching = ({ type }) => {
       ))}
       <PageFrame>
         <Frame>
-          <Pagination total={5} limit={2} page={page} setPage={setPage} />
+          <Pagination total={5} amount={2} page={page} setPage={setPage} />
         </Frame>
       </PageFrame>
     </>

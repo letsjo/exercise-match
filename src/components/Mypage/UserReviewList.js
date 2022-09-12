@@ -44,7 +44,7 @@ const UserReviewList = () => {
         image=""
         category="칠 사람?"
       />
-      <Pagination total={10} limit={2} page={page} setPage={setPage} />
+      <Pagination total={10} amount={2} page={page} setPage={setPage} />
     </Container>
   );
 };

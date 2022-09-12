@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
 
-function Pagination({ total, limit, page, setPage }) {
-  const numPages = Math.ceil(total / limit);
-
+function Pagination({ total, amount, page, setPage }) {
+  const numPages = Math.ceil(total / amount);
+  console.log(page,numPages);
   return (
     <Nav>
-      <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
+      <Button onClick={() => setPage(page - 1)} disabled={page == 1}>
         <HiOutlineChevronLeft size={20} />
       </Button>
       {Array(numPages < 11 ? numPages : 10)
@@ -20,7 +20,7 @@ function Pagination({ total, limit, page, setPage }) {
             {i + 1}
           </Button>
         ))}
-      <Button onClick={() => setPage(page + 1)} disabled={page === numPages}>
+      <Button onClick={() => setPage(page + 1)} disabled={page == numPages}>
         <HiOutlineChevronRight size={20} />
       </Button>
     </Nav>

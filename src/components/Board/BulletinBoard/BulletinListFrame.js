@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { boardAction } from "../../../redux/actions/boardAction";
 
 const BulletinListFrame = () => {
-  const [page, setPage] = useState(1);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -19,6 +18,10 @@ const BulletinListFrame = () => {
   const [boardsList, setBoardsList] = useState([]);
   const query = useLocation().search;
   const cate = new URLSearchParams(query).get("cate");
+  const pageNumber = new URLSearchParams(query).get("page");
+  const amount = new URLSearchParams(query).get("amount");
+  
+  const [page, setPage] = useState(pageNumber?pageNumber:1);
   let boardData = [];
     
   useEffect(() => {
@@ -27,7 +30,7 @@ const BulletinListFrame = () => {
 
   const loadInformation = async () => {
     try {
-      const res = await dispatch(boardAction.loadInformation({ cate, page })).unwrap();
+      const res = await dispatch(boardAction.loadInformation({ cate, page, amount })).unwrap();
       boardData = res.data.boardResponseDtoList?.map((resDate) => {
         resDate["createDate"] = GetDate(resDate.createdAt); 
         resDate["endDate"] = GetDate(resDate.endDateAt); 
@@ -72,7 +75,7 @@ const BulletinListFrame = () => {
 
         <PageFrame>
           <Frame>
-            <Pagination total={5} limit={2} page={page} setPage={setPage} />
+            <Pagination total={boardsList.totalCount} amount={amount} page={page} setPage={setPage} />
           </Frame>
         </PageFrame>
       </BoardListFrame>

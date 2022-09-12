@@ -13,7 +13,6 @@ import CurrentLocationCard from "../../Main/CurrentLocationCard";
 
 
 const MatchingListFrame = () => {
-  const [page, setPage] = useState(1);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -24,7 +23,13 @@ const MatchingListFrame = () => {
   const cate = new URLSearchParams(query).get("cate");
   const city = new URLSearchParams(query).get("city");
   const gu = new URLSearchParams(query).get("gu");
+
+  const pageNumber = new URLSearchParams(query).get("page");
+  const amount = new URLSearchParams(query).get("amount");
   let boardData = [];
+  
+  const [page, setPage] = useState(pageNumber?pageNumber:1);
+  const [boardTotalCount, setBoardTotalCount] = useState(0);
     
   useEffect(() => {
     loadMatching();
@@ -32,13 +37,14 @@ const MatchingListFrame = () => {
 
   const loadMatching = async () => {
     try {
-      const res = await dispatch(boardAction.loadMatching({ cate, page, city, gu })).unwrap();
+      const res = await dispatch(boardAction.loadMatching({ cate, page, amount, city, gu })).unwrap();
       boardData = res.data.boardResponseDtoList?.map((resDate) => {
         resDate["createDate"] = GetDate(resDate.createdAt);
         resDate["endDate"] = GetDate(resDate.endDateAt);
         return resDate;
       });
       setBoardsList(boardData);
+      setBoardTotalCount(res.data.totalCount);
     } catch (e) {
       console.log(e);
     }
@@ -85,7 +91,7 @@ const MatchingListFrame = () => {
         )}
         <PageFrame>
           <Frame>
-            <Pagination total={5} limit={2} page={page} setPage={setPage} />
+            <Pagination total={boardTotalCount} amount={amount} page={page} setPage={setPage} />
           </Frame>
         </PageFrame>
       </BoardListFrame>
