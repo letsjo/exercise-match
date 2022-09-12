@@ -84,7 +84,7 @@ const InputEmailAni = ({
         {!inputAvailable && inputEmail && (
           <InputBtn>
             {validation.validationState ? (
-              <BsCheckSquareFill size={18} color="#494949" />
+              <BsCheckSquareFill size={18} color="#00CFFF" />
             ) : (
               <RiCloseCircleFill
                 className="delIcon"
@@ -158,7 +158,7 @@ const InputFrame = styled.div`
         left: 0;
         pointer-events: none;
         border-bottom: ${validationState || validationLine
-          ? "1px solid #CA2323"
+          ? "1px solid #00CFFF"
           : "1px solid #a8a8a8"};
       }
 
@@ -168,7 +168,7 @@ const InputFrame = styled.div`
         height: 100%;
         width: 100%;
         border-bottom: 2px solid
-          ${validationState || validationLine ? "#CA2323" : "#494949"};
+          ${validationState || validationLine ? "#00CFFF" : "#494949"};
         left: 0;
         bottom: -1px;
         transform: translateX(-100%);

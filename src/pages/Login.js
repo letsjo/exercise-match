@@ -94,7 +94,7 @@ const Login = () => {
           <PwName>비밀번호</PwName>
           <Input
             ref={pwRef}
-            type="text"
+            type="password"
             placeholder="비밀번호를 입력해주세요."
           />
           <FindBoxWrap>

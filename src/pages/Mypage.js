@@ -4,7 +4,7 @@ import MyProfileShow from "../components/Mypage/MyProfileShow";
 import MyPersonalData from "../components/Mypage/MyPersonalData";
 import LeaveSection from "../components/Mypage/LeaveSection";
 import SubNavbar from "../components/public/SubNavbar";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userAction } from "../redux/actions/userAction";
 
 const Mypage = () => {
@@ -13,10 +13,11 @@ const Mypage = () => {
   const [rightArrow, setRightArrow] = useState(false);
 
   const dispatch = useDispatch();
+  const { isLogin } = useSelector((state)=> state.userReducer);
 
   useEffect(()=>{
     dispatch(userAction.loadMyPage());
-  },[])
+  },[isLogin])
   
   return (
     <Container>

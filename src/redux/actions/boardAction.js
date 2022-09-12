@@ -44,7 +44,7 @@ const postLike = createAsyncThunk(
       return res;
     } catch (err) {
       console.log(err);
-      return rejectWithValue(err.response.data.error);
+      return rejectWithValue(err.response.data);
     }
   }
 );
@@ -150,7 +150,7 @@ const applyBoard = createAsyncThunk(
       return res;
     } catch (err) {
       console.log(err);
-      return rejectWithValue(err.response.data.error);
+      return rejectWithValue(err.response.data);
     }
   }
 );
@@ -298,6 +298,19 @@ const loadMatching = createAsyncThunk(
   }
 );
 
+const getParticipate = createAsyncThunk(
+  "board/getParticipate",
+  async ({ boardId }, { rejectWithValue }) => {
+    try {
+      const res = await userAPI.post(`/board/statecheck/${boardId}`);
+      return res;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data.error);
+    }
+  }
+);
+
 // const loadBoard = (type, cate, selectedCity, selectedGu, page) => {
 //   return async (dispatch) => {
 //     let loadURL;
@@ -339,4 +352,5 @@ export const boardAction = {
   loadMyInformation,
   loadInformation,
   loadMatching,
+  getParticipate,
 };

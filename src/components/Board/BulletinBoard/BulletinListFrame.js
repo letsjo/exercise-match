@@ -29,7 +29,8 @@ const BulletinListFrame = () => {
     try {
       const res = await dispatch(boardAction.loadInformation({ cate, page })).unwrap();
       boardData = res.data.boardResponseDtoList?.map((resDate) => {
-        resDate["endDate"] = GetDate(resDate.endDateAt);
+        resDate["createDate"] = GetDate(resDate.createdAt); 
+        resDate["endDate"] = GetDate(resDate.endDateAt); 
         return resDate;
       });
       setBoardsList(boardData);
@@ -64,7 +65,7 @@ const BulletinListFrame = () => {
               content={list.content}
               comment={list.commentCount}
               like={list.likeCount}
-              createdAt={GetDate(list.createdAt)}
+              createdAt={list.createDate}
               image={list.boardimage}
             />
           ))}

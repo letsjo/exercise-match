@@ -32,6 +32,9 @@ const MatchingDetailpage = () => {
 
   const [like, setLike] = useState(true);
   const [likeCount, setLikeCount] = useState(0);
+  const [matchingCount, setMatchingCount] = useState(
+    detailData?.currentEntry ? detailData?.currentEntry : 0
+  );
 
   const [matching, setMatching] = useState(true);
 
@@ -44,7 +47,14 @@ const MatchingDetailpage = () => {
       setLike(!like);
       setLikeCount(res);
     } catch (e) {
-      console.log(e);
+      if (e.status === 403) {
+        Swal.fire({
+          icon: "warning",
+          title: "본인 글에는 할 수 없습니다.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
     }
   };
 
@@ -70,6 +80,7 @@ const MatchingDetailpage = () => {
       ).unwrap();
       clearInterval(timerInterval);
       console.log(resApply);
+      setMatchingCount(resApply.data.currentEntry);
       Swal.fire({
         icon: "success",
         title: "매칭완료!",
@@ -79,17 +90,38 @@ const MatchingDetailpage = () => {
     } catch (err) {
       clearInterval(timerInterval);
       console.log(err);
-      Swal.fire({
-        icon: "warning",
-        title: "매칭실패!",
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      if (err.status === 403) {
+        Swal.fire({
+          icon: "warning",
+          title: "본인 글에는 할 수 없습니다.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else {
+        Swal.fire({
+          icon: "warning",
+          title: "매칭실패!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    }
+  };
+
+  const getParticipate = async () => {
+    try {
+      const res = await dispatch(
+        boardAction.getParticipate({ boardId: params.id })
+      ).unwrap();
+      console.log(res);
+    } catch (err) {
+      console.log(err);
     }
   };
 
   useEffect(() => {
     dispatch(boardAction.loadDetail(params.id));
+    getParticipate();
   }, []);
 
   useEffect(() => {
@@ -151,7 +183,7 @@ const MatchingDetailpage = () => {
           </JoinButton>
         ) : (
           <JoinButton isMatchingCompleted={false} onClick={matchingApply}>
-            참여하기 {detailData?.currentEntry}/{detailData?.maxEntry}
+            참여하기 {matchingCount}/{detailData?.maxEntry}
           </JoinButton>
         )}
 

@@ -93,7 +93,7 @@ const Write = styled.div`
   ${({ boardType }) => {
     return css`
       font-weight: ${boardType === "write" ? "bold" : ""};
-      border-bottom: ${boardType === "write" ? "2px solid #000000" : ""};
+      border-bottom: ${boardType === "write" ? "2px solid #00CFFF" : ""};
     `;
   }}
 `;
@@ -108,7 +108,7 @@ const Apply = styled.div`
   ${({ boardType }) => {
     return css`
       font-weight: ${boardType === "apply" ? "bold" : ""};
-      border-bottom: ${boardType === "apply" ? "2px solid #000000" : ""};
+      border-bottom: ${boardType === "apply" ? "2px solid #00CFFF" : ""};
     `;
   }}
 `;
@@ -123,7 +123,7 @@ const Comment = styled.div`
   ${({ boardType }) => {
     return css`
       font-weight: ${boardType === "comment" ? "bold" : ""};
-      border-bottom: ${boardType === "comment" ? "2px solid #000000" : ""};
+      border-bottom: ${boardType === "comment" ? "2px solid #00CFFF" : ""};
     `;
   }}
 `;

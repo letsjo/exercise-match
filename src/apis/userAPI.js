@@ -15,7 +15,7 @@ userAPI.interceptors.request.use(function (config) {
   });
 
 // Add a response interceptor
-userAPI.interceptors.response.use(function (response) {
+userAPI.interceptors.response.use(async function (response) {
     console.log("response success",response);
     return response;
   }, async function (error) {
@@ -23,7 +23,15 @@ userAPI.interceptors.response.use(function (response) {
     const { response: errorResponse } = error;
     
     if (errorResponse.status === 401) {
-      // return await resetTokenAndReattemptRequest(error);
+      await axios.get(`/api/refresh`,{},{
+        headers: { "Content-Type": "application/json", "accesstoken" : sessionStorage.getItem("accesstoken") },
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     }
 
     console.log("response error",error);
