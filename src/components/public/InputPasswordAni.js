@@ -61,7 +61,7 @@ const InputPasswordAni = ({
       {!inputDisAvailable && inputValue && (
         <InputBtn>
           {validation.validationState ? (
-            <BsCheckSquareFill size={18} color="#494949" />
+            <BsCheckSquareFill size={18} color="#00CFFF" />
           ) : (
             <RiCloseCircleFill
               className="delIcon"
@@ -113,7 +113,7 @@ const Container = styled.div`
         bottom: 0;
         left: 0;
         pointer-events: none;
-        border-bottom: ${validationLine||validationState?"1px solid #CA2323":"1px solid #a8a8a8"};;
+        border-bottom: ${validationLine||validationState?"1px solid #00CFFF":"1px solid #a8a8a8"};;
       }
 
       .label-wrapper::after {
@@ -121,7 +121,7 @@ const Container = styled.div`
         position: absolute;
         height: 100%;
         width: 100%;
-        border-bottom: 2px solid ${validationLine||validationState?"#CA2323":"#494949"};
+        border-bottom: 2px solid ${validationLine||validationState?"#00CFFF":"#494949"};
         left: 0;
         bottom: -1px;
         transform: translateX(-100%);

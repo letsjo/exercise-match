@@ -194,12 +194,7 @@ const editConcern = createAsyncThunk(
   async (editInterest, { rejectWithValue }) => {
     try {
       const res = await userAPI.put("/api/mypage/actionedit/concern", {
-        concern1En: editInterest[0].en,
-        concern1Kor: editInterest[0].ko,
-        concern2En: editInterest[1].en,
-        concern2Kor: editInterest[1].ko,
-        concern3En: editInterest[2].en,
-        concern3Kor: editInterest[2].ko,
+        concern: editInterest
       });
       console.log(res);
       return res;

@@ -30,7 +30,7 @@ const MyMatching = ({ type }) => {
         // resDate["endDateAtMonth"] = date.getMonth() + 1;
         // resDate["endDateAtDate"] = date.getDate();
         // resDate["endDateAtWeek"] = WEEKDAY[date.getDay()];
-        resDate["endDate"] = GetDate(resDate.endDateAt)
+        resDate["endDate"] = GetDate(resDate.endDateAt);
         return resDate;
       });
       setBoardsList(boardData);
@@ -46,7 +46,7 @@ const MyMatching = ({ type }) => {
       {boardsList?.map((board, idx) => (
         <MatchingCard
           key={idx}
-          type={type}
+          type={board.maxEntry == board.currentEntry?"apply":""}
           completed={board.maxEntry == board.currentEntry}
           category="카테고리"
           title={board.title}

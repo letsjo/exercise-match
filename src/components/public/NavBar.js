@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import Popover from "./Popover";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
@@ -65,9 +65,13 @@ const NavBar = () => {
         </SearchBox>
         {isLogin ? (
           <AfterLoginBox>
-            <ProfileImg onClick={onOpenerClick}>
+            <ProfileImg isPopperShown={isPopperShown} onClick={onOpenerClick}>
               <img
-                src={userProfile&&userProfile!="undefined"?userProfile:"/images/anonymousProfile.png"}
+                src={
+                  userProfile && userProfile != "undefined"
+                    ? userProfile
+                    : "/images/anonymousProfile.png"
+                }
                 alt=""
               />
             </ProfileImg>
@@ -131,7 +135,7 @@ const Logo = styled.a`
   text-decoration: none;
   color: black;
   overflow: hidden;
-  img{
+  img {
     width: 100%;
   }
 `;
@@ -208,19 +212,24 @@ const AfterLoginBox = styled.div`
 `;
 
 const ProfileImg = styled.div`
-  width: 48px;
-  height: 48px;
-  border-radius: 25px;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid #00CFFF;
-  img {
-    width: 100%;
-    height: 100%;
-  }
-  margin-right: 10px;
+  ${({ isPopperShown }) => {
+    return css`
+      width: 48px;
+      height: 48px;
+      border-radius: 25px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 10px;
+      border: ${isPopperShown?"2px solid #00cfff;":"2px solid transparent;"}
+      box-shadow: ${isPopperShown?"0px 0px 5px #a2e9fa;":""}; 
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    `;
+  }}
 `;
 
 const Arrow = styled.div`

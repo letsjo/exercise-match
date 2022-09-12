@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 import BulletinLikeCard from "../BulletinBoard/BulletinLikeCard";
@@ -23,17 +23,21 @@ const MatchingCard = ({
   boardId,
 }) => {
   const navigate = useNavigate();
+  const refReviewButton = useRef();
 
   return (
     <Container
-      onClick={() => {
+      onClick={(e) => {
         navigate(`/detail/matching/${boardId}`);
       }}
       completed={completed}
     >
-      <MatchingOrNot completed={completed}>
-        {completed ? "매칭완료" : "매칭중"}
-      </MatchingOrNot>
+      <TopWrap>
+        <MatchingOrNot completed={completed}>
+          {completed ? "매칭완료" : "매칭중"}
+        </MatchingOrNot>
+        {type=="apply" && <ReviewButton ref={refReviewButton} onClick={(e)=>{e.stopPropagation(); navigate(`/review/${boardId}`);}}>리뷰 작성하기</ReviewButton>}
+      </TopWrap>
       <TitleWrap>
         <CategoryTag>{category}</CategoryTag>
         <Title>{title}</Title>
@@ -43,7 +47,18 @@ const MatchingCard = ({
           <Icon>
             <BsCalendarCheck size={20} />
           </Icon>
-          <Text>{endDate?.year?(endDate?.year+"년 "+endDate?.month+"월 "+endDate?.day+"일 ("+endDate?.week+")"):("")}</Text>
+          <Text>
+            {endDate?.year
+              ? endDate?.year +
+                "년 " +
+                endDate?.month +
+                "월 " +
+                endDate?.day +
+                "일 (" +
+                endDate?.week +
+                ")"
+              : ""}
+          </Text>
         </Date>
         <Personnel>
           <Icon>
@@ -59,7 +74,7 @@ const MatchingCard = ({
       <WriterWrap>
         <InfoWrap>
           <ProfileImg>
-            {writerProfile && <img src={writerProfile} alt=""/>}
+            {writerProfile && <img src={writerProfile} alt="" />}
           </ProfileImg>
           <Write>{writerNickname}</Write>
           <Dot>·</Dot>
@@ -88,16 +103,39 @@ const Container = styled.div`
   }}
 `;
 
+const TopWrap = styled.div`
+  width: 100%;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
 const MatchingOrNot = styled.div`
   ${({ completed }) => {
     return css`
       height: 29px;
       font-size: 20px;
       font-weight: bold;
-      margin-bottom: 10px;
       color: ${completed ? "#a8a8a8" : "#000000"};
     `;
   }}
+`;
+
+const ReviewButton = styled.div`
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 150%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+  background-color: #ffffff;
+  cursor: pointer;
+  border: 1px transparent solid;
+  &:hover {
+    border: 1px #00cfff solid;
+  }
 `;
 
 const TitleWrap = styled.div`
@@ -200,7 +238,7 @@ const ProfileImg = styled.div`
   overflow: hidden;
   border-radius: 10px;
   margin-right: 4px;
-  img{
+  img {
     width: 100%;
     height: 100%;
   }

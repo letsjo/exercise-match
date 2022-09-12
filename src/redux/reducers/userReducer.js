@@ -12,7 +12,7 @@ let initialState = {
   userBirthMonth: "",
   userBirthDay: "",
   userJoinList: {
-    gym: 1,
+    gym: 0,
     running: 0,
     badminton: 0,
     badminton: 2,

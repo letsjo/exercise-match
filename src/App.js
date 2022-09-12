@@ -57,8 +57,6 @@ function App() {
     if (is_authorization) {
       userAPI.defaults.headers.common["accesstoken"] =
         sessionStorage.getItem("accesstoken");
-      userAPI.defaults.headers.common["refreshtoken"] =
-        sessionStorage.getItem("refreshtoken");
       dispatch(
         userSliceAction.setLogin({
           username: sessionStorage.getItem("username"),
@@ -82,7 +80,7 @@ function App() {
         <Route path="/communitypostWrite" element={<CommunityPostWrite />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/userinfo" element={<UserInfo />} />
-        <Route path="/review" element={<Review />} />
+        <Route path="/review/:id" element={<Review />} />
         <Route path="/detail/matching/:id" element={<MatchingDetailpage />} />
         <Route path="/detail/:type/:id" element={<InformationDetailPage />} />
         <Route path="/passwordFind" element={<PasswordFind />} />
