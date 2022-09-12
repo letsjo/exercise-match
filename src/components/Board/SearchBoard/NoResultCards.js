@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const NoResultCards = () => {
   return (
-    <Container>
+    // <Container>
         <SearchNoneContainer>
           <NoneTitleBox>
             <NoneTextTop>'ㅇㅇㅇ'</NoneTextTop>
@@ -22,16 +22,16 @@ const NoResultCards = () => {
             </NoneContent>
           </NoneContentBox>
         </SearchNoneContainer>
-      </Container>
+      // </Container>
   )
 }
 
-const Container= styled.div`
-  width: 1074px;
-  height: 100vh;
-  margin: 2px auto auto;
-  background-color: #ffffff;
-`;
+// const Container= styled.div`
+//   width: 1074px;
+//   height: 100vh;
+//   margin: 2px auto auto;
+//   background-color: #ffffff;
+// `;
 
 const SearchNoneContainer = styled.div``;
 
