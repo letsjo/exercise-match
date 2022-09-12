@@ -6,7 +6,7 @@ import userAPI from "../../apis/userAPI";
 const kakaoLogin = (code) => {
   return async (dispatch) => {
     await userAPI
-      .get(`/api/kakaoLogin?code=${code}`)
+      .get(`/user/kakao/callback?code=${code}`)
       .then((res) => {
         console.log(res); // 토큰이 넘어올 것임
 
@@ -92,7 +92,7 @@ const mailCheck = (username) => {
 const checkAuthkey = (authNum) => {
   return async (dispatch) => {
     try {
-      const res = await userAPI.post("/api/checkauthnum", authNum);
+      const res = await userAPI.post("/api/checkAuthNum", authNum);
       console.log(res);
     } catch (e) {
       console.log(e);
@@ -281,7 +281,7 @@ const signUpCheckAuth = createAsyncThunk(
   "signUp/checkAuth",
   async ({ authNum }, { rejectWithValue }) => {
     try {
-      const res = await userAPI.post("/api/checkauthnum", {
+      const res = await userAPI.post("/api/checkAuthNum", {
         authNum,
       });
       console.log(res);

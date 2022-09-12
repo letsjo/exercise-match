@@ -31,6 +31,7 @@ const postBoard = (data) => {
   };
 };
 
+
 const postLike = createAsyncThunk(
   "board/postLike",
   async ({ boardType, boardId, isLike }, { rejectWithValue }) => {
@@ -183,6 +184,22 @@ const loadInfoDetail = (boardId) => {
   };
 };
 
+
+//새로 만들고 있는 부분!!
+// const searchBoards = ({keyword})=>{
+//   return async(dispatch) =>{
+//     await userAPI
+//     .get(`/board/search?page=1&amount=10&city=대구&gu=달서구&sort=title_Content&keyword=${keyword}&boardType=matching`)
+//     .then((response)=>{
+//       dispatch(boardSliceAction.loadSearchData(response.data));
+//       console.log(response.data);
+//     })
+//     .catch((e)=>{
+//       console.log(e);
+//     });
+//   };
+// };
+
 const searchBoard = createAsyncThunk(
   "board/search",
   async ({ keyword }, { rejectWithValue }) => {
@@ -192,6 +209,7 @@ const searchBoard = createAsyncThunk(
         `/board/search?page=1&amount=10&city=대구&gu=달서구&sort=title_Content&keyword=${keyword}&boardType=matching`
       );
       console.log(res);
+
       return res;
     } catch (err) {
       console.log(err);

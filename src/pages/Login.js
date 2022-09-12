@@ -14,8 +14,8 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const REST_API_KEY = "77c5975ead488c768a11d49f9320425c";
-  const REDIRECT_URI = "http://localhost:3000/api/kakaoLogin";
+  const REST_API_KEY = "e789d33a46a6c7fd347b5f73e7669177";
+  const REDIRECT_URI = "http://localhost:3000/user/kakao/callback";
   const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
   const kakaoLogin = () => {
