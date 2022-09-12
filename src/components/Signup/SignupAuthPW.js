@@ -11,7 +11,6 @@ const SignupAuthPW = ({
   leftState,
   rightState,
   inputPasswordCheck,
-  setInputPasswordCheck,
 }) => {
   const { email, password, repassword } = useSelector(
     (state) => state.signupReducer.info
