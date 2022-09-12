@@ -26,18 +26,25 @@ const Signup = () => {
 
   const [inputEmail, setInputEmail] = useState(email);
   const [inputPassword, setInputPassword] = useState(password);
+  const [inputPasswordCheck,setInputPasswordCheck] =useState();
 
-  const NextPageAllow = (e) => {
+  const NextPageAllow = async(e) => {
     e.preventDefault();
     if (nextAvailable && page == 1) {
       try{
-        const res = dispatch(userAction.signUpCheckAuth(authNum)).unwrap();
+        const res = await dispatch(userAction.signUpCheckAuth({authNum})).unwrap();
         console.log(res);
         setPage(page + 1);
       } catch(e) {
         console.log(e);
       }
     } else if (nextAvailable && page >= 2) {
+      console.log(inputPassword, inputPasswordCheck,inputEmail);
+      try{
+        const res= await dispatch(userAction.signUp({authNum})).unwrap();
+      }catch(e){
+        console.log(e);
+      }
       Swal.fire({
         position: "center",
         icon: "success",
@@ -87,7 +94,9 @@ const Signup = () => {
               <SignupAuthPW
                 setNextAvailable={setNextAvailable}
                 inputPassword={inputPassword}
+                inputPasswordCheck={inputPasswordCheck}
                 setInputPassword={setInputPassword}
+                setInputPasswordCheck={setInputPasswordCheck}
                 leftState={{ leftArrow, setLeftArrow }}
                 rightState={{ rightArrow, setRightArrow }}
               />

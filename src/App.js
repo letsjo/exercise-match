@@ -87,7 +87,7 @@ function App() {
         <Route path="/passwordChange" element={<PasswordChange />} />
         <Route path="/memberExit" element={<MemberExit />} />
         <Route path="/search" element={<SearchPage />} />
-        <Route path="/api/kakaologin" element={<KakaoLogin />} />
+        <Route path="/user/kakao/callback" element={<KakaoLogin />} />
         <Route path="/api/naverLogin" element={<NaverLogin />} />
         <Route path="/oauth2/redirect" element={<GoogleLogin />} />
       </Routes>
