@@ -26,7 +26,7 @@ const Detailpage = () => {
     setIsPopperShown(!isPopperShown);
   };
 
-  const [like, setLike] = useState(false);
+  const [like, setLike] = useState(true);
   const [likeCount, setLikeCount] = useState(false);
 
   const likeOnClick = () => {

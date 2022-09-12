@@ -5,13 +5,9 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { locationSliceAction } from "../../redux/reducers/locationReducer";
 
-const SelectCityCard = ({ localData }) => {
+const SelectCityCard = ({ selectedCity, selectedGu, localData }) => {
   const selectedLocationRef = useRef(null);
   const dispatch = useDispatch();
-
-  const { selectedCity, selectedGu, currentLat, currentLon } = useSelector(
-    (state) => state.locationReducer
-  );
 
   const [openCitySection, setOpenCitySection] = useState(
     selectedCity == localData?.city ? true : false
@@ -21,20 +17,23 @@ const SelectCityCard = ({ localData }) => {
     setOpenCitySection(!openCitySection);
   };
 
-  const SelectGu = (e, guName = "") => {
+  const SelectGu = (e, guName="") => {
     e.preventDefault();
     dispatch(
       locationSliceAction.selectLocation({
-        selectedCity: localData?.city=="전국"?"all":localData?.city,
-        selectedGu: guName,
+        selectedCity: localData?.city == "전국" ? "all" : localData?.city,
+        selectedGu: guName?guName:"",
       })
     );
   };
 
   useEffect(() => {
-    selectedLocationRef.current?.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+    selectedLocationRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+      inline: "nearest",
+    });
   }, []);
-
 
   return (
     <Container>
@@ -54,12 +53,12 @@ const SelectCityCard = ({ localData }) => {
             <GuNameZone>{localData?.city} 전체</GuNameZone>
             {selectedCity == "all" && selectedGu == "" && (
               <CheckZone ref={selectedLocationRef}>
-                <AiOutlineCheck size={26} color={"#00CFFF"}/>
+                <AiOutlineCheck size={26} color={"#00CFFF"} />
               </CheckZone>
             )}
             {selectedCity == localData?.city && selectedGu == "" && (
               <CheckZone ref={selectedLocationRef}>
-                <AiOutlineCheck size={26} color={"#00CFFF"}/>
+                <AiOutlineCheck size={26} color={"#00CFFF"} />
               </CheckZone>
             )}
           </GuSection>
@@ -69,7 +68,7 @@ const SelectCityCard = ({ localData }) => {
                 <GuNameZone>{guName}</GuNameZone>
                 {selectedCity == localData?.city && selectedGu == guName && (
                   <CheckZone ref={selectedLocationRef}>
-                    <AiOutlineCheck size={26} color={"#00CFFF"}/>
+                    <AiOutlineCheck size={26} color={"#00CFFF"} />
                   </CheckZone>
                 )}
               </GuSection>
@@ -108,8 +107,8 @@ const GuSection = styled.div`
   display: flex;
   flex-direction: row;
   transition: all 0.2s ease;
-  &:hover{
-    background-color: #DCF6FC;
+  &:hover {
+    background-color: #dcf6fc;
   }
 `;
 

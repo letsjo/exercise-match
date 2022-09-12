@@ -2,11 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import BulletinCard from "./BulletinCard";
 import Pagination from "../BoardPublic/Pagination";
-import { useState, useEffect } from "react";
 import CategoryBoxFrame from "../BoardPublic/CategoryBoxFrame";
+import GetDate from "../../../utils/GetDate";
+
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import GetDate from "../../../utils/GetDate";
 import { boardAction } from "../../../redux/actions/boardAction";
 
 const BulletinListFrame = () => {

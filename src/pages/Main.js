@@ -18,7 +18,9 @@ const Main = () => {
     (state) => state.locationReducer
   );
 
-    console.log(selectedCity,selectedGu);
+  const { isLogin } = useSelector((state) => state.userReducer);
+
+  console.log(selectedCity, selectedGu);
 
   return (
     <MainContainer>
@@ -32,7 +34,7 @@ const Main = () => {
       />
       <CurrentLocationCard />
       <SelectCategoryBox />
-      <HistoryBoard />
+      {isLogin && <HistoryBoard />}
       <BannerCate
         iconImg=""
         title="HOT 매칭 게시글"
@@ -40,9 +42,11 @@ const Main = () => {
         buttonCate={true}
       />
       <InputContainer>
-      <InputDesign/>
+        <InputDesign>
+          <img src="/images/bannerSub.png" alt="" />
+        </InputDesign>
       </InputContainer>
-      
+
       <PopularBoard
         iconImg="/images/cate00_gym.png"
         title="- 실시간 인기 게시글"
@@ -62,22 +66,21 @@ const Main = () => {
   );
 };
 
-const MainContainer = styled.div`
-`;
+const MainContainer = styled.div``;
 
-const InputContainer=styled.div`
-width: 100%;
+const InputContainer = styled.div`
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 100px;
 `;
 
-const InputDesign=styled.div`
-  width:1010px;
-  height:120px;
-  background-color: #dedede;
-
+const InputDesign = styled.div`
+  width: 1010px;
+  img {
+    width: 100%;
+  }
 `;
 
 export default Main;

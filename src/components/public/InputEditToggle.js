@@ -19,6 +19,8 @@ const InputEditToggle = ({
     dispatch(modalSliceAction.modalInterestEditOpen());
   };
 
+  console.log(initialState)
+
   return (
     <Container border={border}>
       <TitleFrame title={title}>{title}</TitleFrame>

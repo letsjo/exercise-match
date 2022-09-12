@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const TitleWrap = ({ isMatching, category, title, writeDate, board }) => {
   console.log(writeDate);
@@ -9,7 +9,9 @@ const TitleWrap = ({ isMatching, category, title, writeDate, board }) => {
         {board == "information" ? (
           <Category>{category}</Category>
         ) : (
-          <Matching>{isMatching ? "매칭완료" : "매칭중"}</Matching>
+          <Matching isMatching={isMatching}>
+            {isMatching ? "매칭완료" : "매칭중"}
+          </Matching>
         )}
       </FirstLine>
       <SecondLine>
@@ -67,6 +69,11 @@ const Category = styled.div`
 `;
 
 const Matching = styled.div`
+  ${({ isMatching }) => {
+    return css`
+      color: ${isMatching?"#A8A8A8":"#00CFFF"};
+    `;
+  }}
   width: 56px;
   height: 29px;
   font-size: 20px;
@@ -89,7 +96,6 @@ const Title = styled.div`
 `;
 
 const Date = styled.div`
-  width: 113px;
   height: 29px;
   font-size: 20px;
   padding: 0px 10px;

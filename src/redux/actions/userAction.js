@@ -271,12 +271,6 @@ const userLogOut = createAsyncThunk(
   async ({}, { rejectWithValue }) => {
     try {
       const res = await userAPI.get("/api/logout");
-      sessionStorage.removeItem("accesstoken");
-      sessionStorage.removeItem("refreshtoken");
-      sessionStorage.removeItem("username");
-      sessionStorage.removeItem("nickname");
-      sessionStorage.removeItem("profile");
-      sessionStorage.removeItem("social");
       console.log(res);
       return res;
       // sessionStorageLogin.setItem("nickname", response.data.userInfoDto.nickname);
@@ -290,10 +284,10 @@ const userLogOut = createAsyncThunk(
 
 const signUpCheckAuth = createAsyncThunk(
   "signUp/checkAuth",
-  async ({ birthYear, birthMonth, birthDay }, { rejectWithValue }) => {
+  async ({ authNum }, { rejectWithValue }) => {
     try {
-      const res = await userAPI.put("/api/mypage/infoedit/birth", {
-        birth: birthYear + birthMonth + birthDay,
+      const res = await userAPI.post("/api/checkauthnum", {
+        authNum,
       });
       console.log(res);
       return res;
@@ -338,4 +332,5 @@ export const userAction = {
   editBirth,
   userLogOut,
   userWithdraw,
+  signUpCheckAuth,
 };

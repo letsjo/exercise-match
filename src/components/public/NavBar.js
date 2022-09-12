@@ -47,7 +47,9 @@ const NavBar = () => {
   return (
     <NavBarWrap>
       <Wrap>
-        <Logo href="/">LOGO</Logo>
+        <Logo href="/">
+          <img src="/images/logoMain.png" alt="" />
+        </Logo>
         <SearchBox>
           <SearchWrap>
             <SearchIcon>
@@ -123,11 +125,15 @@ const Logo = styled.a`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 92px;
+  width: 162px;
   height: 44px;
   margin-right: 40px;
   text-decoration: none;
   color: black;
+  overflow: hidden;
+  img{
+    width: 100%;
+  }
 `;
 
 const SearchBox = styled.div`
@@ -202,14 +208,14 @@ const AfterLoginBox = styled.div`
 `;
 
 const ProfileImg = styled.div`
-  width: 50px;
-  height: 50px;
+  width: 48px;
+  height: 48px;
   border-radius: 25px;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: transparent;
+  border: 2px solid #00CFFF;
   img {
     width: 100%;
     height: 100%;

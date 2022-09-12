@@ -4,6 +4,7 @@ import styled, { css } from "styled-components";
 import Swal from "sweetalert2";
 import { userAction } from "../../redux/actions/userAction";
 import { signupSliceAction } from "../../redux/reducers/signupReducer";
+import { userSliceAction } from "../../redux/reducers/userReducer";
 
 import InputEmailAni from "../public/InputEmailAni";
 import AlertBox from "./AlertBox";
@@ -11,6 +12,7 @@ import AlertBox from "./AlertBox";
 const SignupAuth = ({
   setNextAvailable,
   inputEmail,
+  setAuthNum,
   setInputEmail,
   leftState,
   rightState,
@@ -18,13 +20,13 @@ const SignupAuth = ({
   const dispatch = useDispatch();
   var time = 60000;
 
-  const { email } = useSelector((state)=> state.signupReducer.info)
+  const { email } = useSelector((state) => state.signupReducer.info);
 
   // auth
   const AuthKeywordRef = useRef("");
   const [validationState, setValidationState] = useState(false);
   const [inputAvailable, setInputAvailable] = useState(false);
-    
+
   // timer
   const [alertSent, setAlertSent] = useState(false);
   const [alertcomment, setAlertcomment] = useState("");
@@ -67,21 +69,30 @@ const SignupAuth = ({
     });
   };
 
-  const SentAuthCode = (e) => {
+  const SentAuthCode = async (e) => {
     e.preventDefault();
     if (validationState) {
       if (!sentAuth) {
         if (sentAuthCount > 0) {
           setSentAuthCount(sentAuthCount - 1);
           setInputEmail(inputEmail);
-          dispatch(userAction.checkEmail({ username : inputEmail }));
-          setAlertcomment("인증번호가 전송되었습니다.");
-          TIMER();
-          timerAuth = setTimeout(() => SentAuthOverTime(), time); //3분이 되면 타이머를 삭제한다.
-          timerNumber.current = timerAuth;
-          setAlertSent(true);
-          setSentAuth(true);
-          setInputAvailable(true);
+          try {
+            const res = await dispatch(
+              userAction.checkEmail({ username: inputEmail })
+            ).unwrap();
+            console.log(res);
+            dispatch(signupSliceAction.getInfo({inputEmail}));
+            setAlertcomment("인증번호가 전송되었습니다.");
+            TIMER();
+            timerAuth = setTimeout(() => SentAuthOverTime(), time); //3분이 되면 타이머를 삭제한다.
+            timerNumber.current = timerAuth;
+            setAlertSent(true);
+            setSentAuth(true);
+            setInputAvailable(true);
+          } catch (e) {
+            setAlertcomment("인증번호 전송에 실패했습니다.");
+            setAlertSent(true);
+          }
         } else {
           OverSantAlert(e);
         }
@@ -138,9 +149,11 @@ const SignupAuth = ({
     e.preventDefault();
     if (AuthKeywordRef.current.value.length >= 6) {
       setNextAvailable(true);
+      setAuthNum(AuthKeywordRef.current.value);
       rightState.setRightArrow(true);
     } else {
       setNextAvailable(false);
+      setAuthNum("");
       rightState.setRightArrow(false);
     }
   };
@@ -149,7 +162,6 @@ const SignupAuth = ({
   // const [newemail, setNewEmail] = useState('')
   // const [emailMessage, setEmailMessage] = useState('')
   // const [isEmail, setIsEmail] = useState(false)
-
 
   // const onChangeEmail = useCallback((e) => {
   //   const emailRegex =

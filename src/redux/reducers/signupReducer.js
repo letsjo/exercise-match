@@ -12,8 +12,8 @@ const signupSlice = createSlice({
   initialState,
   reducers: {
     getInfo(state,actions){
-        state.info.email = actions.payload.inputEmail;
-        state.info.password = actions.payload.inputPassword;
+        state.info.email = actions.payload?.inputEmail;
+        state.info.password = actions.payload?.inputPassword;
     }
   },
 });

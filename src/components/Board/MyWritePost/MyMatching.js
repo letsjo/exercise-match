@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { boardAction } from "../../../redux/actions/boardAction";
-import GetAddressName from "../../../utils/GetAddressName";
 import GetDate from "../../../utils/GetDate";
 import Pagination from "../BoardPublic/Pagination";
 import MatchingCard from "../MatchingBoard/MatchingCard";
@@ -47,6 +46,7 @@ const MyMatching = ({ type }) => {
       {boardsList?.map((board, idx) => (
         <MatchingCard
           key={idx}
+          type={type}
           completed={board.maxEntry == board.currentEntry}
           category="카테고리"
           title={board.title}
