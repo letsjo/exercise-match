@@ -114,20 +114,18 @@ const checkPassword = (password, passwordCheck) => {
   };
 };
 
-const signUp = (username, password, passwordCheck) => {
-  return async (dispatch) => {
+const signUp = createAsyncThunk(
+  "user/signUp",
+  async (signUpData, { rejectWithValue }) => {
     try {
-      const res = await userAPI.post("/api/signup", {
-        username,
-        password: encrypt(password),
-        passwordCheck: encrypt(passwordCheck),
-      });
-      console.log(res);
-    } catch (e) {
-      console.log(e);
+      const res = await userAPI.post("/api/checkpassword", signUpData);
+      return res;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data);
     }
-  };
-};
+  }
+);
 
 const loadMyPage = () => {
   return async (dispatch) => {
@@ -194,7 +192,7 @@ const editConcern = createAsyncThunk(
   async (editInterest, { rejectWithValue }) => {
     try {
       const res = await userAPI.put("/api/mypage/actionedit/concern", {
-        concern: editInterest
+        concerns: editInterest
       });
       console.log(res);
       return res;
@@ -279,10 +277,10 @@ const userLogOut = createAsyncThunk(
 
 const signUpCheckAuth = createAsyncThunk(
   "signUp/checkAuth",
-  async ({ authNum }, { rejectWithValue }) => {
+  async ({ username, authNum }, { rejectWithValue }) => {
     try {
       const res = await userAPI.post("/api/checkAuthNum", {
-        authNum,
+        username, authNum,
       });
       console.log(res);
       return res;
@@ -309,6 +307,37 @@ const userWithdraw = createAsyncThunk(
   }
 );
 
+const changePassword = createAsyncThunk(
+  "signUp/changePassword",
+  async ({ passwordCheck,newPassword, newPasswordCheck }, { rejectWithValue }) => {
+    try {
+      const res = await userAPI.post("/api/changepass", {
+        passwordCheck, newPassword, newPasswordCheck
+      });
+      console.log(res);
+      return res;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data.error);
+    }
+  }
+);
+
+const editProfile = (file) => {
+  return async (dispatch) => {
+    await userAPI
+      .put("/api/mypage/profile", file, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
 export const userAction = {
   kakaoLogin,
   naverLogin,
@@ -328,4 +357,6 @@ export const userAction = {
   userLogOut,
   userWithdraw,
   signUpCheckAuth,
+  editProfile,
+  changePassword,
 };

@@ -28,7 +28,7 @@ const MemberExit = () => {
         cancelButtonText: '취소',
         preConfirm: async (password) => { 
             try {
-                const res = await dispatch(userAction.userWithdraw(password)).unwarp();
+                const res = await dispatch(userAction.userWithdraw({password})).unwarp();
                 console.log(res);
             } catch(err){
                 console.log(err);

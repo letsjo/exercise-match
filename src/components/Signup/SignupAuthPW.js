@@ -7,6 +7,7 @@ const SignupAuthPW = ({
   setNextAvailable,
   inputPassword,
   setInputPassword,
+  setInputPasswordCheck,
   leftState,
   rightState,
 }) => {
@@ -34,6 +35,7 @@ const SignupAuthPW = ({
       setNextAvailable(true);
       rightState.setRightArrow(false);
       setInputPassword(RefFirstPassword.current.value);
+      setInputPasswordCheck(RefSecondPassword.current.value);
     } else {
       setNextAvailable(false);
       rightState.setRightArrow(false);

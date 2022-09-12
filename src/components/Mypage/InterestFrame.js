@@ -41,7 +41,7 @@ const InterestFrame = () => {
   ];
 
   const { userInterest } = useSelector((state) => state.userReducer);
-  const [editInterest, setEditInterest] = useState([]);
+  const [editInterest, setEditInterest] = useState(userInterest);
   const [alertcomment, setAlertcomment] = useState(
     "관심사는 최대 3개까지 선택이 가능합니다."
   );
@@ -114,6 +114,7 @@ const InterestFrame = () => {
   const onClose = () => {
     dispatch(modalSliceAction.modalClose());
   };
+
 
   return (
     <Container ref={modalRef}>
@@ -193,16 +194,16 @@ const LineFrame = styled.div`
 const InterestBox = styled.div`
   ${({ selected }) => {
     return css`
-      background: ${selected ? "#A8A8A8" : "white"};
+      background: ${selected ? "#00CFFF" : "white"};
       border: 1px solid ${selected ? "#FFFFFF" : "#494949"};
       color: ${selected ? "#FFFFFF" : "#494949"};
+      box-shadow: ${selected ? "0px 0px 4px #00CFFF" : "0px 0px 4px rgba(0, 0, 0, 0.25);"};
     `;
   }}
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   padding: 5px 10px;
 
@@ -215,11 +216,12 @@ const ButtonFrame = styled.div`
   ${({ editInterest }) => {
     return css`
       background: ${editInterest && editInterest.length > 0
-        ? "#494949"
+        ? "#00CFFF"
         : "#DEDEDE"};
       cursor: ${editInterest && editInterest.length > 0 ? "pointer" : "auto"};
     `;
   }}
+  border: 1px solid #A8A8A8;
   margin-top: 20px;
   display: flex;
   flex-direction: row;

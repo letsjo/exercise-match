@@ -6,14 +6,14 @@ import { userSliceAction } from "../../redux/reducers/userReducer";
 
 const InputJoinList = ({
   title = "",
-  initialState,
+  userJoinList,
   editBt = true,
   fontSize = "25px",
   border = false,
 }) => {
   const dispatch = useDispatch();
 
-  const [inputValue, setInputValue] = useState(initialState);
+  const [inputValue, setInputValue] = useState(userJoinList);
   const [modifyable, setModifyable] = useState(true);
   const inputRef = useRef(null);
 
@@ -56,7 +56,27 @@ const InputJoinList = ({
         <InputLine
           onChange={(e) => onChange(e)}
           ref={inputRef}
-          value={inputValue}
+          value={userJoinList && 
+            (userJoinList["gym"] > 0
+              ? `헬스 ${userJoinList["gym"]} 회 | `
+              : "") +
+            (userJoinList["running"] > 0
+              ? `런닝&조깅 ${userJoinList["running"]} 회 | `
+              : "") +
+            (userJoinList["badminton"] > 0
+              ? `배드민턴 ${userJoinList["badminton"]} 회 | `
+              : "") +
+            (userJoinList["tennis"] > 0
+              ? `테니스 ${userJoinList["tennis"]} 회 | `
+              : "") +
+            (userJoinList["riding"] > 0
+              ? `라이딩 ${userJoinList["riding"]} 회 | `
+              : "") +
+            (userJoinList["golf"] > 0
+              ? `골프 ${userJoinList["golf"]} 회 | `
+              : "") +
+            (userJoinList["etc"] > 0 ? `기타 ${userJoinList["etc"]} 회 ` : "")
+          }
           disabled={modifyable}
           fontSize={fontSize}
         />

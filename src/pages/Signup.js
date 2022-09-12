@@ -26,32 +26,40 @@ const Signup = () => {
 
   const [inputEmail, setInputEmail] = useState(email);
   const [inputPassword, setInputPassword] = useState(password);
-  const [inputPasswordCheck,setInputPasswordCheck] =useState();
+  const [inputPasswordCheck, setInputPasswordCheck] = useState();
 
-  const NextPageAllow = async(e) => {
+  const NextPageAllow = async (e) => {
     e.preventDefault();
     if (nextAvailable && page == 1) {
-      try{
-        const res = await dispatch(userAction.signUpCheckAuth({authNum})).unwrap();
+      try {
+        const res = await dispatch(
+          userAction.signUpCheckAuth({ username: inputEmail, authNum })
+        ).unwrap();
         console.log(res);
         setPage(page + 1);
-      } catch(e) {
+      } catch (e) {
         console.log(e);
       }
     } else if (nextAvailable && page >= 2) {
-      console.log(inputPassword, inputPasswordCheck,inputEmail);
-      try{
-        const res= await dispatch(userAction.signUp({authNum})).unwrap();
-      }catch(e){
+      try {
+        const res = await dispatch(
+          userAction.signUp({
+            username: inputEmail,
+            password: inputPassword,
+            passwordCheck: inputPasswordCheck,
+          })
+        ).unwrap();
+        console.log(res);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "회원가입이 완료되었습니다.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } catch (e) {
         console.log(e);
       }
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "회원가입이 완료되었습니다.",
-        showConfirmButton: false,
-        timer: 1500,
-      });
       navigate("/");
     } else {
       WarningAlert(e);

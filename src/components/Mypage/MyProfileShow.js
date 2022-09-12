@@ -1,5 +1,5 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useRef, useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import InputEditButton from "../public/InputEditButton";
@@ -7,23 +7,56 @@ import InputEditToggle from "../public/InputEditToggle";
 import InputJoinList from "../public/InputJoinList";
 import ShowStarScore from "../public/ShowStarScore";
 import { FaPen } from "react-icons/fa";
+import { boardAction } from "../../redux/actions/boardAction";
+import { userAction } from "../../redux/actions/userAction";
 
 const MyProfileShow = ({ mypage = true, profileImg }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const profileInputRef = useRef();
+  const [files, setFiles] = useState("");
 
   const { userNickName, userJoinList, userInterest, userProfile } = useSelector(
     (state) => state.userReducer
   );
+
+  const handleClick = () => {
+    profileInputRef.current.click();
+  };
+
+  const onLoadFile = (e) => {
+    setFiles(e.target.files);
+  };
+
+  useEffect(() => {
+    onHandleSubmit();
+  },[files]);
+
+  const onHandleSubmit = (e) => {
+    try{
+      dispatch(userAction.editProfile(files[0]));
+    } catch(e){
+      console.log(e);
+    }
+  }
 
   return (
     <Container>
       <LeftFrame>
         <LeftZone>
           <PhotoContainer>
-            <PhotoFrame>
+            <PhotoFrame onClick={handleClick}>
               <img
                 src={userProfile ? userProfile : "/images/anonymousProfile.png"}
                 alt=""
+              />
+              <input
+                type="file"
+                id="image"
+                accept="img/*"
+                onChange={onLoadFile}
+                style={{ display: "none" }}
+                ref={profileInputRef}
               />
             </PhotoFrame>
             <ModifyButton>
@@ -51,7 +84,7 @@ const MyProfileShow = ({ mypage = true, profileImg }) => {
           />
           <InputJoinList
             title="참여횟수"
-            initialState={`헬스 ${userJoinList["gym"]}회 | 런닝&조깅 ${userJoinList["running"]}회 | 배드민턴 ${userJoinList["badminton"]}회 | 테니스 ${userJoinList["tennis"]}회 | 라이딩 ${userJoinList["riding"]}회 | 골프 ${userJoinList["golf"]}회 | 기타 ${userJoinList["etc"]}회`}
+            userJoinList={userJoinList}
             editBt={false}
             fontSize="15px"
           />
@@ -111,6 +144,7 @@ const PhotoFrame = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   img {
     width: 100%;
     height: 100%;
@@ -129,6 +163,7 @@ const ModifyButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
 `;
 
