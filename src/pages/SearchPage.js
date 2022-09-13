@@ -36,16 +36,25 @@ const SearchPage = () => {
   };
 
   console.log(searchList);
+
+  const [search, setSearch]= useState();
+
+    useEffect(()=>{
+      console.log(search);
+    },[search])
+
+
+
   return (
     <Container>
       <NavBar />
       <InlineContainer>
         {searchList == "" ? (
-          <NoResultCards />
+          <NoResultCards keyword={keyword} />
         ) : (
           <BulletinContainer>
             <CategorySelectBox>
-              <SearchOption />
+              <SearchOption setSearch={setSearch} search={search} />
             </CategorySelectBox>
             <BulletinCard
               title="제목"
