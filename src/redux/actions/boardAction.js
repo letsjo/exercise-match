@@ -202,11 +202,11 @@ const loadInfoDetail = (boardId) => {
 
 const searchBoard = createAsyncThunk(
   "board/search",
-  async ({ keyword }, { rejectWithValue }) => {
+  async ({ keyword ,search,selectedCity,selectedGu }, { rejectWithValue }) => {
     console.log(keyword);
     try {
       const res = await userAPI.get(
-        `/board/search?page=1&amount=10&city=대구&gu=달서구&sort=title_Content&keyword=${keyword}&boardType=matching`
+        `/board/search?page=1&amount=10&city=${selectedCity}&gu=${selectedGu}&sort=${search}&keyword=${keyword}&boardType=matching`
       );
       console.log(res);
 
