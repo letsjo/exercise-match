@@ -5,24 +5,26 @@ import { useState, useRef } from "react";
 import ReviewBoxAfter from "./ReviewBoxAfter";
 import { useDispatch, useSelector } from "react-redux";
 import { boardAction } from "../../redux/actions/boardAction";
+import { useParams } from "react-router-dom";
 
 const ReviewBox = () => {
   const dispatch = useDispatch();
   const [rate, setRate] = useState(5);
   const [show, setShow] = useState(false);
   const [hovered, setHovered] = useState(null);
+  const params = useParams();
 
   const checkboxRefForm = useRef();
   
   const {userNickName} = useSelector((state)=>state.userReducer);
 
   useEffect(()=>{
-    loadReview("1");
+    loadReview(params.id);
   }, [])
 
-  const loadReview = async(id) =>{
+  const loadReview = async(boardId) =>{
     try{
-      const res = await dispatch(boardAction.loadReview({id})).unwrap();
+      const res = await dispatch(boardAction.loadReview({boardId})).unwrap();
       console.log(res);
     } catch (e) {
       console.log(e);

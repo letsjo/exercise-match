@@ -37,15 +37,15 @@ const Popover = ({ onOpenerClick }) => {
       <Boxes onClick={() => navigate("/mypage")}>마이페이지</Boxes>
       <Boxes
         onClick={() =>
-          navigate("/board?type=mymatching&cate=all&page=1&amount=12")
+          navigate("/board?type=mymatching&cate=all&page=1&amount=10")
         }
       >
         나의 게시글
       </Boxes>
       <Logout
-        onClick={async () => {
+        onClick={() => {
           try{
-            const res = await dispatch(userAction.userLogOut({})).unwrap();            
+            const res = dispatch(userAction.userLogOut({})).unwrap();            
             console.log(res);
           } catch(e){
             console.log(e);

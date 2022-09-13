@@ -20,7 +20,7 @@ const CurrentLocationCard = ({ isDetail = false }) => {
   return (
     <Container isDetail={isDetail}>
       <LocationFrame isDetail={isDetail} onClick={OpenLocationModal}>
-        {selectedCity === "all" ? "전국" : selectedCity + " " + selectedGu}
+        {(selectedCity === "all" ? "전국" : selectedCity) + " " + (selectedGu === "all"? "" : selectedGu )}
       </LocationFrame>
     </Container>
   );

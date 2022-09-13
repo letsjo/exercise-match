@@ -15,6 +15,7 @@ const BulletinListFrame = () => {
   const dispatch = useDispatch();
 
   const { isLogin } = useSelector((state) => state.userReducer);
+  
   const [boardsList, setBoardsList] = useState([]);
   const query = useLocation().search;
   const cate = new URLSearchParams(query).get("cate");

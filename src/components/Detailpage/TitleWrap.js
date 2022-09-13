@@ -74,7 +74,6 @@ const Matching = styled.div`
       color: ${isMatching?"#A8A8A8":"#00CFFF"};
     `;
   }}
-  width: 56px;
   height: 29px;
   font-size: 20px;
   font-weight: bold;

@@ -15,7 +15,7 @@ const SelectCategoryBox = () => {
       <IconBox
         onClick={() => {
           navigate(
-            `/board?type=matching&cate=gym&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+            `/board?type=matching&cate=gym&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`
           );
         }}
       >
@@ -28,7 +28,7 @@ const SelectCategoryBox = () => {
       <IconBox
         onClick={() => {
           navigate(
-            `/board?type=matching&cate=running&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+            `/board?type=matching&cate=running&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`
           );
         }}
       >
@@ -41,7 +41,7 @@ const SelectCategoryBox = () => {
       <IconBox
         onClick={() => {
           navigate(
-            `/board?type=matching&cate=badminton&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+            `/board?type=matching&cate=badminton&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`
           );
         }}
       >
@@ -54,7 +54,7 @@ const SelectCategoryBox = () => {
       <IconBox
         onClick={() => {
           navigate(
-            `/board?type=matching&cate=tennis&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+            `/board?type=matching&cate=tennis&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`
           );
         }}
       >
@@ -67,7 +67,7 @@ const SelectCategoryBox = () => {
       <IconBox
         onClick={() => {
           navigate(
-            `/board?type=matching&cate=riding&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+            `/board?type=matching&cate=riding&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`
           );
         }}
       >
@@ -80,7 +80,7 @@ const SelectCategoryBox = () => {
       <IconBox
         onClick={() => {
           navigate(
-            `/board?type=matching&cate=golf&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+            `/board?type=matching&cate=golf&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`
           );
         }}
       >
@@ -93,7 +93,7 @@ const SelectCategoryBox = () => {
       <IconBox
         onClick={() => {
           navigate(
-            `/board?type=matching&cate=etc&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+            `/board?type=matching&cate=etc&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`
           );
         }}
       >

@@ -15,6 +15,7 @@ const Board = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const { isLogin } = useSelector((state) => state.userReducer);
   const { boardType, category } = useSelector((state) => state.boardReducer);
   const { selectedCity, selectedGu } = useSelector(
     (state) => state.locationReducer
@@ -36,8 +37,8 @@ const Board = () => {
       `/board?type=${type ? type : "matching"}&cate=${
         cate ? cate : "all"
       }&city=${selectedCity ? selectedCity : "all"}&gu=${
-        selectedGu ? selectedGu : ""
-      }&page=1&amount=12`
+        selectedGu ? selectedGu : "all"
+      }&page=1&amount=10`
     );
   }, [selectedCity, selectedGu]);
 
@@ -45,8 +46,8 @@ const Board = () => {
     if (city && (selectedCity != city || selectedGu != gu)) {
       dispatch(
         locationSliceAction.selectLocation({
-          selectedCity: selectedCity ? selectedCity : "all",
-          selectedGu: selectedGu ? selectedGu : "",
+          selectedCity: selectedCity ? selectedCity : city,
+          selectedGu: selectedGu ? selectedGu : gu,
         })
       );
       navigate(
@@ -54,7 +55,7 @@ const Board = () => {
           cate ? cate : "all"
         }&city=${selectedCity ? selectedCity : "all"}&gu=${
           selectedGu ? selectedGu : ""
-        }&page=1&amount=12`
+        }&page=1&amount=10`
       );
     }
     if (!type || !cate) {
@@ -66,7 +67,7 @@ const Board = () => {
           cate ? cate : "all"
         }&city=${selectedCity ? selectedCity : "all"}&gu=${
           selectedGu ? selectedGu : ""
-        }&page=1&amount=12`
+        }&page=1&amount=10`
       );
     }
   }, [selectedCity, selectedGu]);
@@ -76,24 +77,26 @@ const Board = () => {
     navigate(
       `/board?type=matching&cate=all&city=${city ? city : selectedCity}&gu=${
         gu ? gu : selectedGu
-      }&page=1&amount=12`
+      }&page=1&amount=10`
     );
   };
 
   const InfoOnClick = () => {
     dispatch(boardAction.setBoardType("information", "all"));
-    navigate(`/board?type=information&cate=all&page=1&amount=12`);
+    navigate(`/board?type=information&cate=all&page=1&amount=10`);
   };
 
   const MyMatchingOnClick = () => {
     dispatch(boardAction.setBoardType("mymatching", category));
-    navigate(`/board?type=mymatching&cate=${category}&page=1&amount=12`);
+    navigate(`/board?type=mymatching&cate=${category}&page=1&amount=10`);
   };
 
   const MyInfoOnClick = () => {
     dispatch(boardAction.setBoardType("myinformation", category));
-    navigate(`/board?type=myinformation&cate=${category}&page=1&amount=12`);
+    navigate(`/board?type=myinformation&cate=${category}&page=1&amount=10`);
   };
+
+  console.log(selectedCity,selectedGu);
 
   return (
     <Container>
@@ -108,6 +111,7 @@ const Board = () => {
               <SelectMatching type={type} onClick={MatchingOnClick}>
                 매칭 게시판
               </SelectMatching>
+
               <SelectMyMatching type={type} onClick={MyMatchingOnClick}>
                 나의 게시글
               </SelectMyMatching>
@@ -122,9 +126,11 @@ const Board = () => {
               <SelectInfo type={type} onClick={InfoOnClick}>
                 정보 공유{" "}
               </SelectInfo>
-              <SelectMyBoard type={type} onClick={MyInfoOnClick}>
-                나의 게시글
-              </SelectMyBoard>
+              {isLogin && (
+                <SelectMyBoard type={type} onClick={MyInfoOnClick}>
+                  나의 게시글
+                </SelectMyBoard>
+              )}
             </>
           )}
         </CategoryFrame>

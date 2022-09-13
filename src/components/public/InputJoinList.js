@@ -75,6 +75,9 @@ const InputJoinList = ({
             (userJoinList["golf"] > 0
               ? `골프 ${userJoinList["golf"]} 회 | `
               : "") +
+              (userJoinList["hiking"] > 0
+                ? `등산 ${userJoinList["hiking"]} 회 | `
+                : "") +
             (userJoinList["etc"] > 0 ? `기타 ${userJoinList["etc"]} 회 ` : "")
           }
           disabled={modifyable}

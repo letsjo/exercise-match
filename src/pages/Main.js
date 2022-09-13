@@ -1,7 +1,7 @@
 // package
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // components
 import NavBar from "../components/public/NavBar";
@@ -12,11 +12,17 @@ import SelectCategoryBox from "../components/Main/SelectCategoryBox";
 import OtherBoard from "../components/Main/OtherBoard";
 import CurrentLocationCard from "../components/Main/CurrentLocationCard";
 import BannerCate from "../components/Main/BannerCate";
+import { locationAction } from "../redux/actions/locationAction";
 
 const Main = () => {
+  const dispatch = useDispatch();
   const { selectedCity, selectedGu } = useSelector(
     (state) => state.locationReducer
   );
+
+  useEffect(()=>{
+    dispatch(locationAction.getLocation());
+  },[])
 
   const { isLogin } = useSelector((state) => state.userReducer);
 
@@ -38,7 +44,7 @@ const Main = () => {
       <BannerCate
         iconImg=""
         title="HOT 매칭 게시글"
-        boardUrl={`/board?type=matching&cate=gym&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`}
+        boardUrl={`/board?type=matching&cate=gym&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`}
         buttonCate={true}
       />
       <InputContainer>
@@ -50,17 +56,17 @@ const Main = () => {
       <PopularBoard
         iconImg="/images/cate00_gym.png"
         title="- 실시간 인기 게시글"
-        boardUrl={`/board?type=matching&cate=gym&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`}
+        boardUrl={`/board?type=matching&cate=gym&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`}
       />
       <PopularBoard
         iconImg="/images/cate04_tennis.png"
         title="- 실시간 인기 게시글"
-        boardUrl={`/board?type=matching&cate=tennis&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`}
+        boardUrl={`/board?type=matching&cate=tennis&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`}
       />
       <OtherBoard
         iconImg=""
         title="[기타] - 실시간 인기 게시글"
-        boardUrl={`/board?type=matching&cate=etc&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`}
+        boardUrl={`/board?type=matching&cate=etc&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`}
       />
     </MainContainer>
   );

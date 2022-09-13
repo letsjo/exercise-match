@@ -5,14 +5,6 @@ import userAPI from "../../apis/userAPI";
 function setBoardType(type, cate) {
   return async (dispatch) => {
     dispatch(boardSliceAction.setBoardType({ type, cate }));
-    // await userAPI
-    //   .get(`/api/boards/${type}?cate=${cate}&page=1&amount=12`)
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((e) => {
-    //     console.log(e);
-    //   });
   };
 }
 
@@ -30,7 +22,6 @@ const postBoard = (data) => {
       });
   };
 };
-
 
 const postLike = createAsyncThunk(
   "board/postLike",
@@ -52,7 +43,7 @@ const postLike = createAsyncThunk(
 
 const loadComments = createAsyncThunk(
   "board/loadComments",
-  async ({ boardId}, { rejectWithValue }) => {
+  async ({ boardId }, { rejectWithValue }) => {
     try {
       const res = await userAPI.get(`/api/board/${boardId}/comments`);
       console.log(res);
@@ -66,9 +57,9 @@ const loadComments = createAsyncThunk(
 
 const loadReview = createAsyncThunk(
   "board/loadReview",
-  async ({ id }, { rejectWithValue }) => {
+  async ({boardId}, { rejectWithValue }) => {
     try {
-      const res = await userAPI.get(`/api/review`);
+      const res = await userAPI.get(`/api/review/${boardId}`);
       console.log(res);
       return res;
     } catch (err) {
@@ -170,20 +161,19 @@ const loadDetail = createAsyncThunk(
   }
 );
 
-const loadInfoDetail = (boardId) => {
-  return async (dispatch) => {
-    await userAPI
-      .get(`/api/boards/information/${boardId}`)
-      .then((response) => {
-        dispatch(boardSliceAction.loadInfoDetailData(response.data));
-        console.log(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-};
-
+const loadInfoDetail = createAsyncThunk(
+  "board/loadInfoDetail",
+  async ({ boardId }, { rejectWithValue }) => {
+    try {
+      const res = await userAPI.get(`/api/boards/information/${boardId}`);
+      console.log(res);
+      return res;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 
 //새로 만들고 있는 부분!!
 // const searchBoards = ({keyword})=>{
@@ -222,7 +212,9 @@ const loadMyMatchingComments = createAsyncThunk(
   "board/loadMyMatchingComments",
   async ({ page, amount }, { rejectWithValue }) => {
     try {
-      const res = await userAPI.get(`/api/mycomment/matching?page=${page}&amount=${amount}`);
+      const res = await userAPI.get(
+        `/api/mycomment/matching?page=${page}&amount=${amount}`
+      );
       return res;
     } catch (err) {
       console.log(err);
@@ -231,12 +223,13 @@ const loadMyMatchingComments = createAsyncThunk(
   }
 );
 
-
 const loadMyInformationComments = createAsyncThunk(
   "board/loadMyInformationComments",
   async ({ page, amount }, { rejectWithValue }) => {
     try {
-      const res = await userAPI.get(`/api/mycomment/information?page=${page}&amount=${amount}`);
+      const res = await userAPI.get(
+        `/api/mycomment/information?page=${page}&amount=${amount}`
+      );
       return res;
     } catch (err) {
       console.log(err);
@@ -249,7 +242,9 @@ const loadMyMatchings = createAsyncThunk(
   "board/loadMyMatchings",
   async ({ page, amount }, { rejectWithValue }) => {
     try {
-      const res = await userAPI.get(`/api/mypost/matching?page=${page}&amount=${amount}`);
+      const res = await userAPI.get(
+        `/api/mypost/matching?page=${page}&amount=${amount}`
+      );
       console.log(res);
       return res;
     } catch (err) {
@@ -263,7 +258,9 @@ const loadMyEntrys = createAsyncThunk(
   "board/loadMyEntrys",
   async ({ page, amount }, { rejectWithValue }) => {
     try {
-      const res = await userAPI.get(`/api/myentry?page=${page}&amount=${amount}`);
+      const res = await userAPI.get(
+        `/api/myentry?page=${page}&amount=${amount}`
+      );
       return res;
     } catch (err) {
       console.log(err);
@@ -342,26 +339,6 @@ const mainMyMatching = createAsyncThunk(
     }
   }
 );
-
-// const loadBoard = (type, cate, selectedCity, selectedGu, page) => {
-//   return async (dispatch) => {
-//     let loadURL;
-//     if (type === "matching")
-//       loadURL = `/api/boards/${type}?cate=${cate}&page=${page}&amount=12&city=${
-//         selectedCity ? selectedCity : "all"
-//       }&gu=${selectedGu ? selectedGu : "all"}`;
-//     else loadURL = `/api/boards/${type}?cate=${cate}&page=${page}&amount=12`;
-
-//     await userAPI
-//       .get(loadURL)
-//       .then((response) => {
-//         dispatch(boardSliceAction.loadBoardData(response.data));
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   };
-// };
 
 export const boardAction = {
   setBoardType,

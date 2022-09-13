@@ -72,7 +72,7 @@ const InformationDetailPage = () => {
   const loadBoardDetails = async () => {
     try {
       const res = await dispatch(
-        boardAction.loadDetail({ boardId: params.id })
+        boardAction.loadInfoDetail({ boardId: params.id })
       ).unwrap();
       detailsData = res.data;
       detailsData["createDate"] = GetDate(res.data.createdAt);

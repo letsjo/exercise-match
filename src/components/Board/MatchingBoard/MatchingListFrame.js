@@ -18,6 +18,8 @@ const MatchingListFrame = () => {
 
   const { isLogin } = useSelector((state) => state.userReducer);
 
+  const { selectedCity, selectedGu } = useSelector((state) => state.locationReducer);
+
   const [boardsList, setBoardsList] = useState([]);
   const query = useLocation().search;  
   const cate = new URLSearchParams(query).get("cate");

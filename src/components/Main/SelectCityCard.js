@@ -22,7 +22,7 @@ const SelectCityCard = ({ selectedCity, selectedGu, localData }) => {
     dispatch(
       locationSliceAction.selectLocation({
         selectedCity: localData?.city == "전국" ? "all" : localData?.city,
-        selectedGu: guName?guName:"",
+        selectedGu: guName?guName:"all",
       })
     );
   };
@@ -51,12 +51,12 @@ const SelectCityCard = ({ selectedCity, selectedGu, localData }) => {
         <>
           <GuSection onClick={(e) => SelectGu(e)}>
             <GuNameZone>{localData?.city} 전체</GuNameZone>
-            {selectedCity == "all" && selectedGu == "" && (
+            {selectedCity == "all" && selectedGu == "all" && (
               <CheckZone ref={selectedLocationRef}>
                 <AiOutlineCheck size={26} color={"#00CFFF"} />
               </CheckZone>
             )}
-            {selectedCity == localData?.city && selectedGu == "" && (
+            {selectedCity == localData?.city && selectedGu == "all" && (
               <CheckZone ref={selectedLocationRef}>
                 <AiOutlineCheck size={26} color={"#00CFFF"} />
               </CheckZone>
