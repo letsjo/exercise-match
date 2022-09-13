@@ -6,7 +6,7 @@ function Pagination({ total, amount, page, setPage }) {
   console.log(page,numPages);
   return (
     <Nav>
-      <Button onClick={() => setPage(page - 1)} disabled={page == 1}>
+      <Button onClick={() => setPage(page - 1)} disabled={total == 0 || page%10 == 1}>
         <HiOutlineChevronLeft size={20} />
       </Button>
       {Array(numPages < 11 ? numPages : 10)
@@ -20,7 +20,7 @@ function Pagination({ total, amount, page, setPage }) {
             {i + 1}
           </Button>
         ))}
-      <Button onClick={() => setPage(page + 1)} disabled={page == numPages}>
+      <Button onClick={() => setPage(page + 1)} disabled={total == 0 || page%10 == 0}>
         <HiOutlineChevronRight size={20} />
       </Button>
     </Nav>

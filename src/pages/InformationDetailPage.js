@@ -19,9 +19,7 @@ const InformationDetailPage = () => {
   const dispatch = useDispatch();
   const params = useParams();
 
-  const { detailData } = useSelector((state) => state.boardReducer);
-
-  console.log(params.id);
+  const { isLogin } = useSelector((state) => state.userReducer);
 
   const [isPopperShown, setIsPopperShown] = useState(false);
   const onOpenerClick = (e) => {
@@ -30,27 +28,66 @@ const InformationDetailPage = () => {
     setIsPopperShown(!isPopperShown);
   };
 
+  const [detailsList, setDetailsList] = useState({});
   const [like, setLike] = useState(true);
-  const [likeCount, setLikeCount] = useState(detailData?.likeCount);
-
+  const [likeCount, setLikeCount] = useState(detailsList.likeCount);
+  let detailsData = [];
+  
   const likeOnClick = async () => {
     try {
       const res = await dispatch(
-        boardAction.postLike({ boardId: params.id, isLike: like })
+        boardAction.postLike({
+          boardType: params.type,
+          boardId: params.id,
+          isLike: like,
+        })
       ).unwrap();
-      console.log(res);
       setLike(!like);
-      setLikeCount(res);
+      setLikeCount(res.data.likeCount);
     } catch (e) {
       console.log(e);
+      if (e.status === 403) {
+        Swal.fire({
+          icon: "warning",
+          title: "본인 글에는 할 수 없습니다.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    }
+  };
+
+  const getParticipate = async () => {
+    try {
+      const res = await dispatch(
+        boardAction.getParticipate({ boardId: params.id })
+      ).unwrap();
+      setLike(!res.data?.likeState);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const loadBoardDetails = async () => {
+    try {
+      const res = await dispatch(
+        boardAction.loadDetail({ boardId: params.id })
+      ).unwrap();
+      detailsData = res.data;
+      detailsData["createDate"] = GetDate(res.data.createdAt);
+      setDetailsList(detailsData)
+    } catch (err) {
+      console.log(err);
     }
   };
 
   useEffect(() => {
-    dispatch(boardAction.loadInfoDetail(params.id));
-  }, []);
+    loadBoardDetails();
+    getParticipate();
+  }, [isLogin]);
 
-  console.log(detailData);
+  console.log(detailsList);
   console.log(params.type);
 
   return (
@@ -60,9 +97,9 @@ const InformationDetailPage = () => {
         <ProfileWrap>
           <>
             <Profile>
-              <img src={detailData.memberSimpleDto?.profile} alt="" />
+              <img src={detailsList.memberSimpleDto?.profile} alt="" />
             </Profile>
-            <Nickname>{detailData.memberSimpleDto?.nickname}</Nickname>
+            <Nickname>{detailsList.memberSimpleDto?.nickname}</Nickname>
           </>
           <Dot>
             <BiDotsVerticalRounded size={30} onClick={onOpenerClick} />
@@ -77,30 +114,30 @@ const InformationDetailPage = () => {
         </ProfileWrap>
         <TitleWrap
           board={params.type}
-          isMatching={detailData.currentEntry >= detailData.maxEntry}
-          category={TranslateCates(detailData.category)}
-          title={detailData.title}
-          writeDate={GetDate(detailData.createdAt)}
+          isMatching={detailsList.currentEntry >= detailsList.maxEntry}
+          category={TranslateCates(detailsList.category)}
+          title={detailsList.title}
+          writeDate={GetDate(detailsList.createdAt)}
         />
-        <ContentWrap>{detailData.content}</ContentWrap>
-        {detailData.boardimage && (
+        <ContentWrap>{detailsList.content}</ContentWrap>
+        {detailsList.boardimage && (
           <ContentImage>
-            <img src={detailData.boardimage} alt="" />
+            <img src={detailsList.boardimage} alt="" />
           </ContentImage>
         )}
         <InfoWrap>
           <Icon onClick={likeOnClick}>
             {like ? (
-              <BsHeartFill color="red" size={24} />
-            ) : (
               <BsHeart size={24} />
+            ) : (
+              <BsHeartFill color="red" size={24} />
             )}
           </Icon>
-          <Text>좋아요 {likeCount}개</Text>
+          <Text>좋아요 {likeCount ? likeCount : detailsList.likeCount}개</Text>
           <CommentIcon>
             <MdComment size={24} />
           </CommentIcon>
-          <Text>댓글 {detailData.commentCount}개</Text>
+          <Text>댓글 {detailsList.commentCount}개</Text>
         </InfoWrap>
         <Comment boardId={params.id} />
       </Container>

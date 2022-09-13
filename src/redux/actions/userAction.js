@@ -319,7 +319,7 @@ const userWithdraw = createAsyncThunk(
 );
 
 const changePassword = createAsyncThunk(
-  "signUp/changePassword",
+  "user/changePassword",
   async (
     { passwordCheck, newPassword, newPasswordCheck },
     { rejectWithValue }
@@ -339,20 +339,21 @@ const changePassword = createAsyncThunk(
   }
 );
 
-const editProfile = (file) => {
-  return async (dispatch) => {
-    await userAPI
-      .put("/api/mypage/profile", file, {
+const editProfile = createAsyncThunk(
+  "user/editProfile",
+  async (data, { rejectWithValue }) => {
+    try {
+      const res = await userAPI.put("/api/mypage/profile", data, {
         headers: { "Content-Type": "multipart/form-data" },
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
       });
-  };
-};
+      console.log(res);
+      return res;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data.error);
+    }
+  }
+);
 
 export const userAction = {
   kakaoLogin,

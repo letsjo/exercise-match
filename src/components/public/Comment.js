@@ -63,8 +63,6 @@ const Comment = ({ boardId }) => {
     console.log(inputRef.current.value);
   };
 
-  console.log(commentsList);
-
   return (
     <Container>
       {isLogin && (
