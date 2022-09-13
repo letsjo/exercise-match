@@ -43,9 +43,9 @@ const Popover = ({ onOpenerClick }) => {
         나의 게시글
       </Boxes>
       <Logout
-        onClick={async () => {
+        onClick={() => {
           try{
-            const res = await dispatch(userAction.userLogOut({})).unwrap();            
+            const res = dispatch(userAction.userLogOut({})).unwrap();            
             console.log(res);
           } catch(e){
             console.log(e);

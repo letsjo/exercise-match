@@ -23,7 +23,6 @@ const postBoard = (data) => {
   };
 };
 
-
 const postLike = createAsyncThunk(
   "board/postLike",
   async ({ boardType, boardId, isLike }, { rejectWithValue }) => {
@@ -44,7 +43,7 @@ const postLike = createAsyncThunk(
 
 const loadComments = createAsyncThunk(
   "board/loadComments",
-  async ({ boardId}, { rejectWithValue }) => {
+  async ({ boardId }, { rejectWithValue }) => {
     try {
       const res = await userAPI.get(`/api/board/${boardId}/comments`);
       console.log(res);
@@ -58,9 +57,9 @@ const loadComments = createAsyncThunk(
 
 const loadReview = createAsyncThunk(
   "board/loadReview",
-  async ({ id }, { rejectWithValue }) => {
+  async ({boardId}, { rejectWithValue }) => {
     try {
-      const res = await userAPI.get(`/api/review`);
+      const res = await userAPI.get(`/api/review/${boardId}`);
       console.log(res);
       return res;
     } catch (err) {
@@ -213,7 +212,9 @@ const loadMyMatchingComments = createAsyncThunk(
   "board/loadMyMatchingComments",
   async ({ page, amount }, { rejectWithValue }) => {
     try {
-      const res = await userAPI.get(`/api/mycomment/matching?page=${page}&amount=${amount}`);
+      const res = await userAPI.get(
+        `/api/mycomment/matching?page=${page}&amount=${amount}`
+      );
       return res;
     } catch (err) {
       console.log(err);
@@ -222,12 +223,13 @@ const loadMyMatchingComments = createAsyncThunk(
   }
 );
 
-
 const loadMyInformationComments = createAsyncThunk(
   "board/loadMyInformationComments",
   async ({ page, amount }, { rejectWithValue }) => {
     try {
-      const res = await userAPI.get(`/api/mycomment/information?page=${page}&amount=${amount}`);
+      const res = await userAPI.get(
+        `/api/mycomment/information?page=${page}&amount=${amount}`
+      );
       return res;
     } catch (err) {
       console.log(err);
@@ -240,7 +242,9 @@ const loadMyMatchings = createAsyncThunk(
   "board/loadMyMatchings",
   async ({ page, amount }, { rejectWithValue }) => {
     try {
-      const res = await userAPI.get(`/api/mypost/matching?page=${page}&amount=${amount}`);
+      const res = await userAPI.get(
+        `/api/mypost/matching?page=${page}&amount=${amount}`
+      );
       console.log(res);
       return res;
     } catch (err) {
@@ -254,7 +258,9 @@ const loadMyEntrys = createAsyncThunk(
   "board/loadMyEntrys",
   async ({ page, amount }, { rejectWithValue }) => {
     try {
-      const res = await userAPI.get(`/api/myentry?page=${page}&amount=${amount}`);
+      const res = await userAPI.get(
+        `/api/myentry?page=${page}&amount=${amount}`
+      );
       return res;
     } catch (err) {
       console.log(err);
