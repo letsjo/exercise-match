@@ -10,11 +10,20 @@ const kakaoLogin = (code) => {
       .then((res) => {
         console.log(res); // 토큰이 넘어올 것임
 
-        const ACCESS_TOKEN = res.headers.accesstoken;
+        userAPI.defaults.headers.common["accesstoken"] = res.headers?.accesstoken;
 
-        sessionStorage.setItem("accesstoken", ACCESS_TOKEN); //예시로 로컬에 저장함
+        const ACCESS_TOKEN = res.headers.accesstoken;
+        const nickname = res.data.nickname;
+        const username = res.data.username;
+        const profile = res.data.profile;
+        const social = true;
+        sessionStorage.setItem("nickname", nickname);
+        sessionStorage.setItem("username", username);
+        sessionStorage.setItem("profile", profile);
+        sessionStorage.setItem("social", social);
+        sessionStorage.setItem("accesstoken", ACCESS_TOKEN);
         console.log("ACCESS_TOKEN: ", ACCESS_TOKEN);
-        dispatch(userSliceAction.setLogin());
+        dispatch(userSliceAction.setLogin({nickname, username, profile, social}));
       })
       .catch((err) => {
         console.log("소셜로그인 에러", err);
@@ -193,7 +202,7 @@ const editConcern = createAsyncThunk(
   async (editInterest, { rejectWithValue }) => {
     try {
       const res = await userAPI.put("/api/mypage/actionedit/concern", {
-        concerns: editInterest
+        concerns: editInterest,
       });
       console.log(res);
       return res;
@@ -281,7 +290,8 @@ const signUpCheckAuth = createAsyncThunk(
   async ({ username, authNum }, { rejectWithValue }) => {
     try {
       const res = await userAPI.post("/api/checkAuthNum", {
-        username, authNum,
+        username,
+        authNum,
       });
       console.log(res);
       return res;
@@ -310,10 +320,15 @@ const userWithdraw = createAsyncThunk(
 
 const changePassword = createAsyncThunk(
   "user/changePassword",
-  async ({ passwordCheck,newPassword, newPasswordCheck }, { rejectWithValue }) => {
+  async (
+    { passwordCheck, newPassword, newPasswordCheck },
+    { rejectWithValue }
+  ) => {
     try {
       const res = await userAPI.post("/api/changepass", {
-        passwordCheck, newPassword, newPasswordCheck
+        passwordCheck,
+        newPassword,
+        newPasswordCheck,
       });
       console.log(res);
       return res;

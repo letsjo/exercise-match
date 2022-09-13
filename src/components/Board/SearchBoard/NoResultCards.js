@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from "styled-components";
 
-const NoResultCards = () => {
+const NoResultCards = ({keyword}) => {
   return (
     // <Container>
         <SearchNoneContainer>
           <NoneTitleBox>
-            <NoneTextTop>'ㅇㅇㅇ'</NoneTextTop>
+            <NoneTextTop>'{keyword}'</NoneTextTop>
             <NoneTextBottom>에 대한 검색 결과가 없습니다.</NoneTextBottom>
           </NoneTitleBox>
           <NoneContentBox>
