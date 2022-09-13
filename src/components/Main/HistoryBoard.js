@@ -6,7 +6,7 @@ import BoardInfo from "./BoardNameInfo";
 const HistoryBoard = () => {
   return (
     <BoardWrapper>
-      <BoardInfo iconImg="" title="나의 매칭 게시글" boardUrl="/board?type=mymatching&cate=all&page=1&amount=12"/>
+      <BoardInfo iconImg="" title="나의 매칭 게시글" boardUrl="/board?type=mymatching&cate=all&page=1&amount=10"/>
       <BoardListHistory />
     </BoardWrapper>
   );

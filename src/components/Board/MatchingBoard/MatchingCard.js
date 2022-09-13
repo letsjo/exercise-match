@@ -24,7 +24,6 @@ const MatchingCard = ({
 }) => {
   const navigate = useNavigate();
   const refReviewButton = useRef();
-
   return (
     <Container
       onClick={(e) => {

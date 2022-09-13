@@ -28,7 +28,7 @@ const CategoryBoxFrame = ({ page }) => {
           onClick={(e) => {
             e.preventDefault();
             navigate(
-              `/board?type=${type}&cate=all&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+              `/board?type=${type}&cate=all&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`
             );
           }}
           selected={cate === "all"}
@@ -40,7 +40,7 @@ const CategoryBoxFrame = ({ page }) => {
             e.preventDefault();
 
             navigate(
-              `/board?type=${type}&cate=gym&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+              `/board?type=${type}&cate=gym&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`
             );
           }}
           selected={cate === "gym"}
@@ -52,7 +52,7 @@ const CategoryBoxFrame = ({ page }) => {
             e.preventDefault();
 
             navigate(
-              `/board?type=${type}&cate=running&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+              `/board?type=${type}&cate=running&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`
             );
           }}
           selected={cate === "running"}
@@ -64,7 +64,7 @@ const CategoryBoxFrame = ({ page }) => {
             e.preventDefault();
 
             navigate(
-              `/board?type=${type}&cate=riding&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+              `/board?type=${type}&cate=riding&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`
             );
           }}
           selected={cate === "riding"}
@@ -76,7 +76,7 @@ const CategoryBoxFrame = ({ page }) => {
             e.preventDefault();
 
             navigate(
-              `/board?type=${type}&cate=badminton&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+              `/board?type=${type}&cate=badminton&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`
             );
           }}
           selected={cate === "badminton"}
@@ -88,7 +88,7 @@ const CategoryBoxFrame = ({ page }) => {
             e.preventDefault();
 
             navigate(
-              `/board?type=${type}&cate=tennis&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+              `/board?type=${type}&cate=tennis&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`
             );
           }}
           selected={cate === "tennis"}
@@ -100,7 +100,7 @@ const CategoryBoxFrame = ({ page }) => {
             e.preventDefault();
 
             navigate(
-              `/board?type=${type}&cate=golf&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+              `/board?type=${type}&cate=golf&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`
             );
           }}
           selected={cate === "golf"}
@@ -112,7 +112,7 @@ const CategoryBoxFrame = ({ page }) => {
             e.preventDefault();
 
             navigate(
-              `/board?type=${type}&cate=etc&city=${selectedCity}&gu=${selectedGu}&page=1&amount=12`
+              `/board?type=${type}&cate=etc&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`
             );
           }}
           selected={cate === "etc"}

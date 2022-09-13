@@ -49,7 +49,6 @@ function App() {
 
   useEffect(() => {
     dispatch(locationAction.loadLocalList());
-    dispatch(locationAction.getLocation());
   }, []);
 
   useEffect(() => {

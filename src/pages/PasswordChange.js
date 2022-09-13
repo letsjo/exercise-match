@@ -17,21 +17,18 @@ const PasswordChange = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { email, password } = useSelector((state)=> state.signupReducer.info);
+
   const [page, setPage] = useState(1);
   const [nextAvailable, setNextAvailable] = useState(false);
   const [leftArrow, setLeftArrow] = useState(true);
   const [rightArrow, setRightArrow] = useState(false);
   
-  const [inputEmail, setInputEmail] = useState(email);
-  const [inputPassword, setInputPassword] = useState(password);
+  const [inputPassword, setInputPassword] = useState("");
+  const [inputRePassword, setInputRePassword] = useState("");
 
   const NextPageAllow = (e) => {
     e.preventDefault();
-    if (nextAvailable && page < 2) {
-      dispatch(signupSliceAction.getInfo({inputEmail,inputPassword}));
-      setPage(page + 1);
-    } else if (nextAvailable && page >= 2) {
+    if (nextAvailable) {
       Swal.fire({
         position: 'center',
         icon: 'success',
@@ -68,15 +65,6 @@ const PasswordChange = () => {
       <SignupOutline onSubmit={NextPageAllow}>
         <SignupBox>
           <ContentZone>
-            {/* {page == 1 ? (
-              <SignupAuth
-                setNextAvailable={setNextAvailable}
-                inputEmail={inputEmail}
-                setInputEmail={setInputEmail}
-                leftState={{ leftArrow, setLeftArrow }}
-                rightState={{ rightArrow, setRightArrow }}
-              />
-            ) : page == 2 ? ( */}
               <PasswordFindAuthPW
                 setNextAvailable={setNextAvailable}
                 inputPassword={inputPassword}
@@ -84,12 +72,8 @@ const PasswordChange = () => {
                 leftState={{ leftArrow, setLeftArrow }}
                 rightState={{ rightArrow, setRightArrow }}
               />
-            {/* // ) : (
-            //   <></>
-            // )} */}
           </ContentZone>
           <ButtonBigMain
-            // name={page == 2?("회원가입 완료"):("다음")}
             name="비밀번호 변경"
             nextAvailable={nextAvailable}
             NextPageAllow={NextPageAllow}

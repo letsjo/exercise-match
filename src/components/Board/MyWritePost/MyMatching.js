@@ -50,14 +50,13 @@ const MyMatching = ({ type }) => {
   };
 
   console.log(boardsList);
-
   return (
     <>
       {boardsList?.map((board, idx) => (
         <MatchingCard
           key={idx}
           type={
-            type == "type" && board.maxEntry == board.currentEntry
+            type == "entry" && board.maxEntry == board.currentEntry
               ? "apply"
               : ""
           }
