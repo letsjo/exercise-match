@@ -2,9 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { useRef } from 'react';
 
-const SearchOption = () => {
+const SearchOption = ({setSearch, search}) => {
 
     const SearchOption_ref= useRef();
+    // const onChangeSelect =(e)=>{
+    //   setSearch(e.target.value);
+    // };
 
   return (
     <Container
@@ -12,10 +15,12 @@ const SearchOption = () => {
             id="searchOption"
             name="searchOption"
             ref={SearchOption_ref}
+            value={search}
+            onChange={(e)=>setSearch(e.target.value)}
           >
-            <option value="제목+내용">제목+내용</option>
-            <option value="제목">제목</option>
-            <option value="내용">내용</option>
+            <option value="title_Content">제목+내용</option>
+            <option value="title">제목</option>
+            <option value="content">내용</option>
 
     </Container>
   )

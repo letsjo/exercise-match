@@ -68,7 +68,7 @@ const loadReview = createAsyncThunk(
   "board/loadReview",
   async ({ id }, { rejectWithValue }) => {
     try {
-      const res = await userAPI.get(`/api/reviewstar`);
+      const res = await userAPI.get(`/api/review`);
       console.log(res);
       return res;
     } catch (err) {
@@ -82,7 +82,7 @@ const postReview = createAsyncThunk(
   "board/loadReview",
   async (reviewData, { rejectWithValue }) => {
     try {
-      const res = await userAPI.post(`/api/reviewstar`, reviewData);
+      const res = await userAPI.post(`/api/review`, reviewData);
       console.log(res);
       return res;
     } catch (err) {
