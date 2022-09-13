@@ -20,17 +20,32 @@ const Board = () => {
     (state) => state.locationReducer
   );
 
-  const query = useLocation().search;
-  const type = new URLSearchParams(query).get("type");
-  const cate = new URLSearchParams(query).get("cate");
-  const city = new URLSearchParams(query).get("city");
-  const gu = new URLSearchParams(query).get("gu");
+  const querys = useLocation().search;
+  const query = new URLSearchParams(querys);
+  const type = query.get("type");
+  const cate = query.get("cate");
+  const city = query.get("city");
+  const gu = query.get("gu");
 
   useEffect(() => {
-    if (city && gu && (selectedCity != city || selectedGu != gu)) {
+    query.set("city", selectedCity);
+    query.set("gu", selectedGu);
+    window.history.pushState(
+      null,
+      null,
+      `/board?type=${type ? type : "matching"}&cate=${
+        cate ? cate : "all"
+      }&city=${selectedCity ? selectedCity : "all"}&gu=${
+        selectedGu ? selectedGu : ""
+      }&page=1&amount=12`
+    );
+  }, [selectedCity, selectedGu]);
+
+  useEffect(() => {
+    if (city && (selectedCity != city || selectedGu != gu)) {
       dispatch(
         locationSliceAction.selectLocation({
-          selectedCity: selectedCity? selectedCity : "all",
+          selectedCity: selectedCity ? selectedCity : "all",
           selectedGu: selectedGu ? selectedGu : "",
         })
       );

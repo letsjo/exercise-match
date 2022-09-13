@@ -14,14 +14,13 @@ import { boardAction } from "../redux/actions/boardAction";
 import Swal from "sweetalert2";
 import KakaoMapForDetail from "../components/Board/MatchingBoard/KakaoMapForDetail";
 import TranslateCates from "../utils/TranslateCates";
+import GetDate from "../utils/GetDate";
 
 const MatchingDetailpage = () => {
   const dispatch = useDispatch();
   const params = useParams();
 
-  const { detailData } = useSelector((state) => state.boardReducer);
-
-  console.log(params.id);
+  const { isLogin } = useSelector((state) => state.userReducer);
 
   const [isPopperShown, setIsPopperShown] = useState(false);
   const onOpenerClick = (e) => {
@@ -30,23 +29,26 @@ const MatchingDetailpage = () => {
     setIsPopperShown(!isPopperShown);
   };
 
+  const [detailsList, setDetailsList] = useState({});
   const [like, setLike] = useState(true);
-  const [likeCount, setLikeCount] = useState(0);
-  const [matchingCount, setMatchingCount] = useState(
-    detailData?.currentEntry ? detailData?.currentEntry : 0
-  );
-
+  const [likeCount, setLikeCount] = useState(detailsList?.likeCount);
+  const [matchingCount, setMatchingCount] = useState(detailsList?.currentEntry);
   const [matching, setMatching] = useState(true);
+  let detailsData = [];
 
   const likeOnClick = async () => {
     try {
       const res = await dispatch(
-        boardAction.postLike({ boardId: params.id, isLike: like })
+        boardAction.postLike({
+          boardType: "matching",
+          boardId: params.id,
+          isLike: like,
+        })
       ).unwrap();
-      console.log(res);
       setLike(!like);
-      setLikeCount(res);
+      setLikeCount(res.data.likeCount);
     } catch (e) {
+      console.log(e);
       if (e.status === 403) {
         Swal.fire({
           icon: "warning",
@@ -113,22 +115,34 @@ const MatchingDetailpage = () => {
       const res = await dispatch(
         boardAction.getParticipate({ boardId: params.id })
       ).unwrap();
+      setLike(!res.data?.likeState);
+      setMatching(!res.data?.matchingState);
       console.log(res);
     } catch (err) {
       console.log(err);
     }
   };
 
+  const loadBoardDetails = async () => {
+    try {
+      const res = await dispatch(
+        boardAction.loadDetail({ boardId: params.id })
+      ).unwrap();
+      detailsData = res.data;
+      detailsData["createDate"] = GetDate(res.data.createdAt);
+      detailsData["endDate"] = GetDate(res.data.endDateAt);
+      setDetailsList(detailsData)
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
-    dispatch(boardAction.loadDetail(params.id));
+    loadBoardDetails();
     getParticipate();
-  }, []);
+  }, [isLogin]);
 
-  useEffect(() => {
-    setLikeCount(detailData.likeCount);
-  }, [detailData]);
-
-  console.log(detailData);
+  console.log(detailsList);
 
   return (
     <>
@@ -137,9 +151,9 @@ const MatchingDetailpage = () => {
         <ProfileWrap>
           <>
             <Profile>
-              <img src={detailData.memberSimpleDto?.profile} alt="" />
+              <img src={detailsList.memberSimpleDto?.profile} alt="" />
             </Profile>
-            <Nickname>{detailData.memberSimpleDto?.nickname}</Nickname>
+            <Nickname>{detailsList.memberSimpleDto?.nickname}</Nickname>
           </>
           <Dot>
             <BiDotsVerticalRounded size={30} onClick={onOpenerClick} />
@@ -153,18 +167,18 @@ const MatchingDetailpage = () => {
           </Dot>
         </ProfileWrap>
         <TitleWrap
-          isMatching={detailData.currentEntry >= detailData.maxEntry}
-          category={TranslateCates(detailData.category)}
-          title={detailData.title}
-          writeDate={detailData.createdAt}
+          isMatching={detailsList.currentEntry >= detailsList.maxEntry}
+          category={TranslateCates(detailsList.category)}
+          title={detailsList.title}
+          writeDate={detailsList.createdAt}
         />
 
         <DatePersonnelWrap />
 
-        <ContentWrap>{detailData.content}</ContentWrap>
-        {detailData.boardimage && (
+        <ContentWrap>{detailsList.content}</ContentWrap>
+        {detailsList.boardimage && (
           <ContentImage>
-            <img src={detailData.boardimage} alt="" />
+            <img src={detailsList.boardimage} alt="" />
           </ContentImage>
         )}
         <LocationWrap>
@@ -177,13 +191,14 @@ const MatchingDetailpage = () => {
             />
           </LocationImg>
         </LocationWrap>
-        {detailData.currentEntry >= detailData.maxEntry ? (
+        {detailsList.currentEntry >= detailsList.maxEntry ? (
           <JoinButton isMatchingCompleted={true}>
             매칭이 종료되었습니다.
           </JoinButton>
         ) : (
           <JoinButton isMatchingCompleted={false} onClick={matchingApply}>
-            참여하기 {matchingCount}/{detailData?.maxEntry}
+            참여하기 {matchingCount ? matchingCount : detailsList.currentEntry}/
+            {detailsList?.maxEntry}
           </JoinButton>
         )}
 
@@ -195,11 +210,11 @@ const MatchingDetailpage = () => {
               <BsHeartFill color="red" size={24} />
             )}
           </Icon>
-          <Text>좋아요 {likeCount}개</Text>
+          <Text>좋아요 {likeCount ? likeCount : detailsList.likeCount}개</Text>
           <CommentIcon>
             <MdComment size={24} />
           </CommentIcon>
-          <Text>댓글 {detailData.commentCount}개</Text>
+          <Text>댓글 {detailsList.commentCount}개</Text>
         </InfoWrap>
         <Comment boardId={params.id} />
       </Container>

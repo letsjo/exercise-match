@@ -10,19 +10,20 @@ import MatchingCard from "../MatchingBoard/MatchingCard";
 const MyMatching = ({ type }) => {
   const [boardsList, setBoardsList] = useState([]);
   const dispatch = useDispatch();
-  let res;
-  let boardData = [];
   
   const query = useLocation().search;
   const pageNumber = new URLSearchParams(query).get("page");
   const amount = new URLSearchParams(query).get("amount");
 
-  
   const [page, setPage] = useState(pageNumber?pageNumber:1);
+  const [boardTotalCount, setBoardTotalCount] = useState(0);
+
+  let res;
+  let boardData = [];
 
   useEffect(() => {
     loadMyMatchings();
-  }, []);
+  }, [page]);
 
   const loadMyMatchings = async () => {
     try {
@@ -42,6 +43,7 @@ const MyMatching = ({ type }) => {
         return resDate;
       });
       setBoardsList(boardData);
+      setBoardTotalCount(res.data.totalCount);
     } catch (e) {
       console.log(e);
     }
@@ -84,7 +86,7 @@ const MyMatching = ({ type }) => {
       ))}
       <PageFrame>
         <Frame>
-          <Pagination total={5} amount={2} page={page} setPage={setPage} />
+          <Pagination total={boardTotalCount} amount={amount} page={page} setPage={setPage} />
         </Frame>
       </PageFrame>
     </>

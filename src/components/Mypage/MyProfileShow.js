@@ -9,6 +9,7 @@ import ShowStarScore from "../public/ShowStarScore";
 import { FaPen } from "react-icons/fa";
 import { boardAction } from "../../redux/actions/boardAction";
 import { userAction } from "../../redux/actions/userAction";
+import { userSliceAction } from "../../redux/reducers/userReducer";
 
 const MyProfileShow = ({ mypage = true, profileImg }) => {
   const navigate = useNavigate();
@@ -30,15 +31,25 @@ const MyProfileShow = ({ mypage = true, profileImg }) => {
 
   useEffect(() => {
     onHandleSubmit();
-  },[files]);
+  }, [files]);
 
-  const onHandleSubmit = (e) => {
-    try{
-      dispatch(userAction.editProfile(files[0]));
-    } catch(e){
+  const onHandleSubmit = async (e) => {
+    if (!files[0]) return false;
+    const object = new FormData();
+    object.append("data", files[0]);
+
+    try {
+      const res = await dispatch(userAction.editProfile(object)).unwrap();
+      console.log("등록완료",res);
+      const previewImage = document.getElementById("profile-image");
+      previewImage.src = res.data.profileimgurl;
+      dispatch(userSliceAction.setUserProfile(res.data.profileimgurl));
+      let sessionStorageLogin = sessionStorage;
+      sessionStorageLogin.setItem("profile", res.data.profileimgurl);
+    } catch (e) {
       console.log(e);
     }
-  }
+  };
 
   return (
     <Container>
@@ -47,6 +58,7 @@ const MyProfileShow = ({ mypage = true, profileImg }) => {
           <PhotoContainer>
             <PhotoFrame onClick={handleClick}>
               <img
+                id="profile-image"
                 src={userProfile ? userProfile : "/images/anonymousProfile.png"}
                 alt=""
               />

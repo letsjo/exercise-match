@@ -6,6 +6,7 @@ const KakaoMapForPost = ( { Place, setPlace, setMarkAddress, setSelectPosition }
   const [InputText, setInputText] = useState("");
 
   const onChange = (e) => {
+    e.preventDefault();
     setInputText(e.target.value);
   };
 

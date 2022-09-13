@@ -8,26 +8,31 @@ import MyCommentCard from "../BoardPublic/MyCommentCard";
 import Pagination from "../BoardPublic/Pagination";
 
 const MyComment = () => {
-  const [page, setPage] = useState(1);
   const [commentsList, setCommentsList] = useState([]);
+  const dispatch = useDispatch();
+
   const query = useLocation().search;
   const type = new URLSearchParams(query).get("type");
+  const pageNumber = new URLSearchParams(query).get("page");
+  const amount = new URLSearchParams(query).get("amount");
+
+  const [page, setPage] = useState(pageNumber?pageNumber:1);
+  const [boardTotalCount, setBoardTotalCount] = useState(0);
 
   let res;
   let commentsData = [];
 
-  const dispatch = useDispatch();
 
   useEffect(() => {
     loadMyComments();
-  }, []);
+  }, [page]);
 
   const loadMyComments = async () => {
     try {
       if (type == "mymatching") {
-        res = await dispatch(boardAction.loadMyMatchingComments({})).unwrap();
+        res = await dispatch(boardAction.loadMyMatchingComments({page,amount})).unwrap();
       } else {
-        res = await dispatch(boardAction.loadMyInformationComments({})).unwrap();
+        res = await dispatch(boardAction.loadMyInformationComments({page,amount})).unwrap();
       }
       commentsData = res.data?.map((resDate) => {
         resDate["createDate"] = GetDate(resDate?.createdAt);
@@ -35,6 +40,7 @@ const MyComment = () => {
       });
       console.log(res);
       setCommentsList(commentsData);
+      setBoardTotalCount(res.data.totalCount);
     } catch (e) {
       console.log(e);
     }
@@ -63,7 +69,7 @@ const MyComment = () => {
     date="20xx.xx.xx"/>    */}
       <PageFrame>
         <Frame>
-          <Pagination total={5} amount={2} page={page} setPage={setPage} />
+          <Pagination total={boardTotalCount} amount={amount} page={page} setPage={setPage} />
         </Frame>
       </PageFrame>
     </>

@@ -68,7 +68,7 @@ const loadReview = createAsyncThunk(
   "board/loadReview",
   async ({ id }, { rejectWithValue }) => {
     try {
-      const res = await userAPI.get(`/api/reviewstar`);
+      const res = await userAPI.get(`/api/review`);
       console.log(res);
       return res;
     } catch (err) {
@@ -82,7 +82,7 @@ const postReview = createAsyncThunk(
   "board/loadReview",
   async (reviewData, { rejectWithValue }) => {
     try {
-      const res = await userAPI.post(`/api/reviewstar`, reviewData);
+      const res = await userAPI.post(`/api/review`, reviewData);
       console.log(res);
       return res;
     } catch (err) {
@@ -156,19 +156,19 @@ const applyBoard = createAsyncThunk(
   }
 );
 
-const loadDetail = (boardId) => {
-  return async (dispatch) => {
-    await userAPI
-      .get(`/api/boards/matching/${boardId}`)
-      .then((response) => {
-        dispatch(boardSliceAction.loadDetailData(response.data));
-        console.log(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-};
+const loadDetail = createAsyncThunk(
+  "board/loadDetail",
+  async ({ boardId }, { rejectWithValue }) => {
+    try {
+      const res = await userAPI.get(`/api/boards/matching/${boardId}`);
+      console.log(res);
+      return res;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 
 const loadInfoDetail = (boardId) => {
   return async (dispatch) => {
@@ -220,9 +220,9 @@ const searchBoard = createAsyncThunk(
 
 const loadMyMatchingComments = createAsyncThunk(
   "board/loadMyMatchingComments",
-  async ({}, { rejectWithValue }) => {
+  async ({ page, amount }, { rejectWithValue }) => {
     try {
-      const res = await userAPI.get(`/api/mycomment/matching`);
+      const res = await userAPI.get(`/api/mycomment/matching?page=${page}&amount=${amount}`);
       return res;
     } catch (err) {
       console.log(err);
@@ -234,9 +234,9 @@ const loadMyMatchingComments = createAsyncThunk(
 
 const loadMyInformationComments = createAsyncThunk(
   "board/loadMyInformationComments",
-  async ({}, { rejectWithValue }) => {
+  async ({ page, amount }, { rejectWithValue }) => {
     try {
-      const res = await userAPI.get(`/api/mycomment/information`);
+      const res = await userAPI.get(`/api/mycomment/information?page=${page}&amount=${amount}`);
       return res;
     } catch (err) {
       console.log(err);
@@ -330,6 +330,19 @@ const getParticipate = createAsyncThunk(
   }
 );
 
+const mainMyMatching = createAsyncThunk(
+  "board/mainMyMatching",
+  async ({ category }, { rejectWithValue }) => {
+    try {
+      const res = await userAPI.get(`/api/mainboards/matching/${category}`);
+      return res;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data.error);
+    }
+  }
+);
+
 // const loadBoard = (type, cate, selectedCity, selectedGu, page) => {
 //   return async (dispatch) => {
 //     let loadURL;
@@ -372,4 +385,5 @@ export const boardAction = {
   loadInformation,
   loadMatching,
   getParticipate,
+  mainMyMatching,
 };

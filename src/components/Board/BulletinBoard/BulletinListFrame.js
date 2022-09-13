@@ -22,6 +22,7 @@ const BulletinListFrame = () => {
   const amount = new URLSearchParams(query).get("amount");
   
   const [page, setPage] = useState(pageNumber?pageNumber:1);
+  const [boardTotalCount, setBoardTotalCount] = useState(0);
   let boardData = [];
     
   useEffect(() => {
@@ -37,6 +38,7 @@ const BulletinListFrame = () => {
         return resDate;
       });
       setBoardsList(boardData);
+      setBoardTotalCount(res.data.totalCount);
     } catch (e) {
       console.log(e);
     }
@@ -75,7 +77,7 @@ const BulletinListFrame = () => {
 
         <PageFrame>
           <Frame>
-            <Pagination total={boardsList.totalCount} amount={amount} page={page} setPage={setPage} />
+            <Pagination total={boardTotalCount} amount={amount} page={page} setPage={setPage} />
           </Frame>
         </PageFrame>
       </BoardListFrame>
