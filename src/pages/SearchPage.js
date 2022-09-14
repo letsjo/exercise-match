@@ -16,11 +16,31 @@ import MatchingCard from "../components/Board/MatchingBoard/MatchingCard";
 const SearchPage = () => {
   const dispatch = useDispatch();
 
-  const query = useLocation().search;
-  const keyword = new URLSearchParams(query).get("keyword");
-  console.log(keyword);
+  const { selectedCity, selectedGu } = useSelector(
+    (state) => state.locationReducer
+  );
+
+  const querys = useLocation().search;
+  const query = new URLSearchParams(querys);
+  // const query = useLocation().search;
+  const keyword = query.get("keyword");
+  const city = query.get("city");
+  const gu = query.get("gu");
+  console.log(keyword, city, gu);
+
+  useEffect(()=>{
+    query.set("city", selectedCity);
+    query.set("gu", selectedGu);
+    window.history.pushState(
+      null,
+      null,
+      `/search?keyword=${keyword ? keyword : ""}&city=${selectedCity ? selectedCity : "all"}&gu=${
+        selectedGu ? selectedGu : "all"
+      }&page=1&amount=10`
+    );
+  }, [selectedCity, selectedGu,keyword]);
+
   const [searchList, setSearchList] = useState([]);
-  // let boardData = [];
 
   const [search, setSearch] = useState("title_Content");
 
@@ -34,13 +54,11 @@ const SearchPage = () => {
     loadSearch();
   }, [keyword]);
 
-  const { selectedCity, selectedGu } = useSelector(
-    (state) => state.locationReducer
-  );
-
   const loadSearch = async () => {
     try {
-      const res = await dispatch(boardAction.searchBoard({ keyword, search, selectedCity,selectedGu})).unwrap();
+      const res = await dispatch(
+        boardAction.searchBoard({ keyword, search, selectedCity, selectedGu })
+      ).unwrap();
       const boardData = res.data;
       // console.log(res);
       // console.log(boardData);
@@ -51,8 +69,6 @@ const SearchPage = () => {
   };
 
   console.log(searchList);
-
-  
 
   return (
     <Container>

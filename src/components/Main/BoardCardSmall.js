@@ -30,6 +30,7 @@ const BoardCardFrame = styled.div`
   height: 90px;
   margin: 5px 10px;
   cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
   &:hover{
     text-decoration-line: underline;
   }
@@ -54,6 +55,12 @@ const WriterZone = styled.div`
 const ContentZone = styled.div`
   font-weight: 400;
   font-size: 10px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; // 원하는 라인수
+  -webkit-box-orient: vertical;
 `;
 
 const RightPhotoZone = styled.div`
@@ -73,7 +80,8 @@ const PhotoFrame = styled.div`
   border-radius: 5px;
   img {
     object-fit: cover;
-    width: 100%;
+    width: 80px;
+    height: 70px;
   }
 `;
 
