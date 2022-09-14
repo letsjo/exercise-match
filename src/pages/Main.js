@@ -93,7 +93,7 @@ const Main = () => {
       />
       <OtherBoard
         iconImg="/images/cate07_etc.png"
-        category="etc"
+        category="hiking"
         title="[기타] - 실시간 인기 게시글"
         boardUrl={`/board?type=matching&cate=etc&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`}
       />
