@@ -1,9 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const BoardCardSmall = ({ title, writer, content, image }) => {
+const BoardCardSmall = ({ title, writer, content, boardId, image }) => {
+  const navigate = useNavigate();
   return (
-    <BoardCardFrame>
+    <BoardCardFrame onClick={(e)=>navigate(`/detail/information/${boardId}`)}>
       <LeftContentZone>
         <TitleZone>{title}</TitleZone>
         <WriterZone>{writer}</WriterZone>
@@ -27,6 +29,10 @@ const BoardCardFrame = styled.div`
   width: 410px;
   height: 90px;
   margin: 5px 10px;
+  cursor: pointer;
+  &:hover{
+    text-decoration-line: underline;
+  }
 `;
 
 const LeftContentZone = styled.div`
