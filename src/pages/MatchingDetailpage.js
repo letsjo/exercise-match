@@ -131,7 +131,7 @@ const MatchingDetailpage = () => {
       detailsData = res.data;
       detailsData["createDate"] = GetDate(res.data.createdAt);
       detailsData["endDate"] = GetDate(res.data.endDateAt);
-      setDetailsList(detailsData)
+      setDetailsList(detailsData);
     } catch (err) {
       console.log(err);
     }
@@ -173,8 +173,12 @@ const MatchingDetailpage = () => {
           writeDate={GetDate(detailsList.createdAt)}
         />
 
-        <DatePersonnelWrap 
-        month={detailsList.endDate?.month} day={detailsList.endDate?.day} week={detailsList.endDate?.week} 
+        <DatePersonnelWrap
+          month={detailsList.endDate?.month}
+          day={detailsList.endDate?.day}
+          week={detailsList.endDate?.week}
+          currentEntry={detailsList.currentEntry}
+          maxEntry={detailsList.maxEntry}
         />
 
         <ContentWrap>{detailsList.content}</ContentWrap>

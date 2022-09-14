@@ -13,65 +13,52 @@ const ReviewBox = () => {
   const [rate, setRate] = useState(5);
   const [show, setShow] = useState(false);
   const [hovered, setHovered] = useState(null);
-  const [otherMember, setOtherMember]= useState();
+  const [otherMember, setOtherMember] = useState();
   const params = useParams();
 
   const checkboxRefForm = useRef();
-  
-  const {userNickName} = useSelector((state)=>state.userReducer);
- 
 
-  useEffect(()=>{
+  const { userNickName } = useSelector((state) => state.userReducer);
+
+  useEffect(() => {
     loadReview(params.id);
-  }, [])
+  }, []);
 
-  const loadReview = async(boardId) =>{
-    try{
-      const res = await dispatch(boardAction.loadReview({boardId})).unwrap();
-      const memberName=res.data.otherMember;
+  const loadReview = async (boardId) => {
+    try {
+      const res = await dispatch(boardAction.loadReview({ boardId })).unwrap();
+      const memberName = res.data.otherMember;
       console.log(res);
       setOtherMember(memberName);
     } catch (e) {
       console.log(e);
     }
-  }
-  
+  };
 
   const save = async (e) => {
     e.preventDefault();
 
+    const num=[];
+    const plus=rate>3?0:10;
+    Array.from({length:5},(_, idx)=>{
+      checkboxRefForm.current[idx].checked && num.push(idx+1+plus);
+    })
+
     const reviewData = {
-      score : rate,
-      num: 1,
-      // {
-      //   1: checkboxRefForm.current[0].checked,
-      //   2: checkboxRefForm.current[1].checked,
-      //   3: checkboxRefForm.current[2].checked,
-      //   4: checkboxRefForm.current[3].checked,
-      //   5: checkboxRefForm.current[4].checked,
-      // },
+      score: rate,
+      num:num,
       review: checkboxRefForm.current[5].value,
-      boardId:params.id,
+      boardId: params.id,
     };
 
     console.log(reviewData);
     console.log(checkboxRefForm);
 
-    try{
+    try {
       const res = await dispatch(boardAction.postReview(reviewData));
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: '매칭 리뷰가 작성되었습니다!',
-        showConfirmButton: false,
-        timer: 1500
-      });
-
-      
-    } catch(e){
+    } catch (e) {
       console.log(e);
     }
-
   };
 
   return (
@@ -83,15 +70,19 @@ const ReviewBox = () => {
       <StarForm show={show} ref={checkboxRefForm} onSubmit={(e) => save(e)}>
         <StarBox show={show}>
           {Array.from({ length: 5 }, (_, idx) => {
-            return  (!show && hovered < idx + 1 ) || (show && rate < idx + 1)? (
+            return (!show && hovered < idx + 1) || (show && rate < idx + 1) ? (
               <Star
                 key={idx}
                 onClick={() => {
                   if (!show) setRate(idx + 1);
                   setShow(!show);
                 }}
-                onMouseEnter={() => {if (!show) setHovered(idx + 1)}}
-                onMouseLeave={() => {if (!show) setHovered(null)}}
+                onMouseEnter={() => {
+                  if (!show) setHovered(idx + 1);
+                }}
+                onMouseLeave={() => {
+                  if (!show) setHovered(null);
+                }}
               >
                 <BsStar size={42} />
               </Star>
@@ -102,8 +93,12 @@ const ReviewBox = () => {
                   if (!show) setRate(idx + 1);
                   setShow(!show);
                 }}
-                onMouseEnter={() => {if (!show) setHovered(idx + 1)}}
-                onMouseLeave={() => {if (!show) setHovered(null)}}
+                onMouseEnter={() => {
+                  if (!show) setHovered(idx + 1);
+                }}
+                onMouseLeave={() => {
+                  if (!show) setHovered(null);
+                }}
               >
                 <BsStarFill size={42} color="#00CFFF" />
               </Star>

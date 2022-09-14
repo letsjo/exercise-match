@@ -90,9 +90,21 @@ const postReview = createAsyncThunk(
       console.log(reviewData);
       const res = await userAPI.post(`/api/review`, reviewData);
       console.log(res);
+      Swal.fire({
+        icon: 'success',
+        title: '매칭 리뷰가 작성되었습니다!',
+        showConfirmButton: false,
+        timer: 1500
+      });
       return res;
     } catch (err) {
       console.log(err);
+      Swal.fire({
+        icon: "warning",
+        title: '이미 작성한 리뷰입니다!',
+        showConfirmButton: false,
+        timer: 1500
+      });
       return rejectWithValue(err.response.data.error);
     }
   }

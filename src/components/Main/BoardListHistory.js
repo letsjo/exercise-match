@@ -24,7 +24,7 @@ const BoardListHistory = () => {
       console.log(e);
     }
   };
-
+  
   return (
     <BoardFrame>
       {historyList &&

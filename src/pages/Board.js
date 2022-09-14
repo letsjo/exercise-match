@@ -111,10 +111,11 @@ const Board = () => {
               <SelectMatching type={type} onClick={MatchingOnClick}>
                 매칭 게시판
               </SelectMatching>
-
+              {isLogin && (
               <SelectMyMatching type={type} onClick={MyMatchingOnClick}>
                 나의 게시글
               </SelectMyMatching>
+              )}
             </>
           )}
 
