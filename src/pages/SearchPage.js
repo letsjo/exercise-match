@@ -5,10 +5,13 @@ import NoResultCards from "../components/Board/SearchBoard/NoResultCards";
 import ResultCards from "../components/Board/SearchBoard/ResultCards";
 import BulletinCard from "../components/Board/BulletinBoard/BulletinCard";
 import SearchOption from "../components/Board/BoardPublic/SearchOption";
+import CurrentLocationCard from "../components/Main/CurrentLocationCard";
+import TranslateCates from "../utils/TranslateCates";
 import { boardAction } from "../redux/actions/boardAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import MatchingCard from "../components/Board/MatchingBoard/MatchingCard";
 
 const SearchPage = () => {
   const dispatch = useDispatch();
@@ -19,13 +22,25 @@ const SearchPage = () => {
   const [searchList, setSearchList] = useState([]);
   // let boardData = [];
 
+  const [search, setSearch] = useState("title_Content");
+
+  useEffect(() => {
+    console.log(search);
+  }, [search]);
+
+  console.log(search);
+
   useEffect(() => {
     loadSearch();
   }, [keyword]);
 
+  const { selectedCity, selectedGu } = useSelector(
+    (state) => state.locationReducer
+  );
+
   const loadSearch = async () => {
     try {
-      const res = await dispatch(boardAction.searchBoard({ keyword })).unwrap();
+      const res = await dispatch(boardAction.searchBoard({ keyword, search, selectedCity,selectedGu})).unwrap();
       const boardData = res.data;
       // console.log(res);
       // console.log(boardData);
@@ -37,36 +52,54 @@ const SearchPage = () => {
 
   console.log(searchList);
 
-  const [search, setSearch]= useState();
-
-    useEffect(()=>{
-      console.log(search);
-    },[search])
-
-
+  
 
   return (
     <Container>
       <NavBar />
       <InlineContainer>
-        {searchList == "" ? (
-          <NoResultCards keyword={keyword} />
-        ) : (
-          <BulletinContainer>
-            <CategorySelectBox>
-              <SearchOption setSearch={setSearch} search={search} />
-            </CategorySelectBox>
-            <BulletinCard
-              title="제목"
-              content="내용"
-              comment="3"
-              like="3"
-              createdAt="2022-08-29"
-              image=""
-              boardId=""
-            />
-          </BulletinContainer>
-        )}
+        <BulletinContainer>
+          <CurrentLocationCard isDetail={true} />
+          <CategorySelectBox>
+            <SearchOption setSearch={setSearch} search={search} />
+          </CategorySelectBox>
+          {searchList == "" ? (
+            <NoResultCards keyword={keyword} />
+          ) : (
+            searchList &&
+            searchList.map((list, idx) => (
+              // <BulletinCard
+              //   key={idx}
+              //   title={list.title}
+              //   content={list.content}
+              //   comment={list.commentCount}
+              //   like={list.likeCount}
+              //   createdAt={list.createdAt}
+              //   image={list.boardimage}
+              //   boardId={list.id}
+              // />
+              <MatchingCard
+                key={idx}
+                category={TranslateCates(list.category)}
+                title={list.title}
+                context={list.content}
+                comment={list.commentCount}
+                like={list.likeCount}
+                createdDate={list.createdAt}
+                image={list.boardimage}
+                boardId={list.id}
+                endDate={list.endDate}
+                currentEntry={list.currentEntry}
+                maxEntry={list.maxEntry}
+                writerNickname={list.nickname}
+                writerProfile={list.profile}
+                locationCity={list.city}
+                locationGu={list.gu}
+              />
+            ))
+          )}
+        </BulletinContainer>
+
         {/* <NoResultCards/> */}
         {/* <ResultCards/> */}
       </InlineContainer>

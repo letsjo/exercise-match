@@ -59,7 +59,7 @@ const loadReview = createAsyncThunk(
   "board/loadReview",
   async ({boardId}, { rejectWithValue }) => {
     try {
-      const res = await userAPI.get(`/api/review/${boardId}`);
+      const res = await userAPI.get(`/api/review?boardId=${boardId}`);
       console.log(res);
       return res;
     } catch (err) {
@@ -73,6 +73,7 @@ const postReview = createAsyncThunk(
   "board/loadReview",
   async (reviewData, { rejectWithValue }) => {
     try {
+      console.log(reviewData);
       const res = await userAPI.post(`/api/review`, reviewData);
       console.log(res);
       return res;
@@ -192,11 +193,11 @@ const loadInfoDetail = createAsyncThunk(
 
 const searchBoard = createAsyncThunk(
   "board/search",
-  async ({ keyword }, { rejectWithValue }) => {
+  async ({ keyword ,search,selectedCity,selectedGu }, { rejectWithValue }) => {
     console.log(keyword);
     try {
       const res = await userAPI.get(
-        `/board/search?page=1&amount=10&city=대구&gu=달서구&sort=title_Content&keyword=${keyword}&boardType=matching`
+        `/board/search?page=1&amount=10&city=${selectedCity}&gu=${selectedGu}&sort=${search}&keyword=${keyword}&boardType=matching`
       );
       console.log(res);
 

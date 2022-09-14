@@ -75,6 +75,15 @@ const BulletinListFrame = () => {
               image={list.boardimage}
             />
           ))}
+          {/* <BulletinCard
+              boardId="1"
+              title="ㅈㅔㅁㅗㄱ"
+              content="ㄴㅐㅇㅛㅇ"
+              comment="2"
+              like="1"
+              createdAt={{year:"2022",month:"2",day:"30"} }
+              image="https://mblogthumb-phinf.pstatic.net/MjAxOTExMjVfMTAy/MDAxNTc0NjQ4OTUwOTA1.K72NQMjhPry5VgAvIDXP_edBNMhba79-G213-MjguYgg.MjsUIJpwEP5zEmxrJGxwamrva0Oousl6jIk1AUm5Masg.JPEG.luv9272/IMG_0078.jpg?type=w800"
+            /> */}
 
         <PageFrame>
           <Frame>
