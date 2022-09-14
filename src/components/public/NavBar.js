@@ -15,6 +15,8 @@ const NavBar = () => {
   const [search, setSearch] = useState();
 
   const { isLogin, userProfile } = useSelector((state) => state.userReducer);
+  const {selectedCity, selectedGu} = useSelector((state)=>state.locationReducer);
+  console.log(selectedCity, selectedGu);
 
   const onSubmitSearch = (e) => {
     if (e.key === "Enter") {
@@ -24,7 +26,7 @@ const NavBar = () => {
         setSearch(inputRef.current.value);
         const keyword= inputRef.current.value;
         // console.log(keyword);
-        navigate(`/search?keyword=${keyword}`); 
+        navigate(`/search?keyword=${keyword}&city=${selectedCity}&gu=${selectedGu}`); 
         // try {
         //   const res = await dispatch(
         //     boardAction.searchBoard({ keyword: inputRef.current.value })
