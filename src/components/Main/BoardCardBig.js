@@ -43,8 +43,8 @@ const TopPhotoZone = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  min-width: 250px;
-  width: 250px;
+  /* height: 155px; */
+ 
 `;
 
 const PhotoFrame = styled.div`
@@ -55,7 +55,8 @@ const PhotoFrame = styled.div`
   border-radius: 5px;
   img {
     object-fit: cover;
-    width: 100%;
+    width: 254px;
+    height: 155px;
   }
 `;
 
@@ -78,6 +79,12 @@ const WriterZone = styled.div`
 const ContentZone = styled.div`
   font-weight: 400;
   font-size: 10px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; // 원하는 라인수
+  -webkit-box-orient: vertical;
 `;
 
 export default BoardCardBig;

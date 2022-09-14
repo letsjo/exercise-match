@@ -12,7 +12,7 @@ const BannerCateCard = ({ data }) => {
     return (
       <BoardCard onClick={(e) => navigate(`/detail/matching/${data.boardId}`)}>
         <ImageBox>
-          <img src="https://placehold.jp/156x136.png" alt="" />
+          <img src={data?.boardimage} alt="" />
         </ImageBox>
         <ContentBox>
           <Category>
@@ -66,6 +66,13 @@ const BoardCard = styled.div`
 
 const ImageBox = styled.div`
   margin-right: 20px;
+  width: 156px;
+  height: 136px;
+  img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const ContentBox = styled.div`

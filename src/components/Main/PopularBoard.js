@@ -46,7 +46,7 @@ const PopularBoard = ({ iconImg, category, title, boardUrl }) => {
                   writer={list?.nickname}
                   content={list?.content}
                   boardId={list?.boardId}
-                  image="https://placehold.jp/250x150.png"
+                  image={list?.boardimage}
                 />
               ))}
           </BoardListFrame>
@@ -61,7 +61,7 @@ const PopularBoard = ({ iconImg, category, title, boardUrl }) => {
                   writer={list?.nickname}
                   content={list?.content}
                   boardId={list?.boardId}
-                  image="https://placehold.jp/80x70.png"
+                  image={list?.boardimage}
                 />
               ))}
             {/* 
