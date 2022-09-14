@@ -5,6 +5,7 @@ import styled, { css } from "styled-components";
 import KakaoMapForPost from "../components/Board/MatchingBoard/KakaoMapForPost";
 import NavBar from "../components/public/NavBar";
 import { boardAction } from "../redux/actions/boardAction";
+import Swal from "sweetalert2";
 
 const CommunityPostWrite = () => {
   const navigate = useNavigate();
@@ -75,6 +76,7 @@ const CommunityPostWrite = () => {
     try {
       dispatch(boardAction.postBoard(object));
       console.log(object);
+      
     } catch (e) {
       console.log(e);
     }

@@ -18,6 +18,7 @@ const ReviewBox = () => {
   const checkboxRefForm = useRef();
   
   const {userNickName} = useSelector((state)=>state.userReducer);
+ 
 
   useEffect(()=>{
     loadReview(params.id);

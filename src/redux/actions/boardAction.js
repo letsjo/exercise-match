@@ -1,6 +1,7 @@
 import { boardSliceAction } from "../reducers/boardReducer";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import userAPI from "../../apis/userAPI";
+import Swal from "sweetalert2";
 
 function setBoardType(type, cate) {
   return async (dispatch) => {
@@ -16,9 +17,22 @@ const postBoard = (data) => {
       })
       .then((response) => {
         console.log(response);
+        Swal.fire({
+          icon: "success",
+          title: "작성완료!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       })
+     
       .catch((err) => {
         console.log(err);
+        Swal.fire({
+          icon: "warning",
+          title: "작성실패!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       });
   };
 };
@@ -272,9 +286,9 @@ const loadMyEntrys = createAsyncThunk(
 
 const loadMyInformation = createAsyncThunk(
   "board/loadMyInformation",
-  async ({ page }, { rejectWithValue }) => {
+  async ({ page ,amount}, { rejectWithValue }) => {
     try {
-      const res = await userAPI.get(`/api/mypost/information`);
+      const res = await userAPI.get(`/api/mypost/information?page=${page}&amount=${amount}`);
       return res;
     } catch (err) {
       console.log(err);
