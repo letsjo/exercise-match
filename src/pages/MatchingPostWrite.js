@@ -5,8 +5,10 @@ import styled, { css } from "styled-components";
 import KakaoMapForPost from "../components/Board/MatchingBoard/KakaoMapForPost";
 import NavBar from "../components/public/NavBar";
 import { boardAction } from "../redux/actions/boardAction";
+import Swal from "sweetalert2";
 
 const PostWrite = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const category_ref = useRef(null);
   const person_ref = useRef(null);
@@ -77,10 +79,23 @@ const PostWrite = () => {
     }
 
     try {
-      dispatch(boardAction.postBoard(object));
-      console.log(object);
+      const res = await dispatch(boardAction.postBoard(object)).unwrap();
+      console.log(res);
+      Swal.fire({
+        icon: "success",
+        title: "작성완료!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate(`/detail/matching/${res.data}`);
     } catch (e) {
       console.log(e);
+      Swal.fire({
+        icon: "warning",
+        title: "작성실패!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 

@@ -1,14 +1,18 @@
 import React, { useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import { boardAction } from "../../redux/actions/boardAction";
 
-const DetailpagePopover = ({ onOpenerClick, boardId }) => {
+const DetailpagePopover = ({ onOpenerClick, EditBoard, boardId, boardType, category }) => {
   const settingsWindowRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { selectedCity, selectedGu } = useSelector(
+    (state) => state.locationReducer
+  );
 
   useEffect(() => {
     const pageClickEvent = (e) => {
@@ -75,6 +79,7 @@ const DetailpagePopover = ({ onOpenerClick, boardId }) => {
             showConfirmButton: false,
             timer: 1500,
           });
+          boardType=="matching"?navigate(`/board?type=${boardType}&cate=${category}}&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`):navigate(`/board?type=${boardType}&cate=${category}}&page=1&amount=10`)
         } catch (e) {
           console.log(e);
           Swal.fire({
@@ -90,7 +95,10 @@ const DetailpagePopover = ({ onOpenerClick, boardId }) => {
 
   return (
     <Wrapper ref={settingsWindowRef}>
-      <Text onClick={()=>navigate("/matchingpostWrite")}>게시글 수정</Text>
+      <Text onClick={(e)=>{
+      EditBoard(); 
+      navigate("/matchingpostWrite");}
+    }>게시글 수정</Text>
       <Text onClick={Alert}>게시글 삭제</Text>
       <CloseBtn onClick={onClose}>닫기</CloseBtn>
     </Wrapper>

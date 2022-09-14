@@ -17,7 +17,7 @@ const MyProfileShow = ({ mypage = true, profileImg }) => {
   const profileInputRef = useRef();
   const [files, setFiles] = useState("");
 
-  const { userNickName, userJoinList, userInterest, userProfile } = useSelector(
+  const { userNickName, userJoinList, userInterest, userProfile, userStar } = useSelector(
     (state) => state.userReducer
   );
 
@@ -77,7 +77,7 @@ const MyProfileShow = ({ mypage = true, profileImg }) => {
           </PhotoContainer>
           <InfoFrame>
             <NameZone>{userNickName}</NameZone>
-            <ShowStarScore score={4} width={133.25} height={25} />
+            <ShowStarScore score={userStar} width={133.25} height={25} />
           </InfoFrame>
         </LeftZone>
       </LeftFrame>

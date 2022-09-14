@@ -42,6 +42,7 @@ const PopularBoard = ({ iconImg, category, title, boardUrl }) => {
             {bigListData &&
               bigListData.map((list, idx) => (
                 <BoardCardBig
+                  key={idx}
                   title={list?.title}
                   writer={list?.nickname}
                   content={list?.content}
@@ -57,6 +58,7 @@ const PopularBoard = ({ iconImg, category, title, boardUrl }) => {
             {listData &&
               listData.map((list, idx) => (
                 <BoardCardSmall
+                  key={idx}
                   title={list?.title}
                   writer={list?.nickname}
                   content={list?.content}

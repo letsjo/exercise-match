@@ -50,7 +50,7 @@ const BoardInfo = ({
             <CategoryCard onClick={e => setMainCate("golf")} selected={mainCate == "golf"}>
               <div>골프</div>
             </CategoryCard>
-            <CategoryCard onClick={e => setMainCate("etc")} selected={mainCate == "etc"}>
+            <CategoryCard onClick={e => setMainCate("hiking")} selected={mainCate == "hiking"}>
               <div>기타</div>
             </CategoryCard>
           </CateButtonWrap>

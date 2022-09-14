@@ -15,6 +15,7 @@ import Swal from "sweetalert2";
 import KakaoMapForDetail from "../components/Board/MatchingBoard/KakaoMapForDetail";
 import TranslateCates from "../utils/TranslateCates";
 import GetDate from "../utils/GetDate";
+import { boardSliceAction } from "../redux/reducers/boardReducer";
 
 const MatchingDetailpage = () => {
   const dispatch = useDispatch();
@@ -36,6 +37,11 @@ const MatchingDetailpage = () => {
   const [matching, setMatching] = useState(true);
   let detailsData = [];
 
+  const EditBoard = () => {
+    dispatch(boardSliceAction.loadDetailData(detailsList));
+
+  }
+
   const likeOnClick = async () => {
     try {
       const res = await dispatch(
@@ -56,6 +62,13 @@ const MatchingDetailpage = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+      } else if (e.status === 500 && !isLogin ){
+        Swal.fire({
+          icon: "warning",
+          title: "로그인 후 이용할 수 있습니다.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     }
   };
@@ -64,8 +77,6 @@ const MatchingDetailpage = () => {
     let timerInterval;
 
     try {
-      setMatching(!matching);
-      console.log(matching);
       Swal.fire({
         title: "매칭신청중...",
         width: 439,
@@ -82,6 +93,7 @@ const MatchingDetailpage = () => {
       ).unwrap();
       clearInterval(timerInterval);
       console.log(resApply);
+      setMatching(!matching);
       setMatchingCount(resApply.data.currentEntry);
       Swal.fire({
         icon: "success",
@@ -96,6 +108,13 @@ const MatchingDetailpage = () => {
         Swal.fire({
           icon: "warning",
           title: "본인 글에는 할 수 없습니다.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else if (err.status === 500 && !isLogin ){
+        Swal.fire({
+          icon: "warning",
+          title: "로그인 후 이용할 수 있습니다.",
           showConfirmButton: false,
           timer: 1500,
         });
@@ -162,6 +181,9 @@ const MatchingDetailpage = () => {
               <DetailpagePopover
                 onOpenerClick={onOpenerClick}
                 boardId={params.id}
+                EditBoard={EditBoard}
+                boardType="matching"
+                category={detailsList.category}
               ></DetailpagePopover>
             )}
           </Dot>

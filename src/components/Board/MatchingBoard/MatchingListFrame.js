@@ -22,6 +22,7 @@ const MatchingListFrame = () => {
 
   const [boardsList, setBoardsList] = useState([]);
   const query = useLocation().search;  
+  const type = new URLSearchParams(query).get("type");
   const cate = new URLSearchParams(query).get("cate");
   const city = new URLSearchParams(query).get("city");
   const gu = new URLSearchParams(query).get("gu");
@@ -33,9 +34,21 @@ const MatchingListFrame = () => {
   const [page, setPage] = useState(pageNumber?pageNumber:1);
   const [boardTotalCount, setBoardTotalCount] = useState(0);
     
+
+  const querys = useLocation().search;
+
   useEffect(() => {
     loadMatching();
-  }, [page,cate,city,gu]);
+    window.history.pushState(
+      null,
+      null,
+      `/board?type=${type ? type : "matching"}&cate=${
+        cate ? cate : "all"
+      }&city=${selectedCity ? selectedCity : "all"}&gu=${
+        selectedGu ? selectedGu : "all"
+      }&page=${page}&amount=${amount}`
+    );
+  }, [page,cate,city,gu,amount]);
 
   const loadMatching = async () => {
     try {

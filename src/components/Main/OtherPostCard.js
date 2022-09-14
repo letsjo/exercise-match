@@ -1,9 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const OtherPostCard = ({ boardId, category, title, writer, image }) => {
+  const navigate = useNavigate();
   return (
-    <CardWrap onClick={(e) => navigator(`/detail/information/${boardId}`)}>
+    <CardWrap onClick={(e) => navigate(`/detail/information/${boardId}`)}>
       <Image>
         <img src={image} alt="" />
       </Image>

@@ -34,7 +34,7 @@ const MyComment = () => {
       } else {
         res = await dispatch(boardAction.loadMyInformationComments({page,amount})).unwrap();
       }
-      commentsData = res.data?.map((resDate) => {
+      commentsData = res.data?.commentInfo.map((resDate) => {
         resDate["createDate"] = GetDate(resDate?.createdAt);
         return resDate;
       });
@@ -51,15 +51,16 @@ const MyComment = () => {
   return (
     <>
       {commentsList &&
-        commentsList.map((comment) => {
+        commentsList.map((comment,idx) => (
           <MyCommentCard
-            boardId={comment?.boardid}
+            key={idx}
+            boardId={comment?.boardId}
             commentId={comment?.id}
             content={comment?.comment}
-            title={comment?.comment}
+            title={comment?.boardTitle}
             date={comment?.createDate}
-          />;
-        })}
+          />
+        ))}
 
       {/* <MyCommentCard content="댓글 내용 들어가는 칸" 
     title="글 제목입니다" 

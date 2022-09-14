@@ -1,18 +1,15 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useSelector } from "react-redux";
 import styled from "styled-components";
 import InputAnimation from "../public/InputAnimation";
 
-const PasswordFindAuthPW = ({
+const PasswordChangeAuthPW = ({
   setNextAvailable,
-  inputPassword,
+  setInputOldPassword,
   setInputPassword,
+  setInputRePassword,
   leftState,
   rightState,
 }) => {
-  const { email, password, repassword } = useSelector(
-    (state) => state.signupReducer.info
-  );
 
   useEffect(() => {
     setNextAvailable(false);
@@ -33,7 +30,9 @@ const PasswordFindAuthPW = ({
     ) {
       setNextAvailable(true);
       rightState.setRightArrow(true);
-      setInputPassword(RefFirstPassword.current.value);
+      setInputOldPassword(RefFirstPassword.current.value);
+      setInputPassword(RefSecondPassword.current.value);
+      setInputRePassword(RefThirdPassword.current.value);
     } else {
       setNextAvailable(false);
       rightState.setRightArrow(false);
@@ -85,4 +84,4 @@ const Container = styled.div`
   gap: 25px;
 `;
 
-export default PasswordFindAuthPW;
+export default PasswordChangeAuthPW;

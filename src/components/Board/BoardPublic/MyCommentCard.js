@@ -2,17 +2,17 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const MyCommentCard = ({ boardId, content, title, date }) => {
+const MyCommentCard = ({ boardId, commentId, type, content, title, date }) => {
   const navigate = useNavigate();
   return (
     <Container
       onClick={() => {
-        navigate(`/detail/matching/${boardId}`);
+        navigate(`/detail/${type}/${boardId}`);
       }}
     >
       <Content>{content}</Content>
       <Title>{title}</Title>
-      <Date>{date}</Date>
+      <Date>{date.year+"."+date.month+"."+date.day}</Date>
     </Container>
   );
 };
@@ -23,6 +23,10 @@ const Container = styled.div`
   padding: 10px;
   box-sizing: border-box;
   border-top: 1px solid #dedede;
+  cursor: pointer;
+  &:hover {
+    text-decoration-line: underline;
+  }
 `;
 
 const Content = styled.div`

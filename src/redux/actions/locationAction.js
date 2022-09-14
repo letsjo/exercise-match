@@ -43,12 +43,12 @@ const getLocation = () => {
         .catch((e) => console.log(e));
     } catch (e) {
       console.log(e);
-      // Swal.fire({
-      //   icon: "warning",
-      //   title: "위치정보를 허용해 주세요!",
-      //   text: "서비스 이용에 제한이 있을 수 있습니다.",
-      // });
-      // dispatch(modalSliceAction.modalLocalSelectOpen());
+      Swal.fire({
+        icon: "warning",
+        title: "위치정보를 허용해 주세요!",
+        text: "서비스 이용에 제한이 있을 수 있습니다.",
+      });
+      dispatch(modalSliceAction.modalLocalSelectOpen());
     }
   };
 };

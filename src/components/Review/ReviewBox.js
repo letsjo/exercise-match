@@ -37,8 +37,15 @@ const ReviewBox = () => {
 
   const save = async (e) => {
     e.preventDefault();
-
+    
     const num=[];
+    Array.from({ length: 5 }, (_, index) => {
+      checkboxRefForm.current[index].checked && num.push(index+1);
+    }
+    );
+
+    console.log(num);
+
     const plus=rate>3?0:10;
     Array.from({length:5},(_, idx)=>{
       checkboxRefForm.current[idx].checked && num.push(idx+1+plus);

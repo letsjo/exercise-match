@@ -20,7 +20,7 @@ function Pagination({ total, amount, page, setPage }) {
             {i + 1}
           </Button>
         ))}
-      <Button onClick={() => setPage(page + 1)} disabled={total == 0 || page%10 == 0}>
+      <Button onClick={() => setPage(page + 1)} disabled={total == 0 || numPages == 1 || page%10 == 0}>
         <HiOutlineChevronRight size={20} />
       </Button>
     </Nav>
