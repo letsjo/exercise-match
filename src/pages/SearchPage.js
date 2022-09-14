@@ -28,17 +28,17 @@ const SearchPage = () => {
   const gu = query.get("gu");
   console.log(keyword, city, gu);
 
-  useEffect(()=>{
+  useEffect(() => {
     query.set("city", selectedCity);
     query.set("gu", selectedGu);
     window.history.pushState(
       null,
       null,
-      `/search?keyword=${keyword ? keyword : ""}&city=${selectedCity ? selectedCity : "all"}&gu=${
-        selectedGu ? selectedGu : "all"
-      }&page=1&amount=10`
+      `/search?keyword=${keyword ? keyword : ""}&city=${
+        selectedCity ? selectedCity : "all"
+      }&gu=${selectedGu ? selectedGu : "all"}&page=1&amount=10`
     );
-  }, [selectedCity, selectedGu,keyword]);
+  }, [selectedCity, selectedGu, keyword]);
 
   const [searchList, setSearchList] = useState([]);
 
@@ -125,6 +125,9 @@ const SearchPage = () => {
 
 const Container = styled.div`
   background-color: #f0f0f0;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
 `;
 
 const InlineContainer = styled.div`
