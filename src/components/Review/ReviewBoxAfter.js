@@ -24,6 +24,22 @@ const ReviewBoxAfter = ({ rate }) => {
     }
   }, [rate]);
 
+  // const onClick = (e, interest) => {
+  //   e.preventDefault();
+  //   const findIndex = editInterest?.findIndex((i) => i == interest);
+  //   if (editInterest && editInterest?.length < 3 && findIndex === -1) {
+  //     setEditInterest([...editInterest, interest]);
+  //   } else if (editInterest?.length <= 3 && findIndex >= 0) {
+  //     setEditInterest([
+  //       ...editInterest.slice(0, findIndex),
+  //       ...editInterest.slice(findIndex + 1),
+  //     ]);
+  //   } else {
+  //     setAlertSent(true);
+  //   }
+  //   console.log(editInterest);
+  // };
+
   return (
     <Container>
       {rate > 3 ? (
@@ -35,7 +51,8 @@ const ReviewBoxAfter = ({ rate }) => {
       <ReviewCheck>
         {commentList.map((comment, idx) => {
           return (
-            <CheckList key={idx}>
+            <CheckList
+            key={idx}>
               <CheckBox>
                 <input type="checkbox" />{comment}
               </CheckBox>

@@ -49,7 +49,7 @@ const MyMatching = ({ type }) => {
     }
   };
 
-  console.log(boardsList);
+  // console.log(boardsList[1].endDateAt);
   return (
     <>
       {boardsList?.map((board, idx) => (
@@ -64,14 +64,7 @@ const MyMatching = ({ type }) => {
           category="카테고리"
           title={board.title}
           date={
-            board.endDate.year +
-            "년 " +
-            board.endDate.month +
-            "월 " +
-            board.endDate.day +
-            "일 " +
-            board.endDate.week +
-            "요일"
+            GetDate(board?.endDateAt)
           }
           currentEntry={board?.currentEntry}
           maxEntry={board?.maxEntry}

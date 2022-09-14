@@ -211,9 +211,9 @@ const PasswordFindAuth = ({
             인증번호 다시 전송 (남은 횟수 {sentAuthCount}회)
           </AuthButton>
           <AuthInfo>
-            인증번호에 대한 안내 문구
+            {/* 인증번호에 대한 안내 문구
             <br />
-            인증번호에 대한 안내 문구
+            인증번호에 대한 안내 문구 */}
           </AuthInfo>
           <AuthNumberTitle>인증번호 ?자리</AuthNumberTitle>
           <InputBox>

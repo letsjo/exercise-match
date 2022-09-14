@@ -1,26 +1,34 @@
-import React from 'react'
-import styled from 'styled-components'
-import {BsCalendarCheck,BsFillPeopleFill} from "react-icons/bs";
+import React from "react";
+import styled from "styled-components";
+import { BsCalendarCheck, BsFillPeopleFill } from "react-icons/bs";
 
-const DatePersonnelWrap = ({month, day, week}) => {
+const DatePersonnelWrap = ({ month, day, week, currentEntry, maxEntry }) => {
   console.log(month, day, week);
   return (
     <DateWrap>
-        <Date>
-          <Icon>
-            <BsCalendarCheck size={20}/>
-          </Icon>
-          <Text>{month}월 {day}일 {week}요일</Text>
-        </Date>
-        <Personnel>
-          <Icon>
-          <BsFillPeopleFill size={20}/>
-          </Icon>
-          <Text>1/4 매칭</Text>
-        </Personnel>
-      </DateWrap>
-  )
-}
+      <Date>
+        <Icon>
+          <BsCalendarCheck size={20} />
+        </Icon>
+        <Text>
+          {month}월 {day}일 {week}요일
+        </Text>
+      </Date>
+      <Personnel>
+        <Icon>
+          <BsFillPeopleFill size={20} />
+        </Icon>
+        { currentEntry ==  maxEntry  ? (
+          <Text>매칭완료</Text>
+        ) : (
+          <Text>
+            {currentEntry}/{maxEntry} 매칭
+          </Text>
+        )}
+      </Personnel>
+    </DateWrap>
+  );
+};
 
 const DateWrap = styled.div`
   height: 64px;
@@ -41,7 +49,7 @@ const Icon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color:gray;
+  color: gray;
 `;
 
 const Text = styled.div`
@@ -55,4 +63,4 @@ const Personnel = styled.div`
   display: flex;
 `;
 
-export default DatePersonnelWrap
+export default DatePersonnelWrap;

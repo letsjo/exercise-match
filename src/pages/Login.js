@@ -79,7 +79,7 @@ const Login = () => {
         Swal.fire("로그인에 성공하셨습니다!");
         navigate("/");
       } catch (err) {
-        window.alert(err);
+       setErrorMessage(true);
       }
     }
   };
@@ -127,7 +127,7 @@ const Login = () => {
               <img src="/images/iconKakaoTalk.png" alt="" />
             </KakaoIcon>
             <GoogleIcon onClick={googleLogin}>
-              <img src="/images/iconNaver.png" alt="" />
+              <img src="/images/free-icon-google-720255 (1).png" alt="" />
             </GoogleIcon>
           </IconBox>
         </LoginWrap>
