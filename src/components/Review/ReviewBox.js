@@ -5,7 +5,8 @@ import { useState, useRef } from "react";
 import ReviewBoxAfter from "./ReviewBoxAfter";
 import { useDispatch, useSelector } from "react-redux";
 import { boardAction } from "../../redux/actions/boardAction";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ReviewBox = () => {
   const dispatch = useDispatch();
@@ -36,14 +37,16 @@ const ReviewBox = () => {
 
     const reviewData = {
       score : rate,
-      checkList: {
-        1: checkboxRefForm.current[0].checked,
-        2: checkboxRefForm.current[1].checked,
-        3: checkboxRefForm.current[2].checked,
-        4: checkboxRefForm.current[3].checked,
-        5: checkboxRefForm.current[4].checked,
-      },
+      num: 1,
+      // {
+      //   1: checkboxRefForm.current[0].checked,
+      //   2: checkboxRefForm.current[1].checked,
+      //   3: checkboxRefForm.current[2].checked,
+      //   4: checkboxRefForm.current[3].checked,
+      //   5: checkboxRefForm.current[4].checked,
+      // },
       review: checkboxRefForm.current[5].value,
+      boardId:params.id,
     };
 
     console.log(reviewData);
@@ -51,6 +54,15 @@ const ReviewBox = () => {
 
     try{
       const res = await dispatch(boardAction.postReview(reviewData));
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: '매칭 리뷰가 작성되었습니다!',
+        showConfirmButton: false,
+        timer: 1500
+      });
+
+      
     } catch(e){
       console.log(e);
     }
