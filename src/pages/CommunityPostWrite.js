@@ -76,7 +76,7 @@ const CommunityPostWrite = () => {
     try {
       dispatch(boardAction.postBoard(object));
       console.log(object);
-      
+      // navigate("/");
     } catch (e) {
       console.log(e);
     }
