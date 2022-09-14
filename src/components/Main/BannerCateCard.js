@@ -1,12 +1,18 @@
 import React from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { BsCalendarCheck } from "react-icons/bs";
 import { MdPeople } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import TranslateCates from "../../utils/TranslateCates";
+import GetDate from "../../utils/GetDate";
 
-const BannerCateCard = ({ data }) => {
+const BannerCateCard = ({ data, date }) => {
   const navigate = useNavigate();
+  // const [detailsList, setDetailsList]= useState();
+  // let detailsData=[];
+
+  // detailsData
 
   if (data)
     return (
@@ -25,15 +31,7 @@ const BannerCateCard = ({ data }) => {
               <BsCalendarCheck size={15} />
             </Icon>
             <Text>
-              {data?.endDate?.year &&
-                data?.endDate?.year +
-                  "년 " +
-                  data?.endDate.month +
-                  "월 " +
-                  data?.endDate.day +
-                  "일 " +
-                  data?.endDate.week +
-                  "요일"}
+              {date?.month + "월 " + date?.day + "일 " + date.week + "요일"}
             </Text>
           </Box>
           <Box>
@@ -68,7 +66,7 @@ const ImageBox = styled.div`
   margin-right: 20px;
   width: 156px;
   height: 136px;
-  img{
+  img {
     object-fit: cover;
     width: 100%;
     height: 100%;

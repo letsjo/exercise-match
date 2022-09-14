@@ -9,7 +9,7 @@ const MatchingCard = ({
   category,
   type,
   title,
-  endDate,
+  date,
   currentEntry,
   maxEntry,
   context,
@@ -47,16 +47,7 @@ const MatchingCard = ({
             <BsCalendarCheck size={20} />
           </Icon>
           <Text>
-            {endDate?.year
-              ? endDate?.year +
-                "년 " +
-                endDate?.month +
-                "월 " +
-                endDate?.day +
-                "일 (" +
-                endDate?.week +
-                ")"
-              : ""}
+          {date?.month && date?.month + "월 " + date?.day + "일 " + date.week + "요일"}
           </Text>
         </Date>
         <Personnel>

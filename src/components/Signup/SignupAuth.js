@@ -18,7 +18,7 @@ const SignupAuth = ({
   rightState,
 }) => {
   const dispatch = useDispatch();
-  var time = 60000 * 3;
+  var time = 60000*3;
 
   const { email } = useSelector((state) => state.signupReducer.info);
 
@@ -33,6 +33,8 @@ const SignupAuth = ({
   const [sentAuth, setSentAuth] = useState(false);
   const [sentAuthCount, setSentAuthCount] = useState(3);
   const [showTimer, setShowTimer] = useState("");
+
+  const [authData, setAuthData]=useState();
 
   const playNumber = useRef(null);
   const timerNumber = useRef(null);
@@ -81,6 +83,7 @@ const SignupAuth = ({
               userAction.checkEmail({ username: inputEmail })
             ).unwrap();
             console.log(res);
+            setAuthData(res.data);
             dispatch(signupSliceAction.getInfo({inputEmail}));
             setAlertcomment("인증번호가 전송되었습니다.");
             TIMER();
@@ -129,7 +132,7 @@ const SignupAuth = ({
   const TIMER = () => {
     PlAYTIME = setInterval(function () {
       time = time - 1000;
-      let min = time / (60 * 1000); //초를 분으로 나눠준다.
+      let min = time / (60 * 1000 ); //초를 분으로 나눠준다.
       if (sec > 0) {
         //sec=60 에서 1씩 빼서 출력해준다.
         sec = sec - 1;
@@ -206,14 +209,14 @@ const SignupAuth = ({
             onClick={(e) => SentAuthCode(e)}
             validationState={validationState}
           >
-            인증번호 다시 전송 (남은 횟수 {sentAuthCount}회)
+            인증번호 다시 전송 ({authData}회)
           </AuthButton>
           <AuthInfo>
-            인증번호에 대한 안내 문구
+            {/* 인증번호에 대한 안내 문구
             <br />
-            인증번호에 대한 안내 문구
+            인증번호에 대한 안내 문구 */}
           </AuthInfo>
-          <AuthNumberTitle>인증번호 ?자리</AuthNumberTitle>
+          <AuthNumberTitle>인증번호 7자리</AuthNumberTitle>
           <InputBox>
             <Input>
               <AuthInput

@@ -195,8 +195,12 @@ const MatchingDetailpage = () => {
           writeDate={GetDate(detailsList.createdAt)}
         />
 
-        <DatePersonnelWrap 
-        month={detailsList.endDate?.month} day={detailsList.endDate?.day} week={detailsList.endDate?.week} 
+        <DatePersonnelWrap
+          month={detailsList.endDate?.month}
+          day={detailsList.endDate?.day}
+          week={detailsList.endDate?.week}
+          currentEntry={detailsList.currentEntry}
+          maxEntry={detailsList.maxEntry}
         />
 
         <ContentWrap>{detailsList.content}</ContentWrap>

@@ -49,7 +49,7 @@ const Main = () => {
         buttonCate={true}
       />
       <InputContainer>
-        <InputDesign onClick={e=>navigate("/")}>
+        <InputDesign onClick={e=>navigate(`/board?type=matching&cate=gym&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`)}>
           <img src="/images/bannerSub.png" alt="" />
         </InputDesign>
       </InputContainer>
@@ -108,6 +108,7 @@ const InputContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 100px;
+  cursor: pointer;
 `;
 
 const InputDesign = styled.div`

@@ -74,47 +74,56 @@ const SearchPage = () => {
     <Container>
       <NavBar />
       <InlineContainer>
-        <BulletinContainer>
-          <CurrentLocationCard isDetail={true} />
-          <CategorySelectBox>
-            <SearchOption setSearch={setSearch} search={search} />
-          </CategorySelectBox>
-          {searchList == "" ? (
-            <NoResultCards keyword={keyword} />
-          ) : (
-            searchList &&
-            searchList.map((list, idx) => (
-              // <BulletinCard
-              //   key={idx}
-              //   title={list.title}
-              //   content={list.content}
-              //   comment={list.commentCount}
-              //   like={list.likeCount}
-              //   createdAt={list.createdAt}
-              //   image={list.boardimage}
-              //   boardId={list.id}
-              // />
-              <MatchingCard
-                key={idx}
-                category={TranslateCates(list.category)}
-                title={list.title}
-                context={list.content}
-                comment={list.commentCount}
-                like={list.likeCount}
-                createdDate={list.createdAt}
-                image={list.boardimage}
-                boardId={list.id}
-                endDate={list.endDate}
-                currentEntry={list.currentEntry}
-                maxEntry={list.maxEntry}
-                writerNickname={list.nickname}
-                writerProfile={list.profile}
-                locationCity={list.city}
-                locationGu={list.gu}
-              />
-            ))
-          )}
-        </BulletinContainer>
+        {searchList == "" ? (
+          <NoResultCards keyword={keyword} />
+        ) : (
+          <>
+            <BulletinContainer>
+              <CurrentLocationCard isDetail={true} />
+              <SelectLine>
+                <CategorySelectBox>
+                  <SearchOption setSearch={setSearch} search={search} />
+                </CategorySelectBox>
+                <SelectCategory>
+                  <SelectMatching>매칭</SelectMatching>
+                  <Line />
+                  <SelectInformation>정보공유</SelectInformation>
+                </SelectCategory>
+              </SelectLine>
+              {searchList &&
+                searchList.map((list, idx) => (
+                  // <BulletinCard
+                  //   key={idx}
+                  //   title={list.title}
+                  //   content={list.content}
+                  //   comment={list.commentCount}
+                  //   like={list.likeCount}
+                  //   createdAt={list.createdAt}
+                  //   image={list.boardimage}
+                  //   boardId={list.id}
+                  // />
+                  <MatchingCard
+                    key={idx}
+                    category={TranslateCates(list.category)}
+                    title={list.title}
+                    context={list.content}
+                    comment={list.commentCount}
+                    like={list.likeCount}
+                    createdDate={list.createdAt}
+                    image={list.boardimage}
+                    boardId={list.id}
+                    endDate={list.endDate}
+                    currentEntry={list.currentEntry}
+                    maxEntry={list.maxEntry}
+                    writerNickname={list.nickname}
+                    writerProfile={list.profile}
+                    locationCity={list.city}
+                    locationGu={list.gu}
+                  />
+                ))}
+            </BulletinContainer>
+          </>
+        )}
 
         {/* <NoResultCards/> */}
         {/* <ResultCards/> */}
@@ -145,6 +154,38 @@ const BulletinContainer = styled.div`
   padding-top: 10px;
   padding-left: 70px;
   box-sizing: border-box;
+`;
+
+const SelectLine = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const SelectCategory = styled.div`
+  width: 110px;
+  margin-left: 41px;
+  box-sizing: border-box;
+  height: 31px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const SelectMatching = styled.div`
+&:hover{
+  font-weight: bold;
+}
+`;
+
+const SelectInformation = styled.div`
+&:hover{
+  font-weight: bold;
+}
+`;
+
+const Line = styled.div`
+  border-left: 1px solid gray;
+  height: 18px;
 `;
 
 const CategorySelectBox = styled.div`

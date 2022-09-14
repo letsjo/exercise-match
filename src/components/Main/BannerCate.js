@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { boardAction } from "../../redux/actions/boardAction";
 import BannerCateCard from "./BannerCateCard";
 import BoardInfo from "./BoardNameInfo";
+import GetDate from "../../utils/GetDate";
 
 const BannerCate = ({ iconImg, title, buttonCate, selectedGu, selectedCity }) => {
   const [mainCate, setMainCate] = useState("all");
@@ -25,6 +26,9 @@ const BannerCate = ({ iconImg, title, buttonCate, selectedGu, selectedCity }) =>
     }
   }
 
+  console.log(GetDate(mainMatchingList.endDateAt));
+  console.log(mainMatchingList);
+
   return (
     <BoardWrapper>
       <BoardInfo
@@ -37,12 +41,12 @@ const BannerCate = ({ iconImg, title, buttonCate, selectedGu, selectedCity }) =>
       />
       <BoardFrame>
         <BoardColumn>
-          <BannerCateCard data={mainMatchingList[0]}/>
-          <BannerCateCard data={mainMatchingList[1]}/>
+          <BannerCateCard data={mainMatchingList[0]} date={GetDate(mainMatchingList[0]?.endDateAt)}/>
+          <BannerCateCard data={mainMatchingList[1]} date={GetDate(mainMatchingList[1]?.endDateAt)}/>
         </BoardColumn>
         <BoardColumn>
-          <BannerCateCard data={mainMatchingList[2]}/>
-          <BannerCateCard data={mainMatchingList[3]}/>
+          <BannerCateCard data={mainMatchingList[2]} date={GetDate(mainMatchingList[2]?.endDateAt)}/>
+          <BannerCateCard data={mainMatchingList[3]} date={GetDate(mainMatchingList[3]?.endDateAt)}/>
         </BoardColumn>
       </BoardFrame>
     </BoardWrapper>
