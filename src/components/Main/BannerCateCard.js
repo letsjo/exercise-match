@@ -1,82 +1,102 @@
 import React from "react";
 import styled from "styled-components";
-import {BsCalendarCheck} from "react-icons/bs";
-import {MdPeople} from "react-icons/md";
+import { BsCalendarCheck } from "react-icons/bs";
+import { MdPeople } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import TranslateCates from "../../utils/TranslateCates";
 
-const BannerCateCard = () => {
-  return (
-      <BoardCard>
-          <ImageBox>
-            <img src="https://placehold.jp/156x136.png" alt=""/>
-          </ImageBox>
-          <ContentBox>
-            <Category>배드민턴</Category>
-            <Title>게시글 제목(Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae ves Lorem ipsum dolor sit amet, 게시글 제목(Lorem ipsum dolor </Title>
-            <Nickname>홍길동</Nickname>
-            <Box>
-              <Icon>
-              <BsCalendarCheck size={15}/>
-              </Icon>
-              <Text>
-              8월 17일 수요일
-              </Text>
-            </Box>
-            <Box>
+const BannerCateCard = ({ data }) => {
+  const navigate = useNavigate();
+
+  if (data)
+    return (
+      <BoardCard onClick={(e) => navigate(`/detail/matching/${data.boardId}`)}>
+        <ImageBox>
+          <img src="https://placehold.jp/156x136.png" alt="" />
+        </ImageBox>
+        <ContentBox>
+          <Category>
+            {data?.category && TranslateCates(data?.category)}
+          </Category>
+          <Title>{data?.title}</Title>
+          <Nickname>{data?.nickname}</Nickname>
+          <Box>
             <Icon>
-                <MdPeople size={18}/>
-              </Icon>
-              <Text>
-              1/4 매칭
-              </Text>
-            </Box>
-          </ContentBox>
+              <BsCalendarCheck size={15} />
+            </Icon>
+            <Text>
+              {data?.endDate?.year &&
+                data?.endDate?.year +
+                  "년 " +
+                  data?.endDate.month +
+                  "월 " +
+                  data?.endDate.day +
+                  "일 " +
+                  data?.endDate.week +
+                  "요일"}
+            </Text>
+          </Box>
+          <Box>
+            <Icon>
+              <MdPeople size={18} />
+            </Icon>
+            <Text>
+              {data?.currentEntry == data?.maxEntry
+                ? "매칭완료"
+                : data?.currentEntry + "/" + data?.maxEntry + " 매칭"}
+            </Text>
+          </Box>
+        </ContentBox>
       </BoardCard>
-  );
+    );
 };
-
 
 const BoardCard = styled.div`
   display: flex;
   flex-direction: row;
-  width:486px;
+  width: 486px;
   height: 156px;
   padding: 10px;
   box-sizing: border-box;
+  cursor: pointer;
+  &:hover {
+    text-decoration-line: underline;
+  }
 `;
 
 const ImageBox = styled.div`
-margin-right: 20px;
+  margin-right: 20px;
 `;
 
-const ContentBox=styled.div`
-  width:290px;
+const ContentBox = styled.div`
+  width: 290px;
   height: 136px;
 `;
 
-const Category=styled.div`
-padding: 1px 5px;
-height:19px;
-width:max-content;
-margin-bottom: 4px;
-box-sizing: border-box;
-border: 1px solid #A2E9FA;
-border-radius: 5px;
-color:#494949;
-font-size: 10px;
-font-weight: bold;
-display: flex;
-justify-content: center;
-align-items: center;
+const Category = styled.div`
+  padding: 1px 5px;
+  height: 19px;
+  width: max-content;
+  margin-bottom: 4px;
+  box-sizing: border-box;
+  border: 1px solid #a2e9fa;
+  border-radius: 5px;
+  color: #494949;
+  font-size: 10px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
-const Title=styled.div`
-height: 42px;
-font-weight: 500;
-font-size: 15px;
-line-height: 140%;
-margin-bottom: 5px;
-box-sizing: border-box;
-text-overflow: ellipsis;
+const Title = styled.div`
+  height: 42px;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 140%;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
   overflow: hidden;
   word-break: break-word;
   display: -webkit-box;
@@ -84,22 +104,22 @@ text-overflow: ellipsis;
   -webkit-box-orient: vertical;
 `;
 
-const Nickname=styled.div`
-height: 15px;
-font-weight: 400;
-font-size: 10px;
-line-height: 150%;
-color: #494949;
-margin-bottom: 5px;
-box-sizing: border-box;
+const Nickname = styled.div`
+  height: 15px;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 150%;
+  color: #494949;
+  margin-bottom: 5px;
+  box-sizing: border-box;
 `;
 
-const Box=styled.div`
-  display:flex; 
+const Box = styled.div`
+  display: flex;
 `;
 
-const Icon=styled.div`
-  width:20px;
+const Icon = styled.div`
+  width: 20px;
   height: 20px;
   margin: auto 10px auto 0px;
   box-sizing: border-box;
@@ -109,9 +129,9 @@ const Icon=styled.div`
   align-items: center;
 `;
 
-const Text= styled.div`
+const Text = styled.div`
   font-size: 15px;
-  height:23px;
+  height: 23px;
 `;
 
 export default BannerCateCard;

@@ -1,31 +1,52 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { boardAction } from "../../redux/actions/boardAction";
 import BoardCardHistory from "./BoardCardHistory";
 
 const BoardListHistory = () => {
-
   const dispatch = useDispatch();
+  const { isLogin } = useSelector((state) => state.userReducer);
+  const [historyList, setHistoryList] = useState([]);
+  let historyData;
 
   useEffect(() => {
+    console.log(isLogin);
+    loadHistory();
+  }, [isLogin]);
 
-  },[])
+  const loadHistory = async () => {
+    try {
+      const res = await dispatch(boardAction.loadHistory({})).unwrap();
+      console.log(res);
+      setHistoryList(res.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <BoardFrame>
-      <BoardCardHistory />
-      <BoardCardHistory title="27일날 테니스 같이 칠 사람?" entrycount="0/1"/>
-      <BoardCardHistory title="저녁시간 헬스 같이 다니실 분" entrycount="0/5"/>
-      <BoardCardHistory title="9월 1일날 정기 축구회 미드필더 가능하신분?" entrycount="0/1"/>
+      {historyList &&
+        historyList.map((history, idx) => (
+          <BoardCardHistory
+            key={idx}
+            boardId={history.boardId}
+            type={history.kind}
+            title={history.title}
+            maxEntry={history.maxEntry}
+            currentEntry={history.currentEntry}
+          />
+        ))}
     </BoardFrame>
   );
 };
 
 const BoardFrame = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 1000px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 1000px;
 `;
 
 export default BoardListHistory;

@@ -340,6 +340,49 @@ const mainMyMatching = createAsyncThunk(
   }
 );
 
+const loadHistory = createAsyncThunk(
+  "board/loadHistory",
+  async ({}, { rejectWithValue }) => {
+    try {
+      const res = await userAPI.get(`/api/mainboards/myentry`);
+      console.log(res);
+      return res;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data);
+    }
+  }
+); 
+
+
+const loadMainMatching = createAsyncThunk(
+  "board/loadMainMatching",
+  async ({category}, { rejectWithValue }) => {
+    try {
+      const res = await userAPI.get(`/api/mainboards/matching/${category}`);
+      console.log(res);
+      return res;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data);
+    }
+  }
+); 
+
+const loadMainInformation = createAsyncThunk(
+  "board/loadMainInformation",
+  async ({category}, { rejectWithValue }) => {
+    try {
+      const res = await userAPI.get(`/api/mainboards/information/${category}`);
+      console.log(res);
+      return res;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data);
+    }
+  }
+); 
+
 export const boardAction = {
   setBoardType,
   postBoard,
@@ -363,4 +406,7 @@ export const boardAction = {
   loadMatching,
   getParticipate,
   mainMyMatching,
+  loadHistory,
+  loadMainMatching,
+  loadMainInformation,
 };

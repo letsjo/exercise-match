@@ -13,9 +13,11 @@ import OtherBoard from "../components/Main/OtherBoard";
 import CurrentLocationCard from "../components/Main/CurrentLocationCard";
 import BannerCate from "../components/Main/BannerCate";
 import { locationAction } from "../redux/actions/locationAction";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { selectedCity, selectedGu } = useSelector(
     (state) => state.locationReducer
   );
@@ -48,23 +50,50 @@ const Main = () => {
         buttonCate={true}
       />
       <InputContainer>
-        <InputDesign>
+        <InputDesign onClick={e=>navigate("/")}>
           <img src="/images/bannerSub.png" alt="" />
         </InputDesign>
       </InputContainer>
 
       <PopularBoard
         iconImg="/images/cate00_gym.png"
+        category="gym"
         title="- 실시간 인기 게시글"
         boardUrl={`/board?type=matching&cate=gym&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`}
       />
       <PopularBoard
+        iconImg="/images/cate01_running.png"
+        category="running"
+        title="- 실시간 인기 게시글"
+        boardUrl={`/board?type=matching&cate=running&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`}
+      />
+      <PopularBoard
+        iconImg="/images/cate03_badminton.png"
+        category="badminton"
+        title="- 실시간 인기 게시글"
+        boardUrl={`/board?type=matching&cate=badminton&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`}
+      />
+      <PopularBoard
         iconImg="/images/cate04_tennis.png"
+        category="tennis"
         title="- 실시간 인기 게시글"
         boardUrl={`/board?type=matching&cate=tennis&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`}
       />
+      <PopularBoard
+        iconImg="/images/cate05_riding.png"
+        category="riding"
+        title="- 실시간 인기 게시글"
+        boardUrl={`/board?type=matching&cate=riding&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`}
+      />
+      <PopularBoard
+        iconImg="/images/cate06_golf.png"
+        category="golf"
+        title="- 실시간 인기 게시글"
+        boardUrl={`/board?type=matching&cate=golf&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`}
+      />
       <OtherBoard
-        iconImg=""
+        iconImg="/images/cate07_etc.png"
+        category="etc"
         title="[기타] - 실시간 인기 게시글"
         boardUrl={`/board?type=matching&cate=etc&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`}
       />

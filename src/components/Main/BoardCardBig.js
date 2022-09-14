@@ -1,14 +1,17 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const BoardCardBig = ({
   title,
   content,
   writer, 
-  image
+  image,
+  boardId,
 }) => {
+  const navigate = useNavigate();
   return (
-    <BoardCardFrame>
+    <BoardCardFrame onClick={(e)=>navigate(`/detail/information/${boardId}`)}>
       <TopPhotoZone>
         <PhotoFrame>
           <img src={image} alt="" />
@@ -28,6 +31,10 @@ const BoardCardBig = ({
 const BoardCardFrame = styled.div`
   width: 254px;
   height: 100%;
+  cursor: pointer;
+  &:hover{
+    text-decoration-line: underline;
+  }
 `;
 
 const TopPhotoZone = styled.div`

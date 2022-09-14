@@ -1,14 +1,19 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 const BoardCardHistory = ({
   labelImg = "https://cdn-icons-png.flaticon.com/512/748/748646.png",
-  label = "내가 작성한 글",
-  title = "내가 작성한 글의 제목",
-  entrycount = "참여 완료",
+  boardId,
+  title,
+  type,
+  maxEntry,
+  currentEntry,
 }) => {
+  const navigate = useNavigate();
+
   return (
-    <HistoryCardFrame>
+    <HistoryCardFrame onClick={(e)=>navigate(`/detail/matching/${boardId}`)}>
       <HistoryCardWrapper>
         <CardTop>
           <HistoryLabelFrame>
@@ -16,7 +21,7 @@ const BoardCardHistory = ({
               <Icon>
                 <img src={labelImg} />
               </Icon>
-              <HistoryLabel>{label}</HistoryLabel>
+              <HistoryLabel>{type=="entryPost"?"내가 신청한 글":"내가 작성한 글"}</HistoryLabel>
             </HistoryLabelContent>
           </HistoryLabelFrame>
         </CardTop>
@@ -24,7 +29,7 @@ const BoardCardHistory = ({
           <HistoryTitle>{title}</HistoryTitle>
           <div>
             <HistoryButton>
-              <div>{entrycount}</div>
+              <div>{maxEntry==currentEntry?"참여 완료":currentEntry+"/"+maxEntry}</div>
             </HistoryButton>
           </div>
         </CardBottom>
@@ -41,6 +46,7 @@ const HistoryCardFrame = styled.div`
   border-radius: 5px;
   display: flex;
   overflow: hidden;
+  cursor: pointer;
 `;
 
 const HistoryCardWrapper = styled.div`
