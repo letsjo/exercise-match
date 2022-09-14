@@ -13,11 +13,13 @@ const ReviewBox = () => {
   const [rate, setRate] = useState(5);
   const [show, setShow] = useState(false);
   const [hovered, setHovered] = useState(null);
+  const [otherMember, setOtherMember]= useState();
   const params = useParams();
 
   const checkboxRefForm = useRef();
   
   const {userNickName} = useSelector((state)=>state.userReducer);
+ 
 
   useEffect(()=>{
     loadReview(params.id);
@@ -26,11 +28,14 @@ const ReviewBox = () => {
   const loadReview = async(boardId) =>{
     try{
       const res = await dispatch(boardAction.loadReview({boardId})).unwrap();
+      const memberName=res.data.otherMember;
       console.log(res);
+      setOtherMember(memberName);
     } catch (e) {
       console.log(e);
     }
   }
+  
 
   const save = async (e) => {
     e.preventDefault();
@@ -73,7 +78,7 @@ const ReviewBox = () => {
     <Container>
       <ReviewTitle>
         {userNickName} 님 ,<br />
-        ___님과 매칭은 어떠셨나요?
+        {otherMember}님과 매칭은 어떠셨나요?
       </ReviewTitle>
       <StarForm show={show} ref={checkboxRefForm} onSubmit={(e) => save(e)}>
         <StarBox show={show}>

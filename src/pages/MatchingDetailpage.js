@@ -170,10 +170,12 @@ const MatchingDetailpage = () => {
           isMatching={detailsList.currentEntry >= detailsList.maxEntry}
           category={TranslateCates(detailsList.category)}
           title={detailsList.title}
-          writeDate={detailsList.createdAt}
+          writeDate={GetDate(detailsList.createdAt)}
         />
 
-        <DatePersonnelWrap />
+        <DatePersonnelWrap 
+        month={detailsList.endDate?.month} day={detailsList.endDate?.day} week={detailsList.endDate?.week} 
+        />
 
         <ContentWrap>{detailsList.content}</ContentWrap>
         {detailsList.boardimage && (

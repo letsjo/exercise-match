@@ -2,14 +2,15 @@ import React from 'react'
 import styled from 'styled-components'
 import {BsCalendarCheck,BsFillPeopleFill} from "react-icons/bs";
 
-const DatePersonnelWrap = () => {
+const DatePersonnelWrap = ({month, day, week}) => {
+  console.log(month, day, week);
   return (
     <DateWrap>
         <Date>
           <Icon>
             <BsCalendarCheck size={20}/>
           </Icon>
-          <Text>8월 17일 수요일</Text>
+          <Text>{month}월 {day}일 {week}요일</Text>
         </Date>
         <Personnel>
           <Icon>
