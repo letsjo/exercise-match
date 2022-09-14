@@ -18,7 +18,7 @@ const SignupAuth = ({
   rightState,
 }) => {
   const dispatch = useDispatch();
-  var time = 60000;
+  var time = 60000 * 3;
 
   const { email } = useSelector((state) => state.signupReducer.info);
 

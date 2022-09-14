@@ -29,6 +29,7 @@ const OtherPostCardBig = ({ category }) => {
       {mainEtcList &&
         mainEtcList?.map((etcData, idx) => (
           <OtherPostCard
+            key={idx}
             boardId={etcData.boardId}
             image={etcData.boardimage}
             category="기타"

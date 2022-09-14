@@ -12,9 +12,15 @@ const PersonalBirth = ({ title, editBt = true }) => {
   const {userBirthYear,userBirthMonth,userBirthDay} = useSelector((state) => state.userReducer);
 
   const [available, setAvailable] = useState(true);
-  const [birthYear, setBirthYear] = useState(userBirthYear);
-  const [birthMonth, setBirthMonth] = useState(userBirthMonth);
-  const [birthDay, setBirthDay] = useState(userBirthDay);
+  const [birthYear, setBirthYear] = useState(0);
+  const [birthMonth, setBirthMonth] = useState(0);
+  const [birthDay, setBirthDay] = useState(0);
+
+  useEffect(()=>{
+    setBirthYear(userBirthYear);
+    setBirthMonth(userBirthMonth);
+    setBirthDay(userBirthDay);
+  },[userBirthYear,userBirthMonth,userBirthDay])
 
   const inputBeforeYearRef = useRef(null);
   const inputBeforeMonthRef = useRef(null);
@@ -121,7 +127,7 @@ const PersonalBirth = ({ title, editBt = true }) => {
         <InputFrame ref={birthFrameRef}>
           <InputLine
             onChange={(e) => onChangeYear(e)}
-            value={userBirthYear}
+            value={birthYear}
             disabled={available}
             available={available}
             fontSize={"20px"}
@@ -130,7 +136,7 @@ const PersonalBirth = ({ title, editBt = true }) => {
           년
           <InputLine
             onChange={(e) => onChangeMonth(e)}
-            value={userBirthMonth}
+            value={birthMonth}
             disabled={available}
             available={available}
             fontSize={"20px"}
@@ -139,7 +145,7 @@ const PersonalBirth = ({ title, editBt = true }) => {
           월
           <InputLine
             onChange={(e) => onChangeDay(e)}
-            value={userBirthDay}
+            value={birthDay}
             disabled={available}
             available={available}
             fontSize={"20px"}

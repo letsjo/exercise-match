@@ -8,9 +8,9 @@ let initialState = {
   userProfile: "",
   userStar:1,
   userGender: "null",
-  userBirthYear: "",
-  userBirthMonth: "",
-  userBirthDay: "",
+  userBirthYear: 0,
+  userBirthMonth: 0,
+  userBirthDay: 0,
   userJoinList: {},
   userInterest: [],
 };

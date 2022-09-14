@@ -53,6 +53,13 @@ const InformationDetailPage = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+      } else if (e.status === 500 && !isLogin ){
+        Swal.fire({
+          icon: "warning",
+          title: "로그인 후 이용할 수 있습니다.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     }
   };
@@ -108,6 +115,8 @@ const InformationDetailPage = () => {
               <DetailpagePopover
                 onOpenerClick={onOpenerClick}
                 boardId={params.id}
+                boardType={params.type}
+                category={detailsList.category}
               ></DetailpagePopover>
             )}
           </Dot>

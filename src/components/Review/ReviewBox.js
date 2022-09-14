@@ -40,16 +40,17 @@ const ReviewBox = () => {
   const save = async (e) => {
     e.preventDefault();
 
+    const num = [];
+    Array.from({ length: 5 }, (_, index) => {
+      checkboxRefForm.current[index].checked && num.push(index+1);
+    }
+    );
+
+    console.log(num);
+
     const reviewData = {
       score : rate,
-      num: 1,
-      // {
-      //   1: checkboxRefForm.current[0].checked,
-      //   2: checkboxRefForm.current[1].checked,
-      //   3: checkboxRefForm.current[2].checked,
-      //   4: checkboxRefForm.current[3].checked,
-      //   5: checkboxRefForm.current[4].checked,
-      // },
+      num: num,
       review: checkboxRefForm.current[5].value,
       boardId:params.id,
     };

@@ -9,33 +9,21 @@ function setBoardType(type, cate) {
   };
 }
 
-const postBoard = (data) => {
-  return async (dispatch) => {
-    await userAPI
-      .post("/api/board/create", data, {
+const postBoard = createAsyncThunk(
+  "board/postBoard",
+  async ( data, { rejectWithValue }) => {
+    try {
+      const res = await userAPI.post("/api/board/create", data, {
         headers: { "Content-Type": "multipart/form-data" },
-      })
-      .then((response) => {
-        console.log(response);
-        Swal.fire({
-          icon: "success",
-          title: "작성완료!",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      })
-     
-      .catch((err) => {
-        console.log(err);
-        Swal.fire({
-          icon: "warning",
-          title: "작성실패!",
-          showConfirmButton: false,
-          timer: 1500,
-        });
       });
-  };
-};
+      console.log(res);
+      return res;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 
 const postLike = createAsyncThunk(
   "board/postLike",

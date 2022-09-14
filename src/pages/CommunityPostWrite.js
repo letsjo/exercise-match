@@ -74,11 +74,23 @@ const CommunityPostWrite = () => {
     }
 
     try {
-      dispatch(boardAction.postBoard(object));
-      console.log(object);
-      // navigate("/");
+      const res = await dispatch(boardAction.postBoard(object)).unwrap();
+      console.log(res);
+      Swal.fire({
+        icon: "success",
+        title: "작성완료!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate(`/detail/information/${res.data}`);
     } catch (e) {
       console.log(e);
+      Swal.fire({
+        icon: "warning",
+        title: "작성실패!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 

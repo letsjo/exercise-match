@@ -46,7 +46,6 @@ const Main = () => {
       <BannerCate
         iconImg=""
         title="HOT 매칭 게시글"
-        boardUrl={`/board?type=matching&cate=gym&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`}
         buttonCate={true}
       />
       <InputContainer>

@@ -18,6 +18,7 @@ const BulletinListFrame = () => {
   
   const [boardsList, setBoardsList] = useState([]);
   const query = useLocation().search;
+  const type = new URLSearchParams(query).get("type");
   const cate = new URLSearchParams(query).get("cate");
   const pageNumber = new URLSearchParams(query).get("page");
   const amount = new URLSearchParams(query).get("amount");
@@ -28,6 +29,13 @@ const BulletinListFrame = () => {
     
   useEffect(() => {
     loadInformation();
+    window.history.pushState(
+      null,
+      null,
+      `/board?type=${type ? type : "information"}&cate=${
+        cate ? cate : "all"
+      }&page=${page}&amount=${amount?amount:10}`
+    );
   }, [page,cate]);
 
   const loadInformation = async () => {

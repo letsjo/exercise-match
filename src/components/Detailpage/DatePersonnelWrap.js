@@ -4,6 +4,7 @@ import {BsCalendarCheck,BsFillPeopleFill} from "react-icons/bs";
 
 const DatePersonnelWrap = ({month, day, week}) => {
   console.log(month, day, week);
+  if(month)
   return (
     <DateWrap>
         <Date>

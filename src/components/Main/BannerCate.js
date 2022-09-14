@@ -5,7 +5,7 @@ import { boardAction } from "../../redux/actions/boardAction";
 import BannerCateCard from "./BannerCateCard";
 import BoardInfo from "./BoardNameInfo";
 
-const BannerCate = ({ iconImg, title, boardUrl, buttonCate }) => {
+const BannerCate = ({ iconImg, title, buttonCate, selectedGu, selectedCity }) => {
   const [mainCate, setMainCate] = useState("all");
   const [mainMatchingList, setMainMatchingList] = useState([]);
 
@@ -30,7 +30,7 @@ const BannerCate = ({ iconImg, title, boardUrl, buttonCate }) => {
       <BoardInfo
         iconImg={iconImg}
         title={title}
-        boardUrl={boardUrl}
+        boardUrl={`/board?type=matching&cate=${mainCate}&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`}
         buttonCate={buttonCate}
         mainCate={mainCate}
         setMainCate={setMainCate}

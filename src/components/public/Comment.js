@@ -25,7 +25,7 @@ const Comment = ({ boardId }) => {
 
   useEffect(() => {
     loadComments();
-  }, []);
+  }, [isLogin]);
 
   const loadComments = async () => {
     try {
@@ -89,6 +89,7 @@ const Comment = ({ boardId }) => {
         commentsList.map((comment, idx) => (
           <CommentCard
             key={idx}
+            loadComments={loadComments}
             myComment={username === comment?.writer.username}
             boardId={boardId}
             image={comment?.writer.profile}

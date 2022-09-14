@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import { useDispatch} from 'react-redux';
 import { boardAction } from "../../redux/actions/boardAction";
 
-const CommentCard = ({myComment ,image, nickname, content, date, boardId, commentId}) => {
+const CommentCard = ({loadComments, myComment ,image, nickname, content, date, boardId, commentId}) => {
 
   const dispatch=useDispatch();
 
@@ -54,6 +54,7 @@ const CommentCard = ({myComment ,image, nickname, content, date, boardId, commen
             showConfirmButton: false,
             timer: 1500,
           });
+          loadComments();
         } catch (e) {
           console.log(e);
           Swal.fire({
