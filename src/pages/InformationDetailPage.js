@@ -30,7 +30,8 @@ const InformationDetailPage = () => {
 
   const [detailsList, setDetailsList] = useState({});
   const [like, setLike] = useState(true);
-  const [likeCount, setLikeCount] = useState(detailsList.likeCount);
+  const [likeCount, setLikeCount] = useState(detailsList?.likeCount);
+  const [commentCount, setCommentCount] = useState(detailsList?.commentCount);
   let detailsData = [];
   
   const likeOnClick = async () => {
@@ -146,9 +147,9 @@ const InformationDetailPage = () => {
           <CommentIcon>
             <MdComment size={24} />
           </CommentIcon>
-          <Text>댓글 {detailsList.commentCount}개</Text>
+          <Text>댓글 {commentCount? commentCount: detailsList.commentCount}개</Text>
         </InfoWrap>
-        <Comment boardId={params.id} />
+        <Comment setCommentCount={setCommentCount} boardId={params.id} />
       </Container>
     </>
   );

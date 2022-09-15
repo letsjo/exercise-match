@@ -4,6 +4,7 @@ export function GetAddressName (position,setAddressName) {
     const lat = position.lat;
     const lon = position.lng;
 
+    console.log(lat,lon);
     mapAPI
       .get(
         `https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${lon}&y=${lat}&input_coord=WGS84`

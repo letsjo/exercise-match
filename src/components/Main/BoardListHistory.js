@@ -25,6 +25,8 @@ const BoardListHistory = () => {
     }
   };
   
+  console.log(historyList)
+
   return (
     <BoardFrame>
       {historyList &&

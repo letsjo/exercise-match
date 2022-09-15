@@ -127,7 +127,7 @@ const Login = () => {
               <img src="/images/iconKakaoTalk.png" alt="" />
             </KakaoIcon>
             <GoogleIcon onClick={googleLogin}>
-              <img src="/images/free-icon-google-720255 (1).png" alt="" />
+              <img src="/images/google_logo.png" alt="" />
             </GoogleIcon>
           </IconBox>
         </LoginWrap>

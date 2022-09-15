@@ -31,6 +31,7 @@ const MatchingDetailpage = () => {
   };
 
   const [detailsList, setDetailsList] = useState({});
+  const [commentCount,setCommentCount] = useState(detailsList?.commentCount);
   const [like, setLike] = useState(true);
   const [likeCount, setLikeCount] = useState(detailsList?.likeCount);
   const [matchingCount, setMatchingCount] = useState(detailsList?.currentEntry);
@@ -89,7 +90,7 @@ const MatchingDetailpage = () => {
         },
       });
       const resApply = await dispatch(
-        boardAction.applyBoard({ boardId: params.id, isMatching: matching })
+        boardAction.applyBoard({ boardId: params.id, isMatching: !matching })
       ).unwrap();
       clearInterval(timerInterval);
       console.log(resApply);
@@ -214,8 +215,9 @@ const MatchingDetailpage = () => {
           <LocationImg>
             <KakaoMapForDetail
               // address={selectBoardData.address}
-              address={"장소주소 넣기"}
-              selectPosition={{ La: 128.6061745, Ma: 35.86952722 }}
+              // address={detailsList?.city && detailsList?.city +" "+ detailsList?.gu +" "}
+              address={{lat:detailsList?.lat,lng:detailsList?.lng}}
+              selectPosition={{ La: detailsList?.lng > 0? detailsList?.lng:128.6061745, Ma: detailsList?.lat > 0? detailsList?.lat:35.86952722 }}
             />
           </LocationImg>
         </LocationWrap>
@@ -242,9 +244,9 @@ const MatchingDetailpage = () => {
           <CommentIcon>
             <MdComment size={24} />
           </CommentIcon>
-          <Text>댓글 {detailsList.commentCount}개</Text>
+          <Text>댓글 {commentCount? commentCount: detailsList.commentCount}개</Text>
         </InfoWrap>
-        <Comment boardId={params.id} />
+        <Comment setCommentCount={setCommentCount} boardId={params.id} />
       </Container>
     </>
   );

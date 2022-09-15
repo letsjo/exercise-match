@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { boardAction } from "../../../redux/actions/boardAction";
 import GetDate from "../../../utils/GetDate";
+import TranslateCates from "../../../utils/TranslateCates";
 import Pagination from "../BoardPublic/Pagination";
 import MatchingCard from "../MatchingBoard/MatchingCard";
 
@@ -61,7 +62,7 @@ const MyMatching = ({ type }) => {
               : ""
           }
           completed={board.maxEntry == board.currentEntry}
-          category="카테고리"
+          category={TranslateCates(board.category)}
           title={board.title}
           date={
             GetDate(board?.endDateAt)
