@@ -7,7 +7,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import GetDate from "../../utils/GetDate";
 import { boardSliceAction } from "../../redux/reducers/boardReducer";
 
-const Comment = ({ boardId }) => {
+const Comment = ({ setCommentCount, boardId }) => {
   const inputRef = useRef();
   const dispatch = useDispatch();
   const [commentButton, setCommentButton] = useState(false);
@@ -38,6 +38,7 @@ const Comment = ({ boardId }) => {
         return resDate;
       });
       setCommentsList(commentsData);
+      setCommentCount(commentsData.length);
       await dispatch(boardSliceAction.requestDoneCommentsList());
       console.log(res);
     } catch (e) {

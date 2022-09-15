@@ -22,9 +22,9 @@ const Main = () => {
     (state) => state.locationReducer
   );
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(locationAction.getLocation());
-  },[])
+  }, []);
 
   const { isLogin } = useSelector((state) => state.userReducer);
 
@@ -35,9 +35,8 @@ const Main = () => {
       <NavBar />
       <SlidBanner
         imgsPath={[
-          "https://www.sciencetimes.co.kr/wp-content/uploads/2021/04/GettyImages-1128647143-scaled.jpg",
-          "https://mblogthumb-phinf.pstatic.net/20160723_117/rimiy_1469204735492fnEcr_JPEG/3.jpeg?type=w2",
-          "https://activeinternational.kr/wp-content/uploads/2021/08/%EA%B3%A8%ED%94%84%EC%9E%A5-Golf-Course.jpg",
+          "/images/SliderBanner_01.png",
+          "/images/SliderBanner_02.png",
         ]}
       />
       <CurrentLocationCard />
@@ -47,6 +46,8 @@ const Main = () => {
         iconImg=""
         title="HOT 매칭 게시글"
         buttonCate={true}
+        selectedCity={selectedCity}
+        selectedGu={selectedGu}
       />
       <InputContainer>
         <InputDesign onClick={e=>navigate(`/board?type=matching&cate=gym&city=${selectedCity}&gu=${selectedGu}&page=1&amount=10`)}>

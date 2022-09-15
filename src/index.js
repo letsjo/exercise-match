@@ -11,6 +11,10 @@ import ScrollToTop from "./utils/ScrollTop";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+const meta = document.createElement('meta');
+meta.name = 'google';
+meta.content = 'notranslate';
+document.getElementsByTagName('head')[0].appendChild(meta);
 root.render(
   <Provider store={store}>
     <BrowserRouter>

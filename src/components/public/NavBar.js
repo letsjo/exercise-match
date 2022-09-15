@@ -52,7 +52,7 @@ const NavBar = () => {
     <NavBarWrap>
       <Wrap>
         <Logo href="/">
-          <img src="/images/logoMain.png" alt="" />
+          <img src="/images/logoMainVer2.png" alt="" />
         </Logo>
         <SearchBox>
           <SearchWrap>
