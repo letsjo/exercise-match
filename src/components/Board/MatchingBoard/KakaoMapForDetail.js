@@ -66,7 +66,7 @@ const KakaoMapForDetail = ({ address, selectPosition }) => {
     });
     marker.setMap(kakaoMap);
 
-    var iwContent = `<div style="padding:2px;">${addressName}<a href="https://map.kakao.com/link/map/${selectPosition.Ma},${selectPosition.La}" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/선택된 위치,${selectPosition.Ma},${selectPosition.La}" style="color:blue" target="_blank">길찾기</a></div>`,
+    var iwContent = `<div style="padding:2px;"><a href="https://map.kakao.com/link/map/${selectPosition.Ma},${selectPosition.La}" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/선택된 위치,${selectPosition.Ma},${selectPosition.La}" style="color:blue" target="_blank">길찾기</a></div>`,
       iwPosition = new kakao.maps.LatLng(selectPosition.Ma, selectPosition.La); //인포윈도우 표시 위치입니다
 
     // 인포윈도우를 생성합니다

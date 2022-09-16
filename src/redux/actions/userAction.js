@@ -257,7 +257,7 @@ const userLogin = createAsyncThunk(
       let sessionStorageLogin = sessionStorage;
       sessionStorageLogin.setItem("accesstoken", res.headers?.accesstoken);
       sessionStorageLogin.setItem("username", LoginData.username);
-      sessionStorageLogin.setItem("nickname", res.headers?.nickname);
+      sessionStorageLogin.setItem("nickname", decodeURI(res.headers?.nickname));
       sessionStorageLogin.setItem("profile", res.headers?.profile);
       sessionStorageLogin.setItem("social", false);
 

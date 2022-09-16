@@ -96,12 +96,21 @@ const MatchingDetailpage = () => {
       console.log(resApply);
       setMatching(!matching);
       setMatchingCount(resApply.data.currentEntry);
-      Swal.fire({
-        icon: "success",
-        title: "매칭완료!",
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      if(matching)
+        Swal.fire({
+          icon: "success",
+          title: "매칭완료!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      else{
+        Swal.fire({
+          icon: "info",
+          title: "매칭취소!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
     } catch (err) {
       clearInterval(timerInterval);
       console.log(err);
