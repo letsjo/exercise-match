@@ -12,7 +12,7 @@ const GoogleLogin = (props) => {
   let access_Token = "Bearer " + params.get("access_Token");
   let refresh_Token = "Bearer " + params.get("refresh_Token");
   let username = params.get("username");
-  let nickname = decodeURI(params.get("nickname"));
+  let nickname = decodeURIComponent(params.get("nickname"));
   let profile = params.get("profile");
   let social = true;
   console.log("access_Token", access_Token);

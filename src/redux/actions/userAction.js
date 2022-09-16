@@ -13,7 +13,7 @@ const kakaoLogin = (code) => {
         userAPI.defaults.headers.common["accesstoken"] = res.headers?.accesstoken;
 
         const ACCESS_TOKEN = res.headers.accesstoken;
-        const nickname = res.data.nickname;
+        const nickname = decodeURIComponent(res.data.nickname);
         const username = res.data.username;
         const profile = res.data.profile;
         const social = true;

@@ -138,9 +138,13 @@ const CategoryCard = styled.div`
       background: ${selected ? "#00CFFF" : "#ffffff"};
       border: 2px solid ${selected ? "#DEDEDE" : "#DEDEDE"};
       color: ${selected ? "#ffffff" : "black"};
+      transition: all 0.2s;
       div {
         background: transparent;
         padding: 6px 6px;
+      }
+      &:hover {
+        background: ${selected?"#00aad1":"#f0f0f0"};
       }
     `;
   }}
