@@ -75,6 +75,7 @@ const MyMatching = ({ type }) => {
           locationCity={board?.city}
           locationGu={board?.gu}
           boardId={board?.boardId}
+          reviewEntry={board?.reviewEntry}
         />
       ))}
       <PageFrame>

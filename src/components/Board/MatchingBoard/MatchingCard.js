@@ -21,6 +21,7 @@ const MatchingCard = ({
   comment,
   createDate,
   boardId,
+  reviewEntry,
 }) => {
   const navigate = useNavigate();
   const refReviewButton = useRef();
@@ -35,7 +36,19 @@ const MatchingCard = ({
         <MatchingOrNot completed={completed}>
           {completed ? "매칭완료" : "매칭중"}
         </MatchingOrNot>
-        {type=="apply" && <ReviewButton ref={refReviewButton} onClick={(e)=>{e.stopPropagation(); navigate(`/review/${boardId}`);}}>리뷰 작성하기</ReviewButton>}
+
+        {type == "apply" && (
+          <ReviewButton
+            reviewEntry={reviewEntry}
+            ref={refReviewButton}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (!reviewEntry) navigate(`/review/${boardId}`);
+            }}
+          >
+            {reviewEntry ? "리뷰 작성완료" : "리뷰 작성하기"}
+          </ReviewButton>
+        )}
       </TopWrap>
       <TitleWrap>
         <CategoryTag>{category}</CategoryTag>
@@ -47,7 +60,8 @@ const MatchingCard = ({
             <BsCalendarCheck size={20} />
           </Icon>
           <Text>
-          {date?.month && date?.month + "월 " + date?.day + "일 " + date.week + "요일"}
+            {date?.month &&
+              date?.month + "월 " + date?.day + "일 " + date.week + "요일"}
           </Text>
         </Date>
         <Personnel>
@@ -113,6 +127,17 @@ const MatchingOrNot = styled.div`
 `;
 
 const ReviewButton = styled.div`
+  ${({ reviewEntry }) => {
+    return css`
+      color: ${reviewEntry?"#a8a8a8":"black"};
+      background-color: ${reviewEntry?"transparent":"white"};
+      cursor: ${reviewEntry?"auto":"pointer"};
+      border: ${reviewEntry?"":"1px transparent solid"};
+      &:hover {
+        border: ${reviewEntry?"":"1px #00cfff solid"};
+      }
+    `;
+  }}
   font-weight: 700;
   font-size: 15px;
   line-height: 150%;
@@ -120,12 +145,6 @@ const ReviewButton = styled.div`
   justify-content: center;
   align-items: center;
   padding: 2px;
-  background-color: #ffffff;
-  cursor: pointer;
-  border: 1px transparent solid;
-  &:hover {
-    border: 1px #00cfff solid;
-  }
 `;
 
 const TitleWrap = styled.div`
