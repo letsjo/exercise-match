@@ -70,7 +70,7 @@ const Login = () => {
         dispatch(
           userSliceAction.setLogin({
             username: LoginData?.username,
-            nickname: response.headers?.nickname,
+            nickname: response.headers?.nickname && decodeURI(response.headers?.nickname),
             profile: response.headers?.profile?response.headers?.profile:"/images/anonymousProfile.png",
             social: false,
           })

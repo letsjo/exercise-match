@@ -26,7 +26,7 @@ const NavBar = () => {
         setSearch(inputRef.current.value);
         const keyword= inputRef.current.value;
         // console.log(keyword);
-        navigate(`/search?keyword=${keyword}&city=${selectedCity}&gu=${selectedGu}`); 
+        navigate(`/search?keyword=${keyword}&city=${selectedCity}&gu=${selectedGu}&sort=title_Content`); 
         // try {
         //   const res = await dispatch(
         //     boardAction.searchBoard({ keyword: inputRef.current.value })
