@@ -31,7 +31,9 @@ const BannerCateCard = ({ data, date }) => {
               <BsCalendarCheck size={15} />
             </Icon>
             <Text>
-              {date?.month + "월 " + date?.day + "일 " + date.week + "요일"}
+    
+              {date?.month + "월 " + date?.day + "일 " + date.week + "요일"
+              }
             </Text>
           </Box>
           <Box>
