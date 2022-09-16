@@ -26,7 +26,12 @@ const SearchPage = () => {
   const keyword = query.get("keyword");
   const city = query.get("city");
   const gu = query.get("gu");
+  const sort = query.get("sort");
+  const boardType = query.get("boardType");
   console.log(keyword, city, gu);
+
+  const [search, setSearch] = useState(sort ? sort : "title_Content");
+  const [type, setType] = useState(boardType ? boardType : "matching");
 
   useEffect(() => {
     query.set("city", selectedCity);
@@ -36,23 +41,29 @@ const SearchPage = () => {
       null,
       `/search?keyword=${keyword ? keyword : ""}&city=${
         selectedCity ? selectedCity : "all"
-      }&gu=${selectedGu ? selectedGu : "all"}&page=1&amount=10`
+      }&gu=${selectedGu ? selectedGu : "all"}&sort=${
+        search ? search : "title_Content"
+      }&boardType=${type ? type : "matching"}&page=1&amount=10`
     );
-  }, [selectedCity, selectedGu, keyword]);
+    loadSearch();
+  }, [selectedCity, selectedGu, keyword, search, type]);
 
   const [searchList, setSearchList] = useState([]);
 
-  const [search, setSearch] = useState("title_Content");
+  const matchingClick = () => {
+    setType("matching");
+  };
 
-  useEffect(() => {
-    console.log(search);
-  }, [search]);
+  const infoClick = () => {
+    setType("information");
+  };
 
-  console.log(search);
+  console.log("타입확인!!!", type);
 
-  useEffect(() => {
-    loadSearch();
-  }, [keyword]);
+  // useEffect(() => {
+  //   console.log(search);
+
+  // }, [search]);
 
   const loadSearch = async () => {
     try {
@@ -85,23 +96,16 @@ const SearchPage = () => {
                   <SearchOption setSearch={setSearch} search={search} />
                 </CategorySelectBox>
                 <SelectCategory>
-                  <SelectMatching>매칭</SelectMatching>
+                  <SelectMatching onClick={matchingClick}>매칭</SelectMatching>
                   <Line />
-                  <SelectInformation>정보공유</SelectInformation>
+                  <SelectInformation onClick={infoClick}>
+                    정보공유
+                  </SelectInformation>
                 </SelectCategory>
               </SelectLine>
-              {searchList &&
+              {type === "matching" &&
+                searchList &&
                 searchList.map((list, idx) => (
-                  // <BulletinCard
-                  //   key={idx}
-                  //   title={list.title}
-                  //   content={list.content}
-                  //   comment={list.commentCount}
-                  //   like={list.likeCount}
-                  //   createdAt={list.createdAt}
-                  //   image={list.boardimage}
-                  //   boardId={list.id}
-                  // />
                   <MatchingCard
                     key={idx}
                     category={TranslateCates(list.category)}
@@ -119,6 +123,20 @@ const SearchPage = () => {
                     writerProfile={list.profile}
                     locationCity={list.city}
                     locationGu={list.gu}
+                  />
+                ))}
+              {type === "information" &&
+                searchList &&
+                searchList.map((list, idx) => (
+                  <BulletinCard
+                    key={idx}
+                    title={list.title}
+                    content={list.content}
+                    comment={list.commentCount}
+                    like={list.likeCount}
+                    createdAt={list.createdAt}
+                    image={list.boardimage}
+                    boardId={list.id}
                   />
                 ))}
             </BulletinContainer>
@@ -172,15 +190,15 @@ const SelectCategory = styled.div`
 `;
 
 const SelectMatching = styled.div`
-&:hover{
-  font-weight: bold;
-}
+  &:hover {
+    font-weight: bold;
+  }
 `;
 
 const SelectInformation = styled.div`
-&:hover{
-  font-weight: bold;
-}
+  &:hover {
+    font-weight: bold;
+  }
 `;
 
 const Line = styled.div`

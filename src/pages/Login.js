@@ -15,7 +15,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const REST_API_KEY = "e789d33a46a6c7fd347b5f73e7669177";
-  const REDIRECT_URI = "http://localhost:3000/user/kakao/callback";
+  const REDIRECT_URI = "http://uandmeet.shop/user/kakao/callback";
   const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
   const kakaoLogin = () => {
@@ -23,11 +23,11 @@ const Login = () => {
   };
 
   const CLIENT_ID = "r1zmtgVUyyZ2koRdASic";
-  const CALLBACK_URL = "http://uandmeet.s3-website.ap-northeast-2.amazonaws.com/api/naverLogin";
+  const CALLBACK_URL = "http://uandmeet.shop/api/naverLogin";
   const STATE_STRING = "state_test";
   const naverURL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${CLIENT_ID}&state=${STATE_STRING}&redirect_uri=${CALLBACK_URL}`;
 
-  const googleURL = `http://localhost:3000/oauth2/authorization/google`;
+  const googleURL = `http://ec2-15-164-192-104.ap-northeast-2.compute.amazonaws.com/oauth2/authorization/google`;
 
   const naverLogin = () => {
     window.location.href = naverURL;

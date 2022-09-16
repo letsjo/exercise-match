@@ -90,7 +90,7 @@ const MatchingDetailpage = () => {
         },
       });
       const resApply = await dispatch(
-        boardAction.applyBoard({ boardId: params.id, isMatching: !matching })
+        boardAction.applyBoard({ boardId: params.id, isMatching: matching })
       ).unwrap();
       clearInterval(timerInterval);
       console.log(resApply);
