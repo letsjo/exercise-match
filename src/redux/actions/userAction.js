@@ -8,8 +8,6 @@ const kakaoLogin = (code) => {
     await userAPI
       .get(`/user/kakao/callback?code=${code}`)
       .then((res) => {
-        console.log(res); // 토큰이 넘어올 것임
-
         userAPI.defaults.headers.common["accesstoken"] = res.headers?.accesstoken;
 
         const ACCESS_TOKEN = res.headers.accesstoken;
