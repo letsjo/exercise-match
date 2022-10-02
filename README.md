@@ -39,7 +39,7 @@
 
 #### 🔗 link
 
-- 바로가기(http://uandmeet.shop/)
+- [사이트 바로가기](http://uandmeet.shop/)
 
 - [시연영상]()
 - [Team notion](https://www.notion.so/4-2cfecbfb7da547f58028d85890da61e8)
