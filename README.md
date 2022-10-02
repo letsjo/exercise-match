@@ -41,7 +41,7 @@
 
 - [사이트 바로가기](http://uandmeet.shop/)
 
-- [시연영상]()
+- [시연영상](https://youtu.be/cl1GLQGeJqQ)
 - [Team notion](https://www.notion.so/4-2cfecbfb7da547f58028d85890da61e8)
 - [Github Back-End repo](https://github.com/enkidur/uandmeet)
 - [Github Front-End repo](https://github.com/letsjo/exercise-match)
