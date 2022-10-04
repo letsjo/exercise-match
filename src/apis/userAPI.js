@@ -6,36 +6,49 @@ const userAPI = axios.create({
 });
 
 // Add a request interceptor
-userAPI.interceptors.request.use(function (config) {
-    console.log("request",config)
+userAPI.interceptors.request.use(
+  function (config) {
+    console.log("request", config);
     return config;
-  }, function (error) {
-    console.log("request error",error)
+  },
+  function (error) {
+    console.log("request error", error);
     return Promise.reject(error);
-  });
+  }
+);
 
 // Add a response interceptor
-userAPI.interceptors.response.use(async function (response) {
-    console.log("response success",response);
+userAPI.interceptors.response.use(
+  async function (response) {
+    console.log("response success", response);
     return response;
-  }, async function (error) {
-
+  },
+  async function (error) {
     const { response: errorResponse } = error;
-    
+
     if (errorResponse.status === 401) {
-      await axios.get(`/api/refresh`,{},{
-        headers: { "Content-Type": "application/json", "accesstoken" : sessionStorage.getItem("accesstoken") },
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      await axios
+        .get(
+          `/api/refresh`,
+          {},
+          {
+            headers: {
+              "Content-Type": "application/json",
+              accesstoken: sessionStorage.getItem("accesstoken"),
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
 
-    console.log("response error",error);
+    console.log("response error", error);
     return Promise.reject(error);
-  });
-  
-  export default userAPI;
+  }
+);
+
+export default userAPI;
